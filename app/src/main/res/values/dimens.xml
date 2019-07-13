@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="single_quarter_margin">4dp</dimen>
+    <dimen name="half_margin">8dp</dimen>
+    <dimen name="three_quarter_margin">12dp</dimen>
+    <dimen name="single_small_margin">14dp</dimen>
+    <dimen name="single_margin">16dp</dimen>
+    <dimen name="single_big_margin">18dp</dimen>
+    <dimen name="one_quarter_margin">20dp</dimen>
+    <dimen name="one_half_margin">24dp</dimen>
+    <dimen name="double_margin">32dp</dimen>
+    <dimen name="triple_margin">48dp</dimen>
+    <dimen name="fourth_margin">64dp</dimen>
+</resources>
