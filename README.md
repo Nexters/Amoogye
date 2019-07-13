@@ -1,6 +1,7 @@
 # Amoogye
 
-> Nexters 15th KookKook Team. Amoogye Android Project Repo
+> Nexters 15th KookKook Team. <br/> 
+> Amoogye Android Project Repo
 
 ## Member
 * 유채은
