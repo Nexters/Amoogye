@@ -8,4 +8,6 @@ import cookcook.nexters.com.amoogye.main.domain.MainRepository
 class MainViewModel(private val repo : MainRepository) : ViewModel() {
 
     fun sayHello(context: Context) = "${repo.showToast(context)} from $this"
+
+    val text = repo.getMessage()
 }
