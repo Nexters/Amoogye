@@ -1,3 +1,4 @@
+package cookcook.nexters.com.amoogye.base
 
 import android.util.Log
 import androidx.annotation.MainThread
