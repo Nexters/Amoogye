@@ -1,3 +1,4 @@
+package cookcook.nexters.com.amoogye.base
 
 import android.view.LayoutInflater
 import android.view.View

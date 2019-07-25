@@ -1,3 +1,4 @@
+package cookcook.nexters.com.amoogye.base
 
 import android.app.Application
 import androidx.databinding.ObservableField
