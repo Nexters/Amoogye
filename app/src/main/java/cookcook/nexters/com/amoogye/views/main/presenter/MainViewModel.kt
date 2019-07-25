@@ -13,7 +13,7 @@ class MainViewModel(private val repo : MainRepository) : ViewModel() {
 
     fun sayHello() = "${repo.showToast(context)} from $this"
 
-    fun onNavigationItemSelected(id: Int) = repo.onNavigationItemSelected(id, supportFragmentManager)
+    fun onNavigationItemSelected(id: Int): Boolean = repo.onNavigationItemSelected(id, supportFragmentManager)
 
     val text = repo.getMessage()
 }

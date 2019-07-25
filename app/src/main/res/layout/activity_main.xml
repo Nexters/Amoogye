@@ -25,11 +25,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
                 android:layout_alignParentBottom="true"
-                android:background="?android:attr/windowBackground"
-                app:itemBackground="@color/bottom_navigation_background_color"
-                android:foreground="?attr/selectableItemBackground"
+                android:background="@color/bottom_navigation_background_color"
                 app:itemIconTint="@android:color/white"
                 app:itemTextColor="@android:color/white"
+                app:labelVisibilityMode="labeled"
                 app:menu="@menu/main_navigation">
 
         </com.google.android.material.bottomnavigation.BottomNavigationView>

@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentManager
 interface MainRepository {
     fun showToast(context: Context)
 
-    fun onNavigationItemSelected(id: Int, fragmentManager: FragmentManager)
+    fun onNavigationItemSelected(id: Int, fragmentManager: FragmentManager): Boolean
 
     fun getMessage(): String
 }
