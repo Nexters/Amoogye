@@ -16,3 +16,7 @@
 ### why coroutine?
 > rxjava requires a high running curve. <br/>
 > so, we decided to use a little easier coroutine.
+
+
+## 참고
+* [android architecture](https://academy.realm.io/kr/posts/clean-architecture-in-android/)

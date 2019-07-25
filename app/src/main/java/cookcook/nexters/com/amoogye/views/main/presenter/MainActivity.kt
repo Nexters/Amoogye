@@ -1,4 +1,4 @@
-package cookcook.nexters.com.amoogye.main
+package cookcook.nexters.com.amoogye.views.main.presenter
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -18,8 +18,9 @@ class MainActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.mainVM = mainViewModel
+        mainViewModel.context = this
 
-        mainViewModel.sayHello(this)
+        mainViewModel.sayHello()
 
     }
 }

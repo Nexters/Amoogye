@@ -7,5 +7,7 @@
     <color name="transparent">#00FFFFFF</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+
+    <color name="bottom_navigation_background_color">#c2c2c2</color>
 </resources>
 

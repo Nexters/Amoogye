@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Amoogye</string>
+
+    <string name="navigation_main_calc">계산기</string>
+    <string name="navigation_main_tools">계량도구</string>
+    <string name="navigation_main_timer">타이머</string>
+    <string name="navigation_main_setting">설정</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
