@@ -11,4 +11,6 @@
     <dimen name="double_margin">32dp</dimen>
     <dimen name="triple_margin">48dp</dimen>
     <dimen name="fourth_margin">64dp</dimen>
+
+    <dimen name="timer_button_text_size">18sp</dimen>
 </resources>

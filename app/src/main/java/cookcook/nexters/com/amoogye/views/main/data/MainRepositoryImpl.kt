@@ -8,7 +8,7 @@ import cookcook.nexters.com.amoogye.views.main.domain.MainRepository
 import cookcook.nexters.com.amoogye.utils.addFragmentToActivity
 import cookcook.nexters.com.amoogye.views.calc.CalcFragment
 import cookcook.nexters.com.amoogye.views.setting.SettingFragment
-import cookcook.nexters.com.amoogye.views.timer.TimerFragment
+import cookcook.nexters.com.amoogye.views.timer.presenter.TimerFragment
 import cookcook.nexters.com.amoogye.views.tools.ToolsFragment
 
 class MainRepositoryImpl : MainRepository {

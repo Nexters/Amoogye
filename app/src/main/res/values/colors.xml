@@ -8,6 +8,8 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
 
+    <color name="main_background_color">#EBEDF4</color>
     <color name="bottom_navigation_background_color">#c2c2c2</color>
+    <color name="timer_button_text_color">#6E7282</color>
 </resources>
 
