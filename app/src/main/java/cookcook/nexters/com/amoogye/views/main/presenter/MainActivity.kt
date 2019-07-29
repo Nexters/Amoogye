@@ -21,6 +21,7 @@ class MainActivity : BaseActivity() {
         bottom_navigation_main.setOnNavigationItemSelectedListener {
             mainViewModel.onNavigationItemSelected(it.itemId)
         }
+//        bottom_navigation_main.itemIconTintList = null
     }
 
     override fun subscribeUI() {
