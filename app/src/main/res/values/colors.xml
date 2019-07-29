@@ -8,6 +8,8 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
 
-    <color name="bottom_navigation_background_color">#c2c2c2</color>
+    <color name="bottom_navigation_background_color">#ffffff</color>
+    <color name="bottom_navigation_select_color">#131c32</color>
+    <color name="bottom_navigation_un_select_color">#80131C32</color>
 </resources>
 

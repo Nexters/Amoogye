@@ -11,4 +11,6 @@
     <dimen name="double_margin">32dp</dimen>
     <dimen name="triple_margin">48dp</dimen>
     <dimen name="fourth_margin">64dp</dimen>
+
+    <dimen name="bottom_navigation_size">62dp</dimen>
 </resources>

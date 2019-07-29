@@ -2,21 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
             android:id="@+id/navigation_main_calc"
-            android:icon="@drawable/ic_devices_other_black_24dp"
+            android:icon="@drawable/icon_calc"
             android:title="@string/navigation_main_calc" />
 
     <item
             android:id="@+id/navigation_main_tools"
-            android:icon="@drawable/ic_content_paste_black_24dp"
+            android:icon="@drawable/icon_tools"
             android:title="@string/navigation_main_tools" />
 
     <item
             android:id="@+id/navigation_main_timer"
-            android:icon="@drawable/ic_timer_black_24dp"
+            android:icon="@drawable/icon_timer"
             android:title="@string/navigation_main_timer" />
 
     <item
             android:id="@+id/navigation_main_setting"
-            android:icon="@drawable/ic_build_black_24dp"
+            android:icon="@drawable/icon_setting"
             android:title="@string/navigation_main_setting" />
 </menu>
