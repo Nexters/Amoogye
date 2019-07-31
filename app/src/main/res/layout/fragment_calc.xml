@@ -4,7 +4,20 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <TextView android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="계산기"/>
+    <LinearLayout
+        android:id="@+id/calculator_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.52"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    <!-- 버튼 관련 UI들 올 것 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.48">
+
+    </LinearLayout>
 </LinearLayout>
