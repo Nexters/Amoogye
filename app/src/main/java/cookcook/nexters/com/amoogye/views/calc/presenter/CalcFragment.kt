@@ -1,14 +1,10 @@
 package cookcook.nexters.com.amoogye.views.calc.presenter
 
-import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.FragmentTransaction
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.base.BaseFragment
 import cookcook.nexters.com.amoogye.databinding.FragmentCalcBinding
