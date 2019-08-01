@@ -1,98 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_margin="16dp">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageButton
-            android:id="@+id/btn_history"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/history"
-            android:background="@android:color/transparent"
-            android:layout_toStartOf="@+id/btn_tip"
-            android:layout_marginEnd="24dp"/>
-
-        <ImageButton
-            android:id="@+id/btn_tip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/tip"
-            android:background="@android:color/transparent"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="16dp"/>
-    </RelativeLayout>
-
-    <RelativeLayout
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp">
-        <TextView
-            android:id="@+id/txt_ingredient"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="재료"
-            android:textSize="22sp"
-            android:textColor="#131c32"/>
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:id="@+id/btn_history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/history"
+                android:background="@android:color/transparent"
+                android:layout_toStartOf="@+id/btn_tip"
+                android:layout_marginEnd="24dp"/>
 
-        <TextView
-            android:id="@+id/txt_calc_plus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+"
-            android:textSize="22sp"
-            android:layout_toEndOf="@+id/txt_ingredient"
-            android:layout_marginStart="6dp"
-            android:textColor="#33131c32"/>
+            <ImageButton
+                android:id="@+id/btn_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/tip"
+                android:background="@android:color/transparent"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="16dp"/>
+        </RelativeLayout>
 
-        <TextView
-            android:id="@+id/txt_human"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="인원"
-            android:textSize="22sp"
-            android:layout_toEndOf="@+id/txt_calc_plus"
-            android:layout_marginStart="6dp"
-            android:textColor="#33131c32"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="50ml를"
-            android:textSize="20sp"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="밥숟가락으로"
-            android:textSize="20sp"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp">
-        
-        <Button
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="바꾸면"
-            android:textSize="22sp"
-            android:background="#ff4f34"
-            android:textColor="#ffffff"/>
-    </RelativeLayout>
+            android:layout_marginTop="1dp">
+            <TextView
+                android:id="@+id/txt_ingredient"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="재료"
+                android:textSize="22sp"
+                android:textColor="#131c32"/>
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/txt_calc_plus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+"
+                android:textSize="22sp"
+                android:layout_toEndOf="@+id/txt_ingredient"
+                android:layout_marginStart="6dp"
+                android:textColor="#33131c32"/>
+
+            <TextView
+                android:id="@+id/txt_human"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="인원"
+                android:textSize="22sp"
+                android:layout_toEndOf="@+id/txt_calc_plus"
+                android:layout_marginStart="6dp"
+                android:textColor="#33131c32"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="50ml를"
+                android:textSize="20sp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="밥숟가락으로"
+                android:textSize="20sp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="바꾸면"
+                android:textSize="22sp"
+                android:background="#ff4f34"
+                android:textColor="#ffffff"/>
+        </RelativeLayout>
+    </LinearLayout>
+</layout>
