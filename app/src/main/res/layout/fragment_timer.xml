@@ -1,20 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:background="@color/main_background_color"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+                name="timerVM"
+                type="cookcook.nexters.com.amoogye.views.timer.presenter.TimerViewModel"
+        />
+    </data>
 
-    <RelativeLayout
+    <LinearLayout
+            android:background="@color/main_background_color"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.52">
+            android:layout_height="match_parent">
 
-    </RelativeLayout>
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.53"
+                android:background="@color/white">
 
-    <include layout="@layout/layout_number_button_wrap"
-             android:layout_width="match_parent"
-             android:layout_height="0dp"
-             android:layout_weight="0.48"/>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-</LinearLayout>
+                <EditText
+                        android:id="@+id/edit_hour"
+                        android:padding="4dp"
+                        android:layout_width="30dp"
+                        android:text="@{timerVM.hourText}"
+                        android:background="@drawable/number_input_wrap_rounded_box"
+                        android:layout_height="30dp"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:layout_marginLeft="10dp"
+                        android:text="시간"/>
+
+                <EditText
+                        android:id="@+id/edit_minute"
+                        android:padding="4dp"
+                        android:layout_width="30dp"
+                        android:text="@{timerVM.minuteText}"
+                        android:background="@drawable/number_input_wrap_rounded_box"
+                        android:layout_marginLeft="10dp"
+                        android:layout_height="30dp"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:layout_marginLeft="10dp"
+                        android:text="분"/>
+
+                <EditText
+                        android:id="@+id/edit_second"
+                        android:padding="4dp"
+                        android:layout_width="30dp"
+                        android:text="@{timerVM.secondText}"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/number_input_wrap_rounded_box"
+                        android:layout_height="30dp"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:layout_marginLeft="10dp"
+                        android:text="초 뒤 알려줄게!"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <View android:layout_width="match_parent"
+              android:layout_height="4dp"
+              android:background="@color/main_background_color"/>
+
+        <include layout="@layout/layout_number_button_wrap"
+                 android:layout_width="match_parent"
+                 android:layout_height="0dp"
+                 android:layout_weight="0.47"/>
+
+    </LinearLayout>
+</layout>
