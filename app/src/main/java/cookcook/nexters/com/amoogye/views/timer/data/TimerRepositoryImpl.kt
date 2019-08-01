@@ -23,8 +23,6 @@ class TimerRepositoryImpl: TimerRepository {
                 afterText += number
             }
         }
-        Log.d("TAG", "After Number $number")
-        Log.d("TAG", "After Text $afterText")
         return afterText
     }
 

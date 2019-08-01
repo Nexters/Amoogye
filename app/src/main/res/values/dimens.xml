@@ -15,4 +15,5 @@
     <dimen name="bottom_navigation_size">62dp</dimen>
 
     <dimen name="number_button_text_size">18sp</dimen>
+    <dimen name="timer_button_text_size">18sp</dimen>
 </resources>

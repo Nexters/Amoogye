@@ -1,18 +1,14 @@
 package cookcook.nexters.com.amoogye.views.timer.presenter
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.base.BaseFragment
 import cookcook.nexters.com.amoogye.databinding.FragmentTimerBinding
 import kotlinx.android.synthetic.main.fragment_timer.*
-import kotlinx.android.synthetic.main.layout_number_button_wrap.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -72,6 +68,7 @@ class TimerFragment : BaseFragment() {
     }
 
     companion object {
+        // 선택 선언 1 (Fragment를 싱글턴으로 사용 시)
         private var INSTANCE: TimerFragment? = null
 
         fun getInstance(): TimerFragment {

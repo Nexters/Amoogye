@@ -11,9 +11,9 @@
     <color name="bottom_navigation_background_color">#ffffff</color>
     <color name="bottom_navigation_select_color">#131c32</color>
     <color name="bottom_navigation_un_select_color">#80131C32</color>
-    <color name="main_background_color">#EBEDF4</color>
-    <color name="number_button_text_color">#6E7282</color>
 
     <color name="number_input_wrap_color">#FF4F34</color>
+    <color name="main_background_color">#EBEDF4</color>
+    <color name="number_button_text_color">#6E7282</color>
 </resources>
 

@@ -1,6 +1,5 @@
 package cookcook.nexters.com.amoogye.views.timer.domain
 
-
 interface TimerRepository {
 
     fun onEditTextSelected()
