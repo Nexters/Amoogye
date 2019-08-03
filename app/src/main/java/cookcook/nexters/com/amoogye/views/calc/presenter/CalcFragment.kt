@@ -1,18 +1,13 @@
 package cookcook.nexters.com.amoogye.views.calc.presenter
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.base.BaseFragment
 import cookcook.nexters.com.amoogye.databinding.FragmentCalcBinding
 import kotlinx.android.synthetic.main.fragment_calc.*
-import kotlinx.android.synthetic.main.fragment_calc.*
-import org.koin.android.viewmodel.ext.android.viewModel
-import org.koin.android.viewmodel.ext.android.getViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
