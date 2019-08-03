@@ -10,6 +10,7 @@ import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.base.BaseFragment
 import cookcook.nexters.com.amoogye.databinding.FragmentCalcBinding
 import kotlinx.android.synthetic.main.fragment_calc.*
+import kotlinx.android.synthetic.main.fragment_calc.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.android.viewmodel.ext.android.getViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
