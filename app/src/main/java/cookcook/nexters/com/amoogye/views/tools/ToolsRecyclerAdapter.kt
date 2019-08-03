@@ -8,16 +8,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import cookcook.nexters.com.amoogye.R
 
-class ToolsRecyclerAdapter (private val context: Context, private val measureUnitList: ArrayList<MeasureUnit>) :
+class ToolsRecyclerAdapter (private val context: Context, private val measureUnitList: ArrayList<NormalMeasureUnit>) :
         RecyclerView.Adapter<ToolsRecyclerAdapter.Holder>() {
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private val unitBold = itemView.findViewById<TextView>(R.id.measureUnit_bold)
-        private val unitNormal = itemView.findViewById<TextView>(R.id.measureUnit_normal)
+        private val unitBold = itemView.findViewById<TextView>(R.id.txt_measureUnit_bold)
+        private val unitSoft = itemView.findViewById<TextView>(R.id.txt_measureUnit_soft)
 
-        fun bind(measureUnit: MeasureUnit) {
+        fun bind(measureUnit: NormalMeasureUnit) {
             unitBold?.text = measureUnit.measureUnitBold
-            unitNormal?.text = measureUnit.measureUnitNormal
+            unitSoft?.text = measureUnit.measureUnitSoft
         }
     }
 

@@ -24,19 +24,19 @@ class ToolsFragment: Fragment() {
         }
     }
 
-    private var measureUnitList = arrayListOf<MeasureUnit>(
-        MeasureUnit("cc", "씨씨"),
-        MeasureUnit("ml", "밀리미터"),
-        MeasureUnit("L", "리터"),
-        MeasureUnit("mg", "밀리그램"),
-        MeasureUnit("kg", "킬로그램"),
-        MeasureUnit("큰술", "tbsp"),
-        MeasureUnit("작은술", "tsp"),
-        MeasureUnit("컵", "cup"),
-        MeasureUnit("밥숟갈", "15cc"),
-        MeasureUnit("베라스푼", "5cc"),
-        MeasureUnit("물뚜껑", "7cc"),
-        MeasureUnit("소주잔", "50ml")
+    private var measureUnitList = arrayListOf<NormalMeasureUnit>(
+        NormalMeasureUnit("cc", "씨씨"),
+        NormalMeasureUnit("ml", "밀리미터"),
+        NormalMeasureUnit("L", "리터"),
+        NormalMeasureUnit("mg", "밀리그램"),
+        NormalMeasureUnit("kg", "킬로그램"),
+        NormalMeasureUnit("큰술", "tbsp"),
+        NormalMeasureUnit("작은술", "tsp"),
+        NormalMeasureUnit("컵", "cup"),
+        NormalMeasureUnit("밥숟갈", "15cc"),
+        NormalMeasureUnit("베라스푼", "5cc"),
+        NormalMeasureUnit("물뚜껑", "7cc"),
+        NormalMeasureUnit("소주잔", "50ml")
 
     )
 
@@ -53,10 +53,10 @@ class ToolsFragment: Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val recyclerAdapter = ToolsRecyclerAdapter(context!!, measureUnitList)
-        layout_toolsRecyclerView.adapter = recyclerAdapter
+        layout_normalRecyclerView.adapter = recyclerAdapter
 
         val recyclerManager = LinearLayoutManager(context!!)
-        layout_toolsRecyclerView.layoutManager = recyclerManager
-        layout_toolsRecyclerView.setHasFixedSize(true)
+        layout_normalRecyclerView.layoutManager = recyclerManager
+        layout_normalRecyclerView.setHasFixedSize(true)
     }
 }
