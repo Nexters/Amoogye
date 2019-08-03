@@ -1,20 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-              android:background="#f3f3f7"
               android:layout_marginTop="10dp"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/layout_normalRecyclerView"
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <com.google.android.material.tabs.TabLayout
+                android:id="@+id/layout_Tools_tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+    </LinearLayout>
+
+    <androidx.viewpager.widget.ViewPager
             android:background="#f3f3f7"
-            android:layout_margin="10dp"
+            android:id="@+id/layout_Tools_viewPager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.88">
-    </androidx.recyclerview.widget.RecyclerView>
-
+            android:layout_weight="0.88"/>
     <Button
             android:layout_width="match_parent"
             android:layout_height="0dp"

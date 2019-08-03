@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import cookcook.nexters.com.amoogye.R
 import kotlinx.android.synthetic.main.fragment_tools.*
 
@@ -24,26 +23,6 @@ class ToolsFragment: Fragment() {
         }
     }
 
-    private var measureUnitList = arrayListOf<NormalMeasureUnit>(
-        NormalMeasureUnit("cc", "씨씨"),
-        NormalMeasureUnit("ml", "밀리미터"),
-        NormalMeasureUnit("L", "리터"),
-        NormalMeasureUnit("mg", "밀리그램"),
-        NormalMeasureUnit("kg", "킬로그램"),
-        NormalMeasureUnit("큰술", "tbsp"),
-        NormalMeasureUnit("작은술", "tsp"),
-        NormalMeasureUnit("컵", "cup"),
-        NormalMeasureUnit("밥숟갈", "15cc"),
-        NormalMeasureUnit("베라스푼", "5cc"),
-        NormalMeasureUnit("물뚜껑", "7cc"),
-        NormalMeasureUnit("소주잔", "50ml")
-
-    )
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
@@ -51,12 +30,11 @@ class ToolsFragment: Fragment() {
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        val recyclerAdapter = ToolsRecyclerAdapter(context!!, measureUnitList)
-        layout_normalRecyclerView.adapter = recyclerAdapter
+            super.onActivityCreated(savedInstanceState)
 
-        val recyclerManager = LinearLayoutManager(context!!)
-        layout_normalRecyclerView.layoutManager = recyclerManager
-        layout_normalRecyclerView.setHasFixedSize(true)
+        val toolsFragmentAdapter = ToolsViewPageAdapter(fragmentManager!!)
+        layout_Tools_viewPager.adapter = toolsFragmentAdapter
+
+        layout_Tools_tabLayout.setupWithViewPager(layout_Tools_viewPager)
     }
 }
