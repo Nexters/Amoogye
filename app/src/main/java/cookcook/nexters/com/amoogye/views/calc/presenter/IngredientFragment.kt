@@ -7,7 +7,6 @@ import androidx.databinding.DataBindingUtil
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.base.BaseFragment
 import cookcook.nexters.com.amoogye.databinding.FragmentCalcIngredientBinding
-import kotlinx.android.synthetic.main.fragment_calc.*
 import org.koin.android.viewmodel.ext.android.getViewModel
 
 class IngredientFragment : BaseFragment() {
@@ -18,7 +17,6 @@ class IngredientFragment : BaseFragment() {
     private lateinit var calculatorViewModel : CalculatorViewModel
 
     override fun setupViews(view: View) {
-
     }
 
     override fun subscribeUI() {
