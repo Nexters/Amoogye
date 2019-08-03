@@ -6,20 +6,101 @@
             type="cookcook.nexters.com.amoogye.views.calc.presenter.CalculatorViewModel"
             />
     </data>
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/calculator_container"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.52"
-            android:orientation="vertical"
             android:padding="16dp">
+            <RelativeLayout
+                android:id="@+id/calc_layout_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true">
+                <ImageButton
+                    android:id="@+id/btn_history"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/history"
+                    android:background="@android:color/transparent"
+                    android:layout_toStartOf="@+id/btn_tip"
+                    android:layout_marginEnd="24dp"/>
 
-        </LinearLayout>
+                <ImageButton
+                    android:id="@+id/btn_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/tip"
+                    android:background="@android:color/transparent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="16dp"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/calc_text_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:layout_below="@+id/calc_layout_top">
+                <TextView
+                    android:id="@+id/txt_ingredient"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="재료"
+                    android:textSize="22sp"
+                    android:textColor="#131c32"/>
+
+                <TextView
+                    android:id="@+id/txt_calc_plus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+"
+                    android:textSize="22sp"
+                    android:layout_toEndOf="@+id/txt_ingredient"
+                    android:layout_marginStart="6dp"
+                    android:textColor="#33131c32"/>
+
+                <TextView
+                    android:id="@+id/txt_human"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="인원"
+                    android:textSize="22sp"
+                    android:layout_toEndOf="@+id/txt_calc_plus"
+                    android:layout_marginStart="6dp"
+                    android:textColor="#33131c32"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/calculator_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/calc_text_container"
+                android:layout_above="@+id/calc_layout_bottom"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="24dp">
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/calc_layout_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="바꾸면"
+                    android:textSize="22sp"
+                    android:background="#ff4f34"
+                    android:textColor="#ffffff"/>
+            </RelativeLayout>
+        </RelativeLayout>
 
         <!-- 버튼 관련 UI들 올 것 -->
         <LinearLayout

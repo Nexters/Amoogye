@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.base.BaseFragment
 import cookcook.nexters.com.amoogye.databinding.FragmentCalcBinding
-import org.koin.android.viewmodel.ext.android.getViewModel
+import kotlinx.android.synthetic.main.fragment_calc.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -33,6 +33,10 @@ class CalcFragment: BaseFragment() {
     }
 
     override fun setupViews(view: View) {
+
+        btn_history.setOnClickListener { calculatorViewModel.gazuaa("history 구현 예정") }
+        btn_tip.setOnClickListener { calculatorViewModel.gazuaa("tip 구현 예정") }
+
         val fragmentManager = fragmentManager
         val fragmentTransaction = fragmentManager!!.beginTransaction()
 
