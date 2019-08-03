@@ -32,6 +32,10 @@ class ToolsFragment: Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
             super.onActivityCreated(savedInstanceState)
 
+        layout_tools_dimScreen.setOnClickListener {
+            layout_tools_dimScreen.visibility = View.GONE
+        }
+
         val toolsFragmentAdapter = ToolsViewPageAdapter(fragmentManager!!)
         layout_Tools_viewPager.adapter = toolsFragmentAdapter
 
