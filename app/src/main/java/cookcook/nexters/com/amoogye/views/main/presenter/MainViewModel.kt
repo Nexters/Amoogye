@@ -11,7 +11,7 @@ class MainViewModel(private val repo : MainRepository) : ViewModel() {
     lateinit var context: Context
     lateinit var supportFragmentManager: FragmentManager
 
-    fun sayHello() = "${repo.showToast(context)} from $this"
+    fun sayHello() = repo.showToast(context)
 
     fun onNavigationItemSelected(id: Int): Boolean = repo.onNavigationItemSelected(id, supportFragmentManager)
 

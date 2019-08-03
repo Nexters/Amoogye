@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentManager
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.views.main.domain.MainRepository
 import cookcook.nexters.com.amoogye.utils.addFragmentToActivity
-import cookcook.nexters.com.amoogye.views.calc.CalcFragment
+import cookcook.nexters.com.amoogye.views.calc.presenter.CalcFragment
 import cookcook.nexters.com.amoogye.views.setting.SettingFragment
 import cookcook.nexters.com.amoogye.views.timer.presenter.TimerFragment
 import cookcook.nexters.com.amoogye.views.tools.ToolsFragment

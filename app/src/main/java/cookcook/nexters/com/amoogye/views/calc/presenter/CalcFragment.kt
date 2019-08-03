@@ -4,15 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.base.BaseFragment
 import cookcook.nexters.com.amoogye.databinding.FragmentCalcBinding
+import org.koin.android.viewmodel.ext.android.getViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class CalcFragment: BaseFragment() {
     override val layoutRes: Int = R.layout.fragment_calc
+    override val isUseDataBinding = true
     lateinit var binding : FragmentCalcBinding
+    private val calculatorViewModel: CalculatorViewModel by viewModel()
 
     companion object {
         // 선택 선언 1 (Fragment를 싱글턴으로 사용 시)
@@ -41,12 +46,10 @@ class CalcFragment: BaseFragment() {
 
     override fun onDataBinding(inflater: LayoutInflater, container: ViewGroup?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_calc, container, false)
+        binding.calculatorVM = calculatorViewModel
+        calculatorViewModel.context = context!!
+        binding.lifecycleOwner = this
 
-        return null
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        super.onCreateView(inflater, container, savedInstanceState)
-        return inflater.inflate(R.layout.fragment_calc, container, false)
+        return binding.root
     }
 }
