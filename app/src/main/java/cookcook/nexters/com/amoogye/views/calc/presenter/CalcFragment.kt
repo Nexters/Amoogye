@@ -1,11 +1,13 @@
 package cookcook.nexters.com.amoogye.views.calc.presenter
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentTransaction
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.base.BaseFragment
 import cookcook.nexters.com.amoogye.databinding.FragmentCalcBinding
@@ -36,6 +38,21 @@ class CalcFragment: BaseFragment() {
 
         btn_history.setOnClickListener { calculatorViewModel.gazuaa("history 구현 예정") }
         btn_tip.setOnClickListener { calculatorViewModel.gazuaa("tip 구현 예정") }
+
+        /********************** 모기님 알려주세요~~~ **********************/
+        /* TODO: 글자 색상 변경을 어떻게 묶어야할까..? 알아보자 */
+        /* TODO: fragmentManger는 이렇게 인자로 넘겨야만할까..? 알아보자 */
+        txt_ingredient.setOnClickListener {
+            calculatorViewModel.convertFragment(R.id.calculator_container, IngredientFragment(), fragmentManager!!)
+            txt_ingredient.setTextColor(Color.parseColor("#131c32"))
+            txt_human.setTextColor(Color.parseColor("#33131c32"))
+        }
+
+        txt_human.setOnClickListener {
+            calculatorViewModel.convertFragment(R.id.calculator_container, PortionFragment(), fragmentManager!!)
+            txt_ingredient.setTextColor(Color.parseColor("#33131c32"))
+            txt_human.setTextColor(Color.parseColor("#131c32"))
+        }
 
         val fragmentManager = fragmentManager
         val fragmentTransaction = fragmentManager!!.beginTransaction()
