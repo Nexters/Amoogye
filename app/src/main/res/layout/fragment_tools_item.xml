@@ -6,10 +6,12 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="4dp"
                 android:layout_height="50dp">
-
     <CheckBox
-            android:id="@+id/checkBox_normalTool_Item"
+            android:id="@+id/checkBox_lifeTool_Item"
             android:visibility="gone"
+            android:layout_centerInParent="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -18,10 +20,10 @@
             android:text=""
             android:textSize="22sp"
             android:layout_marginStart="10dp"
-            android:layout_alignParentStart="true"
-            android:layout_centerInParent="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_toEndOf="@id/checkBox_lifeTool_Item"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"/>
     <TextView
             android:id="@+id/txt_measureUnit_soft"
             android:text=""
