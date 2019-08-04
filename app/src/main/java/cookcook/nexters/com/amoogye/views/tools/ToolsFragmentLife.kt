@@ -7,11 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import cookcook.nexters.com.amoogye.R
-import kotlinx.android.synthetic.main.fragment_tools_item.*
 import kotlinx.android.synthetic.main.fragment_tools_life_recycler.*
 
-
-class ToolsFragmentLife: Fragment() {
+class ToolsFragmentLife : Fragment() {
 
     companion object {
         // 선택 선언 1 (Fragment를 싱글턴으로 사용 시)
@@ -46,25 +44,28 @@ class ToolsFragmentLife: Fragment() {
         val recyclerAdapter = ToolsRecyclerAdapterLife(context!!, measureUnitList)
         layout_lifeRecyclerView.adapter = recyclerAdapter
 
-
-        btn_edit_toolList.setOnClickListener {
-            btn_edit_toolList.visibility = View.GONE
-            btn_edit_cancel.visibility = View.VISIBLE
-            btn_edit_delete.visibility = View.VISIBLE
-            flag = true
-            recyclerAdapter.notifyDataSetChanged()
-        }
-
-        btn_edit_cancel.setOnClickListener {
-            btn_edit_toolList.visibility = View.VISIBLE
-            btn_edit_cancel.visibility = View.INVISIBLE
-            btn_edit_delete.visibility = View.INVISIBLE
-            flag = false
-            recyclerAdapter.notifyDataSetChanged()
-        }
-
         val recyclerManager = LinearLayoutManager(context!!)
         layout_lifeRecyclerView.layoutManager = recyclerManager
         layout_lifeRecyclerView.setHasFixedSize(true)
+
+
+        btn_edit_delete.setOnClickListener {
+            btn_edit_delete.visibility = getBtnVisibility()
+        }
+
+        fun visibleCheckBoxToggle() {
+            if (flag_iseditmode) recyclerAdapter.notifyDataSetChanged()
+            else recyclerAdapter.notifyDataSetChanged()
+        }
+
+        visibleCheckBoxToggle()
+
     }
+
+    private fun getBtnVisibility(): Int {
+        if (flag_iseditmode) return View.VISIBLE
+        return View.GONE
+    }
+
+
 }

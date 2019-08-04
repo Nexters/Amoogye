@@ -34,8 +34,8 @@
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-    <Switch
-            android:id="@+id/switch_normalTool_item"
+    <ToggleButton
+            android:id="@+id/toggle_tools_item_onoff"
             android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
             android:layout_marginEnd="10dp"

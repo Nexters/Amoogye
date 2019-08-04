@@ -10,7 +10,7 @@ import cookcook.nexters.com.amoogye.R
 import kotlinx.android.synthetic.main.fragment_tools.*
 
 
-class ToolsFragment: Fragment() {
+class ToolsFragment : Fragment() {
 
     companion object {
         // 선택 선언 1 (Fragment를 싱글턴으로 사용 시)
@@ -31,7 +31,12 @@ class ToolsFragment: Fragment() {
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
-            super.onActivityCreated(savedInstanceState)
+        super.onActivityCreated(savedInstanceState)
+        val toolsFragmentAdapter = ToolsViewPageAdapter(fragmentManager!!)
+        layout_Tools_viewPager.adapter = toolsFragmentAdapter
+
+        layout_tools_tab_layout.setupWithViewPager(layout_Tools_viewPager)
+
 
         layout_tools_dimScreen.setOnClickListener {
             layout_tools_dimScreen.visibility = View.GONE
@@ -43,9 +48,25 @@ class ToolsFragment: Fragment() {
             startActivity(intent)
         }
 
-        val toolsFragmentAdapter = ToolsViewPageAdapter(fragmentManager!!)
-        layout_Tools_viewPager.adapter = toolsFragmentAdapter
+        //visibilityEditMode()
 
-        layout_Tools_tabLayout.setupWithViewPager(layout_Tools_viewPager)
+        btn_edit_toolList.setOnClickListener {
+            btn_edit_toolList.visibility = View.GONE
+            btn_edit_cancel.visibility = View.VISIBLE
+            layout_tools_tab_layout.visibility = View.GONE
+            flag_iseditmode = true
+        }
+
+        btn_edit_cancel.setOnClickListener {
+            btn_edit_toolList.visibility = View.VISIBLE
+            btn_edit_cancel.visibility = View.GONE
+            layout_tools_tab_layout.visibility = View.VISIBLE
+            flag_iseditmode = false
+        }
     }
+
+    //fun visibilityEditMode() {
+    //    if (flag_iseditmode) btn_edit_toolList.visibility = View.VISIBLE
+    //    else btn_edit_toolList.visibility = View.GONE
+    //}
 }
