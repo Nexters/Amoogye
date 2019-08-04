@@ -1,5 +1,6 @@
 package cookcook.nexters.com.amoogye.views.tools
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -37,6 +38,10 @@ class ToolsFragment: Fragment() {
             img_popup_message.visibility = View.GONE
         }
 
+        btn_convert_add_util_activity.setOnClickListener {
+            val intent = Intent(context, ToolsAddUtilActivity::class.java)
+            startActivity(intent)
+        }
 
         val toolsFragmentAdapter = ToolsViewPageAdapter(fragmentManager!!)
         layout_Tools_viewPager.adapter = toolsFragmentAdapter
