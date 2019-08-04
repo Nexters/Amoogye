@@ -1,11 +1,11 @@
 package cookcook.nexters.com.amoogye.views.calc.domain
 
 import android.content.Context
+import android.view.View
 import androidx.fragment.app.FragmentManager
-import cookcook.nexters.com.amoogye.base.BaseFragment
 
 interface CalculatorRepository {
     fun showToast(context: Context, text: String)
 
-    fun changeFragment(id: Int, destination: BaseFragment, fragmentManager: FragmentManager)
+    fun changeFragment(view: View, fragmentManager: FragmentManager, flag: Int, click: Int) : Int
 }

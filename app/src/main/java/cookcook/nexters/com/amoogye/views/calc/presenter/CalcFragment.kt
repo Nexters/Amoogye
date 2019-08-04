@@ -2,6 +2,7 @@ package cookcook.nexters.com.amoogye.views.calc.presenter
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,16 +43,13 @@ class CalcFragment: BaseFragment() {
         /********************** 모기님 알려주세요~~~ **********************/
         /* TODO: 글자 색상 변경을 어떻게 묶어야할까..? 알아보자 */
         /* TODO: fragmentManger는 이렇게 인자로 넘겨야만할까..? 알아보자 */
+
         txt_ingredient.setOnClickListener {
-            calculatorViewModel.convertFragment(R.id.calculator_container, IngredientFragment(), fragmentManager!!)
-            txt_ingredient.setTextColor(Color.parseColor("#131c32"))
-            txt_human.setTextColor(Color.parseColor("#33131c32"))
+            calculatorViewModel.flag = calculatorViewModel.convertFragment(calc_text_container, fragmentManager!!, 1)
         }
 
         txt_human.setOnClickListener {
-            calculatorViewModel.convertFragment(R.id.calculator_container, PortionFragment(), fragmentManager!!)
-            txt_ingredient.setTextColor(Color.parseColor("#33131c32"))
-            txt_human.setTextColor(Color.parseColor("#131c32"))
+            calculatorViewModel.flag = calculatorViewModel.convertFragment(calc_text_container, fragmentManager!!, 2)
         }
 
         val fragmentManager = fragmentManager
