@@ -34,7 +34,9 @@ class ToolsFragment: Fragment() {
 
         layout_tools_dimScreen.setOnClickListener {
             layout_tools_dimScreen.visibility = View.GONE
+            img_popup_message.visibility = View.GONE
         }
+
 
         val toolsFragmentAdapter = ToolsViewPageAdapter(fragmentManager!!)
         layout_Tools_viewPager.adapter = toolsFragmentAdapter
