@@ -6,6 +6,4 @@ import androidx.fragment.app.FragmentManager
 
 interface CalculatorRepository {
     fun showToast(context: Context, text: String)
-
-    fun changeFragment(view: View, fragmentManager: FragmentManager, flag: Int, click: Int) : Int
 }

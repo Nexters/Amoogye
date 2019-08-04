@@ -13,16 +13,19 @@ import org.koin.android.viewmodel.dsl.viewModel
 
 import org.koin.dsl.module
 
-val appModule = module {
-
-    single<MainRepository> { MainRepositoryImpl() }
-
-    viewModel { MainViewModel(get()) }
-
+val calcModule = module {
     single<CalculatorRepository> { CalculatorRepositoryImpl() }
-
     viewModel { CalculatorViewModel(get()) }
+}
 
-    single<TimerRepository> {TimerRepositoryImpl()}
+val timerModule = module {
+    single<TimerRepository> { TimerRepositoryImpl() }
     viewModel { TimerViewModel(get()) }
 }
+
+val mainModule = module {
+    single<MainRepository> { MainRepositoryImpl() }
+    viewModel { MainViewModel(get()) }
+}
+
+val appModule = listOf(mainModule, calcModule, timerModule)
