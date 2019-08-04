@@ -5,8 +5,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
+import android.widget.ToggleButton
 import androidx.recyclerview.widget.RecyclerView
 import cookcook.nexters.com.amoogye.R
 
@@ -18,17 +20,25 @@ class ToolsRecyclerAdapterLife (private val context: Context, private val measur
         private val unitBold = itemView.findViewById<TextView>(R.id.txt_measureUnit_bold)
         private val unitSoft = itemView.findViewById<TextView>(R.id.txt_measureUnit_soft)
         private val unitCheckBox = itemView.findViewById<CheckBox>(R.id.checkBox_lifeTool_Item)
+        private val toggleOnOff = itemView.findViewById<ToggleButton>(R.id.toggle_tools_item_onoff)
 
         fun bind(measureUnit: LifeMeasureUnit) {
             unitBold?.text = measureUnit.measureUnitBold
             unitSoft?.text = measureUnit.measureUnitSoft
             unitCheckBox.visibility = getVisibility()
+            toggleOnOff.visibility = getToggleVisibility()
         }
 
         private fun getVisibility(): Int {
-            if (flag) return View.VISIBLE
+            if (flag_iseditmode) return View.VISIBLE
             return View.GONE
         }
+
+        private fun getToggleVisibility(): Int {
+            if (flag_iseditmode) return View.GONE
+            return View.VISIBLE
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {

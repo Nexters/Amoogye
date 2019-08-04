@@ -1,76 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
 
     <RelativeLayout
-            android:layout_above="@id/layout_bottom"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        android:id="@+id/layout_middle_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
 
         <RelativeLayout
-                android:id="@+id/layout_middle_top"
-                android:layout_alignParentTop="true"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true">
-
-                <com.google.android.material.tabs.TabLayout
-                        android:id="@+id/layout_Tools_tabLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"/>
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"/>
-            </LinearLayout>
-        </RelativeLayout>
-
-        <RelativeLayout
-                android:id="@+id/layout_center"
-                android:layout_below="@id/layout_middle_top"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            <androidx.viewpager.widget.ViewPager
-                    android:background="#f3f3f7"
-                    android:id="@+id/layout_Tools_viewPager"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-        </RelativeLayout>
-        <RelativeLayout
-                android:id="@+id/layout_tools_dimScreen"
-                android:visibility="visible"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#33000000">
-        </RelativeLayout>
-        <ImageView
-                android:id="@+id/img_popup_message"
-                android:layout_alignParentBottom="true"
-                android:layout_centerInParent="true"
-                android:src="@drawable/icon_popup_message"
-                android:paddingBottom="10dp"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-    </RelativeLayout>
-    <RelativeLayout
-            android:id="@+id/layout_bottom"
-            android:layout_alignParentBottom="true"
+            android:id="@+id/layout_tools_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/btn_convert_add_util_activity"
-                android:layout_width="match_parent"
+
+            <ImageView
+                android:id="@+id/img_popup_message"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:text="@string/tools_bottom_btn_addUtils"
-                android:textColor="@color/white"
-                android:background="#6e7282"
-                android:visibility="visible"/>
+                android:layout_toStartOf="@id/btn_convert_add_util_activity"
+                android:paddingEnd="10dp"
+                android:src="@drawable/amoogye" />
+
+            <ImageButton
+                android:id="@+id/btn_convert_add_util_activity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@color/transparent"
+                android:padding="5dp"
+                android:src="@drawable/keyboard_icon_next" />
+
+            <TextView
+                android:id="@+id/txt_tools_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btn_convert_add_util_activity"
+                android:text="계량도구"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_tools_top_tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_tools_title"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/layout_tools_tab_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/btn_edit_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:text="취소"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/btn_edit_toolList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="편집"
+                    android:visibility="visible" />
+
+            </RelativeLayout>
+        </LinearLayout>
     </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_middle_top">
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/layout_Tools_viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#f3f3f7" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/layout_tools_dimScreen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#33000000"
+        android:visibility="visible" />
+
 </RelativeLayout>

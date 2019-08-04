@@ -18,8 +18,8 @@ class ToolsViewPageAdapter(fm:FragmentManager) : FragmentPagerAdapter(fm) {
 
     override fun getPageTitle(position: Int): CharSequence? {
         return when(position) {
-            0 -> "일반계량"
-            else -> "생활계량"
+            0 -> "일반 계량도구"
+            else -> "생활 계량도구"
         }
     }
 }
