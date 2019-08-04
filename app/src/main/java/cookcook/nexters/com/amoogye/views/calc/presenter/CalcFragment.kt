@@ -40,10 +40,6 @@ class CalcFragment: BaseFragment() {
         btn_history.setOnClickListener { calculatorViewModel.gazuaa("history 구현 예정") }
         btn_tip.setOnClickListener { calculatorViewModel.gazuaa("tip 구현 예정") }
 
-        /********************** 모기님 알려주세요~~~ **********************/
-        /* TODO: 글자 색상 변경을 어떻게 묶어야할까..? 알아보자 */
-        /* TODO: fragmentManger는 이렇게 인자로 넘겨야만할까..? 알아보자 */
-
         txt_ingredient.setOnClickListener {
             calculatorViewModel.flag = calculatorViewModel.convertFragment(calc_text_container, fragmentManager!!, 1)
         }
