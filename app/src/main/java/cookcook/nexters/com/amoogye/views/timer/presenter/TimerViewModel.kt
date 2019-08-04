@@ -32,7 +32,7 @@ class TimerViewModel(private val repo: TimerRepository) : ViewModel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             editText.showSoftInputOnFocus = false
         }
-        editText.setTextIsSelectable(true)
+//        editText.setTextIsSelectable(true)
     }
 
     fun onNumberButtonClick(number: String) {
