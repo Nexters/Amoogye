@@ -50,8 +50,14 @@
                 android:layout_height="match_parent"
                 android:background="#33000000">
         </RelativeLayout>
+        <ImageView
+                android:id="@+id/img_popup_message"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
+                android:src="@drawable/icon_popup_message"
+                android:paddingBottom="10dp"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"/>
     </RelativeLayout>
-
     <RelativeLayout
             android:id="@+id/layout_bottom"
             android:layout_alignParentBottom="true"
