@@ -8,7 +8,7 @@ class ToolsViewPageAdapter(fm:FragmentManager) : FragmentPagerAdapter(fm) {
     override fun getItem(position: Int): Fragment {
         return when(position) {
             0 -> { ToolsFragment_Normal() }
-            else -> { ToolsFragment_Life() }
+            else -> { ToolsFragmentLife() }
         }
     }
 
