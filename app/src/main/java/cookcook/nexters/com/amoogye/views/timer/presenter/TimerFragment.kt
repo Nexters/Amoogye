@@ -1,8 +1,10 @@
 package cookcook.nexters.com.amoogye.views.timer.presenter
 
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.RelativeLayout
 import androidx.databinding.DataBindingUtil
 import cookcook.nexters.com.amoogye.R
@@ -51,9 +53,13 @@ class TimerFragment : BaseFragment() {
     )
 
     override fun setupViews(view: View) {
-        timerViewModel.timerEditTextSetting(edit_hour, 0)
-        timerViewModel.timerEditTextSetting(edit_minute, 1)
-        timerViewModel.timerEditTextSetting(edit_second, 2)
+        timerViewModel.timerEditTextSetting(edit_hour)
+        timerViewModel.timerEditTextSetting(edit_minute)
+        timerViewModel.timerEditTextSetting(edit_second)
+
+        editTextClickEvent(edit_hour, 0)
+        editTextClickEvent(edit_minute, 1)
+        editTextClickEvent(edit_second, 2)
 
         for (x in 0 until numberButtonList.size) {
             var layout = view.findViewById<RelativeLayout>(numberButtonList[x])
@@ -61,6 +67,16 @@ class TimerFragment : BaseFragment() {
                 timerViewModel.onNumberButtonClick(numberButtonTextList[x])
             }
         }
+    }
+
+    private fun editTextClickEvent(editText: EditText, number: Int) {
+        editText.setOnTouchListener { v, event ->   event.let {
+            if(it.action == MotionEvent.ACTION_DOWN) {
+                timerViewModel.setSelectedTimerEditText(number)
+            }
+            editText.setSelection(editText.text.length)
+            false
+        }}
     }
 
     override fun subscribeUI() {

@@ -29,6 +29,7 @@
                         android:padding="4dp"
                         android:layout_width="30dp"
                         android:text="@{timerVM.hourText}"
+                        android:selection="@{timerVM.hourText.length}"
                         android:background="@drawable/number_input_wrap_rounded_box"
                         android:layout_height="30dp"/>
 
@@ -44,6 +45,7 @@
                         android:padding="4dp"
                         android:layout_width="30dp"
                         android:text="@{timerVM.minuteText}"
+                        android:selection="@{timerVM.minuteText.length}"
                         android:background="@drawable/number_input_wrap_rounded_box"
                         android:layout_marginLeft="10dp"
                         android:layout_height="30dp"/>
@@ -60,6 +62,7 @@
                         android:padding="4dp"
                         android:layout_width="30dp"
                         android:text="@{timerVM.secondText}"
+                        android:selection="@{timerVM.secondText.length}"
                         android:layout_marginLeft="10dp"
                         android:background="@drawable/number_input_wrap_rounded_box"
                         android:layout_height="30dp"/>
