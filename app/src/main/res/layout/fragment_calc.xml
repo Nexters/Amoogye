@@ -15,8 +15,9 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.52"
-            android:padding="16dp">
+            android:layout_weight="0.53"
+            android:padding="16dp"
+            android:background="@color/white">
             <RelativeLayout
                 android:id="@+id/calc_layout_top"
                 android:layout_width="match_parent"
@@ -101,11 +102,14 @@
         </RelativeLayout>
 
         <!-- 버튼 관련 UI들 올 것 -->
-        <LinearLayout
+        <View android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@color/main_background_color"/>
+
+        <include layout="@layout/layout_number_button_wrap"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.48">
+            android:layout_weight="0.47"/>
 
-        </LinearLayout>
     </LinearLayout>
 </layout>
