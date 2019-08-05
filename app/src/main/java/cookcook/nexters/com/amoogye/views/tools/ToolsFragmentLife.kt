@@ -49,23 +49,23 @@ class ToolsFragmentLife : Fragment() {
         layout_lifeRecyclerView.setHasFixedSize(true)
 
 
-        btn_edit_delete.setOnClickListener {
-            btn_edit_delete.visibility = getBtnVisibility()
+        btn_edit_toolList.setOnClickListener {
+            btn_edit_toolList.visibility = View.GONE
+            btn_edit_cancel.visibility = View.VISIBLE
+            btn_edit_delete.visibility = View.VISIBLE
+            flag_iseditmode = true
+            recyclerAdapter.notifyDataSetChanged()
         }
 
-        fun visibleCheckBoxToggle() {
-            if (flag_iseditmode) recyclerAdapter.notifyDataSetChanged()
-            else recyclerAdapter.notifyDataSetChanged()
+        btn_edit_cancel.setOnClickListener {
+            btn_edit_toolList.visibility = View.VISIBLE
+            btn_edit_cancel.visibility = View.GONE
+            btn_edit_delete.visibility = View.GONE
+            flag_iseditmode = false
+            recyclerAdapter.notifyDataSetChanged()
         }
 
-        visibleCheckBoxToggle()
+
 
     }
-
-    private fun getBtnVisibility(): Int {
-        if (flag_iseditmode) return View.VISIBLE
-        return View.GONE
-    }
-
-
 }

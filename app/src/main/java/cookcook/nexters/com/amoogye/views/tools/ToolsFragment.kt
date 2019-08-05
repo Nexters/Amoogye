@@ -47,26 +47,5 @@ class ToolsFragment : Fragment() {
             val intent = Intent(context, ToolsAddUtilActivity::class.java)
             startActivity(intent)
         }
-
-        //visibilityEditMode()
-
-        btn_edit_toolList.setOnClickListener {
-            btn_edit_toolList.visibility = View.GONE
-            btn_edit_cancel.visibility = View.VISIBLE
-            layout_tools_tab_layout.visibility = View.GONE
-            flag_iseditmode = true
-        }
-
-        btn_edit_cancel.setOnClickListener {
-            btn_edit_toolList.visibility = View.VISIBLE
-            btn_edit_cancel.visibility = View.GONE
-            layout_tools_tab_layout.visibility = View.VISIBLE
-            flag_iseditmode = false
-        }
     }
-
-    //fun visibilityEditMode() {
-    //    if (flag_iseditmode) btn_edit_toolList.visibility = View.VISIBLE
-    //    else btn_edit_toolList.visibility = View.GONE
-    //}
 }
