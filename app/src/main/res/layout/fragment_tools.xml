@@ -44,46 +44,45 @@
                 android:textSize="20sp" />
         </RelativeLayout>
 
-        <LinearLayout
-            android:id="@+id/layout_tools_top_tab_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/layout_tools_title"
-            android:orientation="horizontal">
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/layout_tools_tab_layout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            </RelativeLayout>
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            </RelativeLayout>
-        </LinearLayout>
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/layout_center"
+        android:id="@+id/layout_tools_top_tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/layout_middle_top">
+        android:layout_below="@id/layout_middle_top"
+        android:orientation="horizontal">
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/layout_Tools_viewPager"
+
+        <RelativeLayout
+            android:id="@+id/layout_center"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#f3f3f7" />
-    </RelativeLayout>
+            android:layout_height="wrap_content">
 
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/layout_Tools_viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/layout_tools_tab_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </RelativeLayout>
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/layout_tools_dimScreen"
