@@ -15,6 +15,14 @@ class AddUtilActivity : AppCompatActivity() {
         view_pager_add_util.adapter = addUtilFragmentAdapter
 
         indicator_add_util.setupWithViewPager(view_pager_add_util)
+
+        btn_add_util_back.setOnClickListener {
+            view_pager_add_util.setCurrentItem(getItem(-1), true)
+        }
+    }
+
+    private fun getItem(page : Int) : Int{
+        return view_pager_add_util.currentItem+page
     }
 
 }
