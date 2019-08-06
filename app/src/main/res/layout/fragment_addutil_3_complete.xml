@@ -54,6 +54,16 @@
 
         </RelativeLayout>
     </RelativeLayout>
+    <RelativeLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btn_add_util_3_complete"
+            android:text="확인"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
 
 
 </RelativeLayout>
