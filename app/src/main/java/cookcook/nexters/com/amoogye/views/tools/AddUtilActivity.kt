@@ -1,9 +1,11 @@
 package cookcook.nexters.com.amoogye.views.tools
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.viewpager.widget.ViewPager
 import cookcook.nexters.com.amoogye.R
 import kotlinx.android.synthetic.main.activity_tools_addutil_main.*
@@ -19,6 +21,7 @@ class AddUtilActivity : AppCompatActivity() {
 
         indicator_add_util.setupWithViewPager(view_pager_add_util)
 
+        // 프래그먼트 스와이프 시 변동사항
         view_pager_add_util.addOnPageChangeListener (object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
             }
@@ -35,6 +38,7 @@ class AddUtilActivity : AppCompatActivity() {
             }
         })
 
+        // 버튼 눌렀을 때 이전, 다음 프래그먼트 이동
         btn_add_util_back.setOnClickListener {
             view_pager_add_util.setCurrentItem(getItem(-1), true)
         }
@@ -42,10 +46,21 @@ class AddUtilActivity : AppCompatActivity() {
         btn_add_util_next_page.setOnClickListener {
             view_pager_add_util.setCurrentItem(getItem(1), true)
         }
-    }
 
+        // namefragment editText 눌렀을 때 이미지 사라짐
+        addUtilImageGone()
+
+    }
 
     private fun getItem(page : Int) : Int{
         return view_pager_add_util.currentItem+page
+    }
+
+    private fun addUtilImageGone() {
+        if (flagImage) {
+            layout_outer_mid.visibility = View.VISIBLE
+        } else {
+            layout_outer_mid.visibility = View.GONE
+        }
     }
 }
