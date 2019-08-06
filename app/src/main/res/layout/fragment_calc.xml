@@ -106,10 +106,28 @@
             android:layout_height="4dp"
             android:background="@color/main_background_color"/>
 
-        <include layout="@layout/layout_number_button_wrap"
+        <FrameLayout
+            android:id="@+id/calc_frame_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.47"/>
+            android:layout_weight="0.47">
 
+            <include layout="@layout/layout_number_button_wrap"
+                android:id="@+id/calc_layout_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible"/>
+
+            <include layout="@layout/layout_unit_button_wrap"
+                android:id="@+id/calc_layout_unit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <include layout="@layout/layout_ingredient_scroll_wrap"
+                android:id="@+id/calc_layout_ingredient"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </FrameLayout>
     </LinearLayout>
 </layout>
