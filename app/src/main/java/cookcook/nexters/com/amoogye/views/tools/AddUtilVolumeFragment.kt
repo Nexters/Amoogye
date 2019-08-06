@@ -33,7 +33,7 @@ class AddUtilVolumeFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         edit_txt_name_util.setOnClickListener{
-            //getFragment(NameOfFragment())
+            getFragment(TestFragment())
         }
 
         edit_txt_volume_decimal_point.setOnClickListener {

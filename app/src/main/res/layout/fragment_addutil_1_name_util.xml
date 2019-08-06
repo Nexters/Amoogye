@@ -93,11 +93,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
 
-        <Button
-            android:id="@+id/btn_add_util_name_1_next"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="다음" />
     </RelativeLayout>
 
 </RelativeLayout>

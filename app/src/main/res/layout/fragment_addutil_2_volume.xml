@@ -97,12 +97,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
-        <Button
-            android:id="@+id/btn_add_util_volume_2_next"
-            android:layout_alignParentBottom="true"
-            android:text="다음"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/container_add_util_volume_choice"
