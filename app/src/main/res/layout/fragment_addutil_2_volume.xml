@@ -58,40 +58,55 @@
             </LinearLayout>
 
         </RelativeLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/layout_outer_bottom"
+        android:layout_below="@id/layout_outer_mid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <LinearLayout
             android:id="@+id/layout_mid_3"
-            android:layout_below="@id/layout_mid_2"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <EditText
+            <TextView
                 android:id="@+id/edit_txt_name_util"
+                android:hint="종이컵"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
                 android:text="으로"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <EditText
+            <TextView
                 android:id="@+id/edit_txt_volume_decimal_point"
+                android:hint="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
                 android:text="."
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <EditText
+            <TextView
                 android:id="@+id/edit_txt_volume_under_decimal_point"
+                android:hint="0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
                 android:text="번 담겨요!"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-
-
         </LinearLayout>
+        <Button
+            android:id="@+id/btn_add_util_volume_2_next"
+            android:layout_alignParentBottom="true"
+            android:text="다음"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </RelativeLayout>
-
-
+    <RelativeLayout
+        android:id="@+id/container_add_util_volume_choice"
+        android:layout_below="@id/layout_outer_mid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </RelativeLayout>
