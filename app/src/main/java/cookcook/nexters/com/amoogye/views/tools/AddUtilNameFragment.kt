@@ -2,6 +2,7 @@ package cookcook.nexters.com.amoogye.views.tools
 
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,12 +36,12 @@ class AddUtilNameFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         edit_txt_name_util.setOnClickListener {
-            img_add_util_1_name.visibility = View.GONE
+            flagImage = false
+            Log.d("flagflag", " "+flagImage)
         }
 
-        layout_add_util_1_top.setOnClickListener {
-            img_add_util_1_name.visibility = View.VISIBLE
-
+        layout_outer_top.setOnClickListener {
+            flagImage = true
             addUtilCloseKeyboard()
         }
 
