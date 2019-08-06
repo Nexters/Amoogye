@@ -57,6 +57,8 @@
             android:id="@+id/indicator_add_util"
             android:layout_alignParentStart="true"
             android:layout_marginTop="150dp"
+            app:tabBackground="@drawable/add_util_indicator_tab_selector"
+            app:tabIndicatorHeight="0dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </RelativeLayout>
