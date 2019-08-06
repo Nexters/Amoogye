@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:text="취소"
+            android:text="닫기"
             android:visibility="gone" />
 
 
@@ -56,11 +56,11 @@
 
         <Button
             android:id="@+id/btn_edit_delete"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:text="삭제"
-            android:visibility="invisible" />
+            android:visibility="gone" />
 
     </RelativeLayout>
 </RelativeLayout>
