@@ -22,7 +22,7 @@ class AddUtilActivity : AppCompatActivity() {
         indicator_add_util.setupWithViewPager(view_pager_add_util)
 
         // 프래그먼트 스와이프 시 변동사항
-        view_pager_add_util.addOnPageChangeListener (object : ViewPager.OnPageChangeListener {
+        view_pager_add_util.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
             }
 
@@ -30,10 +30,26 @@ class AddUtilActivity : AppCompatActivity() {
             }
 
             override fun onPageSelected(position: Int) {
-                if (position == 2) {
-                    btn_add_util_next_page.text = "확인"
-                } else {
-                    btn_add_util_next_page.text = "다음"
+                when (position % 3) {
+                    1 -> {
+                        btn_add_util_next_page.text = "다음"
+                        btn_add_util_back.visibility = View.VISIBLE
+                        btn_add_util_next_page.setOnClickListener {
+                            view_pager_add_util.setCurrentItem(getItem(1), true)
+                        }
+                    }
+                    2 -> {
+                        btn_add_util_next_page.setOnClickListener {
+                            finish()
+                        }
+                        btn_add_util_next_page.text = "확인"
+                        btn_add_util_back.visibility = View.VISIBLE
+
+                    }
+                    else -> {
+                        btn_add_util_next_page.text = "다음"
+                        btn_add_util_back.visibility = View.INVISIBLE
+                    }
                 }
             }
         })
@@ -47,20 +63,15 @@ class AddUtilActivity : AppCompatActivity() {
             view_pager_add_util.setCurrentItem(getItem(1), true)
         }
 
-        // namefragment editText 눌렀을 때 이미지 사라짐
-        addUtilImageGone()
-
-    }
-
-    private fun getItem(page : Int) : Int{
-        return view_pager_add_util.currentItem+page
-    }
-
-    private fun addUtilImageGone() {
-        if (flagImage) {
-            layout_outer_mid.visibility = View.VISIBLE
-        } else {
-            layout_outer_mid.visibility = View.GONE
+        // 종료
+        btn_add_util_exit.setOnClickListener {
+            finish()
         }
+
     }
+
+    private fun getItem(page: Int): Int {
+        return view_pager_add_util.currentItem + page
+    }
+
 }
