@@ -1,22 +1,23 @@
-package cookcook.nexters.com.amoogye.views.tools
+package cookcook.nexters.com.amoogye.views.tools.add_tools
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import androidx.viewpager.widget.ViewPager
 import cookcook.nexters.com.amoogye.R
 import kotlinx.android.synthetic.main.activity_tools_addutil_main.*
 
-class AddUtilActivity : AppCompatActivity() {
+class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener {
+    override fun onClickEditText() {
+        layout_main_activity_outer_mid.visibility = View.GONE
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tools_addutil_main)
 
-        val addUtilFragmentAdapter = AddUtilViewPagerAdapter(supportFragmentManager)
+        val addUtilFragmentAdapter =
+            AddUtilViewPagerAdapter(supportFragmentManager, this)
         view_pager_add_util.adapter = addUtilFragmentAdapter
 
         indicator_add_util.setupWithViewPager(view_pager_add_util)
@@ -74,4 +75,8 @@ class AddUtilActivity : AppCompatActivity() {
         return view_pager_add_util.currentItem + page
     }
 
+}
+
+interface OnEditTextClickListener {
+    fun onClickEditText()
 }

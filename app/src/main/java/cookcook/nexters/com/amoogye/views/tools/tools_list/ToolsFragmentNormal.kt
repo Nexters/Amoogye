@@ -1,4 +1,4 @@
-package cookcook.nexters.com.amoogye.views.tools
+package cookcook.nexters.com.amoogye.views.tools.tools_list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import cookcook.nexters.com.amoogye.R
+import cookcook.nexters.com.amoogye.views.tools.NormalMeasureUnit
+import cookcook.nexters.com.amoogye.views.tools.ToolsFragment
 import kotlinx.android.synthetic.main.fragment_tools_normal_recycler.*
 
 
@@ -18,7 +20,8 @@ class ToolsFragmentNormal: Fragment() {
 
         fun getInstance(): ToolsFragment {
             if (INSTANCE == null) {
-                INSTANCE = ToolsFragment()
+                INSTANCE =
+                    ToolsFragment()
             }
             return INSTANCE!!
         }
@@ -48,7 +51,8 @@ class ToolsFragmentNormal: Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val recyclerAdapter = ToolsRecyclerAdapter(context!!, measureUnitList)
+        val recyclerAdapter =
+            ToolsRecyclerAdapter(context!!, measureUnitList)
         layout_normalRecyclerView.adapter = recyclerAdapter
 
         val recyclerManager = LinearLayoutManager(context!!)
