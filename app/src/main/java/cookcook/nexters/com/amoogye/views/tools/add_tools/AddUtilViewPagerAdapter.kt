@@ -4,12 +4,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 
-class AddUtilViewPagerAdapter (fm:FragmentManager, val editTextItemClickListener: OnEditTextClickListener) : FragmentPagerAdapter(fm) {
+class AddUtilViewPagerAdapter (fm:FragmentManager, val editTextItemClickListener: OnEditTextClickListener, val outerTextItemClickListener: OnOuterTextClickListener) : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
         return when(position) {
             0 -> {
-                AddUtilNameFragment(editTextItemClickListener)
+                AddUtilNameFragment(editTextItemClickListener, outerTextItemClickListener)
 
             }
             1 -> {

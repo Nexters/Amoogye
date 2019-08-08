@@ -13,9 +13,15 @@ import kotlinx.android.synthetic.main.fragment_addutil_1_name_util.*
 import kotlinx.android.synthetic.main.fragment_addutil_1_name_util.layout_outer_top
 
 
-class AddUtilNameFragment(editTextItemClickListener: OnEditTextClickListener) : Fragment() {
+class AddUtilNameFragment(
+    editTextItemClickListener: OnEditTextClickListener,
+    outerTextItemClickListener: OnOuterTextClickListener
+) : Fragment() {
 
     var onItemClickListener: OnEditTextClickListener? = editTextItemClickListener
+        private set
+
+    var onOuterItemClickListener: OnOuterTextClickListener? = outerTextItemClickListener
         private set
 
     companion object {
@@ -45,6 +51,7 @@ class AddUtilNameFragment(editTextItemClickListener: OnEditTextClickListener) : 
         }
 
         layout_outer_top.setOnClickListener {
+            onOuterItemClickListener?.onClickOuterText()
             addUtilCloseKeyboard()
         }
 
