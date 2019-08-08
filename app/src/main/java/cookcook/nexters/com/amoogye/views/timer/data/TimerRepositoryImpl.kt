@@ -13,6 +13,24 @@ class TimerRepositoryImpl: TimerRepository {
     override fun timerEvent() {
     }
 
+    override fun limitNumber(type: Int, number: String): Int {
+        when (type) {
+            0 -> {
+                if (number.toInt() > 24) return 24
+                return number.toInt()
+            }
+            1 -> {
+                if (number.toInt() > 59) return 59
+                return number.toInt()
+            }
+            2 -> {
+                if (number.toInt() > 59) return 59
+                return number.toInt()
+            }
+            else -> return 0
+        }
+    }
+
     override fun textChange(number: String, text: String): String {
         var afterText: String = text
 
@@ -20,10 +38,20 @@ class TimerRepositoryImpl: TimerRepository {
             afterText = text.substring(0, text.length - 1)
         } else {
             if (number != "delete") {
-                afterText += number
+                if (afterText == "0") {
+                    afterText = number
+                } else {
+                    afterText += number
+                }
             }
+        }
+        if (afterText.isEmpty()) {
+            return "0"
         }
         return afterText
     }
 
+    override fun timerTime(hour: Int, minute: Int, second: Int): Int {
+        return hour * 3600 + minute * 60 + second
+    }
 }
