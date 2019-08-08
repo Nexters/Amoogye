@@ -11,7 +11,7 @@ import android.widget.ToggleButton
 import androidx.recyclerview.widget.RecyclerView
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.views.tools.LifeMeasureUnit
-import cookcook.nexters.com.amoogye.views.tools.flag_iseditmode
+import cookcook.nexters.com.amoogye.views.tools.flagIsEditMode
 
 class ToolsRecyclerAdapterLife (private val context: Context, private val measureUnitList: ArrayList<LifeMeasureUnit>) :
     RecyclerView.Adapter<ToolsRecyclerAdapterLife.Holder>() {
@@ -31,12 +31,12 @@ class ToolsRecyclerAdapterLife (private val context: Context, private val measur
         }
 
         private fun getVisibility(): Int {
-            if (flag_iseditmode) return View.VISIBLE
+            if (flagIsEditMode) return View.VISIBLE
             return View.GONE
         }
 
         private fun getToggleVisibility(): Int {
-            if (flag_iseditmode) return View.GONE
+            if (flagIsEditMode) return View.GONE
             return View.VISIBLE
         }
 

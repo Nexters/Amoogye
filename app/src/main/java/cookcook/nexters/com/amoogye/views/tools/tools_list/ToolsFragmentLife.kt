@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.views.tools.LifeMeasureUnit
 import cookcook.nexters.com.amoogye.views.tools.ToolsFragment
-import cookcook.nexters.com.amoogye.views.tools.flag_iseditmode
+import cookcook.nexters.com.amoogye.views.tools.flagIsEditMode
 import kotlinx.android.synthetic.main.fragment_tools_life_recycler.*
 
 class ToolsFragmentLife : Fragment() {
@@ -58,7 +58,7 @@ class ToolsFragmentLife : Fragment() {
             btn_edit_toolList.visibility = View.GONE
             btn_edit_cancel.visibility = View.VISIBLE
             btn_edit_delete.visibility = View.VISIBLE
-            flag_iseditmode = true
+            flagIsEditMode = true
             recyclerAdapter.notifyDataSetChanged()
         }
 
@@ -66,7 +66,7 @@ class ToolsFragmentLife : Fragment() {
             btn_edit_toolList.visibility = View.VISIBLE
             btn_edit_cancel.visibility = View.GONE
             btn_edit_delete.visibility = View.GONE
-            flag_iseditmode = false
+            flagIsEditMode = false
             recyclerAdapter.notifyDataSetChanged()
         }
 
