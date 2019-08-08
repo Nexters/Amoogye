@@ -15,5 +15,11 @@
     <color name="number_input_wrap_color">#FF4F34</color>
     <color name="main_background_color">#EBEDF4</color>
     <color name="number_button_text_color">#6E7282</color>
+    <color name="number_non_focus_wrap_color">#f1f5f7</color>
+
+    <color name="timer_title_color">#131c32</color>
+    <color name="timer_theme_color">#ff4f34</color>
+    <color name="timer_cancel_color">#bccdd6</color>
+    <color name="timer_text_color">#80131c32</color>
 </resources>
 

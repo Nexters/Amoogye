@@ -11,4 +11,14 @@
 
     <!-- tools -->
     <string name="tools_bottom_btn_addUtils">계량도구 추가</string>
+    <string name="timer_text_hour">시간</string>
+    <string name="timer_text_minute">분</string>
+    <string name="timer_text_second_before">초 뒤에</string>
+    <string name="timer_text_second_after">초가</string>
+    <string name="timer_text_last_before">알려드릴게요!</string>
+    <string name="timer_text_last_after">끝났습니다!</string>
+    <string name="timer_title">타이머</string>
+    <string name="timer_pause">일시정지</string>
+    <string name="timer_cancel">취소</string>
+    <string name="timer_start">시작하기</string>
 </resources>
