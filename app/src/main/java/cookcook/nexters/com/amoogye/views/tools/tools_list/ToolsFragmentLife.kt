@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import cookcook.nexters.com.amoogye.R
-import cookcook.nexters.com.amoogye.views.tools.LifeMeasureUnit
+import cookcook.nexters.com.amoogye.views.tools.MeasureUnit
 import cookcook.nexters.com.amoogye.views.tools.ToolsFragment
 import cookcook.nexters.com.amoogye.views.tools.flagIsEditMode
+import io.realm.Realm
+import io.realm.Sort
 import kotlinx.android.synthetic.main.fragment_tools_life_recycler.*
 
 class ToolsFragmentLife : Fragment() {
@@ -27,16 +29,9 @@ class ToolsFragmentLife : Fragment() {
         }
     }
 
-    private var measureUnitList = arrayListOf<LifeMeasureUnit>(
-        LifeMeasureUnit("큰술", "tbsp"),
-        LifeMeasureUnit("작은술", "tsp"),
-        LifeMeasureUnit("컵", "cup"),
-        LifeMeasureUnit("밥숟갈", "15cc"),
-        LifeMeasureUnit("베라스푼", "5cc"),
-        LifeMeasureUnit("물뚜껑", "7cc"),
-        LifeMeasureUnit("소주잔", "50ml")
 
-    )
+    val realm = Realm.getDefaultInstance()
+    val unitList = realm.where(MeasureUnit::class.java).equalTo("unitType", 0).findAll().sort("unitId", Sort.DESCENDING)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
@@ -46,13 +41,14 @@ class ToolsFragmentLife : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val recyclerAdapter =
-            ToolsRecyclerAdapterLife(context!!, measureUnitList)
+            ToolsRecyclerAdapterLife(context!!, unitList, true)
         layout_lifeRecyclerView.adapter = recyclerAdapter
 
         val recyclerManager = LinearLayoutManager(context!!)
         layout_lifeRecyclerView.layoutManager = recyclerManager
-        layout_lifeRecyclerView.setHasFixedSize(true)
+        layout_lifeRecyclerView.setHasFixedSize(false)
 
+        unitList.addChangeListener { _-> recyclerAdapter.notifyDataSetChanged() }
 
         btn_edit_toolList.setOnClickListener {
             btn_edit_toolList.visibility = View.GONE
@@ -70,7 +66,29 @@ class ToolsFragmentLife : Fragment() {
             recyclerAdapter.notifyDataSetChanged()
         }
 
+        insertData()
+    }
 
+    private fun insertData(){
+        realm.beginTransaction()
 
+        val newItem = realm.createObject(MeasureUnit::class.java, newId())
+        newItem.unitNameBold = "생활계량"
+        newItem.unitNameSoft = "150ml"
+        newItem.unitType = 0
+
+        realm.commitTransaction()
+    }
+    private fun newId() : Long {
+        val maxId = realm.where(MeasureUnit::class.java).max("unitId")
+        if (maxId != null){
+            return maxId.toLong() + 1
+        }
+        return 0
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        realm.close()
     }
 }

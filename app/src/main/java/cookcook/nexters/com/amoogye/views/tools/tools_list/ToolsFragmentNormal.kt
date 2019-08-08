@@ -67,8 +67,8 @@ class ToolsFragmentNormal : Fragment() {
         realm.beginTransaction()
 
         val newItem = realm.createObject(MeasureUnit::class.java, newId())
-        newItem.unitNameBold = "냠냠2"
-        newItem.unitNameSoft = "호로록2"
+        newItem.unitNameBold = "일반계량"
+        newItem.unitNameSoft = "일반"
         newItem.unitType = 1
 
         realm.commitTransaction()
