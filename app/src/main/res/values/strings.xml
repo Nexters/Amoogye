@@ -8,6 +8,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- tools -->
+    <string name="tools_bottom_btn_addUtils">계량도구 추가</string>
     <string name="timer_text_hour">시간</string>
     <string name="timer_text_minute">분</string>
     <string name="timer_text_second_before">초 뒤에</string>
