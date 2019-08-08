@@ -1,4 +1,4 @@
-package cookcook.nexters.com.amoogye.views.tools
+package cookcook.nexters.com.amoogye.views.tools.add_tools
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import cookcook.nexters.com.amoogye.R
-import kotlinx.android.synthetic.main.fragment_addutil_3_complete.*
+import cookcook.nexters.com.amoogye.views.tools.ToolsFragment
 
 
 class AddUtilCompleteFragment : Fragment() {
@@ -17,7 +17,8 @@ class AddUtilCompleteFragment : Fragment() {
 
         fun getInstance(): ToolsFragment {
             if (INSTANCE == null) {
-                INSTANCE = ToolsFragment()
+                INSTANCE =
+                    ToolsFragment()
             }
             return INSTANCE!!
         }

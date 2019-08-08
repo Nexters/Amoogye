@@ -46,11 +46,12 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/layout_outer_mid"
+        android:id="@+id/layout_main_activity_outer_mid"
         android:layout_below="@id/layout_outer_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
+            android:id="@+id/img_add_util_name"
             android:src="@drawable/icon_popup_message"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
@@ -61,7 +62,7 @@
         android:id="@+id/layout_add_util_outer_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/layout_outer_mid">
+        android:layout_below="@id/layout_main_activity_outer_mid">
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/view_pager_add_util"

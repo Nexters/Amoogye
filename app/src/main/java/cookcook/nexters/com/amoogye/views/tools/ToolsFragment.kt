@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import cookcook.nexters.com.amoogye.R
+import cookcook.nexters.com.amoogye.views.tools.add_tools.AddUtilActivity
+import cookcook.nexters.com.amoogye.views.tools.tools_list.ToolsViewPageAdapter
 import kotlinx.android.synthetic.main.fragment_tools.*
 
 
@@ -18,7 +20,8 @@ class ToolsFragment : Fragment() {
 
         fun getInstance(): ToolsFragment {
             if (INSTANCE == null) {
-                INSTANCE = ToolsFragment()
+                INSTANCE =
+                    ToolsFragment()
             }
             return INSTANCE!!
         }
@@ -32,7 +35,8 @@ class ToolsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val toolsFragmentAdapter = ToolsViewPageAdapter(fragmentManager!!)
+        val toolsFragmentAdapter =
+            ToolsViewPageAdapter(fragmentManager!!)
         layout_Tools_viewPager.adapter = toolsFragmentAdapter
 
         layout_tools_tab_layout.setupWithViewPager(layout_Tools_viewPager)

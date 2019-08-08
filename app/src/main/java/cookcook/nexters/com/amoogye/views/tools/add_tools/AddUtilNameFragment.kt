@@ -1,18 +1,22 @@
-package cookcook.nexters.com.amoogye.views.tools
+package cookcook.nexters.com.amoogye.views.tools.add_tools
 
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import cookcook.nexters.com.amoogye.R
+import cookcook.nexters.com.amoogye.views.tools.ToolsFragment
 import kotlinx.android.synthetic.main.fragment_addutil_1_name_util.*
+import kotlinx.android.synthetic.main.fragment_addutil_1_name_util.layout_outer_top
 
 
-class AddUtilNameFragment : Fragment() {
+class AddUtilNameFragment(editTextItemClickListener: OnEditTextClickListener) : Fragment() {
+
+    var onItemClickListener: OnEditTextClickListener? = editTextItemClickListener
+        private set
 
     companion object {
         // 선택 선언 1 (Fragment를 싱글턴으로 사용 시)
@@ -20,7 +24,8 @@ class AddUtilNameFragment : Fragment() {
 
         fun getInstance(): ToolsFragment {
             if (INSTANCE == null) {
-                INSTANCE = ToolsFragment()
+                INSTANCE =
+                    ToolsFragment()
             }
             return INSTANCE!!
         }
@@ -36,16 +41,15 @@ class AddUtilNameFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         edit_txt_name_util.setOnClickListener {
-            flagImage = false
-            Log.d("flagflag", " "+flagImage)
+            onItemClickListener?.onClickEditText()
         }
 
         layout_outer_top.setOnClickListener {
-            flagImage = true
             addUtilCloseKeyboard()
         }
 
     }
+
 
     private fun addUtilCloseKeyboard() {
 

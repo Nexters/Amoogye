@@ -10,7 +10,7 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".views.tools.AddUtilActivity"
+        <activity android:name=".views.tools.add_tools.AddUtilActivity"
             android:windowSoftInputMode="adjustResize|stateHidden">
         </activity>
         <activity android:name=".views.main.presenter.MainActivity">
