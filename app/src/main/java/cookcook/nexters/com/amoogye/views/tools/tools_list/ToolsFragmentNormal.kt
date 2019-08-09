@@ -7,12 +7,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import cookcook.nexters.com.amoogye.R
-import cookcook.nexters.com.amoogye.views.tools.NormalMeasureUnit
+import cookcook.nexters.com.amoogye.views.tools.MeasureUnit
 import cookcook.nexters.com.amoogye.views.tools.ToolsFragment
+import io.realm.Realm
+import io.realm.Sort
+
 import kotlinx.android.synthetic.main.fragment_tools_normal_recycler.*
 
 
-class ToolsFragmentNormal: Fragment() {
+class ToolsFragmentNormal : Fragment() {
 
     companion object {
         // 선택 선언 1 (Fragment를 싱글턴으로 사용 시)
@@ -27,21 +30,10 @@ class ToolsFragmentNormal: Fragment() {
         }
     }
 
-    private var measureUnitList = arrayListOf<NormalMeasureUnit>(
-        NormalMeasureUnit("cc", "씨씨"),
-        NormalMeasureUnit("ml", "밀리미터"),
-        NormalMeasureUnit("L", "리터"),
-        NormalMeasureUnit("mg", "밀리그램"),
-        NormalMeasureUnit("kg", "킬로그램"),
-        NormalMeasureUnit("큰술", "tbsp"),
-        NormalMeasureUnit("작은술", "tsp"),
-        NormalMeasureUnit("컵", "cup"),
-        NormalMeasureUnit("밥숟갈", "15cc"),
-        NormalMeasureUnit("베라스푼", "5cc"),
-        NormalMeasureUnit("물뚜껑", "7cc"),
-        NormalMeasureUnit("소주잔", "50ml")
-
-    )
+    // Realm
+    private val realm = Realm.getDefaultInstance()
+    // 일반 계량 데이터 가져오기
+    private val unitList = realm.where(MeasureUnit::class.java).equalTo("unitType", 1).findAll().sort("unitId", Sort.DESCENDING)
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -51,12 +43,46 @@ class ToolsFragmentNormal: Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        // 리사이클러뷰 어댑터
         val recyclerAdapter =
-            ToolsRecyclerAdapter(context!!, measureUnitList)
+            ToolsRecyclerAdapter(context!!, unitList, true)
         layout_normalRecyclerView.adapter = recyclerAdapter
 
+        // 변경사항 반영
+        unitList.addChangeListener { _-> recyclerAdapter.notifyDataSetChanged() }
+
+        // 레이아웃 매니저
         val recyclerManager = LinearLayoutManager(context!!)
         layout_normalRecyclerView.layoutManager = recyclerManager
-        layout_normalRecyclerView.setHasFixedSize(true)
+
+        // 리사이클러뷰 사이즈 고정 해제
+        layout_normalRecyclerView.setHasFixedSize(false)
+
+
+        insertData()
+    }
+
+    private fun insertData(){
+        realm.beginTransaction()
+
+        val newItem = realm.createObject(MeasureUnit::class.java, newId())
+        newItem.unitNameBold = "일반계량"
+        newItem.unitNameSoft = "일반"
+        newItem.unitType = 1
+
+        realm.commitTransaction()
+    }
+    private fun newId() : Long {
+        val maxId = realm.where(MeasureUnit::class.java).max("unitId")
+        if (maxId != null){
+            return maxId.toLong() + 1
+        }
+        return 0
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        realm.close()
     }
 }

@@ -10,12 +10,17 @@ import android.widget.TextView
 import android.widget.ToggleButton
 import androidx.recyclerview.widget.RecyclerView
 import cookcook.nexters.com.amoogye.R
-import cookcook.nexters.com.amoogye.views.tools.LifeMeasureUnit
+import cookcook.nexters.com.amoogye.views.tools.MeasureUnit
 import cookcook.nexters.com.amoogye.views.tools.flagIsEditMode
+import io.realm.RealmRecyclerViewAdapter
+import io.realm.RealmResults
 
-class ToolsRecyclerAdapterLife (private val context: Context, private val measureUnitList: ArrayList<LifeMeasureUnit>) :
-    RecyclerView.Adapter<ToolsRecyclerAdapterLife.Holder>() {
-
+class ToolsRecyclerAdapterLife(
+    private val context: Context,
+    measureUnitList: RealmResults<MeasureUnit>,
+    autoUpdate: Boolean
+) :
+    RealmRecyclerViewAdapter<MeasureUnit, ToolsRecyclerAdapterLife.Holder>(measureUnitList, autoUpdate) {
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val unitBold = itemView.findViewById<TextView>(R.id.txt_measureUnit_bold)
@@ -23,9 +28,9 @@ class ToolsRecyclerAdapterLife (private val context: Context, private val measur
         private val unitCheckBox = itemView.findViewById<CheckBox>(R.id.checkBox_lifeTool_Item)
         private val toggleOnOff = itemView.findViewById<ToggleButton>(R.id.toggle_tools_item_onoff)
 
-        fun bind(measureUnit: LifeMeasureUnit) {
-            unitBold?.text = measureUnit.measureUnitBold
-            unitSoft?.text = measureUnit.measureUnitSoft
+        fun bind(unit: MeasureUnit) {
+            unitBold?.text = unit.unitNameBold
+            unitSoft?.text = unit.unitNameSoft
             unitCheckBox.visibility = getVisibility()
             toggleOnOff.visibility = getToggleVisibility()
         }
@@ -48,10 +53,10 @@ class ToolsRecyclerAdapterLife (private val context: Context, private val measur
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.bind(measureUnitList[position])
+        holder.bind(data!![position])
     }
 
     override fun getItemCount(): Int {
-        return measureUnitList.size
+        return data!!.size
     }
 }
