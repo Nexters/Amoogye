@@ -10,6 +10,8 @@ import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.views.tools.MeasureUnit
 import cookcook.nexters.com.amoogye.views.tools.ToolsFragment
 import io.realm.Realm
+import io.realm.RealmObject
+import io.realm.RealmResults
 import io.realm.Sort
 
 import kotlinx.android.synthetic.main.fragment_tools_normal_recycler.*
@@ -19,30 +21,43 @@ class ToolsFragmentNormal : Fragment() {
 
     companion object {
         // 선택 선언 1 (Fragment를 싱글턴으로 사용 시)
-        private var INSTANCE: ToolsFragment? = null
+        private var INSTANCE: ToolsFragmentNormal? = null
 
-        fun getInstance(): ToolsFragment {
+        fun getInstance(): ToolsFragmentNormal {
             if (INSTANCE == null) {
                 INSTANCE =
-                    ToolsFragment()
+                    ToolsFragmentNormal()
             }
             return INSTANCE!!
         }
     }
 
-    // Realm
-    private val realm = Realm.getDefaultInstance()
-    // 일반 계량 데이터 가져오기
-    private val unitList = realm.where(MeasureUnit::class.java).equalTo("unitType", 1).findAll().sort("unitId", Sort.DESCENDING)
+    lateinit var realm: Realm
+    lateinit var unitList: RealmResults<MeasureUnit>
 
+    override fun onStart() {
+        super.onStart()
+
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         return inflater.inflate(R.layout.fragment_tools_normal_recycler, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        // Realm
+
+        // 일반 계량 데이터 가져오기
+        realm = Realm.getDefaultInstance()
+
+        unitList = realm.where(MeasureUnit::class.java).equalTo("unitType", 1).findAll().sort("unitId", Sort.DESCENDING)
 
         // 리사이클러뷰 어댑터
         val recyclerAdapter =
@@ -58,9 +73,7 @@ class ToolsFragmentNormal : Fragment() {
 
         // 리사이클러뷰 사이즈 고정 해제
         layout_normalRecyclerView.setHasFixedSize(false)
-
-
-        insertData()
+//        insertData()
     }
 
     private fun insertData(){
@@ -81,8 +94,13 @@ class ToolsFragmentNormal : Fragment() {
         return 0
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onStop() {
         realm.close()
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+
+        super.onDestroy()
     }
 }

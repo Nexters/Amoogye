@@ -26,12 +26,13 @@ class AddUtilNameFragment(
 
     companion object {
         // 선택 선언 1 (Fragment를 싱글턴으로 사용 시)
-        private var INSTANCE: ToolsFragment? = null
+        private var INSTANCE: AddUtilNameFragment? = null
 
-        fun getInstance(): ToolsFragment {
+        fun getInstance(editTextItemClickListener: OnEditTextClickListener,
+                        outerTextItemClickListener: OnOuterTextClickListener): AddUtilNameFragment {
             if (INSTANCE == null) {
                 INSTANCE =
-                    ToolsFragment()
+                    AddUtilNameFragment(editTextItemClickListener, outerTextItemClickListener)
             }
             return INSTANCE!!
         }

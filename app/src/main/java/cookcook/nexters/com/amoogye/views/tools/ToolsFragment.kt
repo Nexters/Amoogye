@@ -36,7 +36,7 @@ class ToolsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val toolsFragmentAdapter =
-            ToolsViewPageAdapter(fragmentManager!!)
+            ToolsViewPageAdapter(childFragmentManager)
         layout_Tools_viewPager.adapter = toolsFragmentAdapter
 
         layout_tools_tab_layout.setupWithViewPager(layout_Tools_viewPager)
