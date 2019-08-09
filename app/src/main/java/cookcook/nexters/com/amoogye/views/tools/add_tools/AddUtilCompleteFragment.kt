@@ -13,12 +13,12 @@ class AddUtilCompleteFragment : Fragment() {
 
     companion object {
         // 선택 선언 1 (Fragment를 싱글턴으로 사용 시)
-        private var INSTANCE: ToolsFragment? = null
+        private var INSTANCE: AddUtilCompleteFragment? = null
 
-        fun getInstance(): ToolsFragment {
+        fun getInstance(): AddUtilCompleteFragment {
             if (INSTANCE == null) {
                 INSTANCE =
-                    ToolsFragment()
+                    AddUtilCompleteFragment()
             }
             return INSTANCE!!
         }

@@ -14,12 +14,12 @@ class AddUtilVolumeFragment : Fragment() {
 
     companion object {
         // 선택 선언 1 (Fragment를 싱글턴으로 사용 시)
-        private var INSTANCE: ToolsFragment? = null
+        private var INSTANCE: AddUtilVolumeFragment? = null
 
-        fun getInstance(): ToolsFragment {
+        fun getInstance(): AddUtilVolumeFragment {
             if (INSTANCE == null) {
                 INSTANCE =
-                    ToolsFragment()
+                    AddUtilVolumeFragment()
             }
             return INSTANCE!!
         }

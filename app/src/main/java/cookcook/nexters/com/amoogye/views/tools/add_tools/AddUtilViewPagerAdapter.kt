@@ -9,14 +9,14 @@ class AddUtilViewPagerAdapter (fm:FragmentManager, val editTextItemClickListener
     override fun getItem(position: Int): Fragment {
         return when(position) {
             0 -> {
-                AddUtilNameFragment(editTextItemClickListener, outerTextItemClickListener)
+                AddUtilNameFragment.getInstance(editTextItemClickListener, outerTextItemClickListener)
 
             }
             1 -> {
-                AddUtilVolumeFragment()
+                AddUtilVolumeFragment.getInstance()
             }
             else -> {
-                AddUtilCompleteFragment()
+                AddUtilCompleteFragment.getInstance()
             }
         }
     }

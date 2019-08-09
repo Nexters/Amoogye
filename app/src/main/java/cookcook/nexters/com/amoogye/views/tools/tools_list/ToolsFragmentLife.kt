@@ -18,28 +18,39 @@ class ToolsFragmentLife : Fragment() {
 
     companion object {
         // 선택 선언 1 (Fragment를 싱글턴으로 사용 시)
-        private var INSTANCE: ToolsFragment? = null
+        private var INSTANCE: ToolsFragmentLife? = null
 
-        fun getInstance(): ToolsFragment {
+        fun getInstance(): ToolsFragmentLife {
             if (INSTANCE == null) {
                 INSTANCE =
-                    ToolsFragment()
+                    ToolsFragmentLife()
             }
             return INSTANCE!!
         }
     }
 
+    lateinit var realm: Realm
 
-    val realm = Realm.getDefaultInstance()
-    val unitList = realm.where(MeasureUnit::class.java).equalTo("unitType", 0).findAll().sort("unitId", Sort.DESCENDING)
+    override fun onStart() {
+        super.onStart()
+
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         return inflater.inflate(R.layout.fragment_tools_life_recycler, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        realm = Realm.getDefaultInstance()
+        val unitList = realm.where(MeasureUnit::class.java).equalTo("unitType", 0).findAll().sort("unitId", Sort.DESCENDING)
+
         val recyclerAdapter =
             ToolsRecyclerAdapterLife(context!!, unitList, true)
         layout_lifeRecyclerView.adapter = recyclerAdapter
@@ -65,8 +76,6 @@ class ToolsFragmentLife : Fragment() {
             flagIsEditMode = false
             recyclerAdapter.notifyDataSetChanged()
         }
-
-        insertData()
     }
 
     private fun insertData(){
@@ -87,8 +96,12 @@ class ToolsFragmentLife : Fragment() {
         return 0
     }
 
+    override fun onStop() {
+        realm.close()
+        super.onStop()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
-        realm.close()
     }
 }
