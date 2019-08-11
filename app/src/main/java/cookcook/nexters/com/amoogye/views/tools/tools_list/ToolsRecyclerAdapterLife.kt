@@ -32,6 +32,7 @@ class ToolsRecyclerAdapterLife(
             unitBold?.text = unit.unitNameBold
             unitSoft?.text = unit.unitNameSoft
             unitCheckBox.visibility = getVisibility()
+            unitCheckBox.isChecked = false
             toggleOnOff.visibility = getToggleVisibility()
         }
 
@@ -45,6 +46,20 @@ class ToolsRecyclerAdapterLife(
             return View.VISIBLE
         }
 
+        fun isBoxChecked() {
+            unitCheckBox.setOnCheckedChangeListener{ unitCheckBox, _ ->
+                val dataId = data!![adapterPosition].unitId
+                if(unitCheckBox.isChecked){
+                    checkedList.add(dataId)
+                } else {
+                    if (dataId in checkedList){
+                        checkedList.remove(dataId)
+                    }
+                }
+
+            }
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
@@ -54,9 +69,10 @@ class ToolsRecyclerAdapterLife(
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.bind(data!![position])
+        holder.isBoxChecked()
     }
 
     override fun getItemCount(): Int {
-        return data!!.size
+        return if (data == null) return 0 else data!!.size
     }
 }

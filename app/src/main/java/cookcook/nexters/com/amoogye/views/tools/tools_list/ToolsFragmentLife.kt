@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import cookcook.nexters.com.amoogye.R
@@ -76,14 +77,24 @@ class ToolsFragmentLife : Fragment() {
             flagIsEditMode = false
             recyclerAdapter.notifyDataSetChanged()
         }
+
+        btn_edit_delete.setOnClickListener {
+            deleteData()
+        }
+
+        insertData("야호", "메롱")
+        insertData("룰루", "랄라")
+        insertData("가나", "다라")
+        insertData("마바", "사아")
+
     }
 
-    private fun insertData(){
+    private fun insertData(nameBold:String, nameSoft:String){
         realm.beginTransaction()
 
         val newItem = realm.createObject(MeasureUnit::class.java, newId())
-        newItem.unitNameBold = "생활계량"
-        newItem.unitNameSoft = "150ml"
+        newItem.unitNameBold = nameBold
+        newItem.unitNameSoft = nameSoft
         newItem.unitType = 0
 
         realm.commitTransaction()
@@ -94,6 +105,25 @@ class ToolsFragmentLife : Fragment() {
             return maxId.toLong() + 1
         }
         return 0
+    }
+
+
+    private fun deleteData() {
+        realm.beginTransaction()
+
+        for (itemId in checkedList) {
+            // 삭제불가 도구 판별 (일단 임의로 조건 설정해놓음)
+            if (itemId < 5){
+                Toast.makeText(context!!, "기본 데이터는 삭제할 수 없습니다",Toast.LENGTH_LONG).show()
+            } else {
+                val deleteItem = realm.where(MeasureUnit::class.java).equalTo("unitId", itemId).findFirst()!!
+                deleteItem.deleteFromRealm()
+            }
+        }
+
+        checkedList.clear()
+
+        realm.commitTransaction()
     }
 
     override fun onStop() {
