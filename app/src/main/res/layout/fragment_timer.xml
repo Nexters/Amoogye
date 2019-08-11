@@ -7,18 +7,36 @@
         />
     </data>
 
-    <LinearLayout
-            android:background="@color/main_background_color"
+    <RelativeLayout
+            android:background="@color/white"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_alignParentRight="true"
+            android:id="@+id/layout_timer_background"
+            android:visibility="gone"
+            android:background="@color/main_background_color"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
         <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.53"
                 android:padding="16dp"
-                android:background="@color/white">
+                android:background="#00ffffff">
+
+
 
             <TextView
                     android:id="@+id/txt_timer_title"
@@ -158,14 +176,27 @@
 
         </RelativeLayout>
 
-        <View android:layout_width="match_parent"
-              android:layout_height="4dp"
-              android:background="@color/main_background_color"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="4dp"
+                android:orientation="vertical"
+                android:background="#00ffffff"
+                android:layout_weight="0.47">
+                <View
+                    android:id="@+id/view_contour"
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:background="@color/main_background_color"/>
 
-        <include layout="@layout/layout_number_button_wrap"
-                 android:layout_width="match_parent"
-                 android:layout_height="0dp"
-                 android:layout_weight="0.47"/>
+                <include layout="@layout/layout_number_button_wrap"
+                    android:id="@+id/layout_number_button_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.47"/>
 
-    </LinearLayout>
+            </LinearLayout>
+            </LinearLayout>
+
+    </RelativeLayout>
 </layout>

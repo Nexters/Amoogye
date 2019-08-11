@@ -48,7 +48,7 @@ class TimerViewModel(private val repo: TimerRepository) : ViewModel() {
             return TimerCode.STATE_PAUSE // 일시 정지
         }
 
-        return TimerCode.STATE_START // 시작
+        return TimerCode.STATE_WAIT // 시작
     }
 
     fun setSelectedTimerEditText(number: Int) {
@@ -86,13 +86,24 @@ class TimerViewModel(private val repo: TimerRepository) : ViewModel() {
     }
 
     fun onTimerStartButtonClick() {
-        isTimerStart = true
+        timerStartTask()
         this._time.value =
             repo.timerTime(_hourText.value!!.toInt(), _minuteText.value!!.toInt(), _secondText.value!!.toInt()) * 1000
 
     }
 
+    fun timerStartTask() {
+        isTimerStart = true
+        isTimerEnd = false
+    }
+
     fun stopTimerTask() {
+        isTimerEnd = true
+        isTimerStart = true
+    }
+
+    fun pauseTimerTask() {
+        isTimerStart = false
         isTimerEnd = true
     }
 }
