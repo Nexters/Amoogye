@@ -8,12 +8,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import cookcook.nexters.com.amoogye.R
-import cookcook.nexters.com.amoogye.views.tools.MeasureUnit
-import cookcook.nexters.com.amoogye.views.tools.ToolsFragment
-import cookcook.nexters.com.amoogye.views.tools.flagIsEditMode
+import cookcook.nexters.com.amoogye.views.tools.*
 import io.realm.Realm
 import io.realm.Sort
 import kotlinx.android.synthetic.main.fragment_tools_life_recycler.*
+import java.lang.reflect.Array
 
 class ToolsFragmentLife : Fragment() {
 
@@ -50,7 +49,7 @@ class ToolsFragmentLife : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         realm = Realm.getDefaultInstance()
-        val unitList = realm.where(MeasureUnit::class.java).equalTo("unitType", 0).findAll().sort("unitId", Sort.DESCENDING)
+        val unitList = realm.where(MeasureUnit::class.java).equalTo("unitType", TYPE_NORMAL).findAll().sort("unitId", Sort.DESCENDING)
 
         val recyclerAdapter =
             ToolsRecyclerAdapterLife(context!!, unitList, true)
@@ -81,11 +80,19 @@ class ToolsFragmentLife : Fragment() {
 
         btn_edit_delete.setOnClickListener {
             deleteData()
+            if (utilCantDelete){
+                Toast.makeText(context!!, "기본 데이터는 삭제할 수 없습니다",Toast.LENGTH_LONG).show()
+                utilCantDelete = false
+            }
+
         }
 
         changeToggleStatus()
 
-        insertData("야호", "메롱")
+        test_btn_insert_data.setOnClickListener {
+            insertData("야호", "메롱")
+        }
+
 
     }
 
@@ -93,22 +100,23 @@ class ToolsFragmentLife : Fragment() {
         realm.beginTransaction()
 
         if (toggleNotChecked.size > 0){
-            for (itemId in toggleNotChecked) {
-                val toggleStatus = realm.where(MeasureUnit::class.java).equalTo("unitId", itemId).findFirst()!!
-                toggleStatus.unitStatus = 0
-            }
+            toggleUnitStatus(ITEM_STATUS_OFF, toggleNotChecked)
         }
         if (toggleChecked.size > 0){
-            for (itemId in toggleChecked) {
-                val toggleStatus = realm.where(MeasureUnit::class.java).equalTo("unitId", itemId).findFirst()!!
-                toggleStatus.unitStatus = 1
-            }
+            toggleUnitStatus(ITEM_STATUS_ON, toggleChecked)
         }
 
         toggleChecked.clear()
         toggleNotChecked.clear()
 
         realm.commitTransaction()
+    }
+
+    private fun toggleUnitStatus(status:Int, toggleList:MutableList<Long>) {
+        for (itemId in toggleList) {
+            val toggleStatus = realm.where(MeasureUnit::class.java).equalTo("unitId", itemId).findFirst()!!
+            toggleStatus.unitStatus = status
+        }
     }
 
     private fun insertData(nameBold:String, nameSoft:String){
@@ -136,7 +144,7 @@ class ToolsFragmentLife : Fragment() {
         for (itemId in checkedList) {
             // 삭제불가 도구 판별 (일단 임의로 조건 설정해놓음)
             if (itemId < 5){
-                Toast.makeText(context!!, "기본 데이터는 삭제할 수 없습니다",Toast.LENGTH_LONG).show()
+                utilCantDelete = true
             } else {
                 val deleteItem = realm.where(MeasureUnit::class.java).equalTo("unitId", itemId).findFirst()!!
                 deleteItem.deleteFromRealm()

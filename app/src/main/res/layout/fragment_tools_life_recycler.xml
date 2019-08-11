@@ -55,12 +55,18 @@
         android:layout_alignParentBottom="true">
 
         <Button
+            android:id="@+id/test_btn_insert_data"
+            android:text="테스트_항목추가"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
             android:id="@+id/btn_edit_delete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:text="삭제"
             android:visibility="gone" />
+
 
     </RelativeLayout>
 </RelativeLayout>

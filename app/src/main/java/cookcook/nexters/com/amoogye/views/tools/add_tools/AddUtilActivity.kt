@@ -39,6 +39,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTex
                     1 -> {
                         btn_add_util_next_page.text = "다음"
                         btn_add_util_back.visibility = View.VISIBLE
+                        btn_add_util_exit.visibility = View.VISIBLE
                         btn_add_util_next_page.setOnClickListener {
                             view_pager_add_util.setCurrentItem(getItem(1), true)
                         }
@@ -49,11 +50,13 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTex
                         }
                         btn_add_util_next_page.text = "확인"
                         btn_add_util_back.visibility = View.VISIBLE
+                        btn_add_util_exit.visibility = View.INVISIBLE
 
                     }
                     else -> {
                         btn_add_util_next_page.text = "다음"
                         btn_add_util_back.visibility = View.INVISIBLE
+                        btn_add_util_exit.visibility = View.VISIBLE
                     }
                 }
             }
@@ -77,6 +80,9 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTex
 
     private fun getItem(page: Int): Int {
         return view_pager_add_util.currentItem + page
+    }
+
+    private fun exitAlert(){
     }
 
 }

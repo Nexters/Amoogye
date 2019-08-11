@@ -4,3 +4,5 @@ var checkedList = mutableListOf<Long>()
 
 var toggleChecked = mutableListOf<Long>()
 var toggleNotChecked = mutableListOf<Long>()
+
+var utilCantDelete = false

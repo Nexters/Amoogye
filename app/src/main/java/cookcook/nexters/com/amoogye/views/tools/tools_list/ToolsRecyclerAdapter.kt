@@ -8,6 +8,7 @@ import android.widget.TextView
 import android.widget.ToggleButton
 import androidx.recyclerview.widget.RecyclerView
 import cookcook.nexters.com.amoogye.R
+import cookcook.nexters.com.amoogye.views.tools.ITEM_STATUS_ON
 import cookcook.nexters.com.amoogye.views.tools.MeasureUnit
 import io.realm.RealmRecyclerViewAdapter
 import io.realm.RealmResults
@@ -31,7 +32,7 @@ class ToolsRecyclerAdapter(
         }
 
         private fun isToggleOn() : Boolean{
-            if (data!![adapterPosition].unitStatus == 1) return true
+            if (data!![adapterPosition].unitStatus == ITEM_STATUS_ON) return true
             else return false
         }
 

@@ -8,8 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import cookcook.nexters.com.amoogye.R
-import cookcook.nexters.com.amoogye.views.tools.MeasureUnit
-import cookcook.nexters.com.amoogye.views.tools.ToolsFragment
+import cookcook.nexters.com.amoogye.views.tools.*
 import io.realm.Realm
 import io.realm.RealmObject
 import io.realm.RealmResults
@@ -55,7 +54,8 @@ class ToolsFragmentNormal : Fragment() {
 
         realm = Realm.getDefaultInstance()
 
-        unitList = realm.where(MeasureUnit::class.java).equalTo("unitType", 1).findAll().sort("unitId", Sort.DESCENDING)
+        unitList = realm.where(MeasureUnit::class.java).equalTo("unitType", TYPE_LIFE).findAll()
+            .sort("unitId", Sort.DESCENDING)
 
         // 리사이클러뷰 어댑터
         val recyclerAdapter =
@@ -63,7 +63,7 @@ class ToolsFragmentNormal : Fragment() {
         layout_normalRecyclerView.adapter = recyclerAdapter
 
         // 변경사항 반영
-        unitList.addChangeListener { _-> recyclerAdapter.notifyDataSetChanged() }
+        unitList.addChangeListener { _ -> recyclerAdapter.notifyDataSetChanged() }
 
         // 레이아웃 매니저
         val recyclerManager = LinearLayoutManager(context!!)
@@ -72,7 +72,7 @@ class ToolsFragmentNormal : Fragment() {
         // 리사이클러뷰 사이즈 고정 해제
         layout_normalRecyclerView.setHasFixedSize(false)
 
-       changeToggleStatus()
+        changeToggleStatus()
 
 
     }
@@ -80,18 +80,11 @@ class ToolsFragmentNormal : Fragment() {
     private fun changeToggleStatus() {
         realm.beginTransaction()
 
-        if (toggleNotChecked.size > 0){
-            for (itemId in toggleNotChecked) {
-                val toggleStatus = realm.where(MeasureUnit::class.java).equalTo("unitId", itemId).findFirst()!!
-                toggleStatus.unitStatus = 0
-            }
+        if (toggleNotChecked.size > 0) {
+            toggleUnitStatus(ITEM_STATUS_OFF, toggleNotChecked)
         }
-        if (toggleChecked.size > 0){
-            for (itemId in toggleChecked) {
-                val toggleStatus = realm.where(MeasureUnit::class.java).equalTo("unitId", itemId).findFirst()!!
-                toggleStatus.unitStatus = 1
-                Log.d("checked", ""+toggleStatus)
-            }
+        if (toggleChecked.size > 0) {
+            toggleUnitStatus(ITEM_STATUS_ON, toggleChecked)
         }
 
         toggleChecked.clear()
@@ -100,20 +93,28 @@ class ToolsFragmentNormal : Fragment() {
         realm.commitTransaction()
     }
 
+    private fun toggleUnitStatus(status: Int, toggleList: MutableList<Long>) {
+        for (itemId in toggleList) {
+            val toggleStatus = realm.where(MeasureUnit::class.java).equalTo("unitId", itemId).findFirst()!!
+            toggleStatus.unitStatus = status
+        }
+    }
 
-    private fun insertData(){
+
+    private fun insertData() {
         realm.beginTransaction()
 
         val newItem = realm.createObject(MeasureUnit::class.java, newId())
         newItem.unitNameBold = "일반계량"
         newItem.unitNameSoft = "일반"
-        newItem.unitType = 1
+        newItem.unitType = TYPE_NORMAL
 
         realm.commitTransaction()
     }
-    private fun newId() : Long {
+
+    private fun newId(): Long {
         val maxId = realm.where(MeasureUnit::class.java).max("unitId")
-        if (maxId != null){
+        if (maxId != null) {
             return maxId.toLong() + 1
         }
         return 0
