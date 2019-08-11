@@ -126,6 +126,11 @@ class ToolsFragmentLife : Fragment() {
         realm.commitTransaction()
     }
 
+    override fun onResume() {
+        super.onResume()
+        flagIsEditMode = false
+    }
+
     override fun onStop() {
         realm.close()
         super.onStop()

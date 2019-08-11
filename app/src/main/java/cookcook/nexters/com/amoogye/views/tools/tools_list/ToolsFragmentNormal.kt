@@ -52,9 +52,6 @@ class ToolsFragmentNormal : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        // Realm
-
-        // 일반 계량 데이터 가져오기
         realm = Realm.getDefaultInstance()
 
         unitList = realm.where(MeasureUnit::class.java).equalTo("unitType", 1).findAll().sort("unitId", Sort.DESCENDING)
@@ -73,7 +70,7 @@ class ToolsFragmentNormal : Fragment() {
 
         // 리사이클러뷰 사이즈 고정 해제
         layout_normalRecyclerView.setHasFixedSize(false)
-//        insertData()
+
     }
 
     private fun insertData(){
