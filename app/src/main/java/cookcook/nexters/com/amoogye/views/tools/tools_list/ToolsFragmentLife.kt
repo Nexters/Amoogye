@@ -4,15 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import cookcook.nexters.com.amoogye.R
-import cookcook.nexters.com.amoogye.views.tools.MeasureUnit
-import cookcook.nexters.com.amoogye.views.tools.ToolsFragment
-import cookcook.nexters.com.amoogye.views.tools.flagIsEditMode
+import cookcook.nexters.com.amoogye.views.tools.*
 import io.realm.Realm
 import io.realm.Sort
 import kotlinx.android.synthetic.main.fragment_tools_life_recycler.*
+import java.lang.reflect.Array
 
 class ToolsFragmentLife : Fragment() {
 
@@ -49,7 +49,7 @@ class ToolsFragmentLife : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         realm = Realm.getDefaultInstance()
-        val unitList = realm.where(MeasureUnit::class.java).equalTo("unitType", 0).findAll().sort("unitId", Sort.DESCENDING)
+        val unitList = realm.where(MeasureUnit::class.java).equalTo("unitType", TYPE_NORMAL).findAll().sort("unitId", Sort.DESCENDING)
 
         val recyclerAdapter =
             ToolsRecyclerAdapterLife(context!!, unitList, true)
@@ -62,6 +62,7 @@ class ToolsFragmentLife : Fragment() {
         unitList.addChangeListener { _-> recyclerAdapter.notifyDataSetChanged() }
 
         btn_edit_toolList.setOnClickListener {
+            changeToggleStatus()
             btn_edit_toolList.visibility = View.GONE
             btn_edit_cancel.visibility = View.VISIBLE
             btn_edit_delete.visibility = View.VISIBLE
@@ -76,14 +77,54 @@ class ToolsFragmentLife : Fragment() {
             flagIsEditMode = false
             recyclerAdapter.notifyDataSetChanged()
         }
+
+        btn_edit_delete.setOnClickListener {
+            deleteData()
+            if (utilCantDelete){
+                Toast.makeText(context!!, "기본 데이터는 삭제할 수 없습니다",Toast.LENGTH_LONG).show()
+                utilCantDelete = false
+            }
+
+        }
+
+        changeToggleStatus()
+
+        test_btn_insert_data.setOnClickListener {
+            insertData("야호", "메롱")
+        }
+
+
     }
 
-    private fun insertData(){
+    private fun changeToggleStatus() {
+        realm.beginTransaction()
+
+        if (toggleNotChecked.size > 0){
+            toggleUnitStatus(ITEM_STATUS_OFF, toggleNotChecked)
+        }
+        if (toggleChecked.size > 0){
+            toggleUnitStatus(ITEM_STATUS_ON, toggleChecked)
+        }
+
+        toggleChecked.clear()
+        toggleNotChecked.clear()
+
+        realm.commitTransaction()
+    }
+
+    private fun toggleUnitStatus(status:Int, toggleList:MutableList<Long>) {
+        for (itemId in toggleList) {
+            val toggleStatus = realm.where(MeasureUnit::class.java).equalTo("unitId", itemId).findFirst()!!
+            toggleStatus.unitStatus = status
+        }
+    }
+
+    private fun insertData(nameBold:String, nameSoft:String){
         realm.beginTransaction()
 
         val newItem = realm.createObject(MeasureUnit::class.java, newId())
-        newItem.unitNameBold = "생활계량"
-        newItem.unitNameSoft = "150ml"
+        newItem.unitNameBold = nameBold
+        newItem.unitNameSoft = nameSoft
         newItem.unitType = 0
 
         realm.commitTransaction()
@@ -94,6 +135,30 @@ class ToolsFragmentLife : Fragment() {
             return maxId.toLong() + 1
         }
         return 0
+    }
+
+
+    private fun deleteData() {
+        realm.beginTransaction()
+
+        for (itemId in checkedList) {
+            // 삭제불가 도구 판별 (일단 임의로 조건 설정해놓음)
+            if (itemId < 5){
+                utilCantDelete = true
+            } else {
+                val deleteItem = realm.where(MeasureUnit::class.java).equalTo("unitId", itemId).findFirst()!!
+                deleteItem.deleteFromRealm()
+            }
+        }
+
+        checkedList.clear()
+
+        realm.commitTransaction()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        flagIsEditMode = false
     }
 
     override fun onStop() {
