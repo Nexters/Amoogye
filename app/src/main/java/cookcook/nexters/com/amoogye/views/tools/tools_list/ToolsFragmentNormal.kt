@@ -1,6 +1,7 @@
 package cookcook.nexters.com.amoogye.views.tools.tools_list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -71,7 +72,30 @@ class ToolsFragmentNormal : Fragment() {
         // 리사이클러뷰 사이즈 고정 해제
         layout_normalRecyclerView.setHasFixedSize(false)
 
+        changeToggleStatus()
+
     }
+
+    private fun changeToggleStatus() {
+        realm.beginTransaction()
+
+        for (itemId in toggleNotChecked) {
+            val toggleStatus = realm.where(MeasureUnit::class.java).equalTo("unitId", itemId).findFirst()!!
+            toggleStatus.unitStatus = 0
+        }
+        for (itemId in toggleChecked) {
+            val toggleStatus = realm.where(MeasureUnit::class.java).equalTo("unitId", itemId).findFirst()!!
+            toggleStatus.unitStatus = 1
+            Log.d("checked", ""+toggleStatus)
+        }
+
+
+        toggleChecked.clear()
+        toggleNotChecked.clear()
+
+        realm.commitTransaction()
+    }
+
 
     private fun insertData(){
         realm.beginTransaction()
@@ -97,7 +121,6 @@ class ToolsFragmentNormal : Fragment() {
     }
 
     override fun onDestroy() {
-
         super.onDestroy()
     }
 }
