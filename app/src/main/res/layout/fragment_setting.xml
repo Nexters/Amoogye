@@ -136,9 +136,8 @@
                     android:paddingEnd="16dp"
                     android:paddingBottom="11.1dp"
                     android:switchPadding="10dp"
-                    android:background="@drawable/setting_onoff_selector"
-                    android:track="@color/transparent"
-                    android:thumb="@color/transparent"/>
+                    android:thumb="@drawable/setting_onoff_thumb"
+                    android:track="@drawable/setting_onoff_selector"/>
             </RelativeLayout>
 
             <RelativeLayout
