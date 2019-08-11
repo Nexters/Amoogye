@@ -63,6 +63,7 @@ class ToolsFragmentLife : Fragment() {
         unitList.addChangeListener { _-> recyclerAdapter.notifyDataSetChanged() }
 
         btn_edit_toolList.setOnClickListener {
+            changeToggleStatus()
             btn_edit_toolList.visibility = View.GONE
             btn_edit_cancel.visibility = View.VISIBLE
             btn_edit_delete.visibility = View.VISIBLE
@@ -82,11 +83,32 @@ class ToolsFragmentLife : Fragment() {
             deleteData()
         }
 
-        insertData("야호", "메롱")
-        insertData("룰루", "랄라")
-        insertData("가나", "다라")
-        insertData("마바", "사아")
+        changeToggleStatus()
 
+        insertData("야호", "메롱")
+
+    }
+
+    private fun changeToggleStatus() {
+        realm.beginTransaction()
+
+        if (toggleNotChecked.size > 0){
+            for (itemId in toggleNotChecked) {
+                val toggleStatus = realm.where(MeasureUnit::class.java).equalTo("unitId", itemId).findFirst()!!
+                toggleStatus.unitStatus = 0
+            }
+        }
+        if (toggleChecked.size > 0){
+            for (itemId in toggleChecked) {
+                val toggleStatus = realm.where(MeasureUnit::class.java).equalTo("unitId", itemId).findFirst()!!
+                toggleStatus.unitStatus = 1
+            }
+        }
+
+        toggleChecked.clear()
+        toggleNotChecked.clear()
+
+        realm.commitTransaction()
     }
 
     private fun insertData(nameBold:String, nameSoft:String){

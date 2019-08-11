@@ -72,23 +72,27 @@ class ToolsFragmentNormal : Fragment() {
         // 리사이클러뷰 사이즈 고정 해제
         layout_normalRecyclerView.setHasFixedSize(false)
 
-        changeToggleStatus()
+       changeToggleStatus()
+
 
     }
 
     private fun changeToggleStatus() {
         realm.beginTransaction()
 
-        for (itemId in toggleNotChecked) {
-            val toggleStatus = realm.where(MeasureUnit::class.java).equalTo("unitId", itemId).findFirst()!!
-            toggleStatus.unitStatus = 0
+        if (toggleNotChecked.size > 0){
+            for (itemId in toggleNotChecked) {
+                val toggleStatus = realm.where(MeasureUnit::class.java).equalTo("unitId", itemId).findFirst()!!
+                toggleStatus.unitStatus = 0
+            }
         }
-        for (itemId in toggleChecked) {
-            val toggleStatus = realm.where(MeasureUnit::class.java).equalTo("unitId", itemId).findFirst()!!
-            toggleStatus.unitStatus = 1
-            Log.d("checked", ""+toggleStatus)
+        if (toggleChecked.size > 0){
+            for (itemId in toggleChecked) {
+                val toggleStatus = realm.where(MeasureUnit::class.java).equalTo("unitId", itemId).findFirst()!!
+                toggleStatus.unitStatus = 1
+                Log.d("checked", ""+toggleStatus)
+            }
         }
-
 
         toggleChecked.clear()
         toggleNotChecked.clear()
