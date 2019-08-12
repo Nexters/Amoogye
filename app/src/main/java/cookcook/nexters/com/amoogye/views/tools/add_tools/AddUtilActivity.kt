@@ -3,6 +3,7 @@ package cookcook.nexters.com.amoogye.views.tools.add_tools
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.viewpager.widget.ViewPager
 import cookcook.nexters.com.amoogye.R
 import kotlinx.android.synthetic.main.activity_tools_addutil_main.*
@@ -73,7 +74,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTex
 
         // 종료
         btn_add_util_exit.setOnClickListener {
-            finish()
+            exitAlert()
         }
 
     }
@@ -82,7 +83,16 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTex
         return view_pager_add_util.currentItem + page
     }
 
-    private fun exitAlert(){
+    private fun exitAlert() {
+        val builder = AlertDialog.Builder(this)
+        val dialogView = layoutInflater.inflate(R.layout.addutil_alert_dialog, null)
+        builder.setView(dialogView)
+            .setPositiveButton("예") { dialogInterface, i ->
+                finish()
+            }
+            .setNegativeButton("아니오") { dialogInterface, i ->
+            }
+            .show()
     }
 
 }
