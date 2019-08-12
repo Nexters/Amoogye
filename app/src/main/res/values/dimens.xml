@@ -25,4 +25,17 @@
     <dimen name="timer_small_button_size">124dp</dimen>
     <dimen name="timer_button_height">60dp</dimen>
     <dimen name="timer_button_margin_top">29dp</dimen>
+
+    <dimen name="setting_title_text_size">22sp</dimen>
+    <dimen name="setting_item_title_text_size">16sp</dimen>
+    <dimen name="setting_sub_item_text_size">14sp</dimen>
+
+    <dimen name="setting_title_top">41dp</dimen>
+    <dimen name="setting_title_bottom">16dp</dimen>
+    <dimen name="setting_item_title">16dp</dimen>
+    <dimen name="setting_item_start_end">16dp</dimen>
+    <dimen name="setting_sub_item_top">18dp</dimen>
+    <dimen name="setting_sub_item_bottom">17.1dp</dimen>
+    <dimen name="setting_switch_top">12dp</dimen>
+    <dimen name="setting_switch_bottom">11.1dp</dimen>
 </resources>
