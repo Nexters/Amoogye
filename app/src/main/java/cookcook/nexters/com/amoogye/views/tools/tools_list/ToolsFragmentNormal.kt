@@ -72,9 +72,6 @@ class ToolsFragmentNormal : Fragment() {
         // 리사이클러뷰 사이즈 고정 해제
         layout_normalRecyclerView.setHasFixedSize(false)
 
-        changeToggleStatus()
-
-
     }
 
     private fun changeToggleStatus() {
@@ -87,37 +84,23 @@ class ToolsFragmentNormal : Fragment() {
             toggleUnitStatus(ITEM_STATUS_ON, toggleChecked)
         }
 
-        toggleChecked.clear()
-        toggleNotChecked.clear()
-
         realm.commitTransaction()
     }
 
-    private fun toggleUnitStatus(status: Int, toggleList: MutableList<Long>) {
+    private fun toggleUnitStatus(status: Int, toggleList: MutableSet<Long>) {
         for (itemId in toggleList) {
             val toggleStatus = realm.where(MeasureUnit::class.java).equalTo("unitId", itemId).findFirst()!!
             toggleStatus.unitStatus = status
         }
+        toggleList.clear()
     }
 
-
-    private fun insertData() {
-        realm.beginTransaction()
-
-        val newItem = realm.createObject(MeasureUnit::class.java, newId())
-        newItem.unitNameBold = "일반계량"
-        newItem.unitNameSoft = "일반"
-        newItem.unitType = TYPE_NORMAL
-
-        realm.commitTransaction()
-    }
-
-    private fun newId(): Long {
-        val maxId = realm.where(MeasureUnit::class.java).max("unitId")
-        if (maxId != null) {
-            return maxId.toLong() + 1
+    override fun onResume() {
+        super.onResume()
+        if (isToggleClicked) {
+            changeToggleStatus()
+            isToggleClicked = false
         }
-        return 0
     }
 
     override fun onStop() {

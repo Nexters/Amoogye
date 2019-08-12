@@ -12,7 +12,6 @@ import cookcook.nexters.com.amoogye.views.tools.*
 import io.realm.Realm
 import io.realm.Sort
 import kotlinx.android.synthetic.main.fragment_tools_life_recycler.*
-import java.lang.reflect.Array
 
 class ToolsFragmentLife : Fragment() {
 
@@ -33,7 +32,6 @@ class ToolsFragmentLife : Fragment() {
 
     override fun onStart() {
         super.onStart()
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -62,12 +60,16 @@ class ToolsFragmentLife : Fragment() {
         unitList.addChangeListener { _-> recyclerAdapter.notifyDataSetChanged() }
 
         btn_edit_toolList.setOnClickListener {
-            changeToggleStatus()
             btn_edit_toolList.visibility = View.GONE
             btn_edit_cancel.visibility = View.VISIBLE
             btn_edit_delete.visibility = View.VISIBLE
             flagIsEditMode = true
             recyclerAdapter.notifyDataSetChanged()
+
+            if (isToggleClicked) {
+                changeToggleStatus()
+                isToggleClicked = false
+            }
         }
 
         btn_edit_cancel.setOnClickListener {
@@ -81,13 +83,11 @@ class ToolsFragmentLife : Fragment() {
         btn_edit_delete.setOnClickListener {
             deleteData()
             if (utilCantDelete){
-                Toast.makeText(context!!, "기본 데이터는 삭제할 수 없습니다",Toast.LENGTH_LONG).show()
+                Toast.makeText(context!!, "기본 데이터는 삭제할 수 없습니다", Toast.LENGTH_LONG).show()
                 utilCantDelete = false
             }
 
         }
-
-        changeToggleStatus()
 
         test_btn_insert_data.setOnClickListener {
             insertData("야호", "메롱")
@@ -99,27 +99,27 @@ class ToolsFragmentLife : Fragment() {
     private fun changeToggleStatus() {
         realm.beginTransaction()
 
-        if (toggleNotChecked.size > 0){
+        if (toggleNotChecked.size > 0) {
             toggleUnitStatus(ITEM_STATUS_OFF, toggleNotChecked)
         }
-        if (toggleChecked.size > 0){
+        if (toggleChecked.size > 0) {
             toggleUnitStatus(ITEM_STATUS_ON, toggleChecked)
         }
-
-        toggleChecked.clear()
-        toggleNotChecked.clear()
 
         realm.commitTransaction()
     }
 
-    private fun toggleUnitStatus(status:Int, toggleList:MutableList<Long>) {
+    private fun toggleUnitStatus(status: Int, toggleList: MutableSet<Long>) {
+
         for (itemId in toggleList) {
             val toggleStatus = realm.where(MeasureUnit::class.java).equalTo("unitId", itemId).findFirst()!!
             toggleStatus.unitStatus = status
         }
+
+        toggleList.clear()
     }
 
-    private fun insertData(nameBold:String, nameSoft:String){
+    private fun insertData(nameBold: String, nameSoft: String) {
         realm.beginTransaction()
 
         val newItem = realm.createObject(MeasureUnit::class.java, newId())
@@ -129,9 +129,10 @@ class ToolsFragmentLife : Fragment() {
 
         realm.commitTransaction()
     }
-    private fun newId() : Long {
+
+    private fun newId(): Long {
         val maxId = realm.where(MeasureUnit::class.java).max("unitId")
-        if (maxId != null){
+        if (maxId != null) {
             return maxId.toLong() + 1
         }
         return 0
@@ -143,9 +144,11 @@ class ToolsFragmentLife : Fragment() {
 
         for (itemId in checkedList) {
             // 삭제불가 도구 판별 (일단 임의로 조건 설정해놓음)
-            if (itemId < 5){
+            if (itemId < 5) {
                 utilCantDelete = true
             } else {
+                if (itemId in toggleChecked) toggleChecked.remove(itemId)
+                if (itemId in toggleNotChecked) toggleNotChecked.remove(itemId)
                 val deleteItem = realm.where(MeasureUnit::class.java).equalTo("unitId", itemId).findFirst()!!
                 deleteItem.deleteFromRealm()
             }
@@ -159,6 +162,10 @@ class ToolsFragmentLife : Fragment() {
     override fun onResume() {
         super.onResume()
         flagIsEditMode = false
+        if (isToggleClicked) {
+            changeToggleStatus()
+            isToggleClicked = false
+        }
     }
 
     override fun onStop() {
