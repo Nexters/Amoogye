@@ -2,20 +2,23 @@ package cookcook.nexters.com.amoogye.views.tools.add_tools
 
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import cookcook.nexters.com.amoogye.R
-import cookcook.nexters.com.amoogye.views.tools.ToolsFragment
 import kotlinx.android.synthetic.main.fragment_addutil_1_name_util.*
 import kotlinx.android.synthetic.main.fragment_addutil_1_name_util.layout_outer_top
 
 
 class AddUtilNameFragment(
     editTextItemClickListener: OnEditTextClickListener,
-    outerTextItemClickListener: OnOuterTextClickListener
+    outerTextItemClickListener: OnOuterTextClickListener,
+    countEnableTrueListener: OnCountEnableTrueListener,
+    countEnableFalseListener: OnCountEnableFalseListener
 ) : Fragment() {
 
     var onItemClickListener: OnEditTextClickListener? = editTextItemClickListener
@@ -24,15 +27,30 @@ class AddUtilNameFragment(
     var onOuterItemClickListener: OnOuterTextClickListener? = outerTextItemClickListener
         private set
 
+    var onCountEnableTrueListener: OnCountEnableTrueListener? = countEnableTrueListener
+        private set
+
+    var onCountEnableFalseListener: OnCountEnableFalseListener? = countEnableFalseListener
+        private set
+
     companion object {
         // 선택 선언 1 (Fragment를 싱글턴으로 사용 시)
         private var INSTANCE: AddUtilNameFragment? = null
 
-        fun getInstance(editTextItemClickListener: OnEditTextClickListener,
-                        outerTextItemClickListener: OnOuterTextClickListener): AddUtilNameFragment {
+        fun getInstance(
+            editTextItemClickListener: OnEditTextClickListener,
+            outerTextItemClickListener: OnOuterTextClickListener,
+            countEnableTrueListener: OnCountEnableTrueListener,
+            countEnableFalseListener: OnCountEnableFalseListener
+        ): AddUtilNameFragment {
             if (INSTANCE == null) {
                 INSTANCE =
-                    AddUtilNameFragment(editTextItemClickListener, outerTextItemClickListener)
+                    AddUtilNameFragment(
+                        editTextItemClickListener,
+                        outerTextItemClickListener,
+                        countEnableTrueListener,
+                        countEnableFalseListener
+                    )
             }
             return INSTANCE!!
         }
@@ -56,8 +74,27 @@ class AddUtilNameFragment(
             addUtilCloseKeyboard()
         }
 
-    }
+        edit_txt_name_util.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, count: Int) {
+            }
 
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                if (p0!!.length > 10) {
+                    txt_alert_below_ten_letter.visibility = View.VISIBLE
+                    onCountEnableFalseListener?.onCountTextEnableFalse()
+                } else {
+                    txt_alert_below_ten_letter.visibility = View.INVISIBLE
+                    onCountEnableTrueListener?.onCountTextEnable()
+                    if (p0.isEmpty()) onCountEnableFalseListener?.onCountTextEnableFalse()
+                }
+
+            }
+
+        })
+    }
 
     private fun addUtilCloseKeyboard() {
 

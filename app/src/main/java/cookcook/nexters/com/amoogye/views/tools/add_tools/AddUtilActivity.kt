@@ -8,7 +8,7 @@ import androidx.viewpager.widget.ViewPager
 import cookcook.nexters.com.amoogye.R
 import kotlinx.android.synthetic.main.activity_tools_addutil_main.*
 
-class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTextClickListener {
+class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTextClickListener, OnCountEnableTrueListener, OnCountEnableFalseListener {
     override fun onClickEditText() {
         layout_main_activity_outer_mid.visibility = View.GONE
     }
@@ -17,12 +17,20 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTex
         layout_main_activity_outer_mid.visibility = View.VISIBLE
     }
 
+    override fun onCountTextEnable() {
+        btn_add_util_next_page.isEnabled = true
+    }
+
+    override fun onCountTextEnableFalse() {
+        btn_add_util_next_page.isEnabled = false
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tools_addutil_main)
 
         val addUtilFragmentAdapter =
-            AddUtilViewPagerAdapter(supportFragmentManager, this, this)
+            AddUtilViewPagerAdapter(supportFragmentManager, this, this, this, this)
         view_pager_add_util.adapter = addUtilFragmentAdapter
 
         indicator_add_util.setupWithViewPager(view_pager_add_util)
@@ -39,6 +47,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTex
                 when (position % 3) {
                     1 -> {
                         btn_add_util_next_page.text = "다음"
+                        btn_add_util_next_page.isEnabled = true
                         btn_add_util_back.visibility = View.VISIBLE
                         btn_add_util_exit.visibility = View.VISIBLE
                         btn_add_util_next_page.setOnClickListener {
@@ -50,6 +59,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTex
                             finish()
                         }
                         btn_add_util_next_page.text = "확인"
+                        btn_add_util_next_page.isEnabled = true
                         btn_add_util_back.visibility = View.VISIBLE
                         btn_add_util_exit.visibility = View.INVISIBLE
 
@@ -87,10 +97,10 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTex
         val builder = AlertDialog.Builder(this)
         val dialogView = layoutInflater.inflate(R.layout.addutil_alert_dialog, null)
         builder.setView(dialogView)
-            .setPositiveButton("예") { dialogInterface, i ->
+            .setPositiveButton("예") { _, _ ->
                 finish()
             }
-            .setNegativeButton("아니오") { dialogInterface, i ->
+            .setNegativeButton("아니오") { _, _ ->
             }
             .show()
     }
@@ -103,4 +113,12 @@ interface OnEditTextClickListener {
 
 interface OnOuterTextClickListener {
     fun onClickOuterText()
+}
+
+interface OnCountEnableTrueListener {
+    fun onCountTextEnable()
+}
+
+interface OnCountEnableFalseListener {
+    fun onCountTextEnableFalse()
 }

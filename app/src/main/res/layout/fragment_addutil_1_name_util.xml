@@ -20,14 +20,14 @@
                 android:id="@+id/txt_title_1_name_util"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="새로운 계량 도구"
+                android:text="새로운 계량도구"
                 android:textSize="20sp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txt_title_1_name_util"
-                android:text="새로운 도구의 이름을 적어주세요" />
+                android:text="새로운 도구의 이름을 정해주세요" />
 
 
         </RelativeLayout>
@@ -40,6 +40,24 @@
 
             <EditText
                 android:id="@+id/edit_txt_name_util"
+                android:hint="새로운 도구 1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/txt_alert_below_ten_letter"
+                android:text="이름은 10자까지 입력할 수 있습니다."
+                android:textSize="12sp"
+                android:layout_below="@id/edit_txt_name_util"
+                android:visibility="invisible"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/txt_alert_same_name"
+                android:text="같은 이름의 계량도구가 있습니다."
+                android:textSize="12sp"
+                android:layout_below="@id/edit_txt_name_util"
+                android:visibility="invisible"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
