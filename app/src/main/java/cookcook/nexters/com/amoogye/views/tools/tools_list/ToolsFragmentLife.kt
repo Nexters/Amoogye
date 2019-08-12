@@ -162,11 +162,11 @@ class ToolsFragmentLife : Fragment() {
     }
 
     override fun onStop() {
-        realm.close()
         super.onStop()
     }
 
     override fun onDestroy() {
+        realm.close()
         super.onDestroy()
     }
 }
