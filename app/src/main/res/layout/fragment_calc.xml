@@ -121,12 +121,20 @@
             <include layout="@layout/layout_unit_button_wrap"
                 android:id="@+id/calc_layout_unit"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:visibility="gone"/>
+
+            <include layout="@layout/layout_tool_button_wrap"
+                android:id="@+id/calc_layout_tool"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"/>
 
             <include layout="@layout/layout_ingredient_scroll_wrap"
                 android:id="@+id/calc_layout_ingredient"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:visibility="gone"/>
 
         </FrameLayout>
     </LinearLayout>
