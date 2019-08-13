@@ -43,7 +43,7 @@
                 android:background="@drawable/number_input_wrap_rounded_box"/>
 
             <EditText
-                android:id="@+id/edit_portion_tool"
+                android:id="@+id/edit_portion_unit"
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
                 android:minWidth="36dp"
@@ -62,7 +62,7 @@
                 android:textSize="20sp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="6dp"
-                android:layout_toEndOf="@id/edit_portion_tool"/>
+                android:layout_toEndOf="@id/edit_portion_unit"/>
         </RelativeLayout>
 
         <RelativeLayout

@@ -7,16 +7,44 @@ import androidx.databinding.DataBindingUtil
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.base.BaseFragment
 import cookcook.nexters.com.amoogye.databinding.FragmentCalcIngredientBinding
+import kotlinx.android.synthetic.main.fragment_calc_ingredient.*
 import org.koin.android.viewmodel.ext.android.getViewModel
 
 class IngredientFragment : BaseFragment() {
     override val layoutRes: Int = R.layout.fragment_calc_ingredient
     override val isUseDataBinding = true
 
+    private lateinit var calcFragment: CalcFragment
     private lateinit var binding : FragmentCalcIngredientBinding
     private lateinit var calculatorViewModel : CalculatorViewModel
 
     override fun setupViews(view: View) {
+        edit_ingredient_amount.setOnFocusChangeListener { _, isFocus ->
+            if (isFocus) {
+                calcFragment.binding.calcLayoutButton.visibility = View.VISIBLE
+                calcFragment.binding.calcLayoutTool.visibility = View.GONE
+                calcFragment.binding.calcLayoutUnit.visibility = View.GONE
+                calcFragment.binding.calcLayoutIngredient.visibility = View.GONE
+            }
+        }
+
+        edit_ingredient_tool.setOnFocusChangeListener { _, isFocus ->
+            if (isFocus) {
+                calcFragment.binding.calcLayoutButton.visibility = View.GONE
+                calcFragment.binding.calcLayoutTool.visibility = View.VISIBLE
+                calcFragment.binding.calcLayoutUnit.visibility = View.GONE
+                calcFragment.binding.calcLayoutIngredient.visibility = View.GONE
+            }
+        }
+
+        edit_ingredient_unit.setOnFocusChangeListener { _, isFocus ->
+            if (isFocus) {
+                calcFragment.binding.calcLayoutButton.visibility = View.GONE
+                calcFragment.binding.calcLayoutTool.visibility = View.GONE
+                calcFragment.binding.calcLayoutUnit.visibility = View.VISIBLE
+                calcFragment.binding.calcLayoutIngredient.visibility = View.GONE
+            }
+        }
     }
 
     override fun subscribeUI() {
@@ -27,6 +55,8 @@ class IngredientFragment : BaseFragment() {
         /* TODO: viewModel을 CalcFragment에서 초기화 한 것을 가져와서 쓰자 */
         calculatorViewModel = getViewModel()
         calculatorViewModel.context = context!!
+
+        calcFragment = CalcFragment.getInstance()
 
         return binding.root
     }
