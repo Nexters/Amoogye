@@ -7,4 +7,8 @@ interface TimerRepository {
     fun timerEvent()
 
     fun textChange(number: String, text: String): String
+
+    fun limitNumber(type: Int, number: String): Int
+
+    fun timerTime(hour: Int, minute: Int, second: Int): Int
 }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/layout_outer_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
+
+        <RelativeLayout
+            android:id="@+id/layout_in_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txt_title_1_name_util"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="완료!"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_below="@id/layout_in_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txt_addutil_name_by_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="내 밥그릇" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/txt_addutil_name_by_user"
+                android:text="을 새로운 도구로 추가했습니다." />
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+</RelativeLayout>

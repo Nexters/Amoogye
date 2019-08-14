@@ -8,4 +8,52 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- tools -->
+    <string name="tools_bottom_btn_addUtils">계량도구 추가</string>
+    <string name="timer_text_hour">시간</string>
+    <string name="timer_text_minute">분</string>
+    <string name="timer_text_second_before">초 뒤에</string>
+    <string name="timer_text_second_after">초가</string>
+    <string name="timer_text_last_before">알려드릴게요!</string>
+    <string name="timer_text_last_after">끝났습니다!</string>
+    <string name="timer_title">타이머</string>
+    <string name="timer_pause">일시정지</string>
+    <string name="timer_cancel">취소</string>
+    <string name="timer_start">시작하기</string>
+    
+    <!-- setting -->
+    <string name="setting_title">설정</string>
+    <string name="setting_display">화면설정</string>
+    <string name="setting_display_on_off">꺼짐방지</string>
+    <string name="setting_alarm">알림설정</string>
+    <string name="setting_alarm_sound">사운드</string>
+    <string name="setting_alarm_vibration">진동</string>
+    <string name="setting_contact">개발자 컨택</string>
+    <string name="setting_contact_email">emailemali@gmail.com</string>
+    
+    <!-- tools list -->
+    <string name="tools_list_title">계량도구</string>
+    <string name="tools_list_normal">일반 계량도구</string>
+    <string name="tools_list_life">생활 계량도구</string>
+    <string name="tools_list_edit">편집</string>
+    <string name="tools_list_edit_close">닫기</string>
+    <string name="tools_list_edit_delete">삭제하기</string>
+
+    <!-- tools add util-->
+    <string name="add_util_title">계량도구 추가</string>
+    <string name="add_util_name_head">새로운 계량도구</string>
+    <string name="add_util_name_text">새로운 도구의 이름을 정해주세요</string>
+    <string name="add_util_name_alert_ten">이름은 10자까지 입력할 수 있습니다.</string>
+    <string name="add_util_name_alert_same">같은 이름의 계량도구가 있습니다.</string>
+    <string name="add_util_volume_head">부피 계산하기</string>
+    <string name="add_util_volume_by">으로</string>
+    <string name="add_util_volume_how_many">번 담겨요!</string>
+    <string name="add_util_volume_complete">완료</string>
+    <string name="add_util_complete_head">완료!</string>
+    <string name="add_util_next_step">다음</string>
+    <string name="add_util_save_result">확인</string>
+    <string name="add_util_alert_cancel">계량도구 추가를 모두 취소\n하시겠습니까?</string>
+
+
 </resources>
