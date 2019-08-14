@@ -19,6 +19,8 @@ class IngredientFragment : BaseFragment() {
     private lateinit var calculatorViewModel : CalculatorViewModel
 
     override fun setupViews(view: View) {
+        initialize()
+
         edit_ingredient_amount.setOnFocusChangeListener { _, isFocus ->
             if (isFocus) {
                 calcFragment.binding.calcLayoutButton.visibility = View.VISIBLE
@@ -59,5 +61,14 @@ class IngredientFragment : BaseFragment() {
         calcFragment = CalcFragment.getInstance()
 
         return binding.root
+    }
+
+    private fun initialize() {
+        edit_ingredient_amount.requestFocus()
+
+        calcFragment.binding.calcLayoutButton.visibility = View.VISIBLE
+        calcFragment.binding.calcLayoutTool.visibility = View.GONE
+        calcFragment.binding.calcLayoutUnit.visibility = View.GONE
+        calcFragment.binding.calcLayoutIngredient.visibility = View.GONE
     }
 }

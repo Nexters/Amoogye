@@ -17,6 +17,8 @@ class TwiceFragment : BaseFragment() {
     private lateinit var binding: FragmentCalcTwiceBinding
 
     override fun setupViews(view: View) {
+        initialize()
+
         edit_twice_human_one.setOnFocusChangeListener { _, isFocus ->
             if (isFocus) {
                 calcFragment.binding.calcLayoutButton.visibility = View.VISIBLE
@@ -71,5 +73,14 @@ class TwiceFragment : BaseFragment() {
         calcFragment = CalcFragment.getInstance()
 
         return binding.root
+    }
+
+    private fun initialize() {
+        edit_twice_human_one.requestFocus()
+
+        calcFragment.binding.calcLayoutButton.visibility = View.VISIBLE
+        calcFragment.binding.calcLayoutTool.visibility = View.GONE
+        calcFragment.binding.calcLayoutUnit.visibility = View.GONE
+        calcFragment.binding.calcLayoutIngredient.visibility = View.GONE
     }
 }
