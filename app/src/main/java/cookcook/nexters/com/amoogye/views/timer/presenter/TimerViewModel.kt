@@ -7,7 +7,7 @@ import android.widget.EditText
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import cookcook.nexters.com.amoogye.utils.TimerCode
+import cookcook.nexters.com.amoogye.utils.TimerStatus
 import cookcook.nexters.com.amoogye.views.timer.domain.TimerRepository
 
 class TimerViewModel(private val repo: TimerRepository) : ViewModel() {
@@ -37,22 +37,26 @@ class TimerViewModel(private val repo: TimerRepository) : ViewModel() {
     /**
      * 타이머 텍스트, 버튼 구분용
      */
-    fun timerState(): TimerCode {
+    fun timerState(): TimerStatus {
         if (isTimerStart && isTimerEnd) {
-            return TimerCode.STATE_END // 종료
+            return TimerStatus.STATE_END // 종료
         }
         if (isTimerStart) {
-            return TimerCode.STATE_PROGRESS // 진행 중
+            return TimerStatus.STATE_PROGRESS // 진행 중
         }
         if (isTimerEnd) {
-            return TimerCode.STATE_PAUSE // 일시 정지
+            return TimerStatus.STATE_PAUSE // 일시 정지
         }
 
-        return TimerCode.STATE_WAIT // 시작
+        return TimerStatus.STATE_WAIT // 시작
     }
 
     fun setSelectedTimerEditText(number: Int) {
         _selectedTimerEditText.value = number
+    }
+
+    fun setTime(number: Int) {
+        _time.value = number
     }
 
     fun getSelectedTimerEditText() = _selectedTimerEditText.value
