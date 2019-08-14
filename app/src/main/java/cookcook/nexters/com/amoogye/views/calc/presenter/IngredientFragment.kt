@@ -55,9 +55,6 @@ class IngredientFragment : BaseFragment() {
 
     override fun onDataBinding(inflater: LayoutInflater, container: ViewGroup?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_calc_ingredient, container, false)
-        /* TODO: viewModel을 CalcFragment에서 초기화 한 것을 가져와서 쓰자 */
-        calculatorViewModel = getViewModel()
-        calculatorViewModel.context = context!!
 
         calcFragment = CalcFragment.getInstance()
 
