@@ -18,7 +18,7 @@
                 android:textSize="18sp"
                 android:text="50"
                 android:textAlignment="center"
-                android:background="@drawable/number_input_wrap_rounded_box"/>
+                android:background="@drawable/number_input_non_focus_wrap_rounded_box"/>
 
             <EditText
                 android:id="@+id/edit_ingredient_unit"
@@ -29,7 +29,7 @@
                 android:textSize="18sp"
                 android:text="ml"
                 android:textAlignment="center"
-                android:background="@drawable/number_input_wrap_rounded_box"
+                android:background="@drawable/number_input_non_focus_wrap_rounded_box"
                 android:layout_toEndOf="@+id/edit_ingredient_amount"
                 android:layout_marginStart="8dp"
                 android:cursorVisible="false"/>
@@ -57,7 +57,7 @@
                 android:textSize="18sp"
                 android:text="밥숟가락"
                 android:textAlignment="center"
-                android:background="@drawable/number_input_wrap_rounded_box"
+                android:background="@drawable/number_input_non_focus_wrap_rounded_box"
                 android:cursorVisible="false"/>
 
             <TextView

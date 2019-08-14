@@ -20,33 +20,57 @@ class TwiceFragment : BaseFragment() {
     override fun setupViews(view: View) {
         initialize()
 
-        edit_twice_human_one.setOnFocusChangeListener { _, isFocus ->
+        edit_twice_human_one.setOnFocusChangeListener { v, isFocus ->
             if (isFocus) {
                 convertCalcLayoutState(CalcLayoutState.NUMBER)
+                v.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
+            } else {
+                v.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
             }
         }
 
-        edit_twice_amount.setOnFocusChangeListener { _, isFocus ->
+        edit_twice_amount.setOnFocusChangeListener { v, isFocus ->
             if (isFocus) {
                 convertCalcLayoutState(CalcLayoutState.NUMBER)
+                v.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
+            } else {
+                v.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
             }
         }
 
-        edit_twice_unit.setOnFocusChangeListener { _, isFocus ->
+        edit_twice_unit.setOnFocusChangeListener { v, isFocus ->
             if (isFocus) {
                 convertCalcLayoutState(CalcLayoutState.UNIT)
+                v.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
+            } else {
+                v.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
             }
         }
 
-        edit_twice_human_two.setOnFocusChangeListener { _, isFocus ->
+        edit_twice_human_two.setOnFocusChangeListener { v, isFocus ->
             if (isFocus) {
                 convertCalcLayoutState(CalcLayoutState.NUMBER)
+                v.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
+            } else {
+                v.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
             }
         }
 
-        edit_twice_tool.setOnFocusChangeListener { _, isFocus ->
+        edit_twice_tool.setOnFocusChangeListener { v, isFocus ->
             if (isFocus) {
                 convertCalcLayoutState(CalcLayoutState.TOOL)
+                v.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
+            } else {
+                v.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
+            }
+        }
+
+        edit_twice_ingredient.setOnFocusChangeListener { v, isFocus ->
+            if (isFocus) {
+                convertCalcLayoutState(CalcLayoutState.INGREDIENT)
+                v.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
+            } else {
+                v.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
             }
         }
     }

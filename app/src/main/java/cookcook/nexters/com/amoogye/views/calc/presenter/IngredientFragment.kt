@@ -22,21 +22,30 @@ class IngredientFragment : BaseFragment() {
     override fun setupViews(view: View) {
         initialize()
 
-        edit_ingredient_amount.setOnFocusChangeListener { _, isFocus ->
+        edit_ingredient_amount.setOnFocusChangeListener { v, isFocus ->
             if (isFocus) {
                 convertCalcLayoutState(CalcLayoutState.NUMBER)
+                v.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
+            } else {
+                v.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
             }
         }
 
-        edit_ingredient_tool.setOnFocusChangeListener { _, isFocus ->
+        edit_ingredient_tool.setOnFocusChangeListener { v, isFocus ->
             if (isFocus) {
                 convertCalcLayoutState(CalcLayoutState.TOOL)
+                v.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
+            } else {
+                v.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
             }
         }
 
-        edit_ingredient_unit.setOnFocusChangeListener { _, isFocus ->
+        edit_ingredient_unit.setOnFocusChangeListener { v, isFocus ->
             if (isFocus) {
                 convertCalcLayoutState(CalcLayoutState.UNIT)
+                v.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
+            } else {
+                v.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
             }
         }
     }
@@ -69,7 +78,7 @@ class IngredientFragment : BaseFragment() {
 
         when (state) {
             CalcLayoutState.NUMBER -> calcFragment.binding.calcLayoutButton.visibility = View.VISIBLE
-            CalcLayoutState.TOOL -> calcFragment.binding.calcLayoutTool.visibility = View.VISIBLE
+            CalcLayoutState.TOOL ->  calcFragment.binding.calcLayoutTool.visibility = View.VISIBLE
             CalcLayoutState.UNIT -> calcFragment.binding.calcLayoutUnit.visibility = View.VISIBLE
             CalcLayoutState.INGREDIENT -> calcFragment.binding.calcLayoutIngredient.visibility = View.VISIBLE
         }
