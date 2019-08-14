@@ -1,44 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:background="@drawable/item_border"
-                android:layout_width="match_parent"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="4dp"
-                android:layout_height="50dp">
+    android:layout_width="match_parent"
+    android:layout_height="52dp"
+    android:background="@drawable/tools_item_border">
+
     <CheckBox
-            android:id="@+id/checkBox_lifeTool_Item"
-            android:visibility="gone"
-            android:layout_centerInParent="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        android:id="@+id/checkBox_lifeTool_Item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="@dimen/tools_list_start_end"
+        android:background="@drawable/tools_check_box_onoff"
+        android:button="@color/transparent"
+        android:visibility="gone" />
 
     <TextView
-            android:id="@+id/txt_measureUnit_bold"
-            android:text=""
-            android:textSize="22sp"
-            android:layout_marginStart="10dp"
-            android:layout_width="wrap_content"
-            android:layout_toEndOf="@id/checkBox_lifeTool_Item"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"/>
+        android:id="@+id/txt_measureUnit_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/add_util_start_end"
+        android:layout_marginTop="@dimen/tools_list_item_bold_top"
+        android:layout_marginBottom="@dimen/tools_list_item_bold_bottom"
+        android:layout_toEndOf="@id/checkBox_lifeTool_Item"
+        android:text=""
+        android:textColor="@color/tools_list_text_color"
+        android:textSize="@dimen/tools_list_item_bold_text_size" />
+
     <TextView
-            android:id="@+id/txt_measureUnit_soft"
-            android:text=""
-            android:textSize="12sp"
-            android:textStyle="normal"
-            android:layout_marginStart="13dp"
-            android:layout_toEndOf="@id/txt_measureUnit_bold"
-            android:layout_centerInParent="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        android:id="@+id/txt_measureUnit_soft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="@dimen/add_util_start_end"
+        android:layout_marginTop="@dimen/tools_list_item_soft_top"
+        android:layout_toEndOf="@id/txt_measureUnit_bold"
+        android:text=""
+        android:textColor="@color/tools_list_text_color_soft"
+        android:textSize="@dimen/tools_list_item_soft_text_size" />
+
     <ToggleButton
-            android:id="@+id/toggle_tools_item_onoff"
-            android:layout_alignParentEnd="true"
-            android:layout_centerInParent="true"
-            android:layout_marginEnd="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        android:id="@+id/toggle_tools_item_onoff"
+        android:layout_width="48dp"
+        android:layout_height="24dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerInParent="true"
+        android:layout_marginEnd="@dimen/tools_list_start_end"
+        android:layout_marginTop="@dimen/tools_list_button_top"
+        android:layout_marginBottom="@dimen/tools_list_button_bottom"
+        android:background="@drawable/tools_list_onoff"
+        android:textOff=""
+        android:textOn="" />
 </RelativeLayout>

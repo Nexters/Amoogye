@@ -73,10 +73,7 @@ class ToolsFragmentLife : Fragment() {
         }
 
         btn_edit_cancel.setOnClickListener {
-            btn_edit_toolList.visibility = View.VISIBLE
-            btn_edit_cancel.visibility = View.GONE
-            btn_edit_delete.visibility = View.GONE
-            flagIsEditMode = false
+            exitEditMode()
             recyclerAdapter.notifyDataSetChanged()
         }
 
@@ -86,6 +83,8 @@ class ToolsFragmentLife : Fragment() {
                 Toast.makeText(context!!, "기본 데이터는 삭제할 수 없습니다", Toast.LENGTH_LONG).show()
                 utilCantDelete = false
             }
+            exitEditMode()
+            recyclerAdapter.notifyDataSetChanged()
 
         }
 
@@ -94,6 +93,13 @@ class ToolsFragmentLife : Fragment() {
         }
 
 
+    }
+
+    private fun exitEditMode() {
+        btn_edit_toolList.visibility = View.VISIBLE
+        btn_edit_cancel.visibility = View.GONE
+        btn_edit_delete.visibility = View.GONE
+        flagIsEditMode = false
     }
 
     private fun changeToggleStatus() {
