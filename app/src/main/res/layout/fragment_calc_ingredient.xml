@@ -8,14 +8,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <!-- TODO: dimen으로 바꾸자!! -->
             <EditText
                 android:id="@+id/edit_ingredient_amount"
                 android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:minWidth="36dp"
-                android:padding="8dp"
-                android:textSize="18sp"
+                android:layout_height="@dimen/calc_edit_box_size"
+                android:minWidth="@dimen/calc_edit_box_size"
+                android:padding="@dimen/calc_edit_padding"
+                android:textSize="@dimen/calc_edit_text_size"
                 android:text="50"
                 android:textAlignment="center"
                 android:background="@drawable/number_input_non_focus_wrap_rounded_box"/>
@@ -23,10 +22,10 @@
             <EditText
                 android:id="@+id/edit_ingredient_unit"
                 android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:minWidth="36dp"
-                android:padding="8dp"
-                android:textSize="18sp"
+                android:layout_height="@dimen/calc_edit_box_size"
+                android:minWidth="@dimen/calc_edit_box_size"
+                android:padding="@dimen/calc_edit_padding"
+                android:textSize="@dimen/calc_edit_text_size"
                 android:text="ml"
                 android:textAlignment="center"
                 android:background="@drawable/number_input_non_focus_wrap_rounded_box"
@@ -38,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="를"
-                android:textSize="20sp"
+                android:textSize="@dimen/calc_text_size"
                 android:layout_toEndOf="@+id/edit_ingredient_unit"
                 android:layout_marginStart="6dp"
                 android:layout_centerVertical="true"/>
@@ -52,9 +51,9 @@
             <EditText
                 android:id="@+id/edit_ingredient_tool"
                 android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:padding="8dp"
-                android:textSize="18sp"
+                android:layout_height="@dimen/calc_edit_box_size"
+                android:padding="@dimen/calc_edit_padding"
+                android:textSize="@dimen/calc_edit_text_size"
                 android:text="밥숟가락"
                 android:textAlignment="center"
                 android:background="@drawable/number_input_non_focus_wrap_rounded_box"
@@ -64,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="으로"
-                android:textSize="20sp"
+                android:textSize="@dimen/calc_text_size"
                 android:layout_toEndOf="@+id/edit_ingredient_tool"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="6dp"/>
