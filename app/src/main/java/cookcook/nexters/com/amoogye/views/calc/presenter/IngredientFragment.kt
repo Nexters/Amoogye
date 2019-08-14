@@ -65,7 +65,7 @@ class IngredientFragment : BaseFragment() {
     }
 
     private fun initialize() {
-        edit_ingredient_amount.requestFocus()
+//        edit_ingredient_amount.requestFocus()
 
         convertCalcLayoutState(CalcLayoutState.NUMBER)
     }

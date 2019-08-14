@@ -86,7 +86,7 @@ class TwiceFragment : BaseFragment() {
     }
 
     private fun initialize() {
-        edit_twice_human_one.requestFocus()
+//        edit_twice_human_one.requestFocus()
 
         convertCalcLayoutState(CalcLayoutState.NUMBER)
     }

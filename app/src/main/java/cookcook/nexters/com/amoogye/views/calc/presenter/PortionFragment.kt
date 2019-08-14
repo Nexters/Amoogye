@@ -68,7 +68,7 @@ class PortionFragment: BaseFragment() {
     }
 
     private fun initialize() {
-        edit_portion_human_one.requestFocus()
+//        edit_portion_human_one.requestFocus()
 
         convertCalcLayoutState(CalcLayoutState.NUMBER)
     }
