@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.base.BaseFragment
 import cookcook.nexters.com.amoogye.databinding.FragmentCalcIngredientBinding
+import cookcook.nexters.com.amoogye.views.calc.entity.CalcLayoutState
 import kotlinx.android.synthetic.main.fragment_calc_ingredient.*
 import org.koin.android.viewmodel.ext.android.getViewModel
 
@@ -23,28 +24,19 @@ class IngredientFragment : BaseFragment() {
 
         edit_ingredient_amount.setOnFocusChangeListener { _, isFocus ->
             if (isFocus) {
-                calcFragment.binding.calcLayoutButton.visibility = View.VISIBLE
-                calcFragment.binding.calcLayoutTool.visibility = View.GONE
-                calcFragment.binding.calcLayoutUnit.visibility = View.GONE
-                calcFragment.binding.calcLayoutIngredient.visibility = View.GONE
+                convertCalcLayoutState(CalcLayoutState.NUMBER)
             }
         }
 
         edit_ingredient_tool.setOnFocusChangeListener { _, isFocus ->
             if (isFocus) {
-                calcFragment.binding.calcLayoutButton.visibility = View.GONE
-                calcFragment.binding.calcLayoutTool.visibility = View.VISIBLE
-                calcFragment.binding.calcLayoutUnit.visibility = View.GONE
-                calcFragment.binding.calcLayoutIngredient.visibility = View.GONE
+                convertCalcLayoutState(CalcLayoutState.TOOL)
             }
         }
 
         edit_ingredient_unit.setOnFocusChangeListener { _, isFocus ->
             if (isFocus) {
-                calcFragment.binding.calcLayoutButton.visibility = View.GONE
-                calcFragment.binding.calcLayoutTool.visibility = View.GONE
-                calcFragment.binding.calcLayoutUnit.visibility = View.VISIBLE
-                calcFragment.binding.calcLayoutIngredient.visibility = View.GONE
+                convertCalcLayoutState(CalcLayoutState.UNIT)
             }
         }
     }
@@ -66,9 +58,20 @@ class IngredientFragment : BaseFragment() {
     private fun initialize() {
         edit_ingredient_amount.requestFocus()
 
-        calcFragment.binding.calcLayoutButton.visibility = View.VISIBLE
+        convertCalcLayoutState(CalcLayoutState.NUMBER)
+    }
+
+    private fun convertCalcLayoutState(state: CalcLayoutState) {
+        calcFragment.binding.calcLayoutButton.visibility = View.GONE
         calcFragment.binding.calcLayoutTool.visibility = View.GONE
         calcFragment.binding.calcLayoutUnit.visibility = View.GONE
         calcFragment.binding.calcLayoutIngredient.visibility = View.GONE
+
+        when (state) {
+            CalcLayoutState.NUMBER -> calcFragment.binding.calcLayoutButton.visibility = View.VISIBLE
+            CalcLayoutState.TOOL -> calcFragment.binding.calcLayoutTool.visibility = View.VISIBLE
+            CalcLayoutState.UNIT -> calcFragment.binding.calcLayoutUnit.visibility = View.VISIBLE
+            CalcLayoutState.INGREDIENT -> calcFragment.binding.calcLayoutIngredient.visibility = View.VISIBLE
+        }
     }
 }
