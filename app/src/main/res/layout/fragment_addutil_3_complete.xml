@@ -19,12 +19,14 @@
                 android:id="@+id/txt_title_1_name_util"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="완료!"
-                android:textSize="20sp" />
+                android:text="@string/add_util_complete_head"
+                android:textSize="@dimen/add_util_head_text_size"
+                android:textColor="@color/add_util_text_color"/>
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_below="@id/layout_in_top"
+            android:layout_marginTop="@dimen/add_util_head_comment_top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -32,13 +34,17 @@
                 android:id="@+id/txt_addutil_name_by_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/add_util_head_comment_text_size"
+                android:textColor="@color/add_util_text_color_soft"
                 android:text="내 밥그릇" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/add_util_head_comment_text_size"
+                android:textColor="@color/add_util_text_color_soft"
                 android:layout_toEndOf="@id/txt_addutil_name_by_user"
-                android:text="을 새로운 도구로 추가했습니다." />
+                android:text="@string/add_util_complete_comment" />
         </RelativeLayout>
 
 

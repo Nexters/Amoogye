@@ -38,8 +38,10 @@
     <color name="tools_list_dim_color">#07000000</color>
 
     <color name="add_util_text_color">#131c32</color>
-    <color name="add_util_text_color_soft">#33131c32</color>
+    <color name="add_util_text_color_soft">#80131c32</color>
     <color name="add_util_btn_un_activate">#dde2e5</color>
     <color name="add_util_main_color">#ff4f34</color>
+    <color name="add_util_line_division">#1A131c32</color>
+    <color name="add_util_volume_box">#dde2e5</color>
 </resources>
 

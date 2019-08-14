@@ -26,10 +26,14 @@
     <dimen name="timer_button_height">60dp</dimen>
     <dimen name="timer_button_margin_top">29dp</dimen>
 
+
+    <!-- setting text-->
     <dimen name="setting_title_text_size">22sp</dimen>
     <dimen name="setting_item_title_text_size">16sp</dimen>
     <dimen name="setting_sub_item_text_size">14sp</dimen>
 
+
+    <!-- setting -->
     <dimen name="setting_title_top">41dp</dimen>
     <dimen name="setting_title_bottom">16dp</dimen>
     <dimen name="setting_item_title">16dp</dimen>
@@ -39,12 +43,16 @@
     <dimen name="setting_switch_top">12dp</dimen>
     <dimen name="setting_switch_bottom">11.1dp</dimen>
 
+
+    <!-- tools list text-->
     <dimen name="tools_list_title_text_size">22sp</dimen>
     <dimen name="tools_list_head_text_size">16sp</dimen>
     <dimen name="tools_list_item_bold_text_size">16sp</dimen>
     <dimen name="tools_list_item_soft_text_size">12sp</dimen>
     <dimen name="tools_list_edit_text_size">14sp</dimen>
 
+
+    <!-- tools list -->
     <dimen name="tools_list_start_end">16dp</dimen>
     <dimen name="tools_list_head_top">24dp</dimen>
     <dimen name="tools_list_head_bottom">10dp</dimen>
@@ -60,26 +68,44 @@
     <dimen name="tools_list_info">2dp</dimen>
     <dimen name="tools_list_info_top">12dp</dimen>
 
+
+    <!-- add util text -->
     <dimen name="add_util_title_text_size">20sp</dimen>
     <dimen name="add_util_head_text_size">22sp</dimen>
     <dimen name="add_util_head_comment_text_size">12sp</dimen>
     <dimen name="add_util_button_text_size">18sp</dimen>
     <dimen name="add_util_alert_text_size">12sp</dimen>
-    <dimen name="add_util_edit_text_size">18sp</dimen>
+    <dimen name="add_util_box_text_size">18sp</dimen>
     <dimen name="add_util_volume_count_text_size">16sp</dimen>
     <dimen name="add_util_volume_finish_text_size">14sp</dimen>
 
+
+    <!-- add util -->
+    <dimen name="add_util_image_width">328dp</dimen>
+    <dimen name="add_util_image_height">160dp</dimen>
+    <dimen name="add_util_image_top">12dp</dimen>
+    <dimen name="add_util_view_indicator_height">48dp</dimen>
+
+    <dimen name="add_util_title_height">56dp</dimen>
     <dimen name="add_util_title_top">18dp</dimen>
     <dimen name="add_util_title_bottom">16dp</dimen>
     <dimen name="add_util_start_end">16dp</dimen>
-    <dimen name="add_util_image_top">12dp</dimen>
+
     <dimen name="add_util_head_top">20dp</dimen>
     <dimen name="add_util_head_comment_top">12dp</dimen>
     <dimen name="add_util_button_top">23dp</dimen>
     <dimen name="add_util_button_bottom">16dp</dimen>
-    <dimen name="add_util_volume_text_box">33dp</dimen>
     <dimen name="add_util_alert_top">8dp</dimen>
     <dimen name="add_util_new_badge_start">12dp</dimen>
     <dimen name="add_util_new_badge_top">24dp</dimen>
     <dimen name="add_util_new_badge_bottom">22dp</dimen>
+    <dimen name="add_util_name_comment_bottom">35dp</dimen>
+
+    <dimen name="add_util_volume_box_1">120dp</dimen>
+    <dimen name="add_util_volume_box_2">26dp</dimen>
+    <dimen name="add_util_volume_box_height">44dp</dimen>
+    <dimen name="add_util_volume_box_top">33dp</dimen>
+    <dimen name="add_util_volume_box_end">6dp</dimen>
+    <dimen name="add_util_volume_text_end">10dp</dimen>
+
 </resources>

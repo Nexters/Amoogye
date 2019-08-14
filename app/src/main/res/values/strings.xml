@@ -48,12 +48,16 @@
     <string name="add_util_name_alert_same">같은 이름의 계량도구가 있습니다.</string>
     <string name="add_util_volume_head">부피 계산하기</string>
     <string name="add_util_volume_by">으로</string>
+    <string name="add_util_volume_dot">.</string>
     <string name="add_util_volume_how_many">번 담겨요!</string>
     <string name="add_util_volume_complete">완료</string>
     <string name="add_util_complete_head">완료!</string>
     <string name="add_util_next_step">다음</string>
     <string name="add_util_save_result">확인</string>
     <string name="add_util_alert_cancel">계량도구 추가를 모두 취소\n하시겠습니까?</string>
+    <string name="add_util_volume_comment_1">주변 물건으로 </string>
+    <string name="add_util_volume_comment_2">의 부피를 계산해보세요.</string>
+    <string name="add_util_complete_comment">을 새로운 도구로 추가했습니다.</string>
 
 
 </resources>
