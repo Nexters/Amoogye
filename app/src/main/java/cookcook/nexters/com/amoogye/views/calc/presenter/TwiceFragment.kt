@@ -9,6 +9,7 @@ import cookcook.nexters.com.amoogye.base.BaseFragment
 import cookcook.nexters.com.amoogye.databinding.FragmentCalcTwiceBinding
 import cookcook.nexters.com.amoogye.views.calc.entity.CalcLayoutState
 import kotlinx.android.synthetic.main.fragment_calc_twice.*
+import org.koin.android.ext.android.get
 
 class TwiceFragment : BaseFragment() {
     override val layoutRes: Int = R.layout.fragment_calc_twice
@@ -16,6 +17,7 @@ class TwiceFragment : BaseFragment() {
 
     private lateinit var calcFragment: CalcFragment
     private lateinit var binding: FragmentCalcTwiceBinding
+    private val calculatorViewModel : CalculatorViewModel = get()
 
     override fun setupViews(view: View) {
         initialize()
@@ -87,6 +89,12 @@ class TwiceFragment : BaseFragment() {
 
     private fun initialize() {
 //        edit_twice_human_one.requestFocus()
+        calculatorViewModel.calculatorEditTextSetting(edit_twice_amount)
+        calculatorViewModel.calculatorEditTextSetting(edit_twice_human_one)
+        calculatorViewModel.calculatorEditTextSetting(edit_twice_human_two)
+        calculatorViewModel.calculatorEditTextSetting(edit_twice_ingredient)
+        calculatorViewModel.calculatorEditTextSetting(edit_twice_tool)
+        calculatorViewModel.calculatorEditTextSetting(edit_twice_unit)
 
         convertCalcLayoutState(CalcLayoutState.NUMBER)
     }

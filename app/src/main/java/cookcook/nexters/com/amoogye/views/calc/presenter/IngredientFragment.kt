@@ -9,6 +9,7 @@ import cookcook.nexters.com.amoogye.base.BaseFragment
 import cookcook.nexters.com.amoogye.databinding.FragmentCalcIngredientBinding
 import cookcook.nexters.com.amoogye.views.calc.entity.CalcLayoutState
 import kotlinx.android.synthetic.main.fragment_calc_ingredient.*
+import org.koin.android.ext.android.get
 import org.koin.android.viewmodel.ext.android.getViewModel
 
 class IngredientFragment : BaseFragment() {
@@ -17,7 +18,7 @@ class IngredientFragment : BaseFragment() {
 
     private lateinit var calcFragment: CalcFragment
     private lateinit var binding : FragmentCalcIngredientBinding
-    private lateinit var calculatorViewModel : CalculatorViewModel
+    private val calculatorViewModel : CalculatorViewModel = get()
 
     override fun setupViews(view: View) {
         initialize()
@@ -63,6 +64,11 @@ class IngredientFragment : BaseFragment() {
 
     private fun initialize() {
 //        edit_ingredient_amount.requestFocus()
+        // 키보드 제거
+        calculatorViewModel.calculatorEditTextSetting(edit_ingredient_amount)
+        calculatorViewModel.calculatorEditTextSetting(edit_ingredient_tool)
+        calculatorViewModel.calculatorEditTextSetting(edit_ingredient_unit)
+
 
         convertCalcLayoutState(CalcLayoutState.NUMBER)
     }

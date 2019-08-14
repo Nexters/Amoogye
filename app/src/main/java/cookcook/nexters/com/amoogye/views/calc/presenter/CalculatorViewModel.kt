@@ -1,8 +1,11 @@
 package cookcook.nexters.com.amoogye.views.calc.presenter
 
 import android.content.Context
+import android.os.Build
+import android.text.InputType
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModel
 import cookcook.nexters.com.amoogye.base.BaseFragment
@@ -58,5 +61,13 @@ class CalculatorViewModel(private val repo: CalculatorRepository) : ViewModel() 
         }
 
         return this.flag - 1
+    }
+
+    fun calculatorEditTextSetting(editText: EditText) {
+        editText.inputType = InputType.TYPE_NULL
+        editText.setRawInputType(InputType.TYPE_CLASS_TEXT)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            editText.showSoftInputOnFocus = false
+        }
     }
 }

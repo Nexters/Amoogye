@@ -9,6 +9,7 @@ import cookcook.nexters.com.amoogye.base.BaseFragment
 import cookcook.nexters.com.amoogye.databinding.FragmentCalcPortionBinding
 import cookcook.nexters.com.amoogye.views.calc.entity.CalcLayoutState
 import kotlinx.android.synthetic.main.fragment_calc_portion.*
+import org.koin.android.ext.android.get
 
 class PortionFragment: BaseFragment() {
     override val layoutRes: Int = R.layout.fragment_calc_portion
@@ -16,6 +17,7 @@ class PortionFragment: BaseFragment() {
 
     private lateinit var calcFragment: CalcFragment
     private lateinit var binding: FragmentCalcPortionBinding
+    private val calculatorViewModel : CalculatorViewModel = get()
 
     override fun setupViews(view: View) {
         initialize()
@@ -69,6 +71,10 @@ class PortionFragment: BaseFragment() {
 
     private fun initialize() {
 //        edit_portion_human_one.requestFocus()
+        calculatorViewModel.calculatorEditTextSetting(edit_portion_amount)
+        calculatorViewModel.calculatorEditTextSetting(edit_portion_human_one)
+        calculatorViewModel.calculatorEditTextSetting(edit_portion_human_two)
+        calculatorViewModel.calculatorEditTextSetting(edit_portion_unit)
 
         convertCalcLayoutState(CalcLayoutState.NUMBER)
     }
