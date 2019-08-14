@@ -20,7 +20,38 @@ import java.util.*
 import kotlin.math.ceil
 
 
-class TimerFragment : BaseFragment() {
+class TimerFragment : TimerBaseFragment() {
+    override fun getHandledServiceStates(): Array<TimerStatus> {
+
+    }
+
+    override fun getFinishingServiceStates(): Array<TimerStatus> {
+    }
+
+    override fun handleState(timerStatus: TimerStatus) {
+        super.handleState(timerStatus)
+        when(timerStatus) {
+            TimerStatus.STATE_START -> {
+
+            }
+
+            TimerStatus.STATE_WAIT -> {
+
+            }
+
+            TimerStatus.STATE_PAUSE -> {
+
+            }
+
+            TimerStatus.STATE_PROGRESS -> {
+
+            }
+
+            TimerStatus.STATE_END -> {
+
+            }
+        }
+    }
 
     override val layoutRes: Int = R.layout.fragment_timer
 
@@ -53,6 +84,23 @@ class TimerFragment : BaseFragment() {
     override fun subscribeUI() {
 
     }
+
+   fun onUpdateView() {
+       txt_timer_time.visibility = View.GONE
+       btn_timer_start_stop_flag.visibility = View.GONE
+       btn_timer_pause_resume_flag.visibility = View.GONE
+       btn_timer_cancel.visibility = View.GONE
+       txt_timer_next_text.visibility = View.GONE
+       layout_timer_edit.visibility = View.GONE
+
+       layout_timer_background.visibility = View.GONE
+       view_contour.visibility = View.GONE
+       layout_number_button_area.visibility = View.GONE
+
+       var layoutParam = layout_timer_background.layoutParams
+       layoutParam.width = 0
+       layout_timer_background.layoutParams = layoutParam
+   }
 
     var timerRemindTime: Long = 0
     var timerOriginalTime = 0

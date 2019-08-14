@@ -50,7 +50,6 @@ abstract class TimerBaseFragment : BaseFragment() {
         this.serviceConnection = object : ServiceConnection {
             override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
                 onServiceConnected(service as TimerServiceBinder)
-
             }
 
             override fun onServiceDisconnected(name: ComponentName?) {
@@ -69,7 +68,7 @@ abstract class TimerBaseFragment : BaseFragment() {
         this.onAfterServiceDisconnected()
     }
 
-    protected fun unbindTimerService() {
+    protected open fun unbindTimerService() {
         if (this.isServiceBound()) {
             this.onBeforeServiceDisconnected()
             super.activity!!.unbindService(this.serviceConnection!!)
@@ -92,7 +91,7 @@ abstract class TimerBaseFragment : BaseFragment() {
         }
     }
 
-    protected fun getTimerService(): TimerService? {
+    protected open fun getTimerService(): TimerService? {
         if (!isServiceBound()) {
             return this.timerService
         } else {
@@ -103,13 +102,13 @@ abstract class TimerBaseFragment : BaseFragment() {
     protected abstract fun getHandledServiceStates(): Array<TimerStatus>
     protected abstract fun getFinishingServiceStates(): Array<TimerStatus>
 
-    protected fun handleState(timerStatus: TimerStatus) {}
+    protected open fun handleState(timerStatus: TimerStatus) {}
 
 
-    protected fun onAfterServiceDisconnected() {}
+    protected open fun onAfterServiceDisconnected() {}
 
-    protected fun onBeforeServiceDisconnected() {}
-    protected fun onBeforeFinish() {}
+    protected open fun onBeforeServiceDisconnected() {}
+    protected open fun onBeforeFinish() {}
 
     override fun subscribeUI() {
 
