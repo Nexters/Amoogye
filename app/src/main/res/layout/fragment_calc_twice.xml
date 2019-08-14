@@ -52,7 +52,8 @@
                 android:textAlignment="center"
                 android:background="@drawable/number_input_wrap_rounded_box"
                 android:layout_toEndOf="@+id/edit_twice_amount"
-                android:layout_marginStart="8dp"/>
+                android:layout_marginStart="8dp"
+                android:cursorVisible="false"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -101,7 +102,8 @@
                 android:textAlignment="center"
                 android:background="@drawable/number_input_wrap_rounded_box"
                 android:layout_toEndOf="@+id/txt_twice_human_standard_two"
-                android:layout_marginStart="10dp"/>
+                android:layout_marginStart="10dp"
+                android:cursorVisible="false"/>
 
             <TextView
                 android:layout_width="wrap_content"
