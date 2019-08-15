@@ -10,7 +10,6 @@ class AddUtilViewPagerAdapter (fm:FragmentManager, val editTextItemClickListener
         return when(position) {
             0 -> {
                 AddUtilNameFragment.getInstance(editTextItemClickListener, outerTextItemClickListener)
-
             }
             1 -> {
                 AddUtilVolumeFragment.getInstance()
@@ -23,5 +22,11 @@ class AddUtilViewPagerAdapter (fm:FragmentManager, val editTextItemClickListener
 
     override fun getCount(): Int {
         return 3
+    }
+
+    fun instanceInit() {
+        AddUtilNameFragment.instanceInit()
+        AddUtilVolumeFragment.instanceInit()
+        AddUtilCompleteFragment.instanceInit()
     }
 }
