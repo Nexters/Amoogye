@@ -52,7 +52,7 @@ class CalcFragment : BaseFragment() {
     override fun setupViews(view: View) {
 
         btn_history.setOnClickListener { calculatorViewModel.gazuaa("history 구현 예정") }
-        btn_tip.setOnClickListener { calculatorViewModel.gazuaa("tip 구현 예정") }
+        btn_tip.setOnClickListener { calculatorViewModel.gazuaa("tool_tip 구현 예정") }
 
         itemChange(calculatorViewModel.flag - 1)
 

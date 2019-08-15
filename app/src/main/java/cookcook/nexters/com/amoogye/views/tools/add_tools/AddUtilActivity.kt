@@ -2,6 +2,7 @@ package cookcook.nexters.com.amoogye.views.tools.add_tools
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.viewpager.widget.ViewPager
 import cookcook.nexters.com.amoogye.R
@@ -9,6 +10,7 @@ import kotlinx.android.synthetic.main.activity_tools_addutil_main.*
 
 class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTextClickListener {
     override fun onClickEditText() {
+        Log.d("TAG", "click item")
         layout_main_activity_outer_mid.visibility = View.GONE
     }
 
