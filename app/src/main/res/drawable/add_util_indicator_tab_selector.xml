@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:drawable="@drawable/add_util_indicator_selected_dot"
-        android:state_selected="true"/>
-    <item android:drawable="@drawable/add_util_indicator_default_dot"/>
+    <item android:state_selected="true" android:drawable="@drawable/select_dot">
+    </item>
+    <item android:state_selected="false" android:drawable="@drawable/default_dot">
+    </item>
 </selector>

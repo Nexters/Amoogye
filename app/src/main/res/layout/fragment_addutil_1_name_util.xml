@@ -20,14 +20,19 @@
                 android:id="@+id/txt_title_1_name_util"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="새로운 계량 도구"
-                android:textSize="20sp" />
+                android:text="@string/add_util_name_head"
+                android:textColor="@color/add_util_text_color"
+                android:textSize="@dimen/add_util_head_text_size" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/add_util_text_color_soft"
+                android:layout_marginTop="@dimen/add_util_head_comment_top"
+                android:layout_marginBottom="@dimen/add_util_name_comment_bottom"
+                android:textSize="@dimen/add_util_head_comment_text_size"
                 android:layout_below="@id/txt_title_1_name_util"
-                android:text="새로운 도구의 이름을 적어주세요" />
+                android:text="@string/add_util_name_text" />
 
 
         </RelativeLayout>
@@ -36,12 +41,18 @@
             android:id="@+id/layout_in_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="0dp"
             android:layout_below="@id/layout_in_top">
 
             <EditText
                 android:id="@+id/edit_txt_name_util"
+                android:textCursorDrawable="@drawable/add_name_edit_custom"
+                android:textColor="@color/add_util_text_color"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:hint="@string/add_util_name_hint"
+                android:background="@drawable/add_util_edit_box_border"/>
 
             <ImageButton
                 android:id="@+id/btn_addutil_name_complete"
@@ -49,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:background="@color/transparent"
-                android:src="@drawable/amoogye" />
+                android:src="@drawable/keyboard_icon_search_delete" />
         </RelativeLayout>
 
     </RelativeLayout>
