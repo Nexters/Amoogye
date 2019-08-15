@@ -30,6 +30,10 @@ class ToolsFragmentNormal : Fragment() {
             }
             return INSTANCE!!
         }
+
+        fun instanceInit() {
+            INSTANCE = null
+        }
     }
 
     lateinit var realm: Realm
@@ -104,7 +108,6 @@ class ToolsFragmentNormal : Fragment() {
     }
 
     override fun onStop() {
-        realm.close()
         super.onStop()
     }
 

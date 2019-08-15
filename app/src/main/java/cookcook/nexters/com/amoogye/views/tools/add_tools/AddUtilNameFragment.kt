@@ -38,6 +38,10 @@ class AddUtilNameFragment(
             }
             return INSTANCE!!
         }
+
+        fun instanceInit() {
+            INSTANCE = null
+        }
     }
 
 

@@ -22,6 +22,10 @@ class AddUtilCompleteFragment : Fragment() {
             }
             return INSTANCE!!
         }
+
+        fun instanceInit() {
+            INSTANCE = null
+        }
     }
 
 
