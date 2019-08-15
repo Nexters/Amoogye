@@ -16,6 +16,7 @@
             android:layout_height="wrap_content"
             android:text="기본 순"
             android:textSize="12sp"
+            android:textColor="#131c32"
             android:layout_marginStart="20dp"/>
 
         <TextView
@@ -24,6 +25,7 @@
             android:layout_height="wrap_content"
             android:text="최근 사용순"
             android:textSize="12sp"
+            android:textColor="#1E131c32"
             android:layout_marginStart="16dp"
             android:layout_toEndOf="@+id/txt_unit_normal_sequence"/>
 
@@ -48,6 +50,7 @@
                 android:layout_height="wrap_content"
                 android:text="일반단위"
                 android:textSize="12sp"
+                android:textColor="#131c32"
                 android:layout_toStartOf="@id/image_unit_changer"
                 android:layout_marginEnd="6dp"/>
 
@@ -56,14 +59,15 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/layout_unit_top">
         <RelativeLayout
             android:id="@+id/btn_unit_changer_previous"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_centerInParent="true">
+            android:layout_centerInParent="true"
+            android:layout_marginStart="16dp">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -76,7 +80,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_centerInParent="true">
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="16dp">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -84,15 +89,14 @@
                 android:src="@drawable/keyboard_icon_next"/>
         </RelativeLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/layout_unit_changer_recyclerview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+
+        <include layout="@layout/recyclerview_unit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
             android:layout_toEndOf="@+id/btn_unit_changer_previous"
             android:layout_marginStart="10dp"
-            android:layout_toStartOf="@id/btn_unit_changer_next"
-            android:layout_marginEnd="10dp">
-
-        </androidx.recyclerview.widget.RecyclerView>
+            android:layout_toStartOf="@+id/btn_unit_changer_next"
+            android:layout_marginEnd="10dp"/>
     </RelativeLayout>
 </RelativeLayout>

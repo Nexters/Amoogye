@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentTransaction
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.base.BaseFragment
 import cookcook.nexters.com.amoogye.databinding.FragmentCalcBinding
+import cookcook.nexters.com.amoogye.views.calc.entity.NormalUnitModel
 import kotlinx.android.synthetic.main.fragment_calc.*
 import org.koin.android.ext.android.get
 
@@ -28,6 +29,20 @@ class CalcFragment : BaseFragment() {
         PortionFragment(),
         TwiceFragment()
     )
+
+    fun makeDummyItems(): ArrayList<NormalUnitModel> {
+        return arrayListOf(
+            NormalUnitModel("g", "그램", 1),
+            NormalUnitModel("kg", "킬로그램", 1),
+            NormalUnitModel("oz", "온즈", 1),
+            NormalUnitModel("cc", "시시", 1),
+            NormalUnitModel("ml", "밀리그램", 1),
+            NormalUnitModel("L", "리터", 1),
+            NormalUnitModel("Tbsp", "테이블스푼", 1),
+            NormalUnitModel("Tsp", "티스푼", 1),
+            NormalUnitModel("pt", "파인트", 1)
+        )
+    }
 
     companion object {
         // 선택 선언 1 (Fragment를 싱글턴으로 사용 시)
@@ -57,6 +72,9 @@ class CalcFragment : BaseFragment() {
         txt_human.setOnClickListener {
             fragmentChange(2)
         }
+
+        val recyclerView = UnitButtonActivity(view)
+        recyclerView.addItems(makeDummyItems())
     }
 
     private fun itemChange(containerCase: Int) {
