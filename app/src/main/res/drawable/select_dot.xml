@@ -3,10 +3,13 @@
     <item>
         <shape
             android:innerRadius="0dp"
-            android:shape="ring"
-            android:thickness="8dp"
+            android:shape="rectangle"
             android:useLevel="false">
-            <solid android:color="@android:color/darker_gray"/>
+            <corners android:radius="4dp" />
+            <size
+                android:width="4dp"
+                android:height="4dp" />
+            <solid android:color="@color/setting_toggle_active_color" />
         </shape>
     </item>
 </layer-list>

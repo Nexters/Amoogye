@@ -30,4 +30,10 @@ class AddUtilViewPagerAdapter(
     override fun getCount(): Int {
         return 3
     }
+
+    fun instanceInit() {
+        AddUtilNameFragment.instanceInit()
+        AddUtilVolumeFragment.instanceInit()
+        AddUtilCompleteFragment.instanceInit()
+    }
 }

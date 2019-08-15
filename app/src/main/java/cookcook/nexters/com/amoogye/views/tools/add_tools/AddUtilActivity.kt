@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
+import android.widget.RelativeLayout
 import androidx.viewpager.widget.ViewPager
 import cookcook.nexters.com.amoogye.R
 import kotlinx.android.synthetic.main.activity_tools_addutil_main.*
@@ -11,12 +12,15 @@ import kotlinx.android.synthetic.main.activity_tools_addutil_main.*
 class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTextClickListener,
     OnCountEnableTrueListener, OnCountEnableFalseListener {
     override fun onClickEditText() {
-        layout_main_activity_outer_mid.visibility = View.GONE
+        val layout = findViewById<RelativeLayout>(R.id.layout_main_activity_outer_mid)
+        layout.visibility = View.GONE
     }
 
     override fun onClickOuterText() {
         layout_main_activity_outer_mid.visibility = View.VISIBLE
     }
+
+    lateinit var addUtilFragmentAdapter: AddUtilViewPagerAdapter
 
     override fun onCountTextEnable() {
         btn_add_util_next_page.isEnabled = true
@@ -30,9 +34,10 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTex
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tools_addutil_main)
 
-        val addUtilFragmentAdapter =
-            AddUtilViewPagerAdapter(supportFragmentManager, this, this, this, this)
+        addUtilFragmentAdapter =
+            AddUtilViewPagerAdapter(supportFragmentManager, this, this)
         view_pager_add_util.adapter = addUtilFragmentAdapter
+        view_pager_add_util.setSwipePagingEnabled(false)
 
         indicator_add_util.setupWithViewPager(view_pager_add_util)
 
@@ -69,7 +74,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTex
             }
         })
 
-        // 버튼 눌렀을 때 이전 프래그먼트 이동
+        // 버튼 눌렀을 때 이전, 다음 프래그먼트 이동
         btn_add_util_back.setOnClickListener {
             view_pager_add_util.setCurrentItem(getItem(-1), true)
         }
@@ -80,6 +85,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTex
 
         // 종료
         btn_add_util_exit.setOnClickListener {
+            addUtilFragmentAdapter.instanceInit()
             exitAlert()
         }
 

@@ -15,8 +15,9 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.52"
-            android:padding="16dp">
+            android:layout_weight="0.53"
+            android:padding="16dp"
+            android:background="@color/white">
             <RelativeLayout
                 android:id="@+id/calc_layout_top"
                 android:layout_width="match_parent"
@@ -35,7 +36,7 @@
                     android:id="@+id/btn_tip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/tip"
+                    android:src="@drawable/tool_tip"
                     android:background="@android:color/transparent"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="16dp"/>
@@ -92,7 +93,7 @@
 
                 <Button
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
                     android:text="바꾸면"
                     android:textSize="22sp"
                     android:background="#ff4f34"
@@ -101,11 +102,40 @@
         </RelativeLayout>
 
         <!-- 버튼 관련 UI들 올 것 -->
-        <LinearLayout
+        <View android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@color/main_background_color"/>
+
+        <FrameLayout
+            android:id="@+id/calc_frame_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.48">
+            android:layout_weight="0.47">
 
-        </LinearLayout>
+            <include layout="@layout/layout_number_button_wrap"
+                android:id="@+id/calc_layout_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible"/>
+
+            <include layout="@layout/layout_unit_button_wrap"
+                android:id="@+id/calc_layout_unit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"/>
+
+            <include layout="@layout/layout_tool_button_wrap"
+                android:id="@+id/calc_layout_tool"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"/>
+
+            <include layout="@layout/layout_ingredient_scroll_wrap"
+                android:id="@+id/calc_layout_ingredient"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"/>
+
+        </FrameLayout>
     </LinearLayout>
 </layout>

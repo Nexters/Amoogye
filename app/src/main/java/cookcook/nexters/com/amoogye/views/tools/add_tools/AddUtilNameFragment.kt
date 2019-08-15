@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import cookcook.nexters.com.amoogye.R
+import cookcook.nexters.com.amoogye.views.tools.ToolsFragment
 import kotlinx.android.synthetic.main.fragment_addutil_1_name_util.*
 import kotlinx.android.synthetic.main.fragment_addutil_1_name_util.layout_outer_top
 
@@ -54,6 +56,10 @@ class AddUtilNameFragment(
             }
             return INSTANCE!!
         }
+
+        fun instanceInit() {
+            INSTANCE = null
+        }
     }
 
 
@@ -65,8 +71,13 @@ class AddUtilNameFragment(
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        edit_txt_name_util.setOnClickListener {
-            onItemClickListener?.onClickEditText()
+        edit_txt_name_util.setOnTouchListener { view, motionEvent ->
+            motionEvent.let {
+                if(it.action == MotionEvent.ACTION_DOWN) {
+                    onItemClickListener?.onClickEditText()
+                }
+                false
+            }
         }
 
         layout_outer_top.setOnClickListener {

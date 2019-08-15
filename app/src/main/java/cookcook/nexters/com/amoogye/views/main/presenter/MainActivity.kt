@@ -5,6 +5,7 @@ import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.base.BaseActivity
 import cookcook.nexters.com.amoogye.databinding.ActivityMainBinding
 import cookcook.nexters.com.amoogye.views.calc.presenter.CalculatorViewModel
+import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
@@ -35,5 +36,10 @@ class MainActivity : BaseActivity() {
         binding.mainVM = mainViewModel
         mainViewModel.context = this
         mainViewModel.supportFragmentManager = supportFragmentManager
+    }
+
+    override fun onDestroy() {
+        Realm.getDefaultInstance().close()
+        super.onDestroy()
     }
 }

@@ -4,9 +4,12 @@
         <shape
             android:innerRadius="0dp"
             android:shape="ring"
-            android:thickness="8dp"
             android:useLevel="false">
-            <solid android:color="@color/colorAccent"/>
+            <solid android:color="@color/add_util_btn_un_activate"/>
+            <size
+                android:width="4dp"
+                android:height="4dp" />
+
         </shape>
     </item>
 </layer-list>

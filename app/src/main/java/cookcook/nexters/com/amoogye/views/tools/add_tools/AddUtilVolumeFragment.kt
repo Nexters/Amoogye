@@ -23,6 +23,10 @@ class AddUtilVolumeFragment : Fragment() {
             }
             return INSTANCE!!
         }
+
+        fun instanceInit() {
+            INSTANCE = null
+        }
     }
 
 
