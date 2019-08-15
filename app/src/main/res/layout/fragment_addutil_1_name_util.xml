@@ -46,8 +46,8 @@
 
             <EditText
                 android:id="@+id/edit_txt_name_util"
-                android:textCursorDrawable="@color/transparent"
-                android:textColor="@color/add_util_main_color"
+                android:textCursorDrawable="@drawable/add_name_edit_custom"
+                android:textColor="@color/add_util_text_color"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
