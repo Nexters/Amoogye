@@ -51,6 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="8dp"
+                android:hint="@string/add_util_name_hint"
                 android:background="@drawable/add_util_edit_box_border"/>
 
             <ImageButton
@@ -59,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:background="@color/transparent"
-                android:src="@drawable/keyboard_icon_backspace" />
+                android:src="@drawable/keyboard_icon_search_delete" />
         </RelativeLayout>
 
     </RelativeLayout>

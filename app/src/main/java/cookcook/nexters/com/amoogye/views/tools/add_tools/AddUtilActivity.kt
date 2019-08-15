@@ -84,7 +84,6 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTex
             addUtilFragmentAdapter.instanceInit()
             finish()
         }
-
     }
 
     private fun getItem(page: Int): Int {

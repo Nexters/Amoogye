@@ -84,7 +84,7 @@
     <dimen name="add_util_image_width">328dp</dimen>
     <dimen name="add_util_image_height">160dp</dimen>
     <dimen name="add_util_image_top">12dp</dimen>
-    <dimen name="add_util_view_indicator_height">48dp</dimen>
+    <dimen name="add_util_view_indicator_bottom">15dp</dimen>
 
     <dimen name="add_util_title_height">56dp</dimen>
     <dimen name="add_util_title_top">18dp</dimen>

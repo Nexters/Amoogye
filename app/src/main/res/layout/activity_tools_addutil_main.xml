@@ -89,6 +89,7 @@
             android:layout_width="40dp"
             android:layout_height="4dp"
             android:layout_alignParentTop="true"
+            android:layout_marginBottom="@dimen/add_util_view_indicator_bottom"
             app:tabBackground="@drawable/add_util_indicator_tab_selector"
             app:tabIndicatorHeight="0dp" />
 
