@@ -21,6 +21,7 @@ class UnitButtonActivity(view: View) {
         recyclerView.layoutManager = GridLayoutManager(context, GRID_COLUMN)
         recyclerView.adapter = adapter
         recyclerView.setHasFixedSize(true)
+        recyclerView.isLayoutFrozen = true
     }
 
     fun addItems(item: ArrayList<NormalUnitModel>) {
