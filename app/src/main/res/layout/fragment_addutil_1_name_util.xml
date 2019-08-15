@@ -49,7 +49,9 @@
                 android:textCursorDrawable="@drawable/add_name_edit_custom"
                 android:textColor="@color/add_util_text_color"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:background="@drawable/add_util_edit_box_border"/>
 
             <ImageButton
                 android:id="@+id/btn_addutil_name_complete"
