@@ -75,14 +75,14 @@
         android:paddingStart="@dimen/add_util_start_end"
         android:paddingEnd="@dimen/add_util_start_end">
 
-        <androidx.viewpager.widget.ViewPager
+        <cookcook.nexters.com.amoogye.views.tools.add_tools.SwipeLockableViewPager
             android:id="@+id/view_pager_add_util"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@id/layout_add_util_outer_bottom_btn"
             android:layout_below="@id/indicator_add_util">
 
-        </androidx.viewpager.widget.ViewPager>
+        </cookcook.nexters.com.amoogye.views.tools.add_tools.SwipeLockableViewPager>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/indicator_add_util"

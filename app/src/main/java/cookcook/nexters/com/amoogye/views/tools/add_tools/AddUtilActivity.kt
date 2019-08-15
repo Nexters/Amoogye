@@ -2,8 +2,6 @@ package cookcook.nexters.com.amoogye.views.tools.add_tools
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Layout
-import android.util.Log
 import android.view.View
 import android.widget.RelativeLayout
 import androidx.viewpager.widget.ViewPager
@@ -12,8 +10,6 @@ import kotlinx.android.synthetic.main.activity_tools_addutil_main.*
 
 class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTextClickListener {
     override fun onClickEditText() {
-        Log.d("TAG", "click item")
-
         val layout = findViewById<RelativeLayout>(R.id.layout_main_activity_outer_mid)
         layout.visibility = View.GONE
     }
@@ -31,6 +27,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTex
         addUtilFragmentAdapter =
             AddUtilViewPagerAdapter(supportFragmentManager, this, this)
         view_pager_add_util.adapter = addUtilFragmentAdapter
+        view_pager_add_util.setSwipePagingEnabled(false)
 
         indicator_add_util.setupWithViewPager(view_pager_add_util)
 
