@@ -9,6 +9,7 @@ import cookcook.nexters.com.amoogye.base.BaseFragment
 import cookcook.nexters.com.amoogye.databinding.FragmentCalcIngredientBinding
 import cookcook.nexters.com.amoogye.views.calc.entity.CalcLayoutState
 import kotlinx.android.synthetic.main.fragment_calc_ingredient.*
+import org.koin.android.ext.android.get
 import org.koin.android.viewmodel.ext.android.getViewModel
 
 class IngredientFragment : BaseFragment() {
@@ -17,26 +18,35 @@ class IngredientFragment : BaseFragment() {
 
     private lateinit var calcFragment: CalcFragment
     private lateinit var binding : FragmentCalcIngredientBinding
-    private lateinit var calculatorViewModel : CalculatorViewModel
+    private val calculatorViewModel : CalculatorViewModel = get()
 
     override fun setupViews(view: View) {
         initialize()
 
-        edit_ingredient_amount.setOnFocusChangeListener { _, isFocus ->
+        edit_ingredient_amount.setOnFocusChangeListener { v, isFocus ->
             if (isFocus) {
                 convertCalcLayoutState(CalcLayoutState.NUMBER)
+                v.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
+            } else {
+                v.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
             }
         }
 
-        edit_ingredient_tool.setOnFocusChangeListener { _, isFocus ->
+        edit_ingredient_tool.setOnFocusChangeListener { v, isFocus ->
             if (isFocus) {
                 convertCalcLayoutState(CalcLayoutState.TOOL)
+                v.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
+            } else {
+                v.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
             }
         }
 
-        edit_ingredient_unit.setOnFocusChangeListener { _, isFocus ->
+        edit_ingredient_unit.setOnFocusChangeListener { v, isFocus ->
             if (isFocus) {
                 convertCalcLayoutState(CalcLayoutState.UNIT)
+                v.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
+            } else {
+                v.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
             }
         }
     }
@@ -46,9 +56,6 @@ class IngredientFragment : BaseFragment() {
 
     override fun onDataBinding(inflater: LayoutInflater, container: ViewGroup?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_calc_ingredient, container, false)
-        /* TODO: viewModel을 CalcFragment에서 초기화 한 것을 가져와서 쓰자 */
-        calculatorViewModel = getViewModel()
-        calculatorViewModel.context = context!!
 
         calcFragment = CalcFragment.getInstance()
 
@@ -56,7 +63,12 @@ class IngredientFragment : BaseFragment() {
     }
 
     private fun initialize() {
-        edit_ingredient_amount.requestFocus()
+//        edit_ingredient_amount.requestFocus()
+        // 키보드 제거
+        calculatorViewModel.calculatorEditTextSetting(edit_ingredient_amount)
+        calculatorViewModel.calculatorEditTextSetting(edit_ingredient_tool)
+        calculatorViewModel.calculatorEditTextSetting(edit_ingredient_unit)
+
 
         convertCalcLayoutState(CalcLayoutState.NUMBER)
     }
@@ -69,7 +81,7 @@ class IngredientFragment : BaseFragment() {
 
         when (state) {
             CalcLayoutState.NUMBER -> calcFragment.binding.calcLayoutButton.visibility = View.VISIBLE
-            CalcLayoutState.TOOL -> calcFragment.binding.calcLayoutTool.visibility = View.VISIBLE
+            CalcLayoutState.TOOL ->  calcFragment.binding.calcLayoutTool.visibility = View.VISIBLE
             CalcLayoutState.UNIT -> calcFragment.binding.calcLayoutUnit.visibility = View.VISIBLE
             CalcLayoutState.INGREDIENT -> calcFragment.binding.calcLayoutIngredient.visibility = View.VISIBLE
         }

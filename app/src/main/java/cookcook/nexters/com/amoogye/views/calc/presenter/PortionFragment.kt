@@ -9,6 +9,7 @@ import cookcook.nexters.com.amoogye.base.BaseFragment
 import cookcook.nexters.com.amoogye.databinding.FragmentCalcPortionBinding
 import cookcook.nexters.com.amoogye.views.calc.entity.CalcLayoutState
 import kotlinx.android.synthetic.main.fragment_calc_portion.*
+import org.koin.android.ext.android.get
 
 class PortionFragment: BaseFragment() {
     override val layoutRes: Int = R.layout.fragment_calc_portion
@@ -16,31 +17,44 @@ class PortionFragment: BaseFragment() {
 
     private lateinit var calcFragment: CalcFragment
     private lateinit var binding: FragmentCalcPortionBinding
+    private val calculatorViewModel : CalculatorViewModel = get()
 
     override fun setupViews(view: View) {
         initialize()
 
-        edit_portion_human_one.setOnFocusChangeListener { _, isFocus ->
+        edit_portion_human_one.setOnFocusChangeListener { v, isFocus ->
             if (isFocus) {
                 convertCalcLayoutState(CalcLayoutState.NUMBER)
+                v.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
+            } else {
+                v.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
             }
         }
 
-        edit_portion_amount.setOnFocusChangeListener { _, isFocus ->
+        edit_portion_amount.setOnFocusChangeListener { v, isFocus ->
             if (isFocus) {
                 convertCalcLayoutState(CalcLayoutState.NUMBER)
+                v.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
+            } else {
+                v.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
             }
         }
 
-        edit_portion_unit.setOnFocusChangeListener { _, isFocus ->
+        edit_portion_unit.setOnFocusChangeListener { v, isFocus ->
             if (isFocus) {
                 convertCalcLayoutState(CalcLayoutState.UNIT)
+                v.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
+            } else {
+                v.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
             }
         }
 
-        edit_portion_human_two.setOnFocusChangeListener { _, isFocus ->
+        edit_portion_human_two.setOnFocusChangeListener { v, isFocus ->
             if (isFocus) {
                 convertCalcLayoutState(CalcLayoutState.NUMBER)
+                v.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
+            } else {
+                v.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
             }
         }
     }
@@ -56,7 +70,11 @@ class PortionFragment: BaseFragment() {
     }
 
     private fun initialize() {
-        edit_portion_human_one.requestFocus()
+//        edit_portion_human_one.requestFocus()
+        calculatorViewModel.calculatorEditTextSetting(edit_portion_amount)
+        calculatorViewModel.calculatorEditTextSetting(edit_portion_human_one)
+        calculatorViewModel.calculatorEditTextSetting(edit_portion_human_two)
+        calculatorViewModel.calculatorEditTextSetting(edit_portion_unit)
 
         convertCalcLayoutState(CalcLayoutState.NUMBER)
     }
