@@ -1,23 +1,17 @@
 package cookcook.nexters.com.amoogye.views.calc.presenter
 
 import android.graphics.Color
-import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.base.BaseFragment
 import cookcook.nexters.com.amoogye.databinding.FragmentCalcBinding
 import kotlinx.android.synthetic.main.fragment_calc.*
 import org.koin.android.ext.android.get
-import org.koin.android.ext.android.inject
-import org.koin.android.viewmodel.ext.android.viewModel
-
 
 class CalcFragment : BaseFragment() {
     override val layoutRes: Int = R.layout.fragment_calc
@@ -65,7 +59,7 @@ class CalcFragment : BaseFragment() {
         }
     }
 
-    fun itemChange(containerCase: Int) {
+    private fun itemChange(containerCase: Int) {
         val fragmentTransaction = childFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.calculator_container, calcBottomContainer[containerCase])
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
@@ -92,7 +86,7 @@ class CalcFragment : BaseFragment() {
     }
 
     private fun fragmentChange(number: Int) {
-        val containerCase = calculatorViewModel.convFragment(number)
+        val containerCase = calculatorViewModel.convertFragment(number)
         itemChange(containerCase)
     }
 
