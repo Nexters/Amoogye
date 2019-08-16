@@ -21,5 +21,27 @@
     <color name="timer_theme_color">#ff4f34</color>
     <color name="timer_cancel_color">#bccdd6</color>
     <color name="timer_text_color">#80131c32</color>
+
+    <color name="setting_background_color">#f1f5f7</color>
+    <color name="setting_toggle_active_color">#ff4f34</color>
+    <color name="setting_toggle_un_active_color">#dde2e5</color>
+    <color name="setting_text_color">#131c32</color>
+    <color name="setting_text_color_soft">#80131c32</color>
+    <color name="setting_border_soft">#0D131c32</color>
+
+    <color name="tools_list_main_color">#ff4f34</color>
+    <color name="tools_list_not_checked">#dde2e5</color>
+    <color name="tools_list_text_color">#131c32</color>
+    <color name="tools_list_text_color_soft">#50131c32</color>
+    <color name="tools_list_background">#f1f5f7</color>
+    <color name="tools_list_line_division">#04131c32</color>
+    <color name="tools_list_dim_color">#07000000</color>
+
+    <color name="add_util_text_color">#131c32</color>
+    <color name="add_util_text_color_soft">#80131c32</color>
+    <color name="add_util_btn_un_activate">#dde2e5</color>
+    <color name="add_util_main_color">#ff4f34</color>
+    <color name="add_util_line_division">#1A131c32</color>
+    <color name="add_util_volume_box">#dde2e5</color>
 </resources>
 

@@ -3,26 +3,31 @@ package cookcook.nexters.com.amoogye.views.tools.add_tools
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.RelativeLayout
 import androidx.viewpager.widget.ViewPager
 import cookcook.nexters.com.amoogye.R
 import kotlinx.android.synthetic.main.activity_tools_addutil_main.*
 
 class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTextClickListener {
     override fun onClickEditText() {
-        layout_main_activity_outer_mid.visibility = View.GONE
+        val layout = findViewById<RelativeLayout>(R.id.layout_main_activity_outer_mid)
+        layout.visibility = View.GONE
     }
 
     override fun onClickOuterText() {
         layout_main_activity_outer_mid.visibility = View.VISIBLE
     }
 
+    lateinit var addUtilFragmentAdapter: AddUtilViewPagerAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tools_addutil_main)
 
-        val addUtilFragmentAdapter =
+        addUtilFragmentAdapter =
             AddUtilViewPagerAdapter(supportFragmentManager, this, this)
         view_pager_add_util.adapter = addUtilFragmentAdapter
+        view_pager_add_util.setSwipePagingEnabled(false)
 
         indicator_add_util.setupWithViewPager(view_pager_add_util)
 
@@ -39,6 +44,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTex
                     1 -> {
                         btn_add_util_next_page.text = "다음"
                         btn_add_util_back.visibility = View.VISIBLE
+                        btn_add_util_exit.visibility = View.VISIBLE
                         btn_add_util_next_page.setOnClickListener {
                             view_pager_add_util.setCurrentItem(getItem(1), true)
                         }
@@ -49,11 +55,13 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTex
                         }
                         btn_add_util_next_page.text = "확인"
                         btn_add_util_back.visibility = View.VISIBLE
+                        btn_add_util_exit.visibility = View.INVISIBLE
 
                     }
                     else -> {
                         btn_add_util_next_page.text = "다음"
                         btn_add_util_back.visibility = View.INVISIBLE
+                        btn_add_util_exit.visibility = View.VISIBLE
                     }
                 }
             }
@@ -70,13 +78,16 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTex
 
         // 종료
         btn_add_util_exit.setOnClickListener {
+            addUtilFragmentAdapter.instanceInit()
             finish()
         }
-
     }
 
     private fun getItem(page: Int): Int {
         return view_pager_add_util.currentItem + page
+    }
+
+    private fun exitAlert(){
     }
 
 }

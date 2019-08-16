@@ -7,22 +7,69 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edit_ingredient_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/calc_edit_box_size"
+                android:minWidth="@dimen/calc_edit_box_size"
+                android:paddingStart="@dimen/calc_edit_padding"
+                android:paddingEnd="@dimen/calc_edit_padding"
+                android:textSize="@dimen/calc_edit_text_size"
+                android:text="50"
+                android:textAlignment="center"
+                android:background="@drawable/number_input_non_focus_wrap_rounded_box"/>
+
+            <EditText
+                android:id="@+id/edit_ingredient_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/calc_edit_box_size"
+                android:minWidth="@dimen/calc_edit_box_size"
+                android:paddingStart="@dimen/calc_edit_padding"
+                android:paddingEnd="@dimen/calc_edit_padding"
+                android:textSize="@dimen/calc_edit_text_size"
+                android:text="ml"
+                android:textAlignment="center"
+                android:background="@drawable/number_input_non_focus_wrap_rounded_box"
+                android:layout_toEndOf="@+id/edit_ingredient_amount"
+                android:layout_marginStart="8dp"
+                android:cursorVisible="false"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="50ml를"
-                android:textSize="20sp"/>
+                android:text="를"
+                android:textSize="@dimen/calc_text_size"
+                android:layout_toEndOf="@+id/edit_ingredient_unit"
+                android:layout_marginStart="6dp"
+                android:layout_centerVertical="true"/>
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp">
+
+            <EditText
+                android:id="@+id/edit_ingredient_tool"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/calc_edit_box_size"
+                android:paddingStart="@dimen/calc_edit_padding"
+                android:paddingEnd="@dimen/calc_edit_padding"
+                android:textSize="@dimen/calc_edit_text_size"
+                android:text="밥숟가락"
+                android:textAlignment="center"
+                android:background="@drawable/number_input_non_focus_wrap_rounded_box"
+                android:cursorVisible="false"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="밥숟가락으로"
-                android:textSize="20sp"/>
+                android:text="으로"
+                android:textSize="@dimen/calc_text_size"
+                android:layout_toEndOf="@+id/edit_ingredient_tool"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="6dp"/>
         </RelativeLayout>
     </LinearLayout>
 </layout>

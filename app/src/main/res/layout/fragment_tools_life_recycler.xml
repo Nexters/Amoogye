@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="10dp"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -13,8 +12,9 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="invisible"
-            android:layout_toStartOf="@id/btn_edit_toolList">
+            android:layout_toStartOf="@id/btn_edit_toolList"
+            android:visibility="invisible">
+
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -22,19 +22,26 @@
 
         <Button
             android:id="@+id/btn_edit_toolList"
-            android:layout_width="wrap_content"
+            android:layout_width="26dp"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:text="편집"
+            android:layout_marginEnd="@dimen/tools_list_start_end"
+            android:background="@color/transparent"
+            android:text="@string/tools_list_edit"
+            android:textSize="@dimen/tools_list_edit_text_size"
             android:visibility="visible" />
+
         <Button
             android:id="@+id/btn_edit_cancel"
-            android:layout_width="wrap_content"
+            android:layout_width="26dp"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:text="닫기"
+            android:layout_marginEnd="@dimen/tools_list_start_end"
+            android:background="@color/transparent"
+            android:text="@string/tools_list_edit_close"
+            android:textColor="@color/tools_list_main_color"
+            android:textSize="@dimen/tools_list_edit_text_size"
             android:visibility="gone" />
-
 
     </RelativeLayout>
 
@@ -44,9 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/layout_tools_life_recycler_bottom"
-        android:layout_below="@id/layout_btn_edit_toolList"
-        android:layout_margin="5dp"
-        android:background="#f3f3f7"/>
+        android:layout_below="@id/layout_btn_edit_toolList" />
 
     <RelativeLayout
         android:id="@+id/layout_tools_life_recycler_bottom"
@@ -55,12 +60,23 @@
         android:layout_alignParentBottom="true">
 
         <Button
+            android:id="@+id/test_btn_insert_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="테스트_항목추가" />
+
+        <Button
             android:id="@+id/btn_edit_delete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:text="삭제"
+            android:background="@color/add_util_main_color"
+            android:padding="@dimen/tools_list_delete_button"
+            android:text="@string/tools_list_edit_delete"
+            android:textColor="@color/white"
+            android:textSize="@dimen/add_util_button_text_size"
             android:visibility="gone" />
+
 
     </RelativeLayout>
 </RelativeLayout>

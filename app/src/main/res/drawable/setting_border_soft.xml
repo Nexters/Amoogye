@@ -4,12 +4,12 @@
             android:top="-1dp"
             android:left="-1dp"
             android:right="-1dp"
-            android:bottom="0.3dp">
+            android:bottom="0.9dp">
         <shape
                 android:shape="rectangle">
             <stroke
-                    android:width="0.3dp"
-                    android:color="#d8d8d8"/>
+                    android:width="0.9dp"
+                    android:color="@color/setting_border_soft" />
         </shape>
     </item>
 </layer-list>

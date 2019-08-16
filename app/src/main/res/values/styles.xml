@@ -18,4 +18,11 @@
         <item name="android:textSize">@dimen/bottom_navigation_text_size</item>
     </style>
 
+    
+    <style name="TabTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/white</item>
+        <item name="android:textColorPrimary">@color/tools_list_main_color</item>
+        <item name="android:textColorSecondary">@color/tools_list_text_color_soft</item>
+        <item name="colorAccent">@color/tools_list_main_color</item>
+    </style>
 </resources>
