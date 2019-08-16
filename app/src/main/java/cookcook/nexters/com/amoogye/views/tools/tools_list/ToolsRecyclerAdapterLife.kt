@@ -39,7 +39,7 @@ class ToolsRecyclerAdapterLife(
 
         private fun getVisibility(): Int {
             val dataId = data!![adapterPosition].unitId
-            if (flagIsEditMode && (dataId > NUM_DEFAULT_ITEMS)) {
+            if (flagIsEditMode && (dataId >= NUM_DEFAULT_ITEMS)) {
                 return View.VISIBLE
             }
             return View.GONE

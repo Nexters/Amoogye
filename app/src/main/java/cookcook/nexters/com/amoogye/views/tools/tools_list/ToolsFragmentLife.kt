@@ -1,6 +1,7 @@
 package cookcook.nexters.com.amoogye.views.tools.tools_list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -77,13 +78,13 @@ class ToolsFragmentLife : Fragment() {
         btn_edit_toolList.setOnClickListener {
 
             if (areAllItemsDefault()) {
-                Toast.makeText(context!!, "삭제할 수 있는 계량도구가 없습니다", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context!!, "삭제할 수 있는 계량도구가 없습니다", Toast.LENGTH_LONG).show()
             } else {
+                flagIsEditMode = true
+                recyclerAdapter.notifyDataSetChanged()
                 btn_edit_toolList.visibility = View.GONE
                 btn_edit_cancel.visibility = View.VISIBLE
                 btn_edit_delete.visibility = View.VISIBLE
-                flagIsEditMode = true
-                recyclerAdapter.notifyDataSetChanged()
                 callback.onInvisibleTabLayout()
                 callback.onDisableSwipe()
             }
@@ -126,6 +127,7 @@ class ToolsFragmentLife : Fragment() {
         realm.beginTransaction()
 
         val maxId = newId()
+        Log.d("maxmax", ""+maxId+" "+ NUM_DEFAULT_ITEMS)
 
         realm.commitTransaction()
 
