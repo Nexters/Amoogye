@@ -73,16 +73,10 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
             override fun onPageSelected(position: Int) {
                 when (position) {
                     0 -> {
-                        btn_add_util_next_page.isEnabled = false
-                        btn_add_util_back.visibility = View.INVISIBLE
-                        btn_add_util_next_page.text = "다음"
-                        btn_add_util_exit.visibility = View.VISIBLE
-                        btn_add_util_next_page.setOnClickListener {
-                            btn_add_util_next_page.isEnabled = isNameUnique()
-                        }
+                        firstPageDefault()
                     }
                     1 -> {
-                        pageDefault()
+                        restPageDefault()
                         btn_add_util_next_page.text = "다음"
                         btn_add_util_exit.visibility = View.VISIBLE
                         btn_add_util_next_page.setOnClickListener {
@@ -90,7 +84,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
                         }
                     }
                     2 -> {
-                        pageDefault()
+                        restPageDefault()
                         btn_add_util_next_page.text = "확인"
                         btn_add_util_exit.visibility = View.INVISIBLE
                         btn_add_util_next_page.setOnClickListener {
@@ -102,23 +96,29 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
             }
         })
 
-        // 버튼 눌렀을 때 이전, 다음 프래그먼트 이동
+        firstPageDefault()
+
         btn_add_util_back.setOnClickListener {
             view_pager_add_util.setCurrentItem(getItem(-1), true)
         }
 
-        btn_add_util_next_page.setOnClickListener {
-            view_pager_add_util.setCurrentItem(getItem(1), true)
-        }
-
-        // 종료
         btn_add_util_exit.setOnClickListener {
             exitAlert()
         }
 
     }
 
-    private fun pageDefault() {
+    private fun firstPageDefault() {
+        btn_add_util_next_page.isEnabled = false
+        btn_add_util_back.visibility = View.INVISIBLE
+        btn_add_util_next_page.text = "다음"
+        btn_add_util_exit.visibility = View.VISIBLE
+        btn_add_util_next_page.setOnClickListener {
+            btn_add_util_next_page.isEnabled = isNameUnique()
+        }
+    }
+
+    private fun restPageDefault() {
         btn_add_util_back.visibility = View.VISIBLE
         btn_add_util_next_page.isEnabled = true
         layout_main_activity_outer_mid.visibility = View.VISIBLE
