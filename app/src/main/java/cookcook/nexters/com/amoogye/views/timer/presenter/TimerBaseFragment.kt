@@ -10,7 +10,6 @@ import cookcook.nexters.com.amoogye.base.BaseFragment
 import cookcook.nexters.com.amoogye.service.TimerService
 import cookcook.nexters.com.amoogye.service.TimerServiceBinder
 import cookcook.nexters.com.amoogye.utils.TimerStatus
-import java.lang.IllegalStateException
 import java.util.*
 
 abstract class TimerBaseFragment : BaseFragment() {
@@ -23,7 +22,7 @@ abstract class TimerBaseFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        serviceIntent = Intent(activity, TimerService::class.java)
+        serviceIntent = Intent(context, TimerService::class.java)
     }
 
     fun isServiceBound(): Boolean {
@@ -31,6 +30,7 @@ abstract class TimerBaseFragment : BaseFragment() {
     }
 
     private fun startAndBindTimerService() {
+        Log.d("TAG", "service is bound ${isServiceBound()}")
         if (isServiceBound()) {
             this.afterServiceConnected(getTimerService()!!.timerStatus)
             return
@@ -38,18 +38,19 @@ abstract class TimerBaseFragment : BaseFragment() {
 
         this.startTimerService()
         this.initServiceConnection()
-        super.activity!!.bindService(this.serviceIntent, this.serviceConnection, 0)
-
+        context!!.bindService(this.serviceIntent, this.serviceConnection!!, 0)
+        Log.d("TAG", "service is bound ${isServiceBound()}")
     }
 
     private fun startTimerService() {
-        super.activity!!.startService(serviceIntent)
+        context!!.startService(serviceIntent)
     }
 
     private fun initServiceConnection() {
         this.serviceConnection = object : ServiceConnection {
             override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
-                onServiceConnected(service as TimerServiceBinder)
+                val timer: TimerServiceBinder = service!! as TimerServiceBinder
+                onServiceConnected(timer)
             }
 
             override fun onServiceDisconnected(name: ComponentName?) {
@@ -59,7 +60,8 @@ abstract class TimerBaseFragment : BaseFragment() {
     }
 
     private fun onServiceConnected(binder: TimerServiceBinder) {
-        afterServiceConnected(binder.timerService.timerStatus)
+        this.timerService = binder.timerService
+        afterServiceConnected(getTimerService()!!.timerStatus)
     }
 
     private fun onServiceDisconnected() {
@@ -71,7 +73,7 @@ abstract class TimerBaseFragment : BaseFragment() {
     protected open fun unbindTimerService() {
         if (this.isServiceBound()) {
             this.onBeforeServiceDisconnected()
-            super.activity!!.unbindService(this.serviceConnection!!)
+            context!!.unbindService(this.serviceConnection!!)
             this.timerService = null
             this.serviceConnection = null
         } else {
@@ -81,6 +83,7 @@ abstract class TimerBaseFragment : BaseFragment() {
 
 
     fun afterServiceConnected(timerStatus: TimerStatus) {
+        Log.d("TAG", "status is $timerStatus")
         val handleStates: Array<TimerStatus> = this.getHandledServiceStates()
         val finishingStats: Array<TimerStatus> = this.getFinishingServiceStates()
 
@@ -92,8 +95,8 @@ abstract class TimerBaseFragment : BaseFragment() {
     }
 
     protected open fun getTimerService(): TimerService? {
-        if (!isServiceBound()) {
-            return this.timerService
+        if (isServiceBound()) {
+            return this.timerService!!
         } else {
             throw IllegalStateException("TimerService is not bound to activity")
         }
@@ -129,5 +132,9 @@ abstract class TimerBaseFragment : BaseFragment() {
 
     override fun onStop() {
         super.onStop()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 }

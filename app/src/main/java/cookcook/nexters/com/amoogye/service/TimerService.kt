@@ -4,6 +4,7 @@ import android.app.Service
 import android.content.Intent
 import android.os.CountDownTimer
 import android.os.IBinder
+import android.util.Log
 import cookcook.nexters.com.amoogye.utils.TimerStatus
 
 const val COUNTDOWN_TICK_INTERVALL = 10L
@@ -18,7 +19,7 @@ class TimerService : Service() {
     private var initialMilliSeconds: Long = 0
 
     override fun onBind(intent: Intent?): IBinder? {
-        return this.timerServiceBinder
+        return timerServiceBinder
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -27,57 +28,73 @@ class TimerService : Service() {
 
     override fun onCreate() {
         super.onCreate()
-        this.timerServiceBinder = TimerServiceBinder(this)
-        this.timerStatus = TimerStatus.STATE_WAIT
+        timerServiceBinder = TimerServiceBinder(this)
+        timerStatus = TimerStatus.STATE_WAIT
     }
 
     fun setRemindTimes(millisSeconds: Long) {
-        this.remindMilliSeconds = millisSeconds
+        remindMilliSeconds = millisSeconds
     }
 
     fun setInitialTimes(millisSeconds: Long) {
-        initialMilliSeconds = millisSeconds;
+        initialMilliSeconds = millisSeconds
+        remindMilliSeconds = millisSeconds
     }
+
+    fun getRemindTimes() = remindMilliSeconds
+
+    fun getInitialTimes() = initialMilliSeconds
 
     /**
      * setInitialTImesTimes -> startOrContinue() : 초기 시작
      * onPauseCountdown() -> startOrContinue() : 멈췄다 시작
      */
     fun onStartCountdown() {
-        this.timerStatus = TimerStatus.STATE_PROGRESS
+        timerStatus = TimerStatus.STATE_PROGRESS
         startOrContinue(initialMilliSeconds)
     }
 
     fun onPauseCountdown() {
-        this.timerStatus = TimerStatus.STATE_PAUSE
+        timerStatus = TimerStatus.STATE_PAUSE
         countDownTimer.cancel()
+    }
+
+    fun onRestartCountdown() {
+        timerStatus = TimerStatus.STATE_PROGRESS
+        startOrContinue(remindMilliSeconds)
     }
 
     fun onStopCountdown() {
         remindMilliSeconds = 0
-        this.timerStatus = TimerStatus.STATE_END
-        countDownTimer.onFinish()
+        timerStatus = TimerStatus.STATE_END
+        countDownTimer.cancel()
     }
 
-    fun startOrContinue(millis: Long) {
-        this.timerStatus = TimerStatus.STATE_PROGRESS
+    fun onCancelCountdown() {
+        remindMilliSeconds = 0
+        timerStatus = TimerStatus.STATE_WAIT
+        countDownTimer.cancel()
+    }
+
+    private fun startOrContinue(millis: Long) {
+        timerStatus = TimerStatus.STATE_PROGRESS
         startTimer(millis)
     }
 
-    fun startTimer(millis: Long) {
-        this.countDownTimer = object : CountDownTimer(millis, COUNTDOWN_TICK_INTERVALL) {
-            override fun onFinish() {
-                onStopCountdown()
-            }
-
+    private fun startTimer(millis: Long) {
+        countDownTimer = object : CountDownTimer(millis, COUNTDOWN_TICK_INTERVALL) {
             override fun onTick(millisUntilFinished: Long) {
                 remindMilliSeconds = millisUntilFinished
+            }
+
+            override fun onFinish() {
+                onStopCountdown()
             }
         }.start()
     }
 
     fun getState(): TimerStatus {
-        return this.timerStatus
+        return timerStatus
     }
 
     override fun onDestroy() {

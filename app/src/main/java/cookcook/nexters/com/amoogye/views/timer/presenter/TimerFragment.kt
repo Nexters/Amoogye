@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.databinding.DataBindingUtil
 import cookcook.nexters.com.amoogye.R
-import cookcook.nexters.com.amoogye.base.BaseFragment
 import cookcook.nexters.com.amoogye.base.BaseNumberButton
 import cookcook.nexters.com.amoogye.databinding.FragmentTimerBinding
 import cookcook.nexters.com.amoogye.utils.TimerStatus
@@ -20,46 +19,26 @@ import java.util.*
 import kotlin.math.ceil
 
 
-class TimerFragment : BaseFragment() {
-//    override fun getHandledServiceStates(): Array<TimerStatus> {
-//        return arrayOf(
-//            TimerStatus.STATE_START,
-//            TimerStatus.STATE_PROGRESS,
-//            TimerStatus.STATE_WAIT
-//        )
-//    }
-//
-//    override fun getFinishingServiceStates(): Array<TimerStatus> {
-//        return arrayOf(
-//            TimerStatus.STATE_PAUSE,
-//            TimerStatus.STATE_END
-//        )
-//    }
-//
-//    override fun handleState(timerStatus: TimerStatus) {
-//        super.handleState(timerStatus)
-//        when (timerStatus) {
-//            TimerStatus.STATE_START -> {
-//
-//            }
-//
-//            TimerStatus.STATE_WAIT -> {
-//
-//            }
-//
-//            TimerStatus.STATE_PAUSE -> {
-//
-//            }
-//
-//            TimerStatus.STATE_PROGRESS -> {
-//
-//            }
-//
-//            TimerStatus.STATE_END -> {
-//
-//            }
-//        }
-//    }
+class TimerFragment : TimerBaseFragment() {
+    override fun getHandledServiceStates(): Array<TimerStatus> {
+        return arrayOf(
+            TimerStatus.STATE_START,
+            TimerStatus.STATE_PROGRESS,
+            TimerStatus.STATE_WAIT
+        )
+    }
+
+    override fun getFinishingServiceStates(): Array<TimerStatus> {
+        return arrayOf(
+            TimerStatus.STATE_PAUSE,
+            TimerStatus.STATE_END
+        )
+    }
+
+    override fun handleState(timerStatus: TimerStatus) {
+        super.handleState(timerStatus)
+        onUpdateView(timerStatus)
+    }
 
     override val layoutRes: Int = R.layout.fragment_timer
 
@@ -70,6 +49,8 @@ class TimerFragment : BaseFragment() {
     private lateinit var displayMetrics: DisplayMetrics
 
     override val isUseDataBinding: Boolean = true
+
+    lateinit var layoutParam: ViewGroup.LayoutParams
 
     lateinit var timer: CountDownTimer
 
@@ -86,6 +67,10 @@ class TimerFragment : BaseFragment() {
             editTextClickEvent(editTextList[x], x)
         }
 
+        layoutParam = layout_timer_background.layoutParams
+        layoutParam.width = 0
+        layout_timer_background.layoutParams = layoutParam
+
         BaseNumberButton(view, onClick)
     }
 
@@ -93,80 +78,80 @@ class TimerFragment : BaseFragment() {
 
     }
 
-    fun onUpdateView() {
-        txt_timer_time.visibility = View.GONE
-        btn_timer_start_stop_flag.visibility = View.GONE
-        btn_timer_pause_resume_flag.visibility = View.GONE
-        btn_timer_cancel.visibility = View.GONE
-        txt_timer_next_text.visibility = View.GONE
-        layout_timer_edit.visibility = View.GONE
+    fun onUpdateView(state: TimerStatus) {
+        visibleFlag(txt_timer_time, false)
+        visibleFlag(btn_timer_start_stop_flag, false)
+        visibleFlag(btn_timer_pause_resume_flag, false)
+        visibleFlag(btn_timer_cancel, false)
+        visibleFlag(txt_timer_next_text, false)
+        visibleFlag(layout_timer_edit, false)
+        visibleFlag(layout_timer_background, false)
+        visibleFlag(view_contour, false)
+        visibleFlag(layout_number_button_area, false)
 
-        layout_timer_background.visibility = View.GONE
-        view_contour.visibility = View.GONE
-        layout_number_button_area.visibility = View.GONE
+        when (state) {
+            TimerStatus.STATE_WAIT, TimerStatus.STATE_START -> {
+                visibleFlag(layout_timer_edit, true)
+                visibleFlag(txt_timer_next_text, true)
+                visibleFlag(layout_timer_button, true)
+                visibleFlag(view_contour, true)
+                visibleFlag(layout_number_button_area, true)
+                visibleFlag(btn_timer_start_stop_flag, true)
+                txt_timer_next_text.text = "알려드릴게요!"
+                btn_timer_start_stop_flag.text = "시작하기"
+            }
 
-        var layoutParam = layout_timer_background.layoutParams
-        layoutParam.width = 0
-        layout_timer_background.layoutParams = layoutParam
+            TimerStatus.STATE_PROGRESS -> {
+                val time = this.getTimerService()!!.getRemindTimes()
+                visibleFlag(txt_timer_time, true)
+                visibleFlag(btn_timer_cancel, true)
+                visibleFlag(btn_timer_pause_resume_flag, true)
+                btn_timer_pause_resume_flag.text = "일시정지"
+                visibleTimerBackgroundImage()
+            }
+
+            TimerStatus.STATE_PAUSE -> {
+                visibleFlag(txt_timer_time, true)
+                visibleFlag(layout_timer_background, true)
+                visibleFlag(btn_timer_cancel, true)
+                visibleFlag(btn_timer_pause_resume_flag, true)
+                btn_timer_pause_resume_flag.text = "다시시작"
+                visibleTimerBackgroundImage()
+            }
+
+            TimerStatus.STATE_END -> {
+                visibleFlag(layout_timer_edit, true)
+                visibleFlag(txt_timer_next_text, true)
+                visibleFlag(layout_timer_button, true)
+                visibleFlag(view_contour, true)
+                visibleFlag(btn_timer_start_stop_flag, true)
+                txt_timer_next_text.text = "끝났습니다!"
+                btn_timer_start_stop_flag.text = "종료"
+            }
+        }
     }
 
-    var timerRemindTime: Long = 0
-    var timerOriginalTime = 0
+    fun visibleTimerBackgroundImage() {
+        val time = this.getTimerService()!!.getRemindTimes()
+        val maxWidth = displayMetrics.widthPixels
+        val currentWidth = (maxWidth.toDouble() / ((getTimerService()!!.getInitialTimes()).toDouble() / 10))
+        val currentK = ceil(time.toDouble() / 10)
+        layout_timer_background.visibility = View.VISIBLE
+        layoutParam.width = (currentK * currentWidth).toInt()
+        layout_timer_background.layoutParams = layoutParam
+        txt_timer_time.text = String.format(
+            Locale.getDefault(), "%d 시간 %d 분 %d 초",
+            time / 1000L / 3600L,
+            (time / 1000L % 3600L) / 60L,
+            (time / 1000L % 3600L) % 60L
+        )
+    }
 
-    fun initTimer(remindTime: Long) {
-        timer = object : CountDownTimer(remindTime, 10L) {
-            override fun onFinish() {
-                txt_timer_time.visibility = View.GONE
-                btn_timer_start_stop_flag.visibility = View.VISIBLE
-                btn_timer_pause_resume_flag.visibility = View.GONE
-                btn_timer_cancel.visibility = View.GONE
-                txt_timer_next_text.visibility = View.VISIBLE
-                layout_timer_edit.visibility = View.VISIBLE
-                var layoutParam = layout_timer_background.layoutParams
-                layout_timer_background.visibility = View.GONE
-                view_contour.visibility = View.VISIBLE
-                layoutParam.width = 0
-                layout_timer_background.layoutParams = layoutParam
-                timerViewModel.stopTimerTask()
-                layout_number_button_area.visibility = View.VISIBLE
-            }
-
-            override fun onTick(millisUntilFinished: Long) {
-                txt_timer_time.visibility = View.VISIBLE
-                txt_timer_next_text.visibility = View.GONE
-                val initialTime = timerViewModel.time.value!!
-                layout_number_button_area.visibility = View.GONE
-                view_contour.visibility = View.GONE
-                val time = millisUntilFinished
-                txt_timer_time.text = String.format(
-                    Locale.getDefault(), "%d 시간 %d 분 %d 초",
-                    time / 1000L / 3600L,
-                    (time / 1000L % 3600L) / 60L,
-                    (time / 1000L % 3600L) % 60L
-                )
-                timerViewModel.setTime(time.toInt())
-                btn_timer_start_stop_flag.visibility = View.GONE
-                layout_timer_edit.visibility = View.GONE
-                btn_timer_pause_resume_flag.visibility = View.VISIBLE
-                btn_timer_cancel.visibility = View.VISIBLE
-
-                val maxWidth = displayMetrics.widthPixels
-
-                val currentWidth = (maxWidth.toDouble() / (timerOriginalTime.toDouble() / 10))
-
-                val currentK = ceil((millisUntilFinished).toDouble() / 10)
-
-                Log.d(
-                    "TAG",
-                    "maxWidth $maxWidth currentWidth $currentWidth currentK $currentK initialTIme $initialTime"
-                )
-
-                val layoutParam = layout_timer_background.layoutParams
-                timerRemindTime = millisUntilFinished
-                layout_timer_background.visibility = View.VISIBLE
-                layoutParam.width = (currentK * currentWidth).toInt()
-                layout_timer_background.layoutParams = layoutParam
-            }
+    fun visibleFlag(component: View, isVisible: Boolean) {
+        if (isVisible) {
+            component.visibility = View.VISIBLE
+        } else {
+            component.visibility = View.GONE
         }
     }
 
@@ -174,63 +159,74 @@ class TimerFragment : BaseFragment() {
         timerViewModel.onNumberButtonClick(it)
     }
 
+    private fun editTextWrapChange(number: Int) {
+        edit_hour.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
+        edit_minute.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
+        edit_second.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
+
+        when (number) {
+            0 -> edit_hour.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
+            1 -> edit_minute.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
+            2 -> edit_second.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
+        }
+    }
+
     private fun editTextClickEvent(editText: EditText, number: Int) {
         editText.setOnTouchListener { v, event ->
-            event.let {
-                if (it.action == MotionEvent.ACTION_DOWN) {
-                    timerViewModel.setSelectedTimerEditText(number)
-                    when (timerViewModel.getSelectedTimerEditText()) {
-                        0 -> {
-                            edit_hour.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
-                            edit_minute.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
-                            edit_second.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
-                        }
-                        1 -> {
-                            edit_hour.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
-                            edit_minute.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
-                            edit_second.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
-                        }
-                        2 -> {
-                            edit_hour.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
-                            edit_minute.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
-                            edit_second.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
-                        }
-                    }
-                }
-                false
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                timerViewModel.setSelectedTimerEditText(number)
+                editTextWrapChange(timerViewModel.getSelectedTimerEditText()!!)
             }
+            false
         }
 
 
         btn_timer_start_stop_flag.setOnClickListener {
-            timerViewModel.onTimerStartButtonClick()
-            initTimer(timerViewModel.time.value!! + 100L)
-            timerOriginalTime = timerViewModel.time.value!!
-            timer.start()
+            if (getTimerService()!!.getState() == TimerStatus.STATE_WAIT || getTimerService()!!.getState() == TimerStatus.STATE_START) {
+                timerViewModel.onTimerStartButtonClick()
+                getTimerService()!!.setInitialTimes(timerViewModel.time.value!! + 100L)
+                getTimerService()!!.onStartCountdown()
+                visibleTimerStart()
+            } else if (getTimerService()!!.getState() == TimerStatus.STATE_END) {
+                getTimerService()!!.timerStatus = TimerStatus.STATE_WAIT
+                onUpdateView(getTimerService()!!.getState())
+            }
         }
 
         btn_timer_pause_resume_flag.setOnClickListener {
 
-            when (timerViewModel.timerState()) {
-                TimerStatus.STATE_PAUSE -> {
-                    timerViewModel.timerStartTask()
-                    initTimer(timerRemindTime)
-                    timer.start()
-                }
-                TimerStatus.STATE_PROGRESS -> {
-                    timerViewModel.pauseTimerTask()
-                    timer.cancel()
-                }
-                else -> {
-                    Log.e("TAG", "Status error. Timer state is ${timerViewModel.timerState()}")
-                }
+            val timerService = getTimerService()!!
+            if (timerService.getState() == TimerStatus.STATE_PROGRESS) {
+                timerService.onPauseCountdown()
+                timer.cancel()
+                onUpdateView(timerService.getState())
+            } else if (timerService.getState() == TimerStatus.STATE_PAUSE) {
+                timerService.onRestartCountdown()
+                visibleTimerStart()
             }
         }
 
         btn_timer_cancel.setOnClickListener {
-            timerViewModel.stopTimerTask()
-            timer.onFinish()
+            val timerService = getTimerService()!!
+            timerService.onCancelCountdown()
+            timer.cancel()
+            onUpdateView(timerService.getState())
         }
+    }
+
+    fun visibleTimerStart() {
+
+        timer = object : CountDownTimer(getTimerService()!!.getRemindTimes(), 10L) {
+            override fun onFinish() {
+                onUpdateView(TimerStatus.STATE_END)
+            }
+
+            override fun onTick(millisUntilFinished: Long) {
+                onUpdateView(getTimerService()!!.getState())
+            }
+        }
+
+        timer.start()
     }
 
 
@@ -251,5 +247,27 @@ class TimerFragment : BaseFragment() {
         binding.timerVM = timerViewModel
         binding.lifecycleOwner = this
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (isServiceBound()) {
+            val timerService = getTimerService()!!;
+            if (timerService.getState() == TimerStatus.STATE_PROGRESS) {
+                visibleTimerStart()
+            } else {
+                onUpdateView(timerService.getState())
+            }
+        }
+    }
+
+    override fun onPause() {
+        timer.cancel()
+        super.onPause()
+    }
+
+    override fun onStop() {
+        timer.cancel()
+        super.onStop()
     }
 }
