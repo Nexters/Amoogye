@@ -2,15 +2,20 @@ package cookcook.nexters.com.amoogye.views.tools.add_tools
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import android.widget.RelativeLayout
+import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import cookcook.nexters.com.amoogye.R
+import cookcook.nexters.com.amoogye.views.tools.MeasureUnit
+import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_tools_addutil_main.*
 
 class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTextClickListener,
-    OnCountEnableTrueListener, OnCountEnableFalseListener {
+    OnCountEnableTrueListener, OnCountEnableFalseListener, AddUtilNameFragment.OnHeadLineSelectedListener {
     override fun onClickEditText() {
         val layout = findViewById<RelativeLayout>(R.id.layout_main_activity_outer_mid)
         layout.visibility = View.GONE
@@ -30,10 +35,24 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTex
         btn_add_util_next_page.isEnabled = false
     }
 
+    override fun onAttachFragment(fragment: Fragment) {
+        if (fragment is AddUtilNameFragment) {
+            fragment.setOnHeadLineSelectedListener(this)
+        }
+    }
+
+    override fun onArticleSelected() : String {
+        val name = findViewById<EditText>(R.id.edit_txt_name_util).text.toString()
+        return name
+    }
+
+    lateinit var realm: Realm
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tools_addutil_main)
 
+        realm = Realm.getDefaultInstance()
 
         addUtilFragmentAdapter =
             AddUtilViewPagerAdapter(supportFragmentManager, this, this, this, this)
@@ -58,7 +77,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTex
                         btn_add_util_next_page.text = "다음"
                         btn_add_util_exit.visibility = View.VISIBLE
                         btn_add_util_next_page.setOnClickListener {
-                            isNameUnique()
+                            btn_add_util_next_page.isEnabled = isNameUnique()
                         }
                     }
                     1 -> {
@@ -104,12 +123,20 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTex
         layout_main_activity_outer_mid.visibility = View.VISIBLE
     }
 
-    private fun isNameUnique() {
-        if (true) {
+    private fun isNameUnique() : Boolean {
+        val nameEditText = onArticleSelected()
+        Log.d("nameEdit", nameEditText)
+
+
+        try {
+            realm.where(MeasureUnit::class.java).equalTo("unitNameBold", nameEditText).findFirst()!!
+        } catch(e:Exception){
             view_pager_add_util.setCurrentItem(getItem(1), true)
-        } else {
-            btn_add_util_next_page.isEnabled = true
+            return true
         }
+
+        return false
+
     }
 
     private fun getItem(page: Int): Int {

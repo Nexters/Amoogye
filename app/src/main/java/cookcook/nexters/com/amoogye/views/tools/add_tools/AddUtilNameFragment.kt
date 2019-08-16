@@ -1,6 +1,7 @@
 package cookcook.nexters.com.amoogye.views.tools.add_tools
 
 import android.content.Context.INPUT_METHOD_SERVICE
+import android.graphics.ImageDecoder
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -34,6 +35,16 @@ class AddUtilNameFragment(
 
     var onCountEnableFalseListener: OnCountEnableFalseListener? = countEnableFalseListener
         private set
+    
+    lateinit var callback : OnHeadLineSelectedListener
+
+    fun setOnHeadLineSelectedListener(callback: OnHeadLineSelectedListener){
+        this.callback = callback
+    }
+
+    interface OnHeadLineSelectedListener {
+        fun onArticleSelected() : String
+    }
 
     companion object {
         // 선택 선언 1 (Fragment를 싱글턴으로 사용 시)
