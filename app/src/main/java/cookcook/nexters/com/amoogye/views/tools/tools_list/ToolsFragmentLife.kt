@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.tabs.TabLayout
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.views.tools.*
 import io.realm.Realm
@@ -26,6 +27,19 @@ class ToolsFragmentLife : Fragment() {
             }
             return INSTANCE!!
         }
+    }
+
+    internal lateinit var callback: OnClickEditModeListener
+
+    fun setOnClickEditModeListener (callback: OnClickEditModeListener) {
+        this.callback = callback
+    }
+
+    interface OnClickEditModeListener {
+        fun onInvisibleTabLayout()
+        fun onVisibleTabLayout()
+        fun onDisableSwipe()
+        fun onAbleSwipe()
     }
 
     lateinit var realm: Realm
@@ -70,17 +84,21 @@ class ToolsFragmentLife : Fragment() {
                 btn_edit_delete.visibility = View.VISIBLE
                 flagIsEditMode = true
                 recyclerAdapter.notifyDataSetChanged()
+                callback.onInvisibleTabLayout()
+                callback.onDisableSwipe()
+            }
 
-                if (isToggleClicked) {
-                    changeToggleStatus()
-                    isToggleClicked = false
-                }
+            if (isToggleClicked) {
+                changeToggleStatus()
+                isToggleClicked = false
             }
         }
 
         btn_edit_cancel.setOnClickListener {
             exitEditMode()
             recyclerAdapter.notifyDataSetChanged()
+            callback.onVisibleTabLayout()
+            callback.onAbleSwipe()
         }
 
         btn_edit_delete.setOnClickListener {
@@ -103,6 +121,13 @@ class ToolsFragmentLife : Fragment() {
         btn_edit_delete.visibility = View.GONE
         flagIsEditMode = false
     }
+
+    private fun clickEditChangeParent() {
+        val pf = (parentFragment as ToolsFragment).parentFragment
+        val tab = pf!!.view!!.findViewById<TabLayout>(R.id.layout_tools_tab_layout)
+        tab!!.visibility = View.INVISIBLE
+    }
+
 
     private fun areAllItemsDefault(): Boolean {
         realm.beginTransaction()
