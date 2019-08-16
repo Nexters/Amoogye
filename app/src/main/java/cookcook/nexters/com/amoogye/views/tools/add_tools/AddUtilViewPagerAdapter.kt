@@ -7,15 +7,15 @@ import androidx.fragment.app.FragmentPagerAdapter
 class AddUtilViewPagerAdapter(
     fm: FragmentManager,
     val editTextItemClickListener: OnEditTextClickListener,
-    val outerTextItemClickListener: OnOuterTextClickListener,
-    val countEnableTrueListener: OnCountEnableTrueListener,
-    val countEnableFalseListener: OnCountEnableFalseListener
+    val outerTextItemClickListener: OnEditTextClickListener,
+    val countEnableListener: OnCountEnableListener,
+    val countEnableFalseListener:  OnCountEnableListener
 ) : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> {
-                AddUtilNameFragment.getInstance(editTextItemClickListener, outerTextItemClickListener, countEnableTrueListener, countEnableFalseListener)
+                AddUtilNameFragment.getInstance(editTextItemClickListener, outerTextItemClickListener, countEnableListener, countEnableFalseListener)
 
             }
             1 -> {

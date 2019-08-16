@@ -4,7 +4,6 @@ import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -18,29 +17,23 @@ import kotlinx.android.synthetic.main.fragment_addutil_1_name_util.layout_outer_
 
 class AddUtilNameFragment(
     editTextItemClickListener: OnEditTextClickListener,
-    outerTextItemClickListener: OnOuterTextClickListener,
-    countEnableTrueListener: OnCountEnableTrueListener,
-    countEnableFalseListener: OnCountEnableFalseListener
+    outerTextItemClickListener: OnEditTextClickListener,
+    countEnableListener: OnCountEnableListener,
+    countEnableFalseListener: OnCountEnableListener
 ) : Fragment() {
 
     var onItemClickListener: OnEditTextClickListener? = editTextItemClickListener
         private set
 
-    var onOuterItemClickListener: OnOuterTextClickListener? = outerTextItemClickListener
+    var onOuterItemClickListener: OnEditTextClickListener? = outerTextItemClickListener
         private set
 
-    var onCountEnableTrueListener: OnCountEnableTrueListener? = countEnableTrueListener
+    var onCountEnableListener: OnCountEnableListener? = countEnableListener
         private set
 
-    var onCountEnableFalseListener: OnCountEnableFalseListener? = countEnableFalseListener
+    var onCountEnableFalseListener: OnCountEnableListener? = countEnableFalseListener
         private set
 
-
-    lateinit var callback: OnGetNameEditTextListener
-
-    fun setOnGetNameEditTextListener(callback: OnGetNameEditTextListener) {
-        this.callback = callback
-    }
 
     interface OnGetNameEditTextListener {
         fun onGetNameEditText(): String
@@ -53,16 +46,16 @@ class AddUtilNameFragment(
 
         fun getInstance(
             editTextItemClickListener: OnEditTextClickListener,
-            outerTextItemClickListener: OnOuterTextClickListener,
-            countEnableTrueListener: OnCountEnableTrueListener,
-            countEnableFalseListener: OnCountEnableFalseListener
+            outerTextItemClickListener: OnEditTextClickListener,
+            countEnableListener: OnCountEnableListener,
+            countEnableFalseListener: OnCountEnableListener
         ): AddUtilNameFragment {
             if (INSTANCE == null) {
                 INSTANCE =
                     AddUtilNameFragment(
                         editTextItemClickListener,
                         outerTextItemClickListener,
-                        countEnableTrueListener,
+                        countEnableListener,
                         countEnableFalseListener
                     )
             }
@@ -97,6 +90,7 @@ class AddUtilNameFragment(
             addUtilCloseKeyboard()
         }
 
+
         edit_txt_name_util.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, count: Int) {
             }
@@ -111,7 +105,7 @@ class AddUtilNameFragment(
                     onCountEnableFalseListener?.onCountTextEnableFalse()
                 } else {
                     txt_alert_below_ten_letter.visibility = View.INVISIBLE
-                    onCountEnableTrueListener?.onCountTextEnable()
+                    onCountEnableListener?.onCountTextEnableTrue()
                     if (p0.isEmpty()) onCountEnableFalseListener?.onCountTextEnableFalse()
                 }
 

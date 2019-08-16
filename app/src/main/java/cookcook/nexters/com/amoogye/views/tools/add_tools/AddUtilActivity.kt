@@ -8,15 +8,14 @@ import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import android.widget.RelativeLayout
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.views.tools.MeasureUnit
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_tools_addutil_main.*
 
-class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTextClickListener,
-    OnCountEnableTrueListener, OnCountEnableFalseListener, AddUtilNameFragment.OnGetNameEditTextListener {
+class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
+    OnCountEnableListener, AddUtilNameFragment.OnGetNameEditTextListener {
     override fun onClickEditText() {
         val layout = findViewById<RelativeLayout>(R.id.layout_main_activity_outer_mid)
         layout.visibility = View.GONE
@@ -28,7 +27,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTex
 
     lateinit var addUtilFragmentAdapter: AddUtilViewPagerAdapter
 
-    override fun onCountTextEnable() {
+    override fun onCountTextEnableTrue() {
         btn_add_util_next_page.isEnabled = true
     }
 
@@ -37,7 +36,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTex
     }
 
 
-    override fun onGetNameEditText() : String {
+    override fun onGetNameEditText(): String {
         val name = findViewById<EditText>(R.id.edit_txt_name_util).text.toString()
         return name
     }
@@ -46,6 +45,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTex
         val alertMessage = findViewById<TextView>(R.id.txt_alert_same_name)
         alertMessage.visibility = View.VISIBLE
     }
+
     lateinit var realm: Realm
 
 
@@ -78,8 +78,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTex
                         btn_add_util_next_page.text = "다음"
                         btn_add_util_exit.visibility = View.VISIBLE
                         btn_add_util_next_page.setOnClickListener {
-                            isNameUnique()
-                            btn_add_util_next_page.isEnabled = isNameUniqueFlag
+                            btn_add_util_next_page.isEnabled = isNameUnique()
                         }
                     }
                     1 -> {
@@ -125,20 +124,19 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTex
         layout_main_activity_outer_mid.visibility = View.VISIBLE
     }
 
-    private fun isNameUnique() {
+    private fun isNameUnique() : Boolean {
         val nameEditText = onGetNameEditText()
         Log.d("nameEdit", nameEditText)
 
         try {
             realm.where(MeasureUnit::class.java).equalTo("unitNameBold", nameEditText).findFirst()!!
-        } catch(e:Exception){
+        } catch (e: Exception) {
             view_pager_add_util.setCurrentItem(getItem(1), true)
-            isNameUniqueFlag = true
-            return
+            return true
         }
 
-        isNameUniqueFlag = false
         onUniqueNameShowAlert()
+        return false
     }
 
     private fun getItem(page: Int): Int {
@@ -165,20 +163,10 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTex
 
 interface OnEditTextClickListener {
     fun onClickEditText()
-}
-
-interface OnOuterTextClickListener {
     fun onClickOuterText()
 }
 
-interface OnCountEnableTrueListener {
-    fun onCountTextEnable()
-}
-
-interface OnCountEnableFalseListener {
+interface OnCountEnableListener {
+    fun onCountTextEnableTrue()
     fun onCountTextEnableFalse()
-}
-
-interface OnNameUniqueListener {
-    fun onNameUniqueAlert() : Boolean
 }
