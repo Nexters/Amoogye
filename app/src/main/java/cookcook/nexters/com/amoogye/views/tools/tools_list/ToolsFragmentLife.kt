@@ -47,7 +47,8 @@ class ToolsFragmentLife : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         realm = Realm.getDefaultInstance()
-        val unitList = realm.where(MeasureUnit::class.java).equalTo("unitType", TYPE_NORMAL).findAll().sort("unitId", Sort.DESCENDING)
+        val unitList = realm.where(MeasureUnit::class.java).equalTo("unitType", TYPE_NORMAL).findAll()
+            .sort("unitId", Sort.DESCENDING)
 
         val recyclerAdapter =
             ToolsRecyclerAdapterLife(context!!, unitList, true)
@@ -57,18 +58,23 @@ class ToolsFragmentLife : Fragment() {
         layout_lifeRecyclerView.layoutManager = recyclerManager
         layout_lifeRecyclerView.setHasFixedSize(false)
 
-        unitList.addChangeListener { _-> recyclerAdapter.notifyDataSetChanged() }
+        unitList.addChangeListener { _ -> recyclerAdapter.notifyDataSetChanged() }
 
         btn_edit_toolList.setOnClickListener {
-            btn_edit_toolList.visibility = View.GONE
-            btn_edit_cancel.visibility = View.VISIBLE
-            btn_edit_delete.visibility = View.VISIBLE
-            flagIsEditMode = true
-            recyclerAdapter.notifyDataSetChanged()
 
-            if (isToggleClicked) {
-                changeToggleStatus()
-                isToggleClicked = false
+            if (areAllItemsDefault()) {
+                Toast.makeText(context!!, "삭제할 수 있는 계량도구가 없습니다", Toast.LENGTH_SHORT).show()
+            } else {
+                btn_edit_toolList.visibility = View.GONE
+                btn_edit_cancel.visibility = View.VISIBLE
+                btn_edit_delete.visibility = View.VISIBLE
+                flagIsEditMode = true
+                recyclerAdapter.notifyDataSetChanged()
+
+                if (isToggleClicked) {
+                    changeToggleStatus()
+                    isToggleClicked = false
+                }
             }
         }
 
@@ -79,10 +85,6 @@ class ToolsFragmentLife : Fragment() {
 
         btn_edit_delete.setOnClickListener {
             deleteData()
-            if (utilCantDelete){
-                Toast.makeText(context!!, "기본 데이터는 삭제할 수 없습니다", Toast.LENGTH_LONG).show()
-                utilCantDelete = false
-            }
             exitEditMode()
             recyclerAdapter.notifyDataSetChanged()
 
@@ -100,6 +102,17 @@ class ToolsFragmentLife : Fragment() {
         btn_edit_cancel.visibility = View.GONE
         btn_edit_delete.visibility = View.GONE
         flagIsEditMode = false
+    }
+
+    private fun areAllItemsDefault(): Boolean {
+        realm.beginTransaction()
+
+        val maxId = newId()
+
+        realm.commitTransaction()
+
+        if (maxId > NUM_DEFAULT_ITEMS) return false
+        return true
     }
 
     private fun changeToggleStatus() {
@@ -149,15 +162,12 @@ class ToolsFragmentLife : Fragment() {
         realm.beginTransaction()
 
         for (itemId in checkedList) {
-            // 삭제불가 도구 판별 (일단 임의로 조건 설정해놓음)
-            if (itemId < 5) {
-                utilCantDelete = true
-            } else {
-                if (itemId in toggleChecked) toggleChecked.remove(itemId)
-                if (itemId in toggleNotChecked) toggleNotChecked.remove(itemId)
-                val deleteItem = realm.where(MeasureUnit::class.java).equalTo("unitId", itemId).findFirst()!!
-                deleteItem.deleteFromRealm()
-            }
+
+            if (itemId in toggleChecked) toggleChecked.remove(itemId)
+            if (itemId in toggleNotChecked) toggleNotChecked.remove(itemId)
+            val deleteItem = realm.where(MeasureUnit::class.java).equalTo("unitId", itemId).findFirst()!!
+            deleteItem.deleteFromRealm()
+
         }
 
         checkedList.clear()

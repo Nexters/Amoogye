@@ -4,17 +4,6 @@
     android:layout_height="52dp"
     android:background="@drawable/tools_item_border">
 
-    <CheckBox
-        android:id="@+id/checkBox_lifeTool_Item"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="@dimen/tools_list_start_end"
-        android:background="@drawable/tools_check_box_onoff"
-        android:button="@color/transparent"
-        android:visibility="gone" />
-
     <TextView
         android:id="@+id/txt_measureUnit_bold"
         android:layout_width="wrap_content"
@@ -23,7 +12,6 @@
         android:layout_marginStart="@dimen/add_util_start_end"
         android:layout_marginTop="@dimen/tools_list_item_bold_top"
         android:layout_marginBottom="@dimen/tools_list_item_bold_bottom"
-        android:layout_toEndOf="@id/checkBox_lifeTool_Item"
         android:text=""
         android:textColor="@color/tools_list_text_color"
         android:textSize="@dimen/tools_list_item_bold_text_size" />
@@ -46,10 +34,22 @@
         android:layout_height="24dp"
         android:layout_alignParentEnd="true"
         android:layout_centerInParent="true"
-        android:layout_marginEnd="@dimen/tools_list_start_end"
         android:layout_marginTop="@dimen/tools_list_button_top"
+        android:layout_marginEnd="@dimen/tools_list_start_end"
         android:layout_marginBottom="@dimen/tools_list_button_bottom"
         android:background="@drawable/tools_list_onoff"
         android:textOff=""
         android:textOn="" />
+
+    <CheckBox
+        android:id="@+id/checkBox_lifeTool_Item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="@dimen/tools_list_start_end"
+        android:layout_marginEnd="@dimen/tools_list_start_end"
+        android:background="@drawable/tools_check_box_onoff"
+        android:button="@color/transparent"
+        android:visibility="gone" />
 </RelativeLayout>
