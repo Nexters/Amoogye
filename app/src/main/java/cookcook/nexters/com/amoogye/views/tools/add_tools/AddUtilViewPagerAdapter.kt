@@ -9,13 +9,14 @@ class AddUtilViewPagerAdapter(
     val editTextItemClickListener: OnEditTextClickListener,
     val outerTextItemClickListener: OnOuterTextClickListener,
     val countEnableTrueListener: OnCountEnableTrueListener,
-    val countEnableFalseListener: OnCountEnableFalseListener
+    val countEnableFalseListener: OnCountEnableFalseListener,
+    var nameUniqueListener: OnNameUniqueListener
 ) : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> {
-                AddUtilNameFragment.getInstance(editTextItemClickListener, outerTextItemClickListener, countEnableTrueListener, countEnableFalseListener)
+                AddUtilNameFragment.getInstance(editTextItemClickListener, outerTextItemClickListener, countEnableTrueListener, countEnableFalseListener, nameUniqueListener)
 
             }
             1 -> {

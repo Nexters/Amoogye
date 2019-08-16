@@ -15,7 +15,7 @@ import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_tools_addutil_main.*
 
 class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTextClickListener,
-    OnCountEnableTrueListener, OnCountEnableFalseListener, AddUtilNameFragment.OnHeadLineSelectedListener {
+    OnCountEnableTrueListener, OnCountEnableFalseListener, AddUtilNameFragment.OnGetNameEditTextListener, OnNameUniqueListener {
     override fun onClickEditText() {
         val layout = findViewById<RelativeLayout>(R.id.layout_main_activity_outer_mid)
         layout.visibility = View.GONE
@@ -35,18 +35,24 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTex
         btn_add_util_next_page.isEnabled = false
     }
 
+    override fun onNameUniqueAlert() : Boolean {
+        return isNameUniqueFlag
+    }
+
+
     override fun onAttachFragment(fragment: Fragment) {
         if (fragment is AddUtilNameFragment) {
-            fragment.setOnHeadLineSelectedListener(this)
+            fragment.setOnGetNameEditTextListener(this)
         }
     }
 
-    override fun onArticleSelected() : String {
+    override fun onGetNameEditText() : String {
         val name = findViewById<EditText>(R.id.edit_txt_name_util).text.toString()
         return name
     }
 
     lateinit var realm: Realm
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +61,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTex
         realm = Realm.getDefaultInstance()
 
         addUtilFragmentAdapter =
-            AddUtilViewPagerAdapter(supportFragmentManager, this, this, this, this)
+            AddUtilViewPagerAdapter(supportFragmentManager, this, this, this, this,this)
         view_pager_add_util.adapter = addUtilFragmentAdapter
         view_pager_add_util.setSwipePagingEnabled(false)
 
@@ -77,7 +83,8 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTex
                         btn_add_util_next_page.text = "다음"
                         btn_add_util_exit.visibility = View.VISIBLE
                         btn_add_util_next_page.setOnClickListener {
-                            btn_add_util_next_page.isEnabled = isNameUnique()
+                            isNameUnique()
+                            btn_add_util_next_page.isEnabled = isNameUniqueFlag
                         }
                     }
                     1 -> {
@@ -123,20 +130,18 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTex
         layout_main_activity_outer_mid.visibility = View.VISIBLE
     }
 
-    private fun isNameUnique() : Boolean {
-        val nameEditText = onArticleSelected()
+    private fun isNameUnique() {
+        val nameEditText = onGetNameEditText()
         Log.d("nameEdit", nameEditText)
-
 
         try {
             realm.where(MeasureUnit::class.java).equalTo("unitNameBold", nameEditText).findFirst()!!
         } catch(e:Exception){
             view_pager_add_util.setCurrentItem(getItem(1), true)
-            return true
+            isNameUniqueFlag = true
         }
 
-        return false
-
+        isNameUniqueFlag = false
     }
 
     private fun getItem(page: Int): Int {
@@ -175,4 +180,8 @@ interface OnCountEnableTrueListener {
 
 interface OnCountEnableFalseListener {
     fun onCountTextEnableFalse()
+}
+
+interface OnNameUniqueListener {
+    fun onNameUniqueAlert() : Boolean
 }

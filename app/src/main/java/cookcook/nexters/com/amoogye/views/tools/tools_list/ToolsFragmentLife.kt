@@ -89,7 +89,7 @@ class ToolsFragmentLife : Fragment() {
         }
 
         test_btn_insert_data.setOnClickListener {
-            insertData("야호", "메롱")
+            insertData("yyyy", "메롱")
         }
 
 
