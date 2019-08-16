@@ -95,7 +95,6 @@
 
         <RelativeLayout
             android:id="@+id/layout_add_util_outer_bottom_btn"
-            android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true">
@@ -109,12 +108,12 @@
                 android:background="@drawable/add_util_button_selector"
                 android:text="@string/add_util_next_step"
                 android:textColor="@color/white"
+                android:enabled="false"
                 android:textSize="@dimen/add_util_button_text_size" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/container_add_util_volume_choice"
-            android:layout_below="@id/view_pager_add_util"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/view_pager_add_util"

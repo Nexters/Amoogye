@@ -71,7 +71,7 @@ class AddUtilNameFragment(
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        edit_txt_name_util.setOnTouchListener { view, motionEvent ->
+        edit_txt_name_util.setOnTouchListener { _, motionEvent ->
             motionEvent.let {
                 if(it.action == MotionEvent.ACTION_DOWN) {
                     onItemClickListener?.onClickEditText()
@@ -84,6 +84,11 @@ class AddUtilNameFragment(
             onOuterItemClickListener?.onClickOuterText()
             addUtilCloseKeyboard()
         }
+
+        // 만약 이름이 유일하다면 아무 동작 x
+        // 만약 이름이 유일하지 않다면
+        // txt_alert_same_name.visibility = View.VISIBLE
+
 
         edit_txt_name_util.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, count: Int) {

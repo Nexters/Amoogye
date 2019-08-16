@@ -112,7 +112,6 @@ class ToolsFragmentNormal : Fragment() {
     }
 
     override fun onDestroy() {
-        realm.close()
         super.onDestroy()
     }
 }
