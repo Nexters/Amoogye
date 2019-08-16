@@ -97,15 +97,13 @@ class ToolsFragmentLife : Fragment() {
         btn_edit_cancel.setOnClickListener {
             exitEditMode()
             recyclerAdapter.notifyDataSetChanged()
-            callback.onVisibleTabLayout()
-            callback.onAbleSwipe()
         }
 
         btn_edit_delete.setOnClickListener {
-            deleteData()
-            exitEditMode()
-            recyclerAdapter.notifyDataSetChanged()
-
+            if (checkedList.isNotEmpty()){
+                deleteData()
+                recyclerAdapter.notifyDataSetChanged()
+            }
         }
 
         test_btn_insert_data.setOnClickListener {
@@ -120,14 +118,9 @@ class ToolsFragmentLife : Fragment() {
         btn_edit_cancel.visibility = View.GONE
         btn_edit_delete.visibility = View.GONE
         flagIsEditMode = false
+        callback.onVisibleTabLayout()
+        callback.onAbleSwipe()
     }
-
-    private fun clickEditChangeParent() {
-        val pf = (parentFragment as ToolsFragment).parentFragment
-        val tab = pf!!.view!!.findViewById<TabLayout>(R.id.layout_tools_tab_layout)
-        tab!!.visibility = View.INVISIBLE
-    }
-
 
     private fun areAllItemsDefault(): Boolean {
         realm.beginTransaction()
@@ -198,6 +191,8 @@ class ToolsFragmentLife : Fragment() {
         checkedList.clear()
 
         realm.commitTransaction()
+
+        exitEditMode()
     }
 
     override fun onResume() {
