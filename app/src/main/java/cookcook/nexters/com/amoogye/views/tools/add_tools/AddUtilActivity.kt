@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import android.widget.RelativeLayout
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import cookcook.nexters.com.amoogye.R
@@ -15,7 +16,7 @@ import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_tools_addutil_main.*
 
 class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTextClickListener,
-    OnCountEnableTrueListener, OnCountEnableFalseListener, AddUtilNameFragment.OnGetNameEditTextListener, OnNameUniqueListener {
+    OnCountEnableTrueListener, OnCountEnableFalseListener, AddUtilNameFragment.OnGetNameEditTextListener {
     override fun onClickEditText() {
         val layout = findViewById<RelativeLayout>(R.id.layout_main_activity_outer_mid)
         layout.visibility = View.GONE
@@ -35,22 +36,16 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTex
         btn_add_util_next_page.isEnabled = false
     }
 
-    override fun onNameUniqueAlert() : Boolean {
-        return isNameUniqueFlag
-    }
-
-
-    override fun onAttachFragment(fragment: Fragment) {
-        if (fragment is AddUtilNameFragment) {
-            fragment.setOnGetNameEditTextListener(this)
-        }
-    }
 
     override fun onGetNameEditText() : String {
         val name = findViewById<EditText>(R.id.edit_txt_name_util).text.toString()
         return name
     }
 
+    override fun onUniqueNameShowAlert() {
+        val alertMessage = findViewById<TextView>(R.id.txt_alert_same_name)
+        alertMessage.visibility = View.VISIBLE
+    }
     lateinit var realm: Realm
 
 
@@ -61,7 +56,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTex
         realm = Realm.getDefaultInstance()
 
         addUtilFragmentAdapter =
-            AddUtilViewPagerAdapter(supportFragmentManager, this, this, this, this,this)
+            AddUtilViewPagerAdapter(supportFragmentManager, this, this, this, this)
         view_pager_add_util.adapter = addUtilFragmentAdapter
         view_pager_add_util.setSwipePagingEnabled(false)
 
@@ -139,9 +134,11 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener, OnOuterTex
         } catch(e:Exception){
             view_pager_add_util.setCurrentItem(getItem(1), true)
             isNameUniqueFlag = true
+            return
         }
 
         isNameUniqueFlag = false
+        onUniqueNameShowAlert()
     }
 
     private fun getItem(page: Int): Int {

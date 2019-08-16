@@ -20,8 +20,7 @@ class AddUtilNameFragment(
     editTextItemClickListener: OnEditTextClickListener,
     outerTextItemClickListener: OnOuterTextClickListener,
     countEnableTrueListener: OnCountEnableTrueListener,
-    countEnableFalseListener: OnCountEnableFalseListener,
-    nameUniqueListener: OnNameUniqueListener
+    countEnableFalseListener: OnCountEnableFalseListener
 ) : Fragment() {
 
     var onItemClickListener: OnEditTextClickListener? = editTextItemClickListener
@@ -36,8 +35,6 @@ class AddUtilNameFragment(
     var onCountEnableFalseListener: OnCountEnableFalseListener? = countEnableFalseListener
         private set
 
-    var onNameUniqueListener: OnNameUniqueListener? = nameUniqueListener
-        private set
 
     lateinit var callback: OnGetNameEditTextListener
 
@@ -47,6 +44,7 @@ class AddUtilNameFragment(
 
     interface OnGetNameEditTextListener {
         fun onGetNameEditText(): String
+        fun onUniqueNameShowAlert()
     }
 
     companion object {
@@ -57,8 +55,7 @@ class AddUtilNameFragment(
             editTextItemClickListener: OnEditTextClickListener,
             outerTextItemClickListener: OnOuterTextClickListener,
             countEnableTrueListener: OnCountEnableTrueListener,
-            countEnableFalseListener: OnCountEnableFalseListener,
-            nameUniqueListener: OnNameUniqueListener
+            countEnableFalseListener: OnCountEnableFalseListener
         ): AddUtilNameFragment {
             if (INSTANCE == null) {
                 INSTANCE =
@@ -66,8 +63,7 @@ class AddUtilNameFragment(
                         editTextItemClickListener,
                         outerTextItemClickListener,
                         countEnableTrueListener,
-                        countEnableFalseListener,
-                        nameUniqueListener
+                        countEnableFalseListener
                     )
             }
             return INSTANCE!!
@@ -109,7 +105,7 @@ class AddUtilNameFragment(
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                sameNameShowAlert()
+                txt_alert_same_name.visibility = View.INVISIBLE
                 if (p0!!.length > 10) {
                     txt_alert_below_ten_letter.visibility = View.VISIBLE
                     onCountEnableFalseListener?.onCountTextEnableFalse()
@@ -132,9 +128,7 @@ class AddUtilNameFragment(
 
     }
 
-    private fun sameNameShowAlert() {
-        Log.d("uniqueAlert", ""+onNameUniqueListener!!.onNameUniqueAlert())
-        if (onNameUniqueListener!!.onNameUniqueAlert()) txt_alert_same_name.visibility = View.INVISIBLE
-        else txt_alert_same_name.visibility = View.VISIBLE
-    }
 }
+
+
+
