@@ -21,7 +21,7 @@
     <string name="timer_pause">일시정지</string>
     <string name="timer_cancel">취소</string>
     <string name="timer_start">시작하기</string>
-    
+
     <!-- setting -->
     <string name="setting_title">설정</string>
     <string name="setting_display">화면설정</string>
@@ -31,7 +31,7 @@
     <string name="setting_alarm_vibration">진동</string>
     <string name="setting_contact">개발자 컨택</string>
     <string name="setting_contact_email">emailemali@gmail.com</string>
-    
+
     <!-- tools list -->
     <string name="tools_list_title">계량도구</string>
     <string name="tools_list_normal">일반 계량도구</string>
