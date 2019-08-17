@@ -9,8 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.base.BaseFragment
+import cookcook.nexters.com.amoogye.base.BaseScrollPicker
 import cookcook.nexters.com.amoogye.databinding.FragmentCalcBinding
 import kotlinx.android.synthetic.main.fragment_calc.*
+import kotlinx.android.synthetic.main.layout_ingredient_scroll_wrap.*
 import org.koin.android.ext.android.get
 
 class CalcFragment : BaseFragment() {
@@ -57,6 +59,11 @@ class CalcFragment : BaseFragment() {
         txt_human.setOnClickListener {
             fragmentChange(2)
         }
+
+        val items: ArrayList<String> = arrayListOf(
+            "jjjjjjjjj", "mmmmmmm","kkkkkkkk","kjkjkjkjkjk","kkkkkkkkkk","jijijijiji","mkmkmkmkmk","inknknknk","rdrdftft","gtfrdeswasrdf"
+        )
+        val picker = BaseScrollPicker(view, items)
     }
 
     private fun itemChange(containerCase: Int) {
@@ -83,6 +90,8 @@ class CalcFragment : BaseFragment() {
         } else {
             txt_calc_plus.setTextColor(Color.parseColor("#33131c32"))
         }
+
+
     }
 
     private fun fragmentChange(number: Int) {
