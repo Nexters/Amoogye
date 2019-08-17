@@ -10,12 +10,15 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.viewpager.widget.ViewPager
 import cookcook.nexters.com.amoogye.R
+import cookcook.nexters.com.amoogye.base.BaseScrollPicker
 import cookcook.nexters.com.amoogye.views.tools.MeasureUnit
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_tools_addutil_main.*
 
 class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
-    OnCountEnableListener, AddUtilNameFragment.OnGetNameEditTextListener {
+    OnCountEnableListener, AddUtilNameFragment.OnGetNameEditTextListener,
+    AddUtilVolumeFragment.OnGetNameByUserListener,
+    AddUtilCompleteFragment.OnAddUtilResultListener {
     override fun onClickEditText() {
         val layout = findViewById<RelativeLayout>(R.id.layout_main_activity_outer_mid)
         layout.visibility = View.GONE
@@ -46,6 +49,19 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
         alertMessage.visibility = View.VISIBLE
     }
 
+
+    var itemName = ""
+    override fun onGetNameByUser() {
+        itemName = findViewById<EditText>(R.id.edit_txt_name_util).text.toString()
+        val comment = findViewById<TextView>(R.id.txt_2_user_name)
+        comment.text = itemName
+    }
+
+    override fun onAddUtilResult() {
+        val nameResult = findViewById<TextView>(R.id.txt_3_user_name)
+        nameResult.text = itemName
+    }
+
     lateinit var realm: Realm
 
 
@@ -62,6 +78,10 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
 
         indicator_add_util.setupWithViewPager(view_pager_add_util)
 
+//        val list = arrayListOf("aa","bb","cc","dd","ee","ff","gg")
+//        val picker = BaseScrollPicker(this as View, list)
+//        picker.setColor(resources.getColor(R.color.number_non_focus_wrap_color))
+
         // 프래그먼트 스와이프 시 변동사항
         view_pager_add_util.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
@@ -77,6 +97,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
                     }
                     1 -> {
                         restPageDefault()
+                        onGetNameByUser()
                         btn_add_util_next_page.text = "다음"
                         btn_add_util_exit.visibility = View.VISIBLE
                         btn_add_util_next_page.setOnClickListener {
@@ -85,6 +106,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
                     }
                     2 -> {
                         restPageDefault()
+                        onAddUtilResult()
                         btn_add_util_next_page.text = "확인"
                         btn_add_util_exit.visibility = View.INVISIBLE
                         btn_add_util_next_page.setOnClickListener {
@@ -124,7 +146,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
         layout_main_activity_outer_mid.visibility = View.VISIBLE
     }
 
-    private fun isNameUnique() : Boolean {
+    private fun isNameUnique(): Boolean {
         val nameEditText = onGetNameEditText()
         Log.d("nameEdit", nameEditText)
 

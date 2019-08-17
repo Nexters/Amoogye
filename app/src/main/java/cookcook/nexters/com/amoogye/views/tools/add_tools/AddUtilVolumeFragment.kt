@@ -14,6 +14,11 @@ import kotlinx.android.synthetic.main.fragment_addutil_2_volume.*
 
 class AddUtilVolumeFragment : Fragment() {
 
+    interface OnGetNameByUserListener {
+        fun onGetNameByUser()
+    }
+
+
     companion object {
         // 선택 선언 1 (Fragment를 싱글턴으로 사용 시)
         private var INSTANCE: AddUtilVolumeFragment? = null
@@ -40,7 +45,7 @@ class AddUtilVolumeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        edit_txt_name_util.setOnClickListener{
+        btn_txt_name_util.setOnClickListener{
 
         }
 

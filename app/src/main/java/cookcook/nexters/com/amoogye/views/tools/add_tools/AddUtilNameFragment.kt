@@ -111,7 +111,6 @@ class AddUtilNameFragment(
                         btn_addutil_name_complete.visibility = View.INVISIBLE
                     }
                 }
-
             }
 
         })

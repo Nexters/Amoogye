@@ -11,6 +11,10 @@ import cookcook.nexters.com.amoogye.views.tools.ToolsFragment
 
 class AddUtilCompleteFragment : Fragment() {
 
+    interface OnAddUtilResultListener {
+        fun onAddUtilResult()
+    }
+
     companion object {
         // 선택 선언 1 (Fragment를 싱글턴으로 사용 시)
         private var INSTANCE: AddUtilCompleteFragment? = null

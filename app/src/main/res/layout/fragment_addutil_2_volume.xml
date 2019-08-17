@@ -35,6 +35,7 @@
             android:textSize="@dimen/add_util_head_comment_text_size" />
 
         <TextView
+            android:id="@+id/txt_2_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" 내 밥그릇"
@@ -58,7 +59,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/edit_txt_name_util"
+            android:id="@+id/btn_txt_name_util"
             android:layout_width="@dimen/add_util_volume_box_1"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/add_util_volume_box_end"

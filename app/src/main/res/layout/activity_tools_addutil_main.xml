@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:layout="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -94,6 +95,24 @@
             app:tabIndicatorHeight="0dp" />
 
         <RelativeLayout
+            android:id="@+id/container_add_util_volume_choice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/view_pager_add_util"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/complete_scroll_picker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:textColor="@color/tools_list_text_color"
+                android:text="완료" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
             android:id="@+id/layout_add_util_outer_bottom_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -112,14 +131,7 @@
                 android:textSize="@dimen/add_util_button_text_size" />
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/container_add_util_volume_choice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/view_pager_add_util"
-            android:visibility="gone">
 
-        </RelativeLayout>
     </RelativeLayout>
 
 </RelativeLayout>
