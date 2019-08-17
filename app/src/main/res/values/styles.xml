@@ -12,10 +12,12 @@
     
     <style name="BottomNavigationView" parent="@style/TextAppearance.AppCompat.Caption">
         <item name="android:textSize">@dimen/bottom_navigation_text_size</item>
+        <item name="android:fontFamily">@font/nanum_square_r</item>
     </style>
 
     <style name="BottomNavigationView.Active" parent="@style/TextAppearance.AppCompat.Caption">
         <item name="android:textSize">@dimen/bottom_navigation_text_size</item>
+        <item name="android:fontFamily">@font/nanum_square_r</item>
     </style>
 
     
