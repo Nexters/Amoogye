@@ -262,12 +262,16 @@ class TimerFragment : TimerBaseFragment() {
     }
 
     override fun onPause() {
-        timer.cancel()
+        if (getTimerService()!!.getState() === TimerStatus.STATE_PROGRESS) {
+            timer.cancel()
+        }
         super.onPause()
     }
 
     override fun onStop() {
-        timer.cancel()
+        if (getTimerService()!!.getState() === TimerStatus.STATE_PROGRESS) {
+            timer.cancel()
+        }
         super.onStop()
     }
 }
