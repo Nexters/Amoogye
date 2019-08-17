@@ -1,11 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:background="@color/white">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/layout_unit_top"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="단위 버튼들 모인 곳" />
+        android:layout_marginTop="16dp">
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/txt_unit_normal_sequence"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="기본 순"
+            android:textSize="12sp"
+            android:textColor="#131c32"
+            android:fontFamily="@font/nanum_square_r"
+            android:layout_marginStart="20dp"/>
+
+        <TextView
+            android:id="@+id/txt_unit_recent_sequence"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="최근 사용순"
+            android:textSize="12sp"
+            android:textColor="#1E131c32"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/nanum_square_r"
+            android:layout_toEndOf="@+id/txt_unit_normal_sequence"/>
+
+        <RelativeLayout
+            android:id="@+id/btn_unit_changer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp">
+
+            <ImageView
+                android:id="@+id/image_unit_changer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/keyboard_icon_choose"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"/>
+
+            <TextView
+                android:id="@+id/txt_unit_changer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="일반단위"
+                android:textSize="12sp"
+                android:textColor="#131c32"
+                android:fontFamily="@font/nanum_square_r"
+                android:layout_toStartOf="@id/image_unit_changer"
+                android:layout_marginEnd="6dp"/>
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_below="@id/layout_unit_top">
+        <RelativeLayout
+            android:id="@+id/btn_unit_changer_previous"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="16dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/keyboard_icon_before_disable"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/btn_unit_changer_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="16dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/keyboard_icon_next"/>
+        </RelativeLayout>
+
+
+        <include layout="@layout/recyclerview_unit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_toEndOf="@+id/btn_unit_changer_previous"
+            android:layout_marginStart="10dp"
+            android:layout_toStartOf="@+id/btn_unit_changer_next"
+            android:layout_marginEnd="10dp"/>
+    </RelativeLayout>
+</RelativeLayout>

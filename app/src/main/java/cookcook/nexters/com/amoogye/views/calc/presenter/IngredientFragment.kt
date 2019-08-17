@@ -62,7 +62,9 @@ class IngredientFragment : BaseFragment() {
     }
 
     private fun initialize() {
-//        edit_ingredient_amount.requestFocus()
+        edit_ingredient_amount.requestFocus()
+        edit_ingredient_amount.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
+
         // 키보드 제거
         calculatorViewModel.calculatorEditTextSetting(edit_ingredient_amount)
         calculatorViewModel.calculatorEditTextSetting(edit_ingredient_tool)
