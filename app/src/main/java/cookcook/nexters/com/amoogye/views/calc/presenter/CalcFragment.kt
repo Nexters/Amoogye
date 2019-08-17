@@ -1,23 +1,18 @@
 package cookcook.nexters.com.amoogye.views.calc.presenter
 
-import android.animation.Animator
 import android.animation.AnimatorSet
 import android.animation.ValueAnimator
 import android.graphics.Color
-import android.util.Log
 import android.os.CountDownTimer
-import android.os.Handler
-import android.os.Looper
-import android.os.Message
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
-import android.view.animation.AccelerateInterpolator
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import com.baoyz.actionsheet.ActionSheet
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.base.BaseFragment
@@ -27,10 +22,7 @@ import cookcook.nexters.com.amoogye.views.calc.entity.NormalUnitModel
 import cookcook.nexters.com.amoogye.views.calc.entity.UnitType
 import kotlinx.android.synthetic.main.fragment_calc.*
 import kotlinx.android.synthetic.main.layout_unit_button_wrap.*
-import kotlinx.android.synthetic.main.layout_ingredient_scroll_wrap.*
 import org.koin.android.ext.android.get
-import java.lang.Thread.sleep
-import kotlin.concurrent.thread
 
 
 class CalcFragment : BaseFragment() {
@@ -44,11 +36,7 @@ class CalcFragment : BaseFragment() {
     private val portionSelectStatus = arrayOf(false, true, true)
     private val plusSelectStatus = arrayOf(false, false, true)
 
-    private val calcBottomContainer: Array<Fragment> = arrayOf(
-        IngredientFragment(),
-        PortionFragment(),
-        TwiceFragment()
-    )
+    private var currentContainerCase: Int = 3
 
     companion object {
         // 선택 선언 1 (Fragment를 싱글턴으로 사용 시)
@@ -61,7 +49,6 @@ class CalcFragment : BaseFragment() {
             }
             return INSTANCE!!
         }
-
     }
 
     override fun setupViews(view: View) {
@@ -85,7 +72,16 @@ class CalcFragment : BaseFragment() {
         }
 
         val items: ArrayList<String> = arrayListOf(
-            "jjjjjjjjj", "mmmmmmm","kkkkkkkk","kjkjkjkjkjk","kkkkkkkkkk","jijijijiji","mkmkmkmkmk","inknknknk","rdrdftft","gtfrdeswasrdf"
+            "jjjjjjjjj",
+            "mmmmmmm",
+            "kkkkkkkk",
+            "kjkjkjkjkjk",
+            "kkkkkkkkkk",
+            "jijijijiji",
+            "mkmkmkmkmk",
+            "inknknknk",
+            "rdrdftft",
+            "gtfrdeswasrdf"
         )
         val picker = BaseScrollPicker(view, items)
     }
@@ -109,83 +105,143 @@ class CalcFragment : BaseFragment() {
         } else {
             txt_calc_plus.setTextColor(Color.parseColor("#33131c32"))
         }
-    }
-
         updateContents(containerCase)
     }
 
+    var humanTopWidth = 0
+    var humanBottomWidth = 0
+    var ingredientTopWidth = 0
+    var ingredientBottomWidth = 0
+
     private fun updateContents(number: Int) {
-//        layout_ingredient_top_standard.visibility = View.GONE
-//        layout_ingredient_bottom_standard.visibility = View.GONE
-//        layout_human_top_standard.visibility = View.GONE
-//        layout_human_bottom_standard.visibility = View.GONE
-//        layout_weight_standard.visibility = View.GONE
 
-        when(number) {
+        var currentContainerCase = this.currentContainerCase
+        when (number) {
             0 -> {
-                // 재료
-                layout_ingredient_top_standard.visibility = View.VISIBLE
-                layout_ingredient_bottom_standard.visibility = View.VISIBLE
-                layout_human_top_standard.visibility = View.GONE
-                layout_human_bottom_standard.visibility = View.GONE
-                layout_weight_standard.visibility = View.GONE
-            }
-            1 -> {
-                // 인원
-                Log.d("TAG", "layout param: ${layout_ingredient_top_standard.measuredWidth}")
-                layout_ingredient_top_standard.visibility = View.VISIBLE
-//                changeWidthInteraction(layout_ingredient_top_standard, layout_ingredient_top_standard.measuredWidth)
-//                changeWidthInteraction(layout_ingredient_bottom_standard, layout_ingredient_bottom_standard.measuredWidth)
+                // ㅁ -> 재료
+                when (currentContainerCase) {
+                    0 -> {
+                        // 아무런 변화가 일어나지 않는다.
+                    }
+                    1 -> {
+                        Log.e("Error", "가능한 케이스가 아닙니다.")
+                        return
+                    }
+                    2 -> {
+                        humanTopWidth = layout_human_top_standard.measuredWidth
+                        humanBottomWidth = layout_human_bottom_standard.measuredWidth
 
-                val animation = ValueAnimator.ofInt(layout_ingredient_top_standard.measuredWidth, 0).setDuration(200)
-                animation.addUpdateListener {
-                    var value = it.animatedValue as Int
-                    Log.d("TAG", "change value $value")
-                    layout_ingredient_top_standard.layoutParams.width = value
-                    layout_ingredient_top_standard.requestLayout()
+                        val animation = ValueAnimator.ofInt(layout_human_top_standard.measuredWidth, 0).setDuration(200)
+                        animation.addUpdateListener {
+                            val value = it.animatedValue as Int
+                            layout_human_top_standard.layoutParams.width = value
+                            layout_human_top_standard.requestLayout()
+                        }
+
+                        val animation2 =
+                            ValueAnimator.ofInt(layout_human_bottom_standard.measuredWidth, 0).setDuration(200)
+                        animation2.addUpdateListener {
+                            val value = it.animatedValue as Int
+                            layout_human_bottom_standard.layoutParams.width = value
+                            layout_human_bottom_standard.requestLayout()
+                        }
+
+                        val set = AnimatorSet()
+                        set.playSequentially(listOf(animation, animation2))
+                        set.setInterpolator(AccelerateDecelerateInterpolator())
+                        set.start()
+                    }
+
                 }
 
-                val set: AnimatorSet = AnimatorSet()
-                set.play(animation)
-                set.setInterpolator(AccelerateDecelerateInterpolator())
-                set.start()
+            }
+            1 -> {
+                // ㅁ -> 인원
+                when (currentContainerCase) {
+                    0 -> {
+                        Log.e("Error", "가능한 케이스가 아닙니다.")
+                        return
+                    }
+                    1 -> {
+                        // 아무런 변화가 일어나지 않는다.
+                    }
+                    2 -> {
+                        ingredientTopWidth = layout_ingredient_top_standard.measuredWidth
+                        ingredientBottomWidth = layout_ingredient_bottom_standard.measuredWidth
+                        val animation2 =
+                            ValueAnimator.ofInt(layout_ingredient_bottom_standard.measuredWidth, 0).setDuration(200)
+                        animation2.addUpdateListener {
+                            val value = it.animatedValue as Int
+                            layout_ingredient_bottom_standard.layoutParams.width = value
+                            layout_ingredient_bottom_standard.requestLayout()
+                        }
 
+                        val set = AnimatorSet()
+//                        set.playSequentially(listOf(animation, animation2))
+                        set.play(animation2)
+                        set.setInterpolator(AccelerateDecelerateInterpolator())
+                        set.start()
+                    }
+                }
 
-                layout_human_top_standard.visibility = View.VISIBLE
-                layout_human_bottom_standard.visibility = View.VISIBLE
             }
             2 -> {
                 // 재료 + 인원
-                layout_ingredient_top_standard.visibility = View.VISIBLE
-                layout_ingredient_bottom_standard.visibility = View.VISIBLE
-                layout_human_top_standard.visibility = View.VISIBLE
-                layout_human_bottom_standard.visibility = View.VISIBLE
+                when (currentContainerCase) {
+                    0 -> {
+                        val animation =
+                            ValueAnimator.ofInt(0, humanTopWidth).setDuration(200)
+                        animation.addUpdateListener {
+                            val value = it.animatedValue as Int
+                            layout_human_top_standard.layoutParams.width = value
+                            layout_human_top_standard.requestLayout()
+                        }
+
+                        val animation2 =
+                            ValueAnimator.ofInt(0, humanBottomWidth).setDuration(200)
+                        animation2.addUpdateListener {
+                            val value = it.animatedValue as Int
+                            layout_human_bottom_standard.layoutParams.width = value
+                            layout_human_bottom_standard.requestLayout()
+                        }
+
+
+                        val set = AnimatorSet()
+                        set.playSequentially(listOf(animation, animation2))
+                        set.setInterpolator(AccelerateDecelerateInterpolator())
+                        set.start()
+                    }
+
+                    1 -> {
+                        val animation2 =
+                            ValueAnimator.ofInt(0, ingredientBottomWidth).setDuration(200)
+                        animation2.addUpdateListener {
+                            val value = it.animatedValue as Int
+                            layout_ingredient_bottom_standard.layoutParams.width = value
+                            layout_ingredient_bottom_standard.requestLayout()
+                        }
+
+                        val set = AnimatorSet()
+                        set.play(animation2)
+                        set.setInterpolator(AccelerateDecelerateInterpolator())
+                        set.start()
+                    }
+
+                    2 -> {
+                        // 아무 일도 일어나지 않는다.
+                    }
+                }
             }
             3 -> {
                 // 질량
                 layout_weight_standard.visibility = View.VISIBLE
             }
-        }
-    }
+            else -> {
 
-    /**
-     * 인터렉션 부분
-     */
-    private fun changeWidthInteraction(view: View, width: Int) {
-        var reduceWidth = width / 500.0
-        Log.d("TAG", "time is $width reduce is $reduceWidth")
-        val timer: CountDownTimer = object : CountDownTimer(200, 1) {
-            override fun onFinish() {
-            }
-
-            override fun onTick(millisUntilFinished: Long) {
-                Log.d("TAG", "mill: $millisUntilFinished   reduce: $reduceWidth")
-                view.layoutParams.width = (reduceWidth * millisUntilFinished).toInt()
-
-                Log.d("TAG", "width: ${view.layoutParams.width}")
             }
         }
-        timer.start()
+
+        this.currentContainerCase = number
     }
 
     private fun changeCalcContainerLayout(number: Int) {
@@ -201,7 +257,7 @@ class CalcFragment : BaseFragment() {
             .setCancelButtonTitle("취소")
             .setOtherButtonTitles("생활단위", "일반단위")
             .setCancelableOnTouchOutside(true)
-            .setListener(object: ActionSheet.ActionSheetListener {
+            .setListener(object : ActionSheet.ActionSheetListener {
                 override fun onOtherButtonClick(actionSheet: ActionSheet?, index: Int) {
                     if (index == 0) {
                         txt_unit_changer.text = "생활단위"
@@ -241,8 +297,8 @@ class CalcFragment : BaseFragment() {
     private fun makeDummyLifeItems(): ArrayList<NormalUnitModel> {
         return arrayListOf(
             NormalUnitModel("밥숟가락", null, UnitType.LIFE),
-            NormalUnitModel("베라스푼",null, UnitType.LIFE),
-            NormalUnitModel("종이컵",null, UnitType.LIFE),
+            NormalUnitModel("베라스푼", null, UnitType.LIFE),
+            NormalUnitModel("종이컵", null, UnitType.LIFE),
             NormalUnitModel("병뚜껑", null, UnitType.LIFE),
             NormalUnitModel("김용기", null, UnitType.LIFE),
             NormalUnitModel("소주잔", null, UnitType.LIFE),
@@ -272,5 +328,10 @@ class CalcFragment : BaseFragment() {
         binding.lifecycleOwner = this
 
         return binding.root
+    }
+
+    override fun onDestroy() {
+        calculatorViewModel.init()
+        super.onDestroy()
     }
 }

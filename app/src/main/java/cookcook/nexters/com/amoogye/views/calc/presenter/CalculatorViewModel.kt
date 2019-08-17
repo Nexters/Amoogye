@@ -13,10 +13,16 @@ import cookcook.nexters.com.amoogye.views.calc.domain.CalculatorRepository
 
 class CalculatorViewModel(private val repo: CalculatorRepository) : ViewModel() {
     lateinit var context: Context
-    var flag: Int = 1
+    var flag: Int = 3
 
     private var ingredientSelected = true
-    private var portionSelected = false
+    private var portionSelected = true
+
+    fun init() {
+        ingredientSelected = true
+        portionSelected = true
+        flag = 3
+    }
 
     fun gazuaa(text: String) = repo.showToast(context, text)
 
