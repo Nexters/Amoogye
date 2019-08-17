@@ -62,6 +62,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
         nameResult.text = itemName
     }
 
+
     lateinit var realm: Realm
 
 

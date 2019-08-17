@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/layout_outer_top"
         android:layout_marginTop="@dimen/add_util_head_comment_top"
+        android:background="@drawable/add_util_title_border"
         android:orientation="horizontal">
 
         <TextView
@@ -59,7 +60,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_txt_name_util"
+            android:id="@+id/btn_add_util_tool"
             android:layout_width="@dimen/add_util_volume_box_1"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/add_util_volume_box_end"
@@ -79,7 +80,7 @@
             android:textSize="@dimen/add_util_volume_count_text_size" />
 
         <Button
-            android:id="@+id/edit_txt_volume_decimal_point"
+            android:id="@+id/btn_add_util_integer"
             android:layout_width="@dimen/add_util_volume_box_2"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/add_util_volume_box_end"
@@ -99,7 +100,7 @@
             android:textSize="@dimen/add_util_volume_count_text_size" />
 
         <Button
-            android:id="@+id/edit_txt_volume_under_decimal_point"
+            android:id="@+id/btn_add_util_decimal_point"
             android:layout_width="@dimen/add_util_volume_box_2"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/add_util_volume_box_end"
@@ -130,18 +131,21 @@
 
     <RelativeLayout
         android:id="@+id/layout_container_scroll_picker"
+        android:background="@drawable/add_util_picker_top_border"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="invisible"
-        android:layout_below="@id/layout_outer_mid">
+        android:layout_below="@id/layout_outer_mid"
+        android:layout_marginTop="10dp"
+        android:visibility="invisible">
 
         <Button
-            android:id="@+id/btn_send_volume_result"
+            android:id="@+id/btn_add_util_confirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:background="@color/transparent"
+            android:background="@drawable/add_util_picker_top_border"
             android:text="완료"
+            android:textAlignment="viewEnd"
             android:visibility="invisible" />
 
         <include

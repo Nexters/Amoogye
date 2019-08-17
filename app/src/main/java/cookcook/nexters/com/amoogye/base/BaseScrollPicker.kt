@@ -8,7 +8,7 @@ class BaseScrollPicker {
 
     private var items: ArrayList<String> = ArrayList()
 
-    var wheelView: WheelView
+    open var wheelView: WheelView
 
     constructor(view: View, items: ArrayList<String>) {
         wheelView = view.findViewById(R.id.wheelView)
@@ -17,6 +17,12 @@ class BaseScrollPicker {
         wheelView.setInitPosition(2)
         wheelView.setCanLoop(false)
 
+    }
+
+
+
+    fun getItem(): Int {
+        return wheelView.selectedItem
     }
 
     fun addItem(item: String) {
