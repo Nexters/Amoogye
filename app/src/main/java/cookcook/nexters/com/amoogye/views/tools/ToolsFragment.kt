@@ -8,11 +8,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.views.tools.add_tools.AddUtilActivity
+import cookcook.nexters.com.amoogye.views.tools.tools_list.ToolsFragmentLife
 import cookcook.nexters.com.amoogye.views.tools.tools_list.ToolsViewPageAdapter
 import kotlinx.android.synthetic.main.fragment_tools.*
 
 
-class ToolsFragment : Fragment() {
+class ToolsFragment : Fragment() , ToolsFragmentLife.OnClickEditModeListener {
 
     companion object {
         // 선택 선언 1 (Fragment를 싱글턴으로 사용 시)
@@ -27,6 +28,28 @@ class ToolsFragment : Fragment() {
         }
     }
 
+    override fun onAttachFragment(fragment : Fragment){
+        if(fragment is ToolsFragmentLife) {
+            fragment.setOnClickEditModeListener(this)
+        }
+    }
+
+
+    override fun onInvisibleTabLayout() {
+        layout_tools_tab_layout.visibility = View.INVISIBLE
+    }
+
+    override fun onVisibleTabLayout() {
+        layout_tools_tab_layout.visibility = View.VISIBLE
+    }
+
+    override fun onDisableSwipe() {
+        layout_Tools_viewPager.setSwipePagingEnabled(false)
+    }
+
+    override fun onAbleSwipe() {
+        layout_Tools_viewPager.setSwipePagingEnabled(true)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
@@ -40,7 +63,7 @@ class ToolsFragment : Fragment() {
         layout_Tools_viewPager.adapter = toolsFragmentAdapter
 
         layout_tools_tab_layout.setupWithViewPager(layout_Tools_viewPager)
-
+        layout_Tools_viewPager.setSwipePagingEnabled(true)
 
         layout_tools_dimScreen.setOnClickListener {
             layout_tools_dimScreen.visibility = View.GONE
@@ -53,3 +76,4 @@ class ToolsFragment : Fragment() {
         }
     }
 }
+

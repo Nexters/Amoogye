@@ -27,12 +27,12 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/add_util_text_color_soft"
+                android:layout_below="@id/txt_title_1_name_util"
                 android:layout_marginTop="@dimen/add_util_head_comment_top"
                 android:layout_marginBottom="@dimen/add_util_name_comment_bottom"
-                android:textSize="@dimen/add_util_head_comment_text_size"
-                android:layout_below="@id/txt_title_1_name_util"
-                android:text="@string/add_util_name_text" />
+                android:text="@string/add_util_name_text"
+                android:textColor="@color/add_util_text_color_soft"
+                android:textSize="@dimen/add_util_head_comment_text_size" />
 
 
         </RelativeLayout>
@@ -41,18 +41,48 @@
             android:id="@+id/layout_in_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="0dp"
-            android:layout_below="@id/layout_in_top">
+            android:layout_below="@id/layout_in_top"
+            android:padding="0dp">
 
             <EditText
                 android:id="@+id/edit_txt_name_util"
-                android:textCursorDrawable="@drawable/add_name_edit_custom"
-                android:textColor="@color/add_util_text_color"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="8dp"
+                android:background="@color/transparent"
                 android:hint="@string/add_util_name_hint"
-                android:background="@drawable/add_util_edit_box_border"/>
+                android:paddingBottom="8dp"
+                android:maxLength="11"
+                android:textColor="@color/add_util_text_color"
+                android:textCursorDrawable="@drawable/add_name_edit_custom" />
+
+            <View
+                android:layout_below="@id/edit_txt_name_util"
+                android:layout_marginTop="4dp"
+                android:layout_width="match_parent"
+                android:background="@color/black"
+                android:layout_height="1dp"/>
+
+            <TextView
+                android:id="@+id/txt_alert_below_ten_letter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edit_txt_name_util"
+                android:layout_marginTop="@dimen/add_util_alert_top"
+                android:text="@string/add_util_name_alert_ten"
+                android:textColor="@color/add_util_main_color"
+                android:textSize="@dimen/add_util_alert_text_size"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/txt_alert_same_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edit_txt_name_util"
+                android:layout_marginTop="@dimen/add_util_alert_top"
+                android:text="@string/add_util_name_alert_same"
+                android:textSize="@dimen/add_util_alert_text_size"
+                android:textColor="@color/add_util_main_color"
+                android:visibility="invisible" />
 
             <ImageButton
                 android:id="@+id/btn_addutil_name_complete"
@@ -62,6 +92,7 @@
                 android:background="@color/transparent"
                 android:src="@drawable/keyboard_icon_search_delete" />
         </RelativeLayout>
+
 
     </RelativeLayout>
 
