@@ -13,6 +13,7 @@
         android:text="good"
         android:textSize="16sp"
         android:textColor="#131c32"
+        android:fontFamily="@font/nanum_square_r"
         android:layout_gravity="center" />
 
     <TextView
@@ -22,6 +23,7 @@
         android:text="굿"
         android:textSize="12sp"
         android:textColor="#28131c32"
+        android:fontFamily="@font/nanum_square_r"
         android:layout_gravity="center"/>
 
 </LinearLayout>

@@ -18,6 +18,7 @@
                 android:text="1"
                 android:textAlignment="center"
                 android:cursorVisible="false"
+                android:fontFamily="@font/nanum_square_r"
                 android:background="@drawable/number_input_non_focus_wrap_rounded_box"/>
 
             <TextView
@@ -27,6 +28,7 @@
                 android:text="명 기준"
                 android:textSize="@dimen/calc_text_size"
                 android:layout_centerVertical="true"
+                android:fontFamily="@font/nanum_square_r"
                 android:layout_toEndOf="@+id/edit_twice_human_one"
                 android:layout_marginStart="4dp"/>
 
@@ -41,6 +43,7 @@
                 android:text="30"
                 android:textAlignment="center"
                 android:cursorVisible="false"
+                android:fontFamily="@font/nanum_square_r"
                 android:background="@drawable/number_input_non_focus_wrap_rounded_box"
                 android:layout_toEndOf="@+id/txt_twice_human_standard"
                 android:layout_marginStart="8dp"/>
@@ -55,6 +58,7 @@
                 android:textSize="@dimen/calc_edit_text_size"
                 android:text="ml"
                 android:textAlignment="center"
+                android:fontFamily="@font/nanum_square_r"
                 android:background="@drawable/number_input_non_focus_wrap_rounded_box"
                 android:layout_toEndOf="@+id/edit_twice_amount"
                 android:layout_marginStart="4dp"
@@ -67,6 +71,7 @@
                 android:text="의"
                 android:textSize="@dimen/calc_text_size"
                 android:layout_centerVertical="true"
+                android:fontFamily="@font/nanum_square_r"
                 android:layout_toEndOf="@+id/edit_twice_unit"
                 android:layout_marginStart="4dp"/>
 
@@ -80,6 +85,7 @@
                 android:textSize="@dimen/calc_edit_text_size"
                 android:text="굴소스"
                 android:textAlignment="center"
+                android:fontFamily="@font/nanum_square_r"
                 android:background="@drawable/number_input_non_focus_wrap_rounded_box"
                 android:layout_toEndOf="@id/txt_twice_dml"
                 android:layout_marginStart="8dp"
@@ -91,6 +97,7 @@
                 android:text="를"
                 android:textSize="@dimen/calc_text_size"
                 android:layout_centerVertical="true"
+                android:fontFamily="@font/nanum_square_r"
                 android:layout_toEndOf="@id/edit_twice_ingredient"
                 android:layout_marginStart="4dp"/>
         </RelativeLayout>
@@ -111,6 +118,7 @@
                 android:text="1"
                 android:textAlignment="center"
                 android:cursorVisible="false"
+                android:fontFamily="@font/nanum_square_r"
                 android:background="@drawable/number_input_non_focus_wrap_rounded_box"/>
 
             <TextView
@@ -120,6 +128,7 @@
                 android:text="명 기준으로"
                 android:textSize="@dimen/calc_text_size"
                 android:layout_centerVertical="true"
+                android:fontFamily="@font/nanum_square_r"
                 android:layout_toEndOf="@+id/edit_twice_human_two"
                 android:layout_marginStart="4dp"/>
 
@@ -133,6 +142,7 @@
                 android:textSize="@dimen/calc_edit_text_size"
                 android:text="밥숟가락"
                 android:textAlignment="center"
+                android:fontFamily="@font/nanum_square_r"
                 android:background="@drawable/number_input_non_focus_wrap_rounded_box"
                 android:layout_toEndOf="@+id/txt_twice_human_standard_two"
                 android:layout_marginStart="8dp"
@@ -144,6 +154,7 @@
                 android:text="으로"
                 android:textSize="@dimen/calc_text_size"
                 android:layout_centerVertical="true"
+                android:fontFamily="@font/nanum_square_r"
                 android:layout_toEndOf="@+id/edit_twice_tool"
                 android:layout_marginStart="4dp"/>
         </RelativeLayout>
