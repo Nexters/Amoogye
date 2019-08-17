@@ -23,6 +23,10 @@ class BaseScrollPicker {
         this.items.add(item)
     }
 
+    fun addItems(items: ArrayList<String>) {
+        this.items = items
+    }
+
     fun visible() {
         wheelView.visibility = View.VISIBLE
     }

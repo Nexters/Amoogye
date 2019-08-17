@@ -29,7 +29,7 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="@string/add_util_volume_comment_1"
             android:textColor="@color/add_util_text_color_soft"
             android:textSize="@dimen/add_util_head_comment_text_size" />
@@ -118,15 +118,36 @@
             android:textSize="@dimen/add_util_volume_count_text_size" />
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/layout_send_volume_1_result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/layout_outer_bottom"
+        android:orientation="vertical">
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_container_scroll_picker"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
         android:layout_below="@id/layout_outer_mid">
+
+        <Button
+            android:id="@+id/btn_send_volume_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:background="@color/transparent"
+            android:text="완료"
+            android:visibility="invisible" />
 
         <include
             android:id="@+id/scroll_picker"
             layout="@layout/layout_ingredient_scroll_wrap"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-    </LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>
