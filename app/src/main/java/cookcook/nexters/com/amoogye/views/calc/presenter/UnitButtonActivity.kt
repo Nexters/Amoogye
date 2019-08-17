@@ -33,4 +33,8 @@ class UnitButtonActivity(view: View) {
         adapter.addAdapterItem(item)
         adapter.notifyDataSetChanged()
     }
+
+    fun removeAll() {
+        adapter.setAdapterItems(arrayListOf())
+    }
 }

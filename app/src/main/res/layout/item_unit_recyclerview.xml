@@ -24,6 +24,7 @@
         android:textSize="12sp"
         android:textColor="#28131c32"
         android:fontFamily="@font/nanum_square_r"
+        android:layout_marginTop="6dp"
         android:layout_gravity="center"/>
 
 </LinearLayout>

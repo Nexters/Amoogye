@@ -10,7 +10,6 @@ import cookcook.nexters.com.amoogye.databinding.FragmentCalcIngredientBinding
 import cookcook.nexters.com.amoogye.views.calc.entity.CalcLayoutState
 import kotlinx.android.synthetic.main.fragment_calc_ingredient.*
 import org.koin.android.ext.android.get
-import org.koin.android.viewmodel.ext.android.getViewModel
 
 class IngredientFragment : BaseFragment() {
     override val layoutRes: Int = R.layout.fragment_calc_ingredient

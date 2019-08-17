@@ -14,6 +14,7 @@ import cookcook.nexters.com.amoogye.base.BaseFragment
 import cookcook.nexters.com.amoogye.databinding.FragmentCalcBinding
 import cookcook.nexters.com.amoogye.views.calc.entity.NormalUnitModel
 import kotlinx.android.synthetic.main.fragment_calc.*
+import kotlinx.android.synthetic.main.layout_unit_button_wrap.*
 import org.koin.android.ext.android.get
 
 
@@ -22,6 +23,7 @@ class CalcFragment : BaseFragment() {
     override val isUseDataBinding = true
     lateinit var binding: FragmentCalcBinding
     private val calculatorViewModel: CalculatorViewModel = get()
+    private lateinit var unitRecyclerView: UnitButtonActivity
 
     private val ingredientSelectStatus = arrayOf(true, false, true)
     private val portionSelectStatus = arrayOf(false, true, true)
@@ -32,20 +34,6 @@ class CalcFragment : BaseFragment() {
         PortionFragment(),
         TwiceFragment()
     )
-
-    fun makeDummyItems(): ArrayList<NormalUnitModel> {
-        return arrayListOf(
-            NormalUnitModel("g", "그램", 1),
-            NormalUnitModel("kg", "킬로그램", 1),
-            NormalUnitModel("oz", "온즈", 1),
-            NormalUnitModel("cc", "시시", 1),
-            NormalUnitModel("ml", "밀리그램", 1),
-            NormalUnitModel("L", "리터", 1),
-            NormalUnitModel("Tbsp", "테이블스푼", 1),
-            NormalUnitModel("Tsp", "티스푼", 1),
-            NormalUnitModel("pt", "파인트", 1)
-        )
-    }
 
     companion object {
         // 선택 선언 1 (Fragment를 싱글턴으로 사용 시)
@@ -62,11 +50,12 @@ class CalcFragment : BaseFragment() {
     }
 
     override fun setupViews(view: View) {
-
         btn_history.setOnClickListener { calculatorViewModel.gazuaa("history 구현 예정") }
         btn_tip.setOnClickListener { calculatorViewModel.gazuaa("tool_tip 구현 예정") }
 
         itemChange(calculatorViewModel.flag - 1)
+        unitRecyclerView = UnitButtonActivity(view)
+        unitRecyclerView.addItems(makeDummyItems())
 
         txt_ingredient.setOnClickListener {
             fragmentChange(1)
@@ -76,8 +65,9 @@ class CalcFragment : BaseFragment() {
             fragmentChange(2)
         }
 
-        val recyclerView = UnitButtonActivity(view)
-        recyclerView.addItems(makeDummyItems())
+        btn_unit_changer.setOnClickListener {
+            callUnitSelector()
+        }
     }
 
     private fun itemChange(containerCase: Int) {
@@ -104,17 +94,30 @@ class CalcFragment : BaseFragment() {
         } else {
             txt_calc_plus.setTextColor(Color.parseColor("#33131c32"))
         }
+    }
 
+    private fun fragmentChange(number: Int) {
+        val containerCase = calculatorViewModel.convertFragment(number)
+        itemChange(containerCase)
+    }
 
+    private fun callUnitSelector() {
         context!!.setTheme(R.style.ActionSheetStyleiOS7)
 
+        /* TODO: 생활단위, 일반단위를 고정값이 아니게 바꾸자 */
         ActionSheet.createBuilder(context, fragmentManager)
             .setCancelButtonTitle("취소")
             .setOtherButtonTitles("생활단위", "일반단위")
             .setCancelableOnTouchOutside(true)
             .setListener(object: ActionSheet.ActionSheetListener {
                 override fun onOtherButtonClick(actionSheet: ActionSheet?, index: Int) {
-                    Log.d("", "")
+                    if (index == 0) {
+                        txt_unit_changer.text = "생활단위"
+                        setRecyclerViewUnitLife()
+                    } else {
+                        txt_unit_changer.text = "일반단위"
+                        setRecyclerViewUnitNormal()
+                    }
                 }
 
                 override fun onDismiss(actionSheet: ActionSheet?, isCancel: Boolean) {
@@ -123,9 +126,28 @@ class CalcFragment : BaseFragment() {
             }).show()
     }
 
-    private fun fragmentChange(number: Int) {
-        val containerCase = calculatorViewModel.convertFragment(number)
-        itemChange(containerCase)
+    fun makeDummyItems(): ArrayList<NormalUnitModel> {
+        return arrayListOf(
+            NormalUnitModel("g", "그램", 1),
+            NormalUnitModel("kg", "킬로그램", 1),
+            NormalUnitModel("oz", "온즈", 1),
+            NormalUnitModel("cc", "시시", 1),
+            NormalUnitModel("ml", "밀리그램", 1),
+            NormalUnitModel("L", "리터", 1),
+            NormalUnitModel("Tbsp", "테이블스푼", 1),
+            NormalUnitModel("Tsp", "티스푼", 1),
+            NormalUnitModel("pt", "파인트", 1)
+        )
+    }
+
+    private fun setRecyclerViewUnitNormal() {
+        unitRecyclerView.removeAll()
+        unitRecyclerView.addItems(makeDummyItems())
+    }
+
+    private fun setRecyclerViewUnitLife() {
+        unitRecyclerView.removeAll()
+        unitRecyclerView.addItems(makeDummyItems())
     }
 
     override fun subscribeUI() {
