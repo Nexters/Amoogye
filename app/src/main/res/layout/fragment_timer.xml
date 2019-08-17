@@ -45,7 +45,8 @@
                     android:layout_marginTop="25dp"
                     android:text="@string/timer_title"
                     android:textColor="@color/timer_title_color"
-                    android:textSize="22sp" />
+                    android:textSize="22sp"
+                    android:fontFamily="@font/nanum_square_b" />
 
                 <TextView
                     android:id="@+id/txt_timer_time"
@@ -55,7 +56,8 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="52dp"
                     android:textColor="@color/timer_theme_color"
-                    android:textSize="40sp" />
+                    android:textSize="40sp"
+                    android:fontFamily="@font/nanum_square_r" />
 
                 <LinearLayout
                     android:id="@+id/layout_timer_edit"
@@ -73,7 +75,8 @@
                         android:cursorVisible="false"
                         android:padding="@dimen/timer_edit_box_padding"
                         android:text="@{timerVM.hourText}"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:fontFamily="@font/nanum_square_r" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -81,7 +84,8 @@
                         android:layout_marginStart="@dimen/timer_text_margin"
                         android:text="@string/timer_text_hour"
                         android:textColor="@color/timer_text_color"
-                        android:textSize="@dimen/timer_text_size" />
+                        android:textSize="@dimen/timer_text_size"
+                        android:fontFamily="@font/nanum_square_r" />
 
                     <EditText
                         android:id="@+id/edit_minute"
@@ -92,7 +96,8 @@
                         android:cursorVisible="false"
                         android:padding="@dimen/timer_edit_box_padding"
                         android:text="@{timerVM.minuteText}"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:fontFamily="@font/nanum_square_r" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -100,7 +105,8 @@
                         android:layout_marginStart="@dimen/timer_text_margin"
                         android:text="@string/timer_text_minute"
                         android:textColor="@color/timer_text_color"
-                        android:textSize="@dimen/timer_text_size" />
+                        android:textSize="@dimen/timer_text_size"
+                        android:fontFamily="@font/nanum_square_r" />
 
                     <EditText
                         android:id="@+id/edit_second"
@@ -111,7 +117,8 @@
                         android:cursorVisible="false"
                         android:padding="4dp"
                         android:text="@{timerVM.secondText}"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:fontFamily="@font/nanum_square_r" />
 
                     <TextView
                         android:id="@+id/txt_timer_second_text"
@@ -120,7 +127,8 @@
                         android:layout_marginStart="@dimen/timer_text_margin"
                         android:text="@string/timer_text_second_before"
                         android:textColor="@color/timer_text_color"
-                        android:textSize="@dimen/timer_text_size" />
+                        android:textSize="@dimen/timer_text_size"
+                        android:fontFamily="@font/nanum_square_r" />
                 </LinearLayout>
 
                 <TextView
@@ -131,7 +139,8 @@
                     android:layout_marginTop="27dp"
                     android:text="@string/timer_text_last_before"
                     android:textColor="@color/timer_text_color"
-                    android:textSize="@dimen/timer_text_size" />
+                    android:textSize="@dimen/timer_text_size"
+                    android:fontFamily="@font/nanum_square_r" />
 
                 <RelativeLayout
                     android:id="@+id/layout_timer_button"
@@ -147,7 +156,8 @@
                         android:background="@drawable/timer_rounded_theme_button"
                         android:text="@string/timer_start"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/timer_button_text_size" />
+                        android:textSize="@dimen/timer_button_text_size"
+                        android:fontFamily="@font/nanum_square_r" />
 
                     <Button
                         android:id="@+id/btn_timer_cancel"
@@ -157,7 +167,8 @@
                         android:text="@string/timer_cancel"
                         android:textColor="@color/white"
                         android:textSize="@dimen/timer_button_text_size"
-                        android:visibility="gone" />
+                        android:visibility="gone"
+                        android:fontFamily="@font/nanum_square_r" />
 
                     <Button
                         android:id="@+id/btn_timer_pause_resume_flag"
@@ -168,7 +179,8 @@
                         android:text="@string/timer_pause"
                         android:textColor="@color/white"
                         android:textSize="@dimen/timer_button_text_size"
-                        android:visibility="gone" />
+                        android:visibility="gone"
+                        android:fontFamily="@font/nanum_square_r" />
 
                 </RelativeLayout>
 
