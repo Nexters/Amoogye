@@ -24,5 +24,6 @@
         <item name="android:textColorPrimary">@color/tools_list_main_color</item>
         <item name="android:textColorSecondary">@color/tools_list_text_color_soft</item>
         <item name="colorAccent">@color/tools_list_main_color</item>
+        <item name="android:fontFamily">@font/nanum_square_r</item>
     </style>
 </resources>
