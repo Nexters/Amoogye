@@ -75,14 +75,14 @@
         android:paddingStart="@dimen/add_util_start_end"
         android:paddingEnd="@dimen/add_util_start_end">
 
-        <cookcook.nexters.com.amoogye.views.tools.add_tools.SwipeLockableViewPager
+        <cookcook.nexters.com.amoogye.views.tools.SwipeLockableViewPager
             android:id="@+id/view_pager_add_util"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@id/layout_add_util_outer_bottom_btn"
             android:layout_below="@id/indicator_add_util">
 
-        </cookcook.nexters.com.amoogye.views.tools.add_tools.SwipeLockableViewPager>
+        </cookcook.nexters.com.amoogye.views.tools.SwipeLockableViewPager>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/indicator_add_util"
@@ -108,6 +108,7 @@
                 android:background="@drawable/add_util_button_selector"
                 android:text="@string/add_util_next_step"
                 android:textColor="@color/white"
+                android:enabled="false"
                 android:textSize="@dimen/add_util_button_text_size" />
         </RelativeLayout>
 
@@ -120,6 +121,5 @@
 
         </RelativeLayout>
     </RelativeLayout>
-
 
 </RelativeLayout>

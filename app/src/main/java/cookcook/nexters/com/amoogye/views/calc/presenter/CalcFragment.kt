@@ -11,10 +11,12 @@ import androidx.fragment.app.FragmentTransaction
 import com.baoyz.actionsheet.ActionSheet
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.base.BaseFragment
+import cookcook.nexters.com.amoogye.base.BaseScrollPicker
 import cookcook.nexters.com.amoogye.databinding.FragmentCalcBinding
 import cookcook.nexters.com.amoogye.views.calc.entity.NormalUnitModel
 import kotlinx.android.synthetic.main.fragment_calc.*
 import kotlinx.android.synthetic.main.layout_unit_button_wrap.*
+import kotlinx.android.synthetic.main.layout_ingredient_scroll_wrap.*
 import org.koin.android.ext.android.get
 
 
@@ -68,6 +70,11 @@ class CalcFragment : BaseFragment() {
         btn_unit_changer.setOnClickListener {
             callUnitSelector()
         }
+
+        val items: ArrayList<String> = arrayListOf(
+            "jjjjjjjjj", "mmmmmmm","kkkkkkkk","kjkjkjkjkjk","kkkkkkkkkk","jijijijiji","mkmkmkmkmk","inknknknk","rdrdftft","gtfrdeswasrdf"
+        )
+        val picker = BaseScrollPicker(view, items)
     }
 
     private fun itemChange(containerCase: Int) {

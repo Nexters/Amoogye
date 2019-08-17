@@ -89,6 +89,8 @@ dependencies {
     implementation "org.koin:koin-androidx-ext:$koin_version"
 
 
+    implementation 'com.github.BlackBoxVision:material-wheel-view:v0.0.1'
+
     // Realm adapter
     implementation 'io.realm:android-adapters:2.1.1'
 

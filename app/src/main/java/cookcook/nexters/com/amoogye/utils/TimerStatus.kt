@@ -1,6 +1,7 @@
 package cookcook.nexters.com.amoogye.utils
 
-enum class TimerCode {
+enum class TimerStatus {
+    STATE_WAIT,
     STATE_START,
     STATE_PROGRESS,
     STATE_PAUSE,

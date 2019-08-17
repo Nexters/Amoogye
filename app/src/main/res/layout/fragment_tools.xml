@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <androidx.viewpager.widget.ViewPager
+            <cookcook.nexters.com.amoogye.views.tools.SwipeLockableViewPager
                 android:id="@+id/layout_Tools_viewPager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />

@@ -11,7 +11,7 @@ import android.widget.ToggleButton
 import androidx.recyclerview.widget.RecyclerView
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.views.tools.MeasureUnit
-import cookcook.nexters.com.amoogye.views.tools.flagIsEditMode
+import cookcook.nexters.com.amoogye.views.tools.NUM_DEFAULT_ITEMS
 import io.realm.RealmRecyclerViewAdapter
 import io.realm.RealmResults
 
@@ -38,7 +38,10 @@ class ToolsRecyclerAdapterLife(
         }
 
         private fun getVisibility(): Int {
-            if (flagIsEditMode) return View.VISIBLE
+            val dataId = data!![adapterPosition].unitId
+            if (flagIsEditMode && (dataId >= NUM_DEFAULT_ITEMS)) {
+                return View.VISIBLE
+            }
             return View.GONE
         }
 

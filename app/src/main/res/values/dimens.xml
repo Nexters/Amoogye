@@ -13,6 +13,7 @@
     <dimen name="fourth_margin">64dp</dimen>
 
     <dimen name="bottom_navigation_size">62dp</dimen>
+    <dimen name="bottom_navigation_text_size">10sp</dimen>
 
     <dimen name="number_button_text_size">18sp</dimen>
     <dimen name="timer_button_text_size">22sp</dimen>
@@ -99,10 +100,6 @@
     <dimen name="add_util_new_badge_start">12dp</dimen>
     <dimen name="add_util_new_badge_top">24dp</dimen>
     <dimen name="add_util_new_badge_bottom">22dp</dimen>
-    <dimen name="calc_edit_text_size">18sp</dimen>
-    <dimen name="calc_edit_padding">8dp</dimen>
-    <dimen name="calc_edit_box_size">36dp</dimen>
-    <dimen name="calc_text_size">20sp</dimen>
     <dimen name="add_util_name_comment_bottom">35dp</dimen>
 
     <dimen name="add_util_volume_box_1">120dp</dimen>
@@ -112,4 +109,10 @@
     <dimen name="add_util_volume_box_end">6dp</dimen>
     <dimen name="add_util_volume_text_end">10dp</dimen>
 
+
+    <!-- calc -->
+    <dimen name="calc_edit_text_size">18sp</dimen>
+    <dimen name="calc_edit_padding">8dp</dimen>
+    <dimen name="calc_edit_box_size">36dp</dimen>
+    <dimen name="calc_text_size">20sp</dimen>
 </resources>
