@@ -90,7 +90,6 @@ class AddUtilNameFragment(
             addUtilCloseKeyboard()
         }
 
-
         edit_txt_name_util.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, count: Int) {
             }
@@ -100,18 +99,26 @@ class AddUtilNameFragment(
 
             override fun afterTextChanged(p0: Editable?) {
                 txt_alert_same_name.visibility = View.INVISIBLE
+                btn_addutil_name_complete.visibility = View.VISIBLE
                 if (p0!!.length > 10) {
                     txt_alert_below_ten_letter.visibility = View.VISIBLE
                     onCountEnableFalseListener?.onCountTextEnableFalse()
                 } else {
                     txt_alert_below_ten_letter.visibility = View.INVISIBLE
                     onCountEnableListener?.onCountTextEnableTrue()
-                    if (p0.isEmpty()) onCountEnableFalseListener?.onCountTextEnableFalse()
+                    if (p0.isEmpty()) {
+                        onCountEnableFalseListener?.onCountTextEnableFalse()
+                        btn_addutil_name_complete.visibility = View.INVISIBLE
+                    }
                 }
 
             }
 
         })
+
+        btn_addutil_name_complete.setOnClickListener {
+            edit_txt_name_util.text.clear()
+        }
 
     }
 
