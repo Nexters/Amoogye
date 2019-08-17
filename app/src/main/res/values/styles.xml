@@ -14,10 +14,12 @@
     
     <style name="BottomNavigationView" parent="@style/TextAppearance.AppCompat.Caption">
         <item name="android:textSize">@dimen/bottom_navigation_text_size</item>
+        <item name="android:fontFamily">@font/nanum_square_r</item>
     </style>
 
     <style name="BottomNavigationView.Active" parent="@style/TextAppearance.AppCompat.Caption">
         <item name="android:textSize">@dimen/bottom_navigation_text_size</item>
+        <item name="android:fontFamily">@font/nanum_square_r</item>
     </style>
 
     
@@ -26,6 +28,7 @@
         <item name="android:textColorPrimary">@color/tools_list_main_color</item>
         <item name="android:textColorSecondary">@color/tools_list_text_color_soft</item>
         <item name="colorAccent">@color/tools_list_main_color</item>
+        <item name="android:fontFamily">@font/nanum_square_r</item>
     </style>
 
     <!-- TODO: 취소버튼 BOLD 없애기, font 바꾸기 -->
