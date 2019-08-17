@@ -1,19 +1,20 @@
 package cookcook.nexters.com.amoogye.views.calc.presenter
 
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.baoyz.actionsheet.ActionSheet
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.base.BaseFragment
 import cookcook.nexters.com.amoogye.databinding.FragmentCalcBinding
 import cookcook.nexters.com.amoogye.views.calc.entity.NormalUnitModel
 import kotlinx.android.synthetic.main.fragment_calc.*
 import org.koin.android.ext.android.get
-
 
 
 class CalcFragment : BaseFragment() {
@@ -77,7 +78,6 @@ class CalcFragment : BaseFragment() {
 
         val recyclerView = UnitButtonActivity(view)
         recyclerView.addItems(makeDummyItems())
-
     }
 
     private fun itemChange(containerCase: Int) {
@@ -104,6 +104,23 @@ class CalcFragment : BaseFragment() {
         } else {
             txt_calc_plus.setTextColor(Color.parseColor("#33131c32"))
         }
+
+
+        context!!.setTheme(R.style.ActionSheetStyleiOS7)
+
+        ActionSheet.createBuilder(context, fragmentManager)
+            .setCancelButtonTitle("취소")
+            .setOtherButtonTitles("생활단위", "일반단위")
+            .setCancelableOnTouchOutside(true)
+            .setListener(object: ActionSheet.ActionSheetListener {
+                override fun onOtherButtonClick(actionSheet: ActionSheet?, index: Int) {
+                    Log.d("", "")
+                }
+
+                override fun onDismiss(actionSheet: ActionSheet?, isCancel: Boolean) {
+                    Log.d("", "")
+                }
+            }).show()
     }
 
     private fun fragmentChange(number: Int) {
