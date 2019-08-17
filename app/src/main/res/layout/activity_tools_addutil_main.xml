@@ -109,6 +109,7 @@
                 android:textColor="@color/tools_list_text_color"
                 android:text="완료" />
 
+
         </RelativeLayout>
 
 

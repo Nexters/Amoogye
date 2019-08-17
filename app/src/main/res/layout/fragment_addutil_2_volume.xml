@@ -118,4 +118,15 @@
             android:textSize="@dimen/add_util_volume_count_text_size" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_outer_mid">
+
+        <include
+            android:id="@+id/scroll_picker"
+            layout="@layout/layout_ingredient_scroll_wrap"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 </RelativeLayout>

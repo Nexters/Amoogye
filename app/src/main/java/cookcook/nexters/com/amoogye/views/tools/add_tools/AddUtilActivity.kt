@@ -78,9 +78,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
 
         indicator_add_util.setupWithViewPager(view_pager_add_util)
 
-//        val list = arrayListOf("aa","bb","cc","dd","ee","ff","gg")
-//        val picker = BaseScrollPicker(this as View, list)
-//        picker.setColor(resources.getColor(R.color.number_non_focus_wrap_color))
+
 
         // 프래그먼트 스와이프 시 변동사항
         view_pager_add_util.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
@@ -112,6 +110,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
                         btn_add_util_next_page.setOnClickListener {
                             finish()
                         }
+
 
                     }
                 }

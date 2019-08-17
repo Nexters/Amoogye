@@ -23,6 +23,14 @@ class BaseScrollPicker {
         this.items.add(item)
     }
 
+    fun visible() {
+        wheelView.visibility = View.VISIBLE
+    }
+
+    fun inVisible() {
+        wheelView.visibility = View.GONE
+    }
+
     fun setColor(color: Int) {
         wheelView.setBackgroundColor(color)
     }

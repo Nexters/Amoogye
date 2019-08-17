@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import cookcook.nexters.com.amoogye.R
+import cookcook.nexters.com.amoogye.base.BaseScrollPicker
 import cookcook.nexters.com.amoogye.views.tools.ToolsFragment
+import kotlinx.android.synthetic.main.activity_tools_addutil_main.*
 import kotlinx.android.synthetic.main.fragment_addutil_2_volume.*
 
 
@@ -42,11 +44,21 @@ class AddUtilVolumeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_addutil_2_volume, container, false)
     }
 
+
+    lateinit var picker: BaseScrollPicker
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val list = arrayListOf("aa","bb","cc","dd","ee","ff","gg")
+        picker = BaseScrollPicker(view, list)
+        picker.setColor(resources.getColor(R.color.number_non_focus_wrap_color))
+        picker.inVisible()
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         btn_txt_name_util.setOnClickListener{
-
+            picker.visible()
         }
 
         edit_txt_volume_decimal_point.setOnClickListener {
