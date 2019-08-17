@@ -11,12 +11,11 @@ import cookcook.nexters.com.amoogye.views.calc.presenter.adapter.UnitAdapter
 const val GRID_COLUMN = 3
 
 class UnitButtonActivity(view: View) {
-
     var adapter: UnitAdapter
     var context: Context = view.context
+    val recyclerView: RecyclerView = view.findViewById(R.id.recyclerview_unit)
 
     init {
-        val recyclerView: RecyclerView = view.findViewById(R.id.recyclerview_unit)
         adapter = UnitAdapter(context)
         recyclerView.layoutManager = GridLayoutManager(context, GRID_COLUMN)
         recyclerView.adapter = adapter
@@ -25,13 +24,15 @@ class UnitButtonActivity(view: View) {
     }
 
     fun addItems(item: ArrayList<NormalUnitModel>) {
+        recyclerView.isLayoutFrozen = false
         adapter.setAdapterItems(item)
-        adapter.notifyDataSetChanged()
+        recyclerView.isLayoutFrozen = true
     }
 
     fun addItem(item: NormalUnitModel) {
+        recyclerView.isLayoutFrozen = false
         adapter.addAdapterItem(item)
-        adapter.notifyDataSetChanged()
+        recyclerView.isLayoutFrozen = true
     }
 
     fun removeAll() {

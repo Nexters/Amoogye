@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="good"
-        android:textSize="16sp"
+        android:textSize="@dimen/item_normal_abbreviation_size"
         android:textColor="#131c32"
         android:fontFamily="@font/nanum_square_r"
         android:layout_gravity="center" />
@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="굿"
-        android:textSize="12sp"
+        android:textSize="@dimen/item_korean_size"
         android:textColor="#28131c32"
         android:fontFamily="@font/nanum_square_r"
         android:layout_marginTop="6dp"

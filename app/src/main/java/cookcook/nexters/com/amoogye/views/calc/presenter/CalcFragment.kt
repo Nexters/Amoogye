@@ -14,6 +14,7 @@ import cookcook.nexters.com.amoogye.base.BaseFragment
 import cookcook.nexters.com.amoogye.base.BaseScrollPicker
 import cookcook.nexters.com.amoogye.databinding.FragmentCalcBinding
 import cookcook.nexters.com.amoogye.views.calc.entity.NormalUnitModel
+import cookcook.nexters.com.amoogye.views.calc.entity.UnitType
 import kotlinx.android.synthetic.main.fragment_calc.*
 import kotlinx.android.synthetic.main.layout_unit_button_wrap.*
 import kotlinx.android.synthetic.main.layout_ingredient_scroll_wrap.*
@@ -57,7 +58,7 @@ class CalcFragment : BaseFragment() {
 
         itemChange(calculatorViewModel.flag - 1)
         unitRecyclerView = UnitButtonActivity(view)
-        unitRecyclerView.addItems(makeDummyItems())
+        unitRecyclerView.addItems(makeDummyNormalItems())
 
         txt_ingredient.setOnClickListener {
             fragmentChange(1)
@@ -121,9 +122,15 @@ class CalcFragment : BaseFragment() {
                     if (index == 0) {
                         txt_unit_changer.text = "생활단위"
                         setRecyclerViewUnitLife()
+                        for (item in unitRecyclerView.adapter.getUnitList()) {
+                            Log.d("good", item.abbreviation)
+                        }
                     } else {
                         txt_unit_changer.text = "일반단위"
                         setRecyclerViewUnitNormal()
+                        for (item in unitRecyclerView.adapter.getUnitList()) {
+                            Log.d("good", item.abbreviation)
+                        }
                     }
                 }
 
@@ -133,28 +140,42 @@ class CalcFragment : BaseFragment() {
             }).show()
     }
 
-    fun makeDummyItems(): ArrayList<NormalUnitModel> {
+    private fun makeDummyNormalItems(): ArrayList<NormalUnitModel> {
         return arrayListOf(
-            NormalUnitModel("g", "그램", 1),
-            NormalUnitModel("kg", "킬로그램", 1),
-            NormalUnitModel("oz", "온즈", 1),
-            NormalUnitModel("cc", "시시", 1),
-            NormalUnitModel("ml", "밀리그램", 1),
-            NormalUnitModel("L", "리터", 1),
-            NormalUnitModel("Tbsp", "테이블스푼", 1),
-            NormalUnitModel("Tsp", "티스푼", 1),
-            NormalUnitModel("pt", "파인트", 1)
+            NormalUnitModel("g", "그램", UnitType.NORMAL),
+            NormalUnitModel("kg", "킬로그램", UnitType.NORMAL),
+            NormalUnitModel("oz", "온즈", UnitType.NORMAL),
+            NormalUnitModel("cc", "시시", UnitType.NORMAL),
+            NormalUnitModel("ml", "밀리그램", UnitType.NORMAL),
+            NormalUnitModel("L", "리터", UnitType.NORMAL),
+            NormalUnitModel("Tbsp", "테이블스푼", UnitType.NORMAL),
+            NormalUnitModel("Tsp", "티스푼", UnitType.NORMAL),
+            NormalUnitModel("pt", "파인트", UnitType.NORMAL)
+        )
+    }
+
+    private fun makeDummyLifeItems(): ArrayList<NormalUnitModel> {
+        return arrayListOf(
+            NormalUnitModel("밥숟가락", null, UnitType.LIFE),
+            NormalUnitModel("베라스푼",null, UnitType.LIFE),
+            NormalUnitModel("종이컵",null, UnitType.LIFE),
+            NormalUnitModel("병뚜껑", null, UnitType.LIFE),
+            NormalUnitModel("김용기", null, UnitType.LIFE),
+            NormalUnitModel("소주잔", null, UnitType.LIFE),
+            NormalUnitModel("참치캔", null, UnitType.LIFE),
+            NormalUnitModel("햇반그릇", null, UnitType.LIFE),
+            NormalUnitModel("my냄비", null, UnitType.LIFE)
         )
     }
 
     private fun setRecyclerViewUnitNormal() {
         unitRecyclerView.removeAll()
-        unitRecyclerView.addItems(makeDummyItems())
+        unitRecyclerView.addItems(makeDummyNormalItems())
     }
 
     private fun setRecyclerViewUnitLife() {
         unitRecyclerView.removeAll()
-        unitRecyclerView.addItems(makeDummyItems())
+        unitRecyclerView.addItems(makeDummyLifeItems())
     }
 
     override fun subscribeUI() {
