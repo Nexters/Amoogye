@@ -18,6 +18,7 @@
                 android:textSize="@dimen/calc_edit_text_size"
                 android:text="50"
                 android:textAlignment="center"
+                android:cursorVisible="false"
                 android:background="@drawable/number_input_non_focus_wrap_rounded_box"/>
 
             <EditText

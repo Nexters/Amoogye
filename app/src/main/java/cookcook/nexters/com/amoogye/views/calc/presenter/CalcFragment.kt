@@ -14,6 +14,8 @@ import cookcook.nexters.com.amoogye.views.calc.entity.NormalUnitModel
 import kotlinx.android.synthetic.main.fragment_calc.*
 import org.koin.android.ext.android.get
 
+
+
 class CalcFragment : BaseFragment() {
     override val layoutRes: Int = R.layout.fragment_calc
     override val isUseDataBinding = true
@@ -75,6 +77,7 @@ class CalcFragment : BaseFragment() {
 
         val recyclerView = UnitButtonActivity(view)
         recyclerView.addItems(makeDummyItems())
+
     }
 
     private fun itemChange(containerCase: Int) {

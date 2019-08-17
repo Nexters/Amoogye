@@ -17,6 +17,7 @@
                 android:textSize="@dimen/calc_edit_text_size"
                 android:text="1"
                 android:textAlignment="center"
+                android:cursorVisible="false"
                 android:background="@drawable/number_input_non_focus_wrap_rounded_box"/>
 
             <TextView
@@ -39,6 +40,7 @@
                 android:textSize="@dimen/calc_edit_text_size"
                 android:text="30"
                 android:textAlignment="center"
+                android:cursorVisible="false"
                 android:background="@drawable/number_input_non_focus_wrap_rounded_box"
                 android:layout_toEndOf="@+id/txt_twice_human_standard"
                 android:layout_marginStart="8dp"/>
@@ -108,6 +110,7 @@
                 android:textSize="@dimen/calc_edit_text_size"
                 android:text="1"
                 android:textAlignment="center"
+                android:cursorVisible="false"
                 android:background="@drawable/number_input_non_focus_wrap_rounded_box"/>
 
             <TextView
