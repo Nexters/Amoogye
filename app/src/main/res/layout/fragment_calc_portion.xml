@@ -18,6 +18,8 @@
                 android:textSize="@dimen/calc_edit_text_size"
                 android:text="1"
                 android:textAlignment="center"
+                android:cursorVisible="false"
+                android:fontFamily="@font/nanum_square_r"
                 android:background="@drawable/number_input_non_focus_wrap_rounded_box"/>
 
             <TextView
@@ -26,6 +28,7 @@
                 android:layout_height="wrap_content"
                 android:text="명 기준"
                 android:textSize="@dimen/calc_text_size"
+                android:fontFamily="@font/nanum_square_r"
                 android:layout_toEndOf="@+id/edit_portion_human_one"
                 android:layout_marginStart="6dp"
                 android:layout_centerVertical="true"/>
@@ -41,6 +44,8 @@
                 android:text="50"
                 android:textAlignment="center"
                 android:layout_marginStart="10dp"
+                android:cursorVisible="false"
+                android:fontFamily="@font/nanum_square_r"
                 android:layout_toEndOf="@+id/txt_portion_human_one"
                 android:background="@drawable/number_input_non_focus_wrap_rounded_box"/>
 
@@ -54,6 +59,7 @@
                 android:textSize="@dimen/calc_edit_text_size"
                 android:text="ml"
                 android:textAlignment="center"
+                android:fontFamily="@font/nanum_square_r"
                 android:background="@drawable/number_input_non_focus_wrap_rounded_box"
                 android:layout_toEndOf="@+id/edit_portion_amount"
                 android:layout_marginStart="8dp"
@@ -66,6 +72,7 @@
                 android:textSize="@dimen/calc_text_size"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="6dp"
+                android:fontFamily="@font/nanum_square_r"
                 android:layout_toEndOf="@id/edit_portion_unit"/>
         </RelativeLayout>
 
@@ -83,6 +90,8 @@
                 android:textSize="@dimen/calc_edit_text_size"
                 android:text="1"
                 android:textAlignment="center"
+                android:cursorVisible="false"
+                android:fontFamily="@font/nanum_square_r"
                 android:background="@drawable/number_input_non_focus_wrap_rounded_box"/>
 
             <TextView
@@ -91,9 +100,9 @@
                 android:text="명 기준으로"
                 android:textSize="@dimen/calc_text_size"
                 android:layout_centerVertical="true"
+                android:fontFamily="@font/nanum_square_r"
                 android:layout_toEndOf="@id/edit_portion_human_two"
                 android:layout_marginStart="6dp" />
-
         </RelativeLayout>
     </LinearLayout>
 </layout>

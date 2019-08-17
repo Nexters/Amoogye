@@ -18,6 +18,8 @@
                 android:textSize="@dimen/calc_edit_text_size"
                 android:text="50"
                 android:textAlignment="center"
+                android:cursorVisible="false"
+                android:fontFamily="@font/nanum_square_r"
                 android:background="@drawable/number_input_non_focus_wrap_rounded_box"/>
 
             <EditText
@@ -30,6 +32,7 @@
                 android:textSize="@dimen/calc_edit_text_size"
                 android:text="ml"
                 android:textAlignment="center"
+                android:fontFamily="@font/nanum_square_r"
                 android:background="@drawable/number_input_non_focus_wrap_rounded_box"
                 android:layout_toEndOf="@+id/edit_ingredient_amount"
                 android:layout_marginStart="8dp"
@@ -40,6 +43,7 @@
                 android:layout_height="wrap_content"
                 android:text="를"
                 android:textSize="@dimen/calc_text_size"
+                android:fontFamily="@font/nanum_square_r"
                 android:layout_toEndOf="@+id/edit_ingredient_unit"
                 android:layout_marginStart="6dp"
                 android:layout_centerVertical="true"/>
@@ -59,6 +63,7 @@
                 android:textSize="@dimen/calc_edit_text_size"
                 android:text="밥숟가락"
                 android:textAlignment="center"
+                android:fontFamily="@font/nanum_square_r"
                 android:background="@drawable/number_input_non_focus_wrap_rounded_box"
                 android:cursorVisible="false"/>
 
@@ -67,6 +72,7 @@
                 android:layout_height="wrap_content"
                 android:text="으로"
                 android:textSize="@dimen/calc_text_size"
+                android:fontFamily="@font/nanum_square_r"
                 android:layout_toEndOf="@+id/edit_ingredient_tool"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="6dp"/>
