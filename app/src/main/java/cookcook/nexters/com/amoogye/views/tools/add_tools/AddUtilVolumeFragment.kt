@@ -83,6 +83,16 @@ class AddUtilVolumeFragment : Fragment() {
 
         initializeLists()
 
+        // 임의로 값넣기
+        btn_add_util_tool.text = toolList[0]
+        MeasureUnitSaveData.getInstance().currentTool = toolList[0]
+
+        btn_add_util_integer.text = integerList[0]
+        MeasureUnitSaveData.getInstance().currentInteger = integerList[0]
+
+        btn_add_util_decimal_point.text = decimalPointList[0]
+        MeasureUnitSaveData.getInstance().currentDecimalPoint = decimalPointList[0]
+
         btn_add_util_tool.setOnClickListener{
             state = ButtonSelectedState.TOOL
             picker = BaseScrollPicker(getView, toolList)
@@ -113,16 +123,20 @@ class AddUtilVolumeFragment : Fragment() {
             (activity!!.findViewById<Button>(R.id.btn_add_util_next_page) as View).visibility = View.VISIBLE
 
             when (state) {
-                ButtonSelectedState.TOOL -> btn_add_util_tool.text = toolList[picker.getItem()]
-                ButtonSelectedState.INTEGER -> btn_add_util_integer.text = integerList[picker.getItem()]
-                ButtonSelectedState.DECIMALPOINT -> btn_add_util_decimal_point.text = decimalPointList[picker.getItem()]
+                ButtonSelectedState.TOOL -> {
+                    btn_add_util_tool.text = toolList[picker.getItem()]
+                    MeasureUnitSaveData.getInstance().currentTool = toolList[picker.getItem()]
+                }
+                ButtonSelectedState.INTEGER -> {
+                    btn_add_util_integer.text = integerList[picker.getItem()]
+                    MeasureUnitSaveData.getInstance().currentInteger = integerList[picker.getItem()]
+                }
+                ButtonSelectedState.DECIMALPOINT -> {
+                    btn_add_util_decimal_point.text = decimalPointList[picker.getItem()]
+                    MeasureUnitSaveData.getInstance().currentDecimalPoint = decimalPointList[picker.getItem()]
+                }
             }
         }
-
-        // 임의로 값넣기
-        btn_add_util_tool.text = toolList[0]
-        btn_add_util_integer.text = integerList[0]
-        btn_add_util_decimal_point.text = decimalPointList[0]
     }
 
     private fun addUtilCloseKeyboard() {

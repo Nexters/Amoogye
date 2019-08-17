@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.base.BaseScrollPicker
@@ -180,6 +182,12 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
     override fun onDestroy() {
         addUtilFragmentAdapter.instanceInit()
         super.onDestroy()
+    }
+
+    private fun clickConfirmButton() {
+        MeasureUnitSaveData.getInstance().currentTool
+        MeasureUnitSaveData.getInstance().currentInteger
+        MeasureUnitSaveData.getInstance().currentDecimalPoint
     }
 }
 
