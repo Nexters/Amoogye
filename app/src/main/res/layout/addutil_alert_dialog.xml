@@ -7,6 +7,7 @@
         android:paddingStart="24dp"
         android:paddingEnd="24dp"
         android:paddingTop="25dp"
+        android:fontFamily="@font/nanum_square_r"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
