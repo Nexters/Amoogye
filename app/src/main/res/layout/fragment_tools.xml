@@ -30,7 +30,7 @@
             android:layout_marginTop="@dimen/tools_list_button_top"
             android:layout_marginEnd="@dimen/tools_list_start_end"
             android:background="@color/transparent"
-            android:src="@drawable/tip" />
+            android:src="@drawable/tool_tip" />
 
         <TextView
             android:id="@+id/txt_tools_title"

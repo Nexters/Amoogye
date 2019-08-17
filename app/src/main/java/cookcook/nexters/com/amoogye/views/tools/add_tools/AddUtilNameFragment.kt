@@ -2,7 +2,9 @@ package cookcook.nexters.com.amoogye.views.tools.add_tools
 
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
@@ -36,6 +38,10 @@ class AddUtilNameFragment(
             }
             return INSTANCE!!
         }
+
+        fun instanceInit() {
+            INSTANCE = null
+        }
     }
 
 
@@ -47,8 +53,15 @@ class AddUtilNameFragment(
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        edit_txt_name_util.setOnClickListener {
-            onItemClickListener?.onClickEditText()
+        edit_txt_name_util.setOnTouchListener { view, motionEvent ->
+            Log.d("TAG", motionEvent.action.toString())
+            motionEvent.let {
+                if(it.action == MotionEvent.ACTION_DOWN) {
+                    Log.d("TAG", motionEvent.action.toString())
+                    onItemClickListener?.onClickEditText()
+                }
+                false
+            }
         }
 
         layout_outer_top.setOnClickListener {
