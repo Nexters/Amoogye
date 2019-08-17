@@ -108,6 +108,7 @@
                 android:background="@drawable/add_util_button_selector"
                 android:text="@string/add_util_next_step"
                 android:textColor="@color/white"
+                android:enabled="false"
                 android:textSize="@dimen/add_util_button_text_size" />
         </RelativeLayout>
 
@@ -120,6 +121,5 @@
 
         </RelativeLayout>
     </RelativeLayout>
-
 
 </RelativeLayout>

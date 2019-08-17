@@ -1,9 +1,11 @@
 package cookcook.nexters.com.amoogye.views.tools.add_tools
 
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.views.tools.ToolsFragment
@@ -58,5 +60,12 @@ class AddUtilVolumeFragment : Fragment() {
         transaction.replace(R.id.container_add_util_volume_choice, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
+    }
+
+    private fun addUtilCloseKeyboard() {
+
+        val inputMethodManager = context!!.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
+
     }
 }
