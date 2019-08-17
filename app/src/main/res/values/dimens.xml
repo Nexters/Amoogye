@@ -50,7 +50,7 @@
     <dimen name="tools_list_head_text_size">16sp</dimen>
     <dimen name="tools_list_item_bold_text_size">16sp</dimen>
     <dimen name="tools_list_item_soft_text_size">12sp</dimen>
-    <dimen name="tools_list_edit_text_size">14sp</dimen>
+    <dimen name="tools_list_edit_text_size">12sp</dimen>
 
 
     <!-- tools list -->
@@ -83,7 +83,7 @@
 
     <!-- add util -->
     <dimen name="add_util_image_width">328dp</dimen>
-    <dimen name="add_util_image_height">160dp</dimen>
+    <dimen name="add_util_image_height">200dp</dimen>
     <dimen name="add_util_image_top">12dp</dimen>
     <dimen name="add_util_view_indicator_bottom">15dp</dimen>
 
