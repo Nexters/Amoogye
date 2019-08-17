@@ -27,6 +27,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="@dimen/tools_list_start_end"
             android:background="@color/transparent"
+            android:fontFamily="@font/nanum_square_r"
             android:text="@string/tools_list_edit"
             android:textSize="@dimen/tools_list_edit_text_size"
             android:visibility="visible" />
@@ -38,6 +39,7 @@
             android:layout_alignParentStart="true"
             android:layout_marginStart="@dimen/tools_list_start_end"
             android:background="@color/transparent"
+            android:fontFamily="@font/nanum_square_r"
             android:text="@string/tools_list_edit_close"
             android:textColor="@color/tools_list_text_color"
             android:textSize="@dimen/tools_list_edit_text_size"
@@ -50,9 +52,10 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="@dimen/tools_list_start_end"
             android:background="@color/transparent"
+            android:fontFamily="@font/nanum_square_r"
+            android:text="@string/tools_list_edit_delete"
             android:textColor="@color/tools_list_main_color"
             android:textSize="@dimen/tools_list_edit_text_size"
-            android:text="@string/tools_list_edit_delete"
             android:visibility="gone" />
 
     </RelativeLayout>

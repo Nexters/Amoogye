@@ -17,7 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/setting_title"
-            android:textSize="@dimen/setting_title_text_size" />
+            android:textSize="@dimen/setting_title_text_size"
+            android:fontFamily="@font/nanum_square_b"/>
     </LinearLayout>
 
     <LinearLayout
@@ -38,7 +39,8 @@
                 android:padding="@dimen/setting_item_title"
                 android:text="@string/setting_display"
                 android:textColor="@color/setting_text_color"
-                android:textSize="@dimen/setting_item_title_text_size" />
+                android:textSize="@dimen/setting_item_title_text_size"
+                android:fontFamily="@font/nanum_square_r"/>
         </LinearLayout>
 
         <RelativeLayout
@@ -56,7 +58,8 @@
                 android:paddingBottom="@dimen/setting_sub_item_bottom"
                 android:text="@string/setting_display_on_off"
                 android:textColor="@color/setting_text_color_soft"
-                android:textSize="@dimen/setting_sub_item_text_size" />
+                android:textSize="@dimen/setting_sub_item_text_size"
+                android:fontFamily="@font/nanum_square_r" />
 
             <Switch
                 android:id="@+id/setting_switch_onoffDisplay"
@@ -68,7 +71,8 @@
                 android:paddingEnd="@dimen/setting_item_start_end"
                 android:paddingBottom="@dimen/setting_switch_bottom"
                 android:thumb="@drawable/setting_onoff_thumb"
-                android:track="@drawable/setting_onoff_selector" />
+                android:track="@drawable/setting_onoff_selector"
+                android:fontFamily="@font/nanum_square_r" />
 
         </RelativeLayout>
     </LinearLayout>
@@ -96,7 +100,8 @@
                 android:padding="@dimen/setting_item_title"
                 android:text="@string/setting_alarm"
                 android:textColor="@color/setting_text_color"
-                android:textSize="@dimen/setting_item_title_text_size" />
+                android:textSize="@dimen/setting_item_title_text_size"
+                android:fontFamily="@font/nanum_square_r" />
         </RelativeLayout>
 
         <LinearLayout
@@ -119,7 +124,8 @@
                     android:paddingBottom="@dimen/setting_sub_item_bottom"
                     android:text="@string/setting_alarm_sound"
                     android:textColor="@color/setting_text_color_soft"
-                    android:textSize="@dimen/setting_sub_item_text_size" />
+                    android:textSize="@dimen/setting_sub_item_text_size"
+                    android:fontFamily="@font/nanum_square_r" />
 
                 <Switch
                     android:id="@+id/setting_switch_sound"
@@ -148,7 +154,8 @@
                     android:paddingBottom="@dimen/setting_sub_item_bottom"
                     android:text="@string/setting_alarm_vibration"
                     android:textColor="@color/setting_text_color_soft"
-                    android:textSize="@dimen/setting_sub_item_text_size" />
+                    android:textSize="@dimen/setting_sub_item_text_size"
+                    android:fontFamily="@font/nanum_square_r" />
 
                 <Switch
                     android:id="@+id/setting_switch_vibration"
@@ -187,7 +194,8 @@
                 android:padding="@dimen/setting_item_title"
                 android:text="@string/setting_contact"
                 android:textColor="@color/setting_text_color"
-                android:textSize="@dimen/setting_item_title_text_size" />
+                android:textSize="@dimen/setting_item_title_text_size"
+                android:fontFamily="@font/nanum_square_r" />
         </RelativeLayout>
 
         <LinearLayout
@@ -206,7 +214,8 @@
                 android:paddingBottom="@dimen/setting_sub_item_bottom"
                 android:text="@string/setting_contact_email"
                 android:textColor="@color/setting_text_color_soft"
-                android:textSize="@dimen/setting_sub_item_text_size" />
+                android:textSize="@dimen/setting_sub_item_text_size"
+                android:fontFamily="@font/nanum_square_r"/>
 
         </LinearLayout>
     </LinearLayout>
