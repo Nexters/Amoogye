@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android" >
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
     <data>
         <variable
             name="calculatorVM"
@@ -85,6 +86,199 @@
                 android:layout_above="@+id/calc_layout_bottom"
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="24dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:id="@+id/layout_human_top_standard"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/edit_twice_human_one"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/calc_edit_box_size"
+                                android:background="@drawable/number_input_non_focus_wrap_rounded_box"
+                                android:minWidth="@dimen/calc_edit_box_size"
+                                android:paddingStart="@dimen/calc_edit_padding"
+                                android:paddingEnd="@dimen/calc_edit_padding"
+                                android:text="1"
+                                android:singleLine="true"
+                                android:textAlignment="center"
+                                android:textSize="@dimen/calc_edit_text_size" />
+
+                            <TextView
+                                android:id="@+id/txt_twice_human_standard"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="4dp"
+                                android:layout_toEndOf="@+id/edit_twice_human_one"
+                                android:text="명 기준"
+                                android:singleLine="true"
+                                android:textSize="@dimen/calc_text_size" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/layout_ingredient_top_standard"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/layout_human_top_standard">
+
+                            <RelativeLayout
+                                android:id="@+id/layout_weight_standard"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <EditText
+                                    android:id="@+id/edit_twice_amount"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="@dimen/calc_edit_box_size"
+                                    android:layout_marginStart="8dp"
+                                    android:background="@drawable/number_input_non_focus_wrap_rounded_box"
+                                    android:minWidth="@dimen/calc_edit_box_size"
+                                    android:paddingStart="@dimen/calc_edit_padding"
+                                    android:paddingEnd="@dimen/calc_edit_padding"
+                                    android:text="30"
+                                    android:singleLine="true"
+                                    android:textAlignment="center"
+                                    android:textSize="@dimen/calc_edit_text_size" />
+
+                                <EditText
+                                    android:id="@+id/edit_twice_unit"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="@dimen/calc_edit_box_size"
+                                    android:layout_marginStart="4dp"
+                                    android:layout_toEndOf="@+id/edit_twice_amount"
+                                    android:background="@drawable/number_input_non_focus_wrap_rounded_box"
+                                    android:cursorVisible="false"
+                                    android:minWidth="@dimen/calc_edit_box_size"
+                                    android:paddingStart="@dimen/calc_edit_padding"
+                                    android:paddingEnd="@dimen/calc_edit_padding"
+                                    android:text="ml"
+                                    android:singleLine="true"
+                                    android:textAlignment="center"
+                                    android:textSize="@dimen/calc_edit_text_size" />
+
+                                <TextView
+                                    android:id="@+id/txt_twice_dml"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:singleLine="true"
+                                    android:layout_marginStart="4dp"
+                                    android:layout_toEndOf="@+id/edit_twice_unit"
+                                    android:text="의"
+                                    android:textSize="@dimen/calc_text_size" />
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:id="@+id/layout_ingredient_wrap"
+                                android:layout_toEndOf="@id/layout_weight_standard"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <EditText
+                                    android:id="@+id/edit_twice_ingredient"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="@dimen/calc_edit_box_size"
+                                    android:layout_marginStart="8dp"
+                                    android:background="@drawable/number_input_non_focus_wrap_rounded_box"
+                                    android:cursorVisible="false"
+                                    android:minWidth="@dimen/calc_edit_box_size"
+                                    android:paddingStart="@dimen/calc_edit_padding"
+                                    android:paddingEnd="@dimen/calc_edit_padding"
+                                    android:text="굴소스"
+                                    android:textAlignment="center"
+                                    android:singleLine="true"
+                                    android:textSize="@dimen/calc_edit_text_size" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginStart="4dp"
+                                    android:layout_toEndOf="@id/edit_twice_ingredient"
+                                    android:text="를"
+                                    android:singleLine="true"
+                                    android:textSize="@dimen/calc_text_size" />
+                            </RelativeLayout>
+                        </RelativeLayout>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp">
+
+                        <RelativeLayout
+                            android:id="@+id/layout_human_bottom_standard"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/edit_twice_human_two"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/calc_edit_box_size"
+                                android:background="@drawable/number_input_non_focus_wrap_rounded_box"
+                                android:minWidth="@dimen/calc_edit_box_size"
+                                android:paddingStart="@dimen/calc_edit_padding"
+                                android:paddingEnd="@dimen/calc_edit_padding"
+                                android:text="1"
+                                android:singleLine="true"
+                                android:textAlignment="center"
+                                android:textSize="@dimen/calc_edit_text_size" />
+
+                            <TextView
+                                android:id="@+id/txt_twice_human_standard_two"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="4dp"
+                                android:layout_toEndOf="@+id/edit_twice_human_two"
+                                android:text="명 기준"
+                                android:singleLine="true"
+                                android:textSize="@dimen/calc_text_size" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/layout_ingredient_bottom_standard"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/layout_human_bottom_standard">
+
+                            <EditText
+                                android:id="@+id/edit_twice_tool"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/calc_edit_box_size"
+                                android:layout_marginStart="8dp"
+                                android:background="@drawable/number_input_non_focus_wrap_rounded_box"
+                                android:cursorVisible="false"
+                                android:minWidth="@dimen/calc_edit_box_size"
+                                android:paddingStart="@dimen/calc_edit_padding"
+                                android:paddingEnd="@dimen/calc_edit_padding"
+                                android:text="밥숟가락"
+                                android:singleLine="true"
+                                android:textAlignment="center"
+                                android:textSize="@dimen/calc_edit_text_size" />
+                        </RelativeLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="4dp"
+                                android:layout_toEndOf="@+id/layout_ingredient_bottom_standard"
+                                android:text="으로"
+                                android:singleLine="true"
+                                android:textSize="@dimen/calc_text_size" />
+                    </RelativeLayout>
+                </LinearLayout>
 
             </RelativeLayout>
 
@@ -101,12 +295,13 @@
                     android:textSize="22sp"
                     android:fontFamily="@font/nanum_square_r"
                     android:background="#ff4f34"
-                    android:textColor="#ffffff"/>
+                    android:textColor="#ffffff" />
             </RelativeLayout>
         </RelativeLayout>
 
         <!-- 버튼 관련 UI들 올 것 -->
-        <View android:layout_width="match_parent"
+        <View
+            android:layout_width="match_parent"
             android:layout_height="4dp"
             android:background="@color/main_background_color"/>
 
