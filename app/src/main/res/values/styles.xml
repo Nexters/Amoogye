@@ -24,5 +24,7 @@
         <item name="android:textColorPrimary">@color/tools_list_main_color</item>
         <item name="android:textColorSecondary">@color/tools_list_text_color_soft</item>
         <item name="colorAccent">@color/tools_list_main_color</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:paddingBottom">0dp</item>
     </style>
 </resources>

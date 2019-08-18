@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
@@ -12,14 +13,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true">
 
-        <ImageView
-            android:id="@+id/img_popup_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/tools_list_info_top"
-            android:layout_marginEnd="@dimen/tools_list_info"
-            android:layout_toStartOf="@id/btn_convert_add_util_activity"
-            android:src="@drawable/info" />
 
         <ImageButton
             android:id="@+id/btn_convert_add_util_activity"
@@ -38,6 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/btn_convert_add_util_activity"
             android:layout_alignParentStart="true"
+            android:layout_marginTop="3dp"
             android:layout_marginStart="@dimen/tools_list_start_end"
             android:layout_marginBottom="@dimen/setting_title_bottom"
             android:text="@string/tools_list_title"
@@ -76,7 +70,7 @@
                 app:tabIndicator="@drawable/ic_tab_indicator_24dp"
                 app:tabRippleColor="@color/transparent"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="35dp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -93,5 +87,13 @@
         android:layout_height="match_parent"
         android:background="@color/tools_list_dim_color"
         android:visibility="visible" />
+    <ImageView
+        android:id="@+id/img_popup_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="170dp"
+        android:layout_marginTop="@dimen/tools_list_info_top"
+        android:layout_marginEnd="@dimen/tools_list_info"
+        android:src="@drawable/info" />
 
 </RelativeLayout>
