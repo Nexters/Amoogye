@@ -66,6 +66,8 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
 
 
     lateinit var realm: Realm
+    lateinit var newToolData : arrayList
+    lateinit var standardToolData : ArrayList
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -178,6 +180,29 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
             }
             .show()
     }
+    
+    private fun getStandardDataList() {
+        /* TODO 값 가져와서 리스트에 넣어놓기*/
+        // standardData -> 종이컵, ml, 150, 4, 5
+        
+        
+        // 1. 이름 가져오기 
+        
+        // 2. 종이컵의 unitValue 가져오기
+        
+        // 3. 종이컵의 unit 단위 가져오기
+    }
+    
+    private fun calcNewToolValue() {
+        /*TODO 필요한 값들 계산하고 리스트에 넣기*/
+        // newData -> 물뚜껑, 계산결과+단위, 계산결과
+    }
+    
+    private fun saveNewTool() {
+        /* 저장하기 */
+        // 리스트에 있는 것들 조합해서 잘 넣기
+    }
+    
 
     override fun onDestroy() {
         addUtilFragmentAdapter.instanceInit()
