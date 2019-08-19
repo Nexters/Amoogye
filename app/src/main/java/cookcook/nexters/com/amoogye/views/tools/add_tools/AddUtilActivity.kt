@@ -81,6 +81,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
         view_pager_add_util.setSwipePagingEnabled(false)
 
         indicator_add_util.setupWithViewPager(view_pager_add_util)
+        indicator_add_util.clearOnTabSelectedListeners()
 
 
         view_pager_add_util.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {

@@ -26,7 +26,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/layout_outer_top"
         android:layout_marginTop="@dimen/add_util_head_comment_top"
-        android:background="@drawable/add_util_title_border"
         android:orientation="horizontal">
 
         <TextView
