@@ -3,12 +3,8 @@ package cookcook.nexters.com.amoogye.views.calc.presenter
 import android.content.Context
 import android.os.Build
 import android.text.InputType
-import android.util.Log
-import android.view.View
 import android.widget.EditText
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModel
-import cookcook.nexters.com.amoogye.base.BaseFragment
 import cookcook.nexters.com.amoogye.views.calc.domain.CalculatorRepository
 
 class CalculatorViewModel(private val repo: CalculatorRepository) : ViewModel() {
@@ -17,6 +13,13 @@ class CalculatorViewModel(private val repo: CalculatorRepository) : ViewModel() 
 
     private var ingredientSelected = true
     private var portionSelected = true
+
+    var humanOne: String = "0"
+    var amount: String = "0"
+    var unit: String = "ml"
+    var ingredient: String = "굴소스"
+    var humanTwo: String = "0"
+    var tool: String = "밥숟가락"
 
     fun init() {
         ingredientSelected = true

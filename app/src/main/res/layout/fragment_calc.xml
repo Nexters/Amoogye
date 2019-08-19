@@ -108,7 +108,7 @@
                                 android:minWidth="@dimen/calc_edit_box_size"
                                 android:paddingStart="@dimen/calc_edit_padding"
                                 android:paddingEnd="@dimen/calc_edit_padding"
-                                android:text="1"
+                                android:text="@{calculatorVM.humanOne}"
                                 android:singleLine="true"
                                 android:textAlignment="center"
                                 android:textSize="@dimen/calc_edit_text_size" />
@@ -145,7 +145,7 @@
                                     android:minWidth="@dimen/calc_edit_box_size"
                                     android:paddingStart="@dimen/calc_edit_padding"
                                     android:paddingEnd="@dimen/calc_edit_padding"
-                                    android:text="30"
+                                    android:text="@{calculatorVM.amount}"
                                     android:singleLine="true"
                                     android:textAlignment="center"
                                     android:textSize="@dimen/calc_edit_text_size" />
@@ -161,7 +161,7 @@
                                     android:minWidth="@dimen/calc_edit_box_size"
                                     android:paddingStart="@dimen/calc_edit_padding"
                                     android:paddingEnd="@dimen/calc_edit_padding"
-                                    android:text="ml"
+                                    android:text="@{calculatorVM.unit}"
                                     android:singleLine="true"
                                     android:textAlignment="center"
                                     android:textSize="@dimen/calc_edit_text_size" />
@@ -194,7 +194,7 @@
                                     android:minWidth="@dimen/calc_edit_box_size"
                                     android:paddingStart="@dimen/calc_edit_padding"
                                     android:paddingEnd="@dimen/calc_edit_padding"
-                                    android:text="굴소스"
+                                    android:text="@{calculatorVM.ingredient}"
                                     android:textAlignment="center"
                                     android:singleLine="true"
                                     android:textSize="@dimen/calc_edit_text_size" />
@@ -230,7 +230,7 @@
                                 android:minWidth="@dimen/calc_edit_box_size"
                                 android:paddingStart="@dimen/calc_edit_padding"
                                 android:paddingEnd="@dimen/calc_edit_padding"
-                                android:text="1"
+                                android:text="@{calculatorVM.humanTwo}"
                                 android:singleLine="true"
                                 android:textAlignment="center"
                                 android:textSize="@dimen/calc_edit_text_size" />
@@ -263,7 +263,7 @@
                                 android:minWidth="@dimen/calc_edit_box_size"
                                 android:paddingStart="@dimen/calc_edit_padding"
                                 android:paddingEnd="@dimen/calc_edit_padding"
-                                android:text="밥숟가락"
+                                android:text="@{calculatorVM.tool}"
                                 android:singleLine="true"
                                 android:textAlignment="center"
                                 android:textSize="@dimen/calc_edit_text_size" />
