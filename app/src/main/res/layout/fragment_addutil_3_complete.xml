@@ -24,7 +24,6 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nanum_square_b"
                 android:text="@string/add_util_complete_head"
-                android:fontFamily="@font/nanum_square_b"
                 android:textColor="@color/add_util_text_color"
                 android:textSize="@dimen/add_util_head_text_size" />
         </RelativeLayout>

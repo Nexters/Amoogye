@@ -17,7 +17,6 @@
             android:id="@+id/txt_title_1_name_util"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/nanum_square_b"
             android:text="@string/add_util_volume_head"
             android:fontFamily="@font/nanum_square_b"
             android:textColor="@color/add_util_text_color"

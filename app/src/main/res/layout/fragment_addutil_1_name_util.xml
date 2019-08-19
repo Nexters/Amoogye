@@ -63,8 +63,6 @@
                 android:textCursorDrawable="@drawable/add_name_edit_custom" />
 
             <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
                 android:layout_below="@id/edit_txt_name_util"
                 android:layout_marginTop="4dp"
                 android:layout_width="match_parent"

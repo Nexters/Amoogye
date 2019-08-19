@@ -66,8 +66,6 @@
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/layout_tools_tab_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:theme="@style/TabTheme"
                 app:tabIndicator="@drawable/ic_tab_indicator_24dp"
