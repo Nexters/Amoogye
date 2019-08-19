@@ -11,6 +11,8 @@
         android:layout_centerVertical="true"
         android:layout_marginStart="@dimen/add_util_start_end"
         android:layout_marginTop="@dimen/tools_list_item_bold_top"
+        android:layout_marginBottom="@dimen/tools_list_item_bold_bottom"
+        android:fontFamily="@font/nanum_square_r"
         android:text=""
         android:textColor="@color/tools_list_text_color"
         android:textSize="@dimen/tools_list_item_bold_text_size" />
@@ -23,6 +25,7 @@
         android:layout_marginStart="11dp"
         android:layout_marginTop="@dimen/tools_list_item_soft_top"
         android:layout_toEndOf="@id/txt_measureUnit_bold"
+        android:fontFamily="@font/nanum_square_r"
         android:text=""
         android:textColor="@color/tools_list_text_color_soft"
         android:textSize="@dimen/tools_list_item_soft_text_size" />

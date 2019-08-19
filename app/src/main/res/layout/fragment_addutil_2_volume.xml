@@ -17,6 +17,7 @@
             android:id="@+id/txt_title_1_name_util"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nanum_square_b"
             android:text="@string/add_util_volume_head"
             android:fontFamily="@font/nanum_square_b"
             android:textColor="@color/add_util_text_color"
@@ -34,6 +35,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nanum_square_r"
             android:text="@string/add_util_volume_comment_1"
             android:textColor="@color/add_util_text_color_soft"
             android:textSize="@dimen/add_util_head_comment_text_size" />
@@ -41,6 +43,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nanum_square_r"
             android:text=" 내 밥그릇"
             android:textColor="@color/add_util_text_color_soft"
             android:textSize="@dimen/add_util_head_comment_text_size" />
@@ -48,6 +51,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nanum_square_r"
             android:text="@string/add_util_volume_comment_2"
             android:textColor="@color/add_util_text_color_soft"
             android:textSize="@dimen/add_util_head_comment_text_size" />
@@ -66,6 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/add_util_volume_box_end"
             android:background="@drawable/add_util_box_border"
+            android:fontFamily="@font/nanum_square_r"
             android:padding="0dp"
             android:text="종이컵"
             android:textAlignment="viewStart"
@@ -76,6 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/add_util_volume_text_end"
+            android:fontFamily="@font/nanum_square_r"
             android:text="@string/add_util_volume_by"
             android:textColor="@color/add_util_text_color"
             android:textSize="@dimen/add_util_volume_count_text_size" />
@@ -86,6 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/add_util_volume_box_end"
             android:background="@drawable/add_util_box_border"
+            android:fontFamily="@font/nanum_square_r"
             android:padding="0dp"
             android:text="1"
             android:textAlignment="viewStart"
@@ -96,6 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/add_util_volume_text_end"
+            android:fontFamily="@font/nanum_square_r"
             android:text="@string/add_util_volume_dot"
             android:textColor="@color/add_util_text_color"
             android:textSize="@dimen/add_util_volume_count_text_size" />
@@ -106,6 +114,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/add_util_volume_box_end"
             android:background="@drawable/add_util_box_border"
+            android:fontFamily="@font/nanum_square_r"
             android:padding="0dp"
             android:text="0"
             android:textAlignment="viewStart"
@@ -115,6 +124,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nanum_square_r"
             android:text="@string/add_util_volume_how_many"
             android:textColor="@color/add_util_text_color"
             android:textSize="@dimen/add_util_volume_count_text_size" />

@@ -8,14 +8,18 @@
         <item name="colorAccent">@color/colorAccent</item>
 
         <item name="windowNoTitle">true</item>
+
+        <item name="actionSheetStyle">@style/ActionSheetStyleiOS7</item>
     </style>
     
     <style name="BottomNavigationView" parent="@style/TextAppearance.AppCompat.Caption">
         <item name="android:textSize">@dimen/bottom_navigation_text_size</item>
+        <item name="android:fontFamily">@font/nanum_square_r</item>
     </style>
 
     <style name="BottomNavigationView.Active" parent="@style/TextAppearance.AppCompat.Caption">
         <item name="android:textSize">@dimen/bottom_navigation_text_size</item>
+        <item name="android:fontFamily">@font/nanum_square_r</item>
     </style>
 
     
@@ -24,7 +28,25 @@
         <item name="android:textColorPrimary">@color/tools_list_main_color</item>
         <item name="android:textColorSecondary">@color/tools_list_text_color_soft</item>
         <item name="colorAccent">@color/tools_list_main_color</item>
+        <item name="android:fontFamily">@font/nanum_square_r</item>
         <item name="android:textSize">14sp</item>
         <item name="android:paddingBottom">0dp</item>
+    </style>
+
+    <!-- TODO: 취소버튼 BOLD 없애기, font 바꾸기 -->
+    <style name="ActionSheetStyleiOS7">
+        <item name="actionSheetBackground">@android:color/transparent</item>
+        <item name="cancelButtonBackground">@drawable/slt_as_ios7_cancel_bt</item>
+        <item name="otherButtonTopBackground">@drawable/slt_as_ios7_other_bt_top</item>
+        <item name="otherButtonMiddleBackground">@drawable/slt_as_ios7_other_bt_middle</item>
+        <item name="otherButtonBottomBackground">@drawable/slt_as_ios7_other_bt_bottom</item>
+        <item name="otherButtonSingleBackground">@drawable/slt_as_ios7_other_bt_single</item>
+        <item name="cancelButtonTextColor">#131c32</item>
+        <item name="otherButtonTextColor">#131c32</item>
+        <item name="actionSheetPadding">20dp</item>
+        <item name="otherButtonSpacing">0dp</item>
+        <item name="cancelButtonMarginTop">8dp</item>
+        <item name="actionSheetTextSize">16sp</item>
+
     </style>
 </resources>
