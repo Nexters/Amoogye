@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:layout="http://schemas.android.com/tools"
@@ -9,7 +10,7 @@
     <RelativeLayout
         android:id="@+id/layout_outer_top"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true">
 
         <RelativeLayout
@@ -66,8 +67,8 @@
             android:layout_height="@dimen/add_util_image_height"
             android:layout_centerInParent="true"
             android:layout_marginStart="@dimen/add_util_start_end"
-            android:layout_marginTop="@dimen/add_util_image_top"
-            android:src="@drawable/icon_popup_message" />
+            android:paddingTop="@dimen/add_util_image_top"
+            android:src="@drawable/add_util_img" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -76,9 +77,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/layout_main_activity_outer_mid"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="21dp"
-        android:paddingStart="@dimen/add_util_start_end"
-        android:paddingEnd="@dimen/add_util_start_end">
+        android:layout_marginTop="40dp">
 
         <cookcook.nexters.com.amoogye.views.tools.SwipeLockableViewPager
             android:id="@+id/view_pager_add_util"
@@ -91,8 +90,10 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/indicator_add_util"
-            android:layout_width="40dp"
-            android:layout_height="4dp"
+            android:layout_width="55dp"
+            android:layout_height="5dp"
+            android:layout_marginStart="@dimen/add_util_start_end"
+            android:layout_marginEnd="@dimen/add_util_start_end"
             android:layout_alignParentTop="true"
             android:layout_marginBottom="@dimen/add_util_view_indicator_bottom"
             app:tabBackground="@drawable/add_util_indicator_tab_selector"
@@ -102,6 +103,8 @@
             android:id="@+id/layout_add_util_outer_bottom_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/add_util_start_end"
+            android:layout_marginEnd="@dimen/add_util_start_end"
             android:layout_alignParentBottom="true">
 
             <Button
@@ -110,6 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/add_util_start_end"
                 android:layout_marginBottom="@dimen/add_util_start_end"
+                android:fontFamily="@font/nanum_square_r"
                 android:background="@drawable/add_util_button_selector"
                 android:enabled="false"
                 android:text="@string/add_util_next_step"

@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_marginStart="@dimen/add_util_start_end"
+        android:layout_marginStart="11dp"
         android:layout_marginTop="@dimen/tools_list_item_soft_top"
         android:layout_toEndOf="@id/txt_measureUnit_bold"
         android:fontFamily="@font/nanum_square_r"

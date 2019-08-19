@@ -29,6 +29,8 @@
         <item name="android:textColorSecondary">@color/tools_list_text_color_soft</item>
         <item name="colorAccent">@color/tools_list_main_color</item>
         <item name="android:fontFamily">@font/nanum_square_r</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:paddingBottom">0dp</item>
     </style>
 
     <!-- TODO: 취소버튼 BOLD 없애기, font 바꾸기 -->
@@ -45,5 +47,6 @@
         <item name="otherButtonSpacing">0dp</item>
         <item name="cancelButtonMarginTop">8dp</item>
         <item name="actionSheetTextSize">16sp</item>
+
     </style>
 </resources>

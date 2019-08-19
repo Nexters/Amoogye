@@ -32,10 +32,10 @@
     <color name="tools_list_main_color">#ff4f34</color>
     <color name="tools_list_not_checked">#dde2e5</color>
     <color name="tools_list_text_color">#131c32</color>
-    <color name="tools_list_text_color_soft">#50131c32</color>
+    <color name="tools_list_text_color_soft">#CC131c32</color>
     <color name="tools_list_background">#f1f5f7</color>
     <color name="tools_list_line_division">#0D131c32</color>
-    <color name="tools_list_dim_color">#07000000</color>
+    <color name="tools_list_dim_color">#12000000</color>
 
     <color name="add_util_text_color">#131c32</color>
     <color name="add_util_text_color_soft">#80131c32</color>
