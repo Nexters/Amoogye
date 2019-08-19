@@ -4,22 +4,41 @@ import android.content.Context
 import android.os.Build
 import android.text.InputType
 import android.widget.EditText
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import cookcook.nexters.com.amoogye.views.calc.domain.CalculatorRepository
+import cookcook.nexters.com.amoogye.views.calc.entity.EditTextType
 
 class CalculatorViewModel(private val repo: CalculatorRepository) : ViewModel() {
     lateinit var context: Context
     var flag: Int = 3
 
+    // flag
     private var ingredientSelected = true
     private var portionSelected = true
 
-    var humanOne: String = "0"
-    var amount: String = "0"
-    var unit: String = "ml"
-    var ingredient: String = "굴소스"
-    var humanTwo: String = "0"
-    var tool: String = "밥숟가락"
+    private var selectedEditText: EditTextType = EditTextType.HUMAN_ONE
+
+    private val _humanOne = MutableLiveData<String>()
+    private val _amount = MutableLiveData<String>()
+    private val _unit = MutableLiveData<String>()
+    private val _ingredient = MutableLiveData<String>()
+    private val _humanTwo = MutableLiveData<String>()
+    private val _tool = MutableLiveData<String>()
+
+    val humanOne: LiveData<String> get() = _humanOne
+    val amount: LiveData<String> get() = _amount
+    val unit: LiveData<String> get() = _unit
+    val ingredient: LiveData<String> get() = _ingredient
+    val humanTwo: LiveData<String> get() = _humanTwo
+    val tool: LiveData<String> get() = _tool
+
+    init {
+        _humanOne.value = "0"
+        _amount.value = "0"
+        _humanTwo.value = "0"
+    }
 
     fun init() {
         ingredientSelected = true
@@ -77,6 +96,39 @@ class CalculatorViewModel(private val repo: CalculatorRepository) : ViewModel() 
         editText.setRawInputType(InputType.TYPE_CLASS_TEXT)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             editText.showSoftInputOnFocus = false
+        }
+    }
+
+    fun setSelectedEditText(value: EditTextType) {
+        selectedEditText = value
+    }
+
+    fun onNumberButtonClick(number: String) {
+        when (selectedEditText) {
+            EditTextType.HUMAN_ONE -> {
+                _humanOne.value = _humanOne.value?.let { it->
+                    repo.changeText(number, it)
+                } ?: repo.changeText(number, "0")
+            }
+            EditTextType.AMOUNT -> {
+                _amount.value = _amount.value?.let { it ->
+                    repo.changeText(number, it)
+                } ?: repo.changeText(number, "0")
+            }
+            EditTextType.UNIT -> {
+
+            }
+            EditTextType.INGREDIENT -> {
+
+            }
+            EditTextType.HUMAN_TWO -> {
+                _humanTwo.value = _humanTwo.value?.let { it ->
+                    repo.changeText(number, it)
+                } ?: repo.changeText(number, "0")
+            }
+            EditTextType.TOOL -> {
+
+            }
         }
     }
 }

@@ -2,13 +2,16 @@ package cookcook.nexters.com.amoogye.views.calc.presenter
 
 import android.animation.AnimatorSet
 import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.CountDownTimer
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.databinding.DataBindingUtil
@@ -16,8 +19,10 @@ import androidx.fragment.app.Fragment
 import com.baoyz.actionsheet.ActionSheet
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.base.BaseFragment
+import cookcook.nexters.com.amoogye.base.BaseNumberButton
 import cookcook.nexters.com.amoogye.base.BaseScrollPicker
 import cookcook.nexters.com.amoogye.databinding.FragmentCalcBinding
+import cookcook.nexters.com.amoogye.views.calc.entity.EditTextType
 import cookcook.nexters.com.amoogye.views.calc.entity.NormalUnitModel
 import cookcook.nexters.com.amoogye.views.calc.entity.UnitType
 import kotlinx.android.synthetic.main.fragment_calc.*
@@ -51,17 +56,38 @@ class CalcFragment : BaseFragment() {
         }
     }
 
+    private val onClick: (number: String) -> Unit = {
+        calculatorViewModel.onNumberButtonClick(it)
+    }
+
+    private fun editTextClickEvent(editText: EditText, type: EditTextType) {
+        editText.setOnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                calculatorViewModel.setSelectedEditText(type)
+//                editTextWrapChange(calculatorViewModel.getSelectedTimerEditText()!!)
+            }
+
+            return@setOnTouchListener false
+        }
+    }
+
     override fun setupViews(view: View) {
         btn_history.setOnClickListener { calculatorViewModel.gazuaa("history 구현 예정") }
         btn_tip.setOnClickListener { calculatorViewModel.gazuaa("tool_tip 구현 예정") }
 
         // edittext setting
+        /* TODO: 묶어서 초기화하자 */
         calculatorViewModel.calculatorEditTextSetting(edit_twice_human_one)
+        editTextClickEvent(edit_twice_human_one, EditTextType.HUMAN_ONE)
         calculatorViewModel.calculatorEditTextSetting(edit_twice_amount)
+        editTextClickEvent(edit_twice_amount, EditTextType.AMOUNT)
         calculatorViewModel.calculatorEditTextSetting(edit_twice_unit)
         calculatorViewModel.calculatorEditTextSetting(edit_twice_ingredient)
         calculatorViewModel.calculatorEditTextSetting(edit_twice_human_two)
+        editTextClickEvent(edit_twice_human_two, EditTextType.HUMAN_TWO)
         calculatorViewModel.calculatorEditTextSetting(edit_twice_tool)
+
+        BaseNumberButton(view, onClick)
 
         itemChange(calculatorViewModel.flag - 1)
         unitRecyclerView = UnitButtonActivity(view)
