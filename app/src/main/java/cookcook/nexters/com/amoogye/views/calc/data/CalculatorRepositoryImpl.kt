@@ -9,7 +9,7 @@ class CalculatorRepositoryImpl : CalculatorRepository {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
     }
 
-    override fun changeText(number: String, text: String): String {
+    override fun changeNumberText(number: String, text: String): String {
         var afterText: String = text
 
         if (number == "delete" && text.isNotEmpty()) {

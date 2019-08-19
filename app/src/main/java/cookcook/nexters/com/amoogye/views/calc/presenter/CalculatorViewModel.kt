@@ -108,27 +108,38 @@ class CalculatorViewModel(private val repo: CalculatorRepository) : ViewModel() 
         when (_selectedEditText.value) {
             EditTextType.HUMAN_ONE -> {
                 _humanOne.value = _humanOne.value?.let { it->
-                    repo.changeText(number, it)
-                } ?: repo.changeText(number, "0")
+                    repo.changeNumberText(number, it)
+                } ?: repo.changeNumberText(number, "0")
             }
             EditTextType.AMOUNT -> {
                 _amount.value = _amount.value?.let { it ->
-                    repo.changeText(number, it)
-                } ?: repo.changeText(number, "0")
-            }
-            EditTextType.UNIT -> {
-
+                    repo.changeNumberText(number, it)
+                } ?: repo.changeNumberText(number, "0")
             }
             EditTextType.INGREDIENT -> {
 
             }
             EditTextType.HUMAN_TWO -> {
                 _humanTwo.value = _humanTwo.value?.let { it ->
-                    repo.changeText(number, it)
-                } ?: repo.changeText(number, "0")
+                    repo.changeNumberText(number, it)
+                } ?: repo.changeNumberText(number, "0")
+            }
+            else -> {
+                // 아무것도 안한다.
+            }
+        }
+    }
+
+    fun onUnitButtonClick(value: String) {
+        when (_selectedEditText.value) {
+            EditTextType.UNIT -> {
+                _unit.value = value
             }
             EditTextType.TOOL -> {
-
+                _tool.value = value
+            }
+            else -> {
+                // 아무것도 안한다.
             }
         }
     }

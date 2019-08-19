@@ -302,7 +302,6 @@
             </RelativeLayout>
         </RelativeLayout>
 
-        <!-- 버튼 관련 UI들 올 것 -->
         <View
             android:layout_width="match_parent"
             android:layout_height="4dp"
