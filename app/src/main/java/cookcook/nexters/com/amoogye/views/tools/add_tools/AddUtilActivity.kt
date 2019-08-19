@@ -84,6 +84,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
         indicator_add_util.clearOnTabSelectedListeners()
 
 
+
         view_pager_add_util.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
             }
@@ -132,6 +133,10 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
             exitAlert()
         }
 
+    }
+
+    override fun onBackPressed() {
+        exitAlert()
     }
 
     private fun firstPageDefault() {
