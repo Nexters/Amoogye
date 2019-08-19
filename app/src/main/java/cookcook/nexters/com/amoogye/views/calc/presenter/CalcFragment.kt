@@ -78,11 +78,29 @@ class CalcFragment : BaseFragment() {
         }
     }
 
+    private fun convertBottomButton(type: EditTextType) {
+        calc_layout_button.visibility = View.GONE
+        calc_layout_unit.visibility = View.GONE
+        calc_layout_ingredient.visibility = View.GONE
+
+        when (type) {
+            EditTextType.HUMAN_ONE,
+            EditTextType.HUMAN_TWO,
+            EditTextType.AMOUNT -> calc_layout_button.visibility = View.VISIBLE
+
+            EditTextType.UNIT,
+            EditTextType.TOOL -> calc_layout_unit.visibility = View.VISIBLE
+
+            EditTextType.INGREDIENT -> calc_layout_ingredient.visibility = View.VISIBLE
+        }
+    }
+
     private fun editTextClickEvent(editText: EditText, type: EditTextType) {
         editText.setOnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
                 calculatorViewModel.setSelectedEditText(type)
                 editTextWrapChange(calculatorViewModel.getSelectedEditText()!!)
+                convertBottomButton(calculatorViewModel.getSelectedEditText()!!)
             }
 
             return@setOnTouchListener false
@@ -100,10 +118,13 @@ class CalcFragment : BaseFragment() {
         calculatorViewModel.calculatorEditTextSetting(edit_twice_amount)
         editTextClickEvent(edit_twice_amount, EditTextType.AMOUNT)
         calculatorViewModel.calculatorEditTextSetting(edit_twice_unit)
+        editTextClickEvent(edit_twice_unit, EditTextType.UNIT)
         calculatorViewModel.calculatorEditTextSetting(edit_twice_ingredient)
+        editTextClickEvent(edit_twice_ingredient, EditTextType.INGREDIENT)
         calculatorViewModel.calculatorEditTextSetting(edit_twice_human_two)
         editTextClickEvent(edit_twice_human_two, EditTextType.HUMAN_TWO)
         calculatorViewModel.calculatorEditTextSetting(edit_twice_tool)
+        editTextClickEvent(edit_twice_tool, EditTextType.TOOL)
 
         BaseNumberButton(view, onClick)
 

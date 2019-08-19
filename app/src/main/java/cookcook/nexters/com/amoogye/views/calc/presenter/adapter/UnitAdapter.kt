@@ -8,8 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import cookcook.nexters.com.amoogye.R
+import cookcook.nexters.com.amoogye.base.BaseActivity
 import cookcook.nexters.com.amoogye.views.calc.entity.NormalUnitModel
 import cookcook.nexters.com.amoogye.views.calc.entity.UnitType
+import cookcook.nexters.com.amoogye.views.calc.presenter.CalcFragment
 import kotlinx.android.synthetic.main.item_unit_recyclerview.view.*
 
 class UnitAdapter(val context: Context) : RecyclerView.Adapter<UnitAdapter.Holder>() {
@@ -63,6 +65,11 @@ class UnitAdapter(val context: Context) : RecyclerView.Adapter<UnitAdapter.Holde
 
             itemView.txt_unit_abbreviation.text = normalUnitModel.abbreviation
             itemView.txt_unit_korean.text = normalUnitModel.korean
+
+            /* TODO: CalcFragment에 종속적이지 않고 좀 더 안전한 코드를 고민해보자.. */
+            itemView.setOnClickListener {
+                CalcFragment.getInstance().binding.calculatorVM!!.onUnitButtonClick(normalUnitModel.abbreviation)
+            }
         }
     }
 }
