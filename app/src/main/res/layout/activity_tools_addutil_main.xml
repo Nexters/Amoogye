@@ -14,7 +14,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:background="@drawable/add_util_title_border">
 
             <ImageButton
@@ -24,6 +24,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/add_util_start_end"
+                android:layout_marginBottom="@dimen/add_util_start_end"
                 android:background="@color/transparent"
                 android:src="@drawable/back"
                 android:visibility="invisible" />
@@ -33,6 +34,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_marginTop="@dimen/add_util_title_top"
+                android:layout_marginBottom="@dimen/add_util_start_end"
+                android:fontFamily="@font/nanum_square_r"
                 android:text="@string/add_util_title"
                 android:textColor="@color/add_util_text_color"
                 android:textSize="@dimen/add_util_title_text_size" />
@@ -44,6 +47,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/add_util_start_end"
+                android:layout_marginBottom="@dimen/add_util_start_end"
                 android:background="@color/transparent"
                 android:src="@drawable/close" />
         </RelativeLayout>
@@ -107,9 +111,9 @@
                 android:layout_marginTop="@dimen/add_util_start_end"
                 android:layout_marginBottom="@dimen/add_util_start_end"
                 android:background="@drawable/add_util_button_selector"
+                android:enabled="false"
                 android:text="@string/add_util_next_step"
                 android:textColor="@color/white"
-                android:enabled="false"
                 android:textSize="@dimen/add_util_button_text_size" />
         </RelativeLayout>
 

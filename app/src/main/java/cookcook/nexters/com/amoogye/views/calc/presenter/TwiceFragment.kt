@@ -88,7 +88,9 @@ class TwiceFragment : BaseFragment() {
     }
 
     private fun initialize() {
-//        edit_twice_human_one.requestFocus()
+        edit_twice_human_one.requestFocus()
+        edit_twice_human_one.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
+
         calculatorViewModel.calculatorEditTextSetting(edit_twice_amount)
         calculatorViewModel.calculatorEditTextSetting(edit_twice_human_one)
         calculatorViewModel.calculatorEditTextSetting(edit_twice_human_two)

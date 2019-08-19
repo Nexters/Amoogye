@@ -19,6 +19,7 @@
                 android:id="@+id/txt_title_1_name_util"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/nanum_square_b"
                 android:text="@string/add_util_complete_head"
                 android:textColor="@color/add_util_text_color"
                 android:textSize="@dimen/add_util_head_text_size" />
@@ -34,7 +35,8 @@
                 android:id="@+id/txt_3_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="내 밥그릇"
+                android:fontFamily="@font/nanum_square_r"
+                android:text="내 밥그릇(150ml)"
                 android:textColor="@color/add_util_main_color"
                 android:textSize="@dimen/add_util_head_comment_text_size" />
 
@@ -50,7 +52,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/txt_3_user_name_unit"
+                android:layout_toEndOf="@id/txt_addutil_name_by_user"
+                android:fontFamily="@font/nanum_square_r"
                 android:text="@string/add_util_complete_comment"
                 android:textColor="@color/add_util_text_color_soft"
                 android:textSize="@dimen/add_util_head_comment_text_size" />

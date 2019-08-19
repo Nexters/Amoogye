@@ -70,7 +70,9 @@ class PortionFragment: BaseFragment() {
     }
 
     private fun initialize() {
-//        edit_portion_human_one.requestFocus()
+        edit_portion_human_one.requestFocus()
+        edit_portion_human_one.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
+
         calculatorViewModel.calculatorEditTextSetting(edit_portion_amount)
         calculatorViewModel.calculatorEditTextSetting(edit_portion_human_one)
         calculatorViewModel.calculatorEditTextSetting(edit_portion_human_two)

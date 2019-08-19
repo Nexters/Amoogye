@@ -9,6 +9,7 @@
         app:textSize="18sp"
         app:drawItemCount="5"
         app:centerTextColor="@color/timer_theme_color"
+        app:textSize="18sp"
         android:background="@color/number_non_focus_wrap_color"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
