@@ -83,7 +83,6 @@ class AddUtilVolumeFragment : Fragment() {
 
         initializeLists()
 
-        // 임의로 값넣기
         btn_add_util_tool.text = toolList[0]
         MeasureUnitSaveData.getInstance().currentTool = toolList[0]
 
@@ -137,10 +136,5 @@ class AddUtilVolumeFragment : Fragment() {
                 }
             }
         }
-    }
-
-    private fun addUtilCloseKeyboard() {
-        val inputMethodManager = context!!.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
     }
 }

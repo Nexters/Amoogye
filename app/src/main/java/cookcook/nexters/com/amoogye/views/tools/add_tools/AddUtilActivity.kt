@@ -1,9 +1,11 @@
 package cookcook.nexters.com.amoogye.views.tools.add_tools
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import android.widget.RelativeLayout
@@ -146,6 +148,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
         btn_add_util_exit.visibility = View.VISIBLE
         btn_add_util_next_page.setOnClickListener {
             btn_add_util_next_page.isEnabled = isNameUnique()
+            closeKeyboard()
         }
     }
 
@@ -184,7 +187,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
             }
             .show()
     }
-    
+
     private fun getStandardDataList() {
 
         val standardTool = MeasureUnitSaveData.getInstance().currentTool
@@ -230,7 +233,14 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
         }
         return 0
     }
-    
+
+    private fun closeKeyboard() {
+
+        val inputMethodManager = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(currentFocus.windowToken, 0)
+
+    }
+
 
     override fun onDestroy() {
         addUtilFragmentAdapter.instanceInit()
