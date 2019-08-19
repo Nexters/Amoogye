@@ -2,7 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingTop="5dp"
+    android:paddingStart="@dimen/add_util_start_end"
+    android:paddingEnd="@dimen/add_util_start_end">
 
 
     <RelativeLayout
@@ -20,8 +23,8 @@
                 android:id="@+id/txt_title_1_name_util"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/nanum_square_b"
                 android:text="@string/add_util_name_head"
+                android:fontFamily="@font/nanum_square_b"
                 android:textColor="@color/add_util_text_color"
                 android:textSize="@dimen/add_util_head_text_size" />
 
@@ -51,19 +54,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/transparent"
+                android:textColorHint="@color/add_util_text_color_soft"
                 android:fontFamily="@font/nanum_square_r"
                 android:hint="@string/add_util_name_hint"
-                android:maxLength="11"
                 android:paddingBottom="8dp"
+                android:maxLength="11"
                 android:textColor="@color/add_util_text_color"
                 android:textCursorDrawable="@drawable/add_name_edit_custom" />
 
             <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
                 android:layout_below="@id/edit_txt_name_util"
                 android:layout_marginTop="4dp"
-                android:background="@color/black" />
+                android:layout_width="match_parent"
+                android:background="@color/black"
+                android:layout_height="1dp"/>
 
             <TextView
                 android:id="@+id/txt_alert_below_ten_letter"

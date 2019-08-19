@@ -2,7 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingTop="5dp"
+    android:paddingStart="@dimen/add_util_start_end"
+    android:paddingEnd="@dimen/add_util_start_end">
 
     <RelativeLayout
         android:id="@+id/layout_outer_top"
@@ -14,8 +17,8 @@
             android:id="@+id/txt_title_1_name_util"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/nanum_square_b"
             android:text="@string/add_util_volume_head"
+            android:fontFamily="@font/nanum_square_b"
             android:textColor="@color/add_util_text_color"
             android:textSize="@dimen/add_util_head_text_size" />
     </RelativeLayout>
@@ -26,8 +29,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/layout_outer_top"
         android:layout_marginTop="@dimen/add_util_head_comment_top"
+        android:layout_marginBottom="@dimen/add_util_volume_box_top"
         android:orientation="horizontal">
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -58,7 +61,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/add_util_volume_box_height"
         android:layout_below="@id/layout_outer_mid"
-        android:layout_marginTop="@dimen/add_util_volume_box_top"
         android:orientation="horizontal">
 
         <Button

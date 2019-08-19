@@ -5,11 +5,12 @@
             android:innerRadius="0dp"
             android:shape="ring"
             android:useLevel="false">
-            <solid android:color="@color/add_util_btn_un_activate"/>
-            <size
-                android:width="4dp"
-                android:height="4dp" />
+            <corners android:radius="4dp" />
 
+            <size
+                android:width="10dp"
+                android:height="10dp" />
+            <solid android:color="@color/add_util_btn_un_activate" />
         </shape>
     </item>
 </layer-list>
