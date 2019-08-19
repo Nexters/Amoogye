@@ -55,6 +55,14 @@ class CalcFragment : BaseFragment() {
         btn_history.setOnClickListener { calculatorViewModel.gazuaa("history 구현 예정") }
         btn_tip.setOnClickListener { calculatorViewModel.gazuaa("tool_tip 구현 예정") }
 
+        // edittext setting
+        calculatorViewModel.calculatorEditTextSetting(edit_twice_human_one)
+        calculatorViewModel.calculatorEditTextSetting(edit_twice_amount)
+        calculatorViewModel.calculatorEditTextSetting(edit_twice_unit)
+        calculatorViewModel.calculatorEditTextSetting(edit_twice_ingredient)
+        calculatorViewModel.calculatorEditTextSetting(edit_twice_human_two)
+        calculatorViewModel.calculatorEditTextSetting(edit_twice_tool)
+
         itemChange(calculatorViewModel.flag - 1)
         unitRecyclerView = UnitButtonActivity(view)
         unitRecyclerView.addItems(makeDummyNormalItems())
