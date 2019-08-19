@@ -1,9 +1,11 @@
 package cookcook.nexters.com.amoogye.views.tools.add_tools
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import android.widget.RelativeLayout
@@ -15,7 +17,9 @@ import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_tools_addutil_main.*
 
 class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
-    OnCountEnableListener, AddUtilNameFragment.OnGetNameEditTextListener {
+    OnCountEnableListener, AddUtilNameFragment.OnGetNameEditTextListener,
+    AddUtilVolumeFragment.OnGetNameByUserListener,
+    AddUtilCompleteFragment.OnAddUtilResultListener {
     override fun onClickEditText() {
         val layout = findViewById<RelativeLayout>(R.id.layout_main_activity_outer_mid)
         layout.visibility = View.GONE
@@ -38,6 +42,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
 
     override fun onGetNameEditText(): String {
         val name = findViewById<EditText>(R.id.edit_txt_name_util).text.toString()
+        MeasureUnitSaveData.getInstance().unitNameBold = name
         return name
     }
 
@@ -45,6 +50,23 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
         val alertMessage = findViewById<TextView>(R.id.txt_alert_same_name)
         alertMessage.visibility = View.VISIBLE
     }
+
+
+    var itemName = ""
+    override fun onGetNameByUser() {
+        itemName = findViewById<EditText>(R.id.edit_txt_name_util).text.toString()
+        val comment = findViewById<TextView>(R.id.txt_2_user_name)
+        comment.text = itemName
+    }
+
+    override fun onAddUtilResult() {
+        val nameResult = findViewById<TextView>(R.id.txt_3_user_name)
+        val nameResultUnit = findViewById<TextView>(R.id.txt_3_user_name_unit)
+        val result = MeasureUnitSaveData.getInstance().unitNameSoft
+        nameResult.text = itemName
+        nameResultUnit.text = "($result)"
+    }
+
 
     lateinit var realm: Realm
 
@@ -61,8 +83,10 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
         view_pager_add_util.setSwipePagingEnabled(false)
 
         indicator_add_util.setupWithViewPager(view_pager_add_util)
+        indicator_add_util.clearOnTabSelectedListeners()
 
-        // 프래그먼트 스와이프 시 변동사항
+
+
         view_pager_add_util.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
             }
@@ -77,19 +101,24 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
                     }
                     1 -> {
                         restPageDefault()
+                        onGetNameByUser()
                         btn_add_util_next_page.text = "다음"
                         btn_add_util_exit.visibility = View.VISIBLE
                         btn_add_util_next_page.setOnClickListener {
+                            getStandardDataList()
                             view_pager_add_util.setCurrentItem(getItem(1), true)
                         }
                     }
                     2 -> {
                         restPageDefault()
+                        onAddUtilResult()
                         btn_add_util_next_page.text = "확인"
                         btn_add_util_exit.visibility = View.INVISIBLE
                         btn_add_util_next_page.setOnClickListener {
+                            saveNewTool()
                             finish()
                         }
+
 
                     }
                 }
@@ -108,6 +137,10 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
 
     }
 
+    override fun onBackPressed() {
+        exitAlert()
+    }
+
     private fun firstPageDefault() {
         btn_add_util_next_page.isEnabled = false
         btn_add_util_back.visibility = View.INVISIBLE
@@ -115,6 +148,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
         btn_add_util_exit.visibility = View.VISIBLE
         btn_add_util_next_page.setOnClickListener {
             btn_add_util_next_page.isEnabled = isNameUnique()
+            closeKeyboard()
         }
     }
 
@@ -124,9 +158,8 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
         layout_main_activity_outer_mid.visibility = View.VISIBLE
     }
 
-    private fun isNameUnique() : Boolean {
+    private fun isNameUnique(): Boolean {
         val nameEditText = onGetNameEditText()
-        Log.d("nameEdit", nameEditText)
 
         try {
             realm.where(MeasureUnit::class.java).equalTo("unitNameBold", nameEditText).findFirst()!!
@@ -155,10 +188,65 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
             .show()
     }
 
+    private fun getStandardDataList() {
+
+        val standardTool = MeasureUnitSaveData.getInstance().currentTool
+        //val standardToolData = realm.where(MeasureUnit::class.java).equalTo("unitNameBold", standardTool).findFirst()!!
+        //테스트용
+        val standardToolData = realm.where(MeasureUnit::class.java).equalTo("unitNameBold", "종이컵").findFirst()!!
+
+        val standardToolValue = standardToolData.unitValue
+        val standardToolUnit = standardToolData.unit
+
+        val calcInteger = MeasureUnitSaveData.getInstance().currentInteger.toInt()
+        val decimalPoint = MeasureUnitSaveData.getInstance().currentDecimalPoint.toInt()
+        val calcDecimalPoint = decimalPoint * 0.1
+
+        val calcResult = standardToolValue * (calcInteger + calcDecimalPoint)
+        val calcResultInt = calcResult.toInt()
+        val calcResultString = calcResultInt.toString() + standardToolUnit
+
+        MeasureUnitSaveData.getInstance().unitNameSoft = calcResultString
+        MeasureUnitSaveData.getInstance().unit = standardToolUnit
+        MeasureUnitSaveData.getInstance().unitValue = calcResultInt
+
+    }
+
+    private fun saveNewTool() {
+
+        realm.beginTransaction()
+
+        val newItem = realm.createObject(MeasureUnit::class.java, newId())
+        newItem.unitType = 0
+        newItem.unitNameBold = MeasureUnitSaveData.getInstance().unitNameBold
+        newItem.unitNameSoft = MeasureUnitSaveData.getInstance().unitNameSoft
+        newItem.unit = MeasureUnitSaveData.getInstance().unit
+        newItem.unitValue = MeasureUnitSaveData.getInstance().unitValue
+
+        realm.commitTransaction()
+    }
+
+    private fun newId(): Long {
+        val maxId = realm.where(MeasureUnit::class.java).max("unitId")
+        if (maxId != null) {
+            return maxId.toLong() + 1
+        }
+        return 0
+    }
+
+    private fun closeKeyboard() {
+
+        val inputMethodManager = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(currentFocus.windowToken, 0)
+
+    }
+
+
     override fun onDestroy() {
         addUtilFragmentAdapter.instanceInit()
         super.onDestroy()
     }
+
 }
 
 interface OnEditTextClickListener {

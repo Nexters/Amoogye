@@ -40,6 +40,7 @@
             android:textSize="@dimen/add_util_head_comment_text_size" />
 
         <TextView
+            android:id="@+id/txt_2_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nanum_square_r"
@@ -64,7 +65,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/edit_txt_name_util"
+            android:id="@+id/btn_add_util_tool"
             android:layout_width="@dimen/add_util_volume_box_1"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/add_util_volume_box_end"
@@ -86,7 +87,7 @@
             android:textSize="@dimen/add_util_volume_count_text_size" />
 
         <Button
-            android:id="@+id/edit_txt_volume_decimal_point"
+            android:id="@+id/btn_add_util_integer"
             android:layout_width="@dimen/add_util_volume_box_2"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/add_util_volume_box_end"
@@ -108,7 +109,7 @@
             android:textSize="@dimen/add_util_volume_count_text_size" />
 
         <Button
-            android:id="@+id/edit_txt_volume_under_decimal_point"
+            android:id="@+id/btn_add_util_decimal_point"
             android:layout_width="@dimen/add_util_volume_box_2"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/add_util_volume_box_end"
@@ -129,4 +130,37 @@
             android:textSize="@dimen/add_util_volume_count_text_size" />
     </LinearLayout>
 
+    <RelativeLayout
+        android:id="@+id/layout_send_volume_1_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_outer_bottom"
+        android:orientation="vertical">
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_container_scroll_picker"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/layout_outer_mid"
+        android:layout_marginTop="10dp"
+        android:visibility="invisible">
+
+        <Button
+            android:id="@+id/btn_add_util_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="완료"
+            android:textAlignment="viewEnd"
+            android:visibility="invisible" />
+
+        <include
+            android:id="@+id/scroll_picker"
+            layout="@layout/layout_ingredient_scroll_wrap"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
 </RelativeLayout>

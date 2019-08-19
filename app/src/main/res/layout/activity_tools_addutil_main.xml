@@ -4,6 +4,7 @@
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:layout="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -120,14 +121,7 @@
                 android:textSize="@dimen/add_util_button_text_size" />
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/container_add_util_volume_choice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/view_pager_add_util"
-            android:visibility="gone">
 
-        </RelativeLayout>
     </RelativeLayout>
 
 </RelativeLayout>
