@@ -60,11 +60,29 @@ class CalcFragment : BaseFragment() {
         calculatorViewModel.onNumberButtonClick(it)
     }
 
+    private fun editTextWrapChange(type: EditTextType) {
+        edit_twice_human_one.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
+        edit_twice_amount.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
+        edit_twice_unit.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
+        edit_twice_ingredient.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
+        edit_twice_human_two.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
+        edit_twice_tool.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
+
+        when (type) {
+            EditTextType.HUMAN_ONE -> edit_twice_human_one.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
+            EditTextType.AMOUNT -> edit_twice_amount.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
+            EditTextType.UNIT -> edit_twice_unit.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
+            EditTextType.INGREDIENT -> edit_twice_ingredient.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
+            EditTextType.HUMAN_TWO -> edit_twice_human_two.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
+            EditTextType.TOOL -> edit_twice_tool.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
+        }
+    }
+
     private fun editTextClickEvent(editText: EditText, type: EditTextType) {
         editText.setOnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
                 calculatorViewModel.setSelectedEditText(type)
-//                editTextWrapChange(calculatorViewModel.getSelectedTimerEditText()!!)
+                editTextWrapChange(calculatorViewModel.getSelectedEditText()!!)
             }
 
             return@setOnTouchListener false

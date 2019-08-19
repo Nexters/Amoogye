@@ -18,8 +18,7 @@ class CalculatorViewModel(private val repo: CalculatorRepository) : ViewModel() 
     private var ingredientSelected = true
     private var portionSelected = true
 
-    private var selectedEditText: EditTextType = EditTextType.HUMAN_ONE
-
+    private val _selectedEditText = MutableLiveData<EditTextType>()
     private val _humanOne = MutableLiveData<String>()
     private val _amount = MutableLiveData<String>()
     private val _unit = MutableLiveData<String>()
@@ -100,11 +99,13 @@ class CalculatorViewModel(private val repo: CalculatorRepository) : ViewModel() 
     }
 
     fun setSelectedEditText(value: EditTextType) {
-        selectedEditText = value
+        _selectedEditText.value = value
     }
 
+    fun getSelectedEditText() = _selectedEditText.value
+
     fun onNumberButtonClick(number: String) {
-        when (selectedEditText) {
+        when (_selectedEditText.value) {
             EditTextType.HUMAN_ONE -> {
                 _humanOne.value = _humanOne.value?.let { it->
                     repo.changeText(number, it)
