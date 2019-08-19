@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingTop="5dp"
     android:paddingStart="@dimen/add_util_start_end"
     android:paddingEnd="@dimen/add_util_start_end">
 
@@ -28,8 +29,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/layout_outer_top"
         android:layout_marginTop="@dimen/add_util_head_comment_top"
+        android:layout_marginBottom="@dimen/add_util_volume_box_top"
         android:orientation="horizontal">
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -57,7 +58,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/add_util_volume_box_height"
         android:layout_below="@id/layout_outer_mid"
-        android:layout_marginTop="@dimen/add_util_volume_box_top"
         android:orientation="horizontal">
 
         <Button

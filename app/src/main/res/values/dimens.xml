@@ -84,8 +84,8 @@
     <!-- add util -->
     <dimen name="add_util_image_width">328dp</dimen>
     <dimen name="add_util_image_height">200dp</dimen>
-    <dimen name="add_util_image_top">12dp</dimen>
-    <dimen name="add_util_view_indicator_bottom">16dp</dimen>
+    <dimen name="add_util_image_top">15dp</dimen>
+    <dimen name="add_util_view_indicator_bottom">20dp</dimen>
 
     <dimen name="add_util_title_height">56dp</dimen>
     <dimen name="add_util_title_top">18dp</dimen>
@@ -100,12 +100,12 @@
     <dimen name="add_util_new_badge_start">12dp</dimen>
     <dimen name="add_util_new_badge_top">24dp</dimen>
     <dimen name="add_util_new_badge_bottom">22dp</dimen>
-    <dimen name="add_util_name_comment_bottom">56dp</dimen>
+    <dimen name="add_util_name_comment_bottom">48dp</dimen>
 
     <dimen name="add_util_volume_box_1">120dp</dimen>
     <dimen name="add_util_volume_box_2">26dp</dimen>
     <dimen name="add_util_volume_box_height">44dp</dimen>
-    <dimen name="add_util_volume_box_top">33dp</dimen>
+    <dimen name="add_util_volume_box_top">45dp</dimen>
     <dimen name="add_util_volume_box_end">6dp</dimen>
     <dimen name="add_util_volume_text_end">10dp</dimen>
 
