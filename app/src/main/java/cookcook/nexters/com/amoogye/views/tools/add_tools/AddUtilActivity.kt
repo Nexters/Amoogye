@@ -4,15 +4,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import android.widget.RelativeLayout
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import cookcook.nexters.com.amoogye.R
-import cookcook.nexters.com.amoogye.base.BaseScrollPicker
 import cookcook.nexters.com.amoogye.views.tools.MeasureUnit
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_tools_addutil_main.*
@@ -43,6 +40,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
 
     override fun onGetNameEditText(): String {
         val name = findViewById<EditText>(R.id.edit_txt_name_util).text.toString()
+        MeasureUnitSaveData.getInstance().unitNameBold = name
         return name
     }
 
@@ -61,13 +59,14 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
 
     override fun onAddUtilResult() {
         val nameResult = findViewById<TextView>(R.id.txt_3_user_name)
+        val nameResultUnit = findViewById<TextView>(R.id.txt_3_user_name_unit)
+        val result = MeasureUnitSaveData.getInstance().unitNameSoft
         nameResult.text = itemName
+        nameResultUnit.text = "($result)"
     }
 
 
     lateinit var realm: Realm
-    lateinit var newToolData : arrayList
-    lateinit var standardToolData : ArrayList
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,8 +83,6 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
         indicator_add_util.setupWithViewPager(view_pager_add_util)
 
 
-
-        // 프래그먼트 스와이프 시 변동사항
         view_pager_add_util.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
             }
@@ -104,6 +101,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
                         btn_add_util_next_page.text = "다음"
                         btn_add_util_exit.visibility = View.VISIBLE
                         btn_add_util_next_page.setOnClickListener {
+                            getStandardDataList()
                             view_pager_add_util.setCurrentItem(getItem(1), true)
                         }
                     }
@@ -113,6 +111,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
                         btn_add_util_next_page.text = "확인"
                         btn_add_util_exit.visibility = View.INVISIBLE
                         btn_add_util_next_page.setOnClickListener {
+                            saveNewTool()
                             finish()
                         }
 
@@ -152,7 +151,6 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
 
     private fun isNameUnique(): Boolean {
         val nameEditText = onGetNameEditText()
-        Log.d("nameEdit", nameEditText)
 
         try {
             realm.where(MeasureUnit::class.java).equalTo("unitNameBold", nameEditText).findFirst()!!
@@ -182,25 +180,49 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
     }
     
     private fun getStandardDataList() {
-        /* TODO 값 가져와서 리스트에 넣어놓기*/
-        // standardData -> 종이컵, ml, 150, 4, 5
-        
-        
-        // 1. 이름 가져오기 
-        
-        // 2. 종이컵의 unitValue 가져오기
-        
-        // 3. 종이컵의 unit 단위 가져오기
+
+        val standardTool = MeasureUnitSaveData.getInstance().currentTool
+        //val standardToolData = realm.where(MeasureUnit::class.java).equalTo("unitNameBold", standardTool).findFirst()!!
+        //테스트용
+        val standardToolData = realm.where(MeasureUnit::class.java).equalTo("unitNameBold", "종이컵").findFirst()!!
+
+        val standardToolValue = standardToolData.unitValue
+        val standardToolUnit = standardToolData.unit
+
+        val calcInteger = MeasureUnitSaveData.getInstance().currentInteger.toInt()
+        val decimalPoint = MeasureUnitSaveData.getInstance().currentDecimalPoint.toInt()
+        val calcDecimalPoint = decimalPoint * 0.1
+
+        val calcResult = standardToolValue * (calcInteger + calcDecimalPoint)
+        val calcResultInt = calcResult.toInt()
+        val calcResultString = calcResultInt.toString() + standardToolUnit
+
+        MeasureUnitSaveData.getInstance().unitNameSoft = calcResultString
+        MeasureUnitSaveData.getInstance().unit = standardToolUnit
+        MeasureUnitSaveData.getInstance().unitValue = calcResultInt
+
     }
-    
-    private fun calcNewToolValue() {
-        /*TODO 필요한 값들 계산하고 리스트에 넣기*/
-        // newData -> 물뚜껑, 계산결과+단위, 계산결과
-    }
-    
+
     private fun saveNewTool() {
-        /* 저장하기 */
-        // 리스트에 있는 것들 조합해서 잘 넣기
+
+        realm.beginTransaction()
+
+        val newItem = realm.createObject(MeasureUnit::class.java, newId())
+        newItem.unitType = 0
+        newItem.unitNameBold = MeasureUnitSaveData.getInstance().unitNameBold
+        newItem.unitNameSoft = MeasureUnitSaveData.getInstance().unitNameSoft
+        newItem.unit = MeasureUnitSaveData.getInstance().unit
+        newItem.unitValue = MeasureUnitSaveData.getInstance().unitValue
+
+        realm.commitTransaction()
+    }
+
+    private fun newId(): Long {
+        val maxId = realm.where(MeasureUnit::class.java).max("unitId")
+        if (maxId != null) {
+            return maxId.toLong() + 1
+        }
+        return 0
     }
     
 
@@ -209,11 +231,6 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
         super.onDestroy()
     }
 
-    private fun clickConfirmButton() {
-        MeasureUnitSaveData.getInstance().currentTool
-        MeasureUnitSaveData.getInstance().currentInteger
-        MeasureUnitSaveData.getInstance().currentDecimalPoint
-    }
 }
 
 interface OnEditTextClickListener {

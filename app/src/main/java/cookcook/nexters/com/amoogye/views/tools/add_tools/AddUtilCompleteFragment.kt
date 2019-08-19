@@ -11,6 +11,7 @@ import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.views.tools.MeasureUnit
 import cookcook.nexters.com.amoogye.views.tools.ToolsFragment
 import io.realm.Realm
+import kotlinx.android.synthetic.main.fragment_addutil_3_complete.*
 import kotlin.text.Typography.times
 
 
@@ -46,5 +47,7 @@ class AddUtilCompleteFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        val name = MeasureUnitSaveData.getInstance().unitNameSoft
     }
 }

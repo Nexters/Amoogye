@@ -119,6 +119,8 @@ class AddUtilNameFragment(
             edit_txt_name_util.text.clear()
         }
 
+
+
     }
 
     private fun addUtilCloseKeyboard() {

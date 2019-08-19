@@ -141,7 +141,6 @@
 
     <RelativeLayout
         android:id="@+id/layout_container_scroll_picker"
-        android:background="@drawable/add_util_picker_top_border"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/layout_outer_mid"
@@ -153,7 +152,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:background="@drawable/add_util_picker_top_border"
             android:text="완료"
             android:textAlignment="viewEnd"
             android:visibility="invisible" />

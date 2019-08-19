@@ -6,7 +6,6 @@
 
     <io.blackbox_vision.wheelview.view.WheelView
         android:id="@+id/wheelView"
-        app:textSize="18sp"
         app:drawItemCount="5"
         app:centerTextColor="@color/timer_theme_color"
         app:textSize="18sp"
