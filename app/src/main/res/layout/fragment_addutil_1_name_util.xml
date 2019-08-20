@@ -98,6 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:background="@color/transparent"
+                android:visibility="invisible"
                 android:src="@drawable/keyboard_icon_search_delete" />
         </RelativeLayout>
 

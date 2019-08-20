@@ -35,18 +35,27 @@
             android:layout_marginTop="@dimen/add_util_head_comment_top">
 
             <TextView
-                android:id="@+id/txt_addutil_name_by_user"
+                android:id="@+id/txt_3_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nanum_square_r"
-                android:text="내 밥그릇(150ml)"
+                android:text="내 밥그릇"
+                android:textColor="@color/add_util_main_color"
+                android:textSize="@dimen/add_util_head_comment_text_size" />
+
+            <TextView
+                android:id="@+id/txt_3_user_name_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(150ml)"
+                android:layout_toEndOf="@id/txt_3_user_name"
                 android:textColor="@color/add_util_main_color"
                 android:textSize="@dimen/add_util_head_comment_text_size" />
 
             <TextView
                 android:layout_width="wrap_content"
+                android:layout_toEndOf="@id/txt_3_user_name_unit"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/txt_addutil_name_by_user"
                 android:fontFamily="@font/nanum_square_r"
                 android:text="@string/add_util_complete_comment"
                 android:textColor="@color/add_util_text_color_soft"

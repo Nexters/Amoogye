@@ -8,7 +8,7 @@ class BaseScrollPicker {
 
     private var items: ArrayList<String> = ArrayList()
 
-    var wheelView: WheelView
+    open var wheelView: WheelView
 
     constructor(view: View, items: ArrayList<String>) {
         wheelView = view.findViewById(R.id.wheelView)
@@ -19,8 +19,26 @@ class BaseScrollPicker {
 
     }
 
+
+
+    fun getItem(): Int {
+        return wheelView.selectedItem
+    }
+
     fun addItem(item: String) {
         this.items.add(item)
+    }
+
+    fun addItems(items: ArrayList<String>) {
+        this.items = items
+    }
+
+    fun visible() {
+        wheelView.visibility = View.VISIBLE
+    }
+
+    fun inVisible() {
+        wheelView.visibility = View.GONE
     }
 
     fun setColor(color: Int) {

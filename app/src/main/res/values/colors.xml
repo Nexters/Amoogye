@@ -42,6 +42,7 @@
     <color name="add_util_btn_un_activate">#dde2e5</color>
     <color name="add_util_main_color">#ff4f34</color>
     <color name="add_util_line_division">#1A131c32</color>
+    <color name="add_util_line_division_2">#33131c32</color>
     <color name="add_util_volume_box">#dde2e5</color>
 </resources>
 
