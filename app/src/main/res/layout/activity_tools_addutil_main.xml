@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
+    xmlns:layout="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:layout="http://schemas.android.com/tools"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -61,14 +61,34 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/layout_outer_top">
 
-        <ImageView
-            android:id="@+id/img_add_util_name"
+
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/add_util_lottie_name"
             android:layout_width="@dimen/add_util_image_width"
             android:layout_height="@dimen/add_util_image_height"
             android:layout_centerInParent="true"
-            android:layout_marginStart="@dimen/add_util_start_end"
             android:paddingTop="@dimen/add_util_image_top"
-            android:src="@drawable/add_util_img" />
+            app:lottie_fileName="addtool01_and.json" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/add_util_lottie_volume"
+            android:layout_width="@dimen/add_util_image_width"
+            android:layout_height="@dimen/add_util_image_height"
+            android:layout_centerInParent="true"
+            android:paddingTop="@dimen/add_util_image_top"
+            app:lottie_fileName="addtool02_and.json"
+            android:visibility="gone"/>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/add_util_lottie_complete"
+            android:layout_width="@dimen/add_util_image_width"
+            android:layout_height="@dimen/add_util_image_height"
+            android:layout_centerInParent="true"
+            android:paddingTop="@dimen/add_util_image_top"
+            app:lottie_fileName="addtool03_and.json"
+            android:visibility="gone"/>
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -92,9 +112,9 @@
             android:id="@+id/indicator_add_util"
             android:layout_width="@dimen/add_util_indicator_width"
             android:layout_height="@dimen/add_util_indicator_height"
+            android:layout_alignParentTop="true"
             android:layout_marginStart="@dimen/add_util_start_end"
             android:layout_marginEnd="@dimen/add_util_start_end"
-            android:layout_alignParentTop="true"
             android:layout_marginBottom="@dimen/add_util_view_indicator_bottom"
             app:tabBackground="@drawable/add_util_indicator_tab_selector"
             app:tabIndicatorHeight="0dp" />
@@ -103,9 +123,9 @@
             android:id="@+id/layout_add_util_outer_bottom_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_marginStart="@dimen/add_util_start_end"
-            android:layout_marginEnd="@dimen/add_util_start_end"
-            android:layout_alignParentBottom="true">
+            android:layout_marginEnd="@dimen/add_util_start_end">
 
             <Button
                 android:id="@+id/btn_add_util_next_page"
@@ -113,9 +133,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/add_util_start_end"
                 android:layout_marginBottom="@dimen/add_util_start_end"
-                android:fontFamily="@font/nanum_square_r"
                 android:background="@drawable/add_util_button_selector"
                 android:enabled="false"
+                android:fontFamily="@font/nanum_square_r"
                 android:text="@string/add_util_next_step"
                 android:textColor="@color/white"
                 android:textSize="@dimen/add_util_button_text_size" />

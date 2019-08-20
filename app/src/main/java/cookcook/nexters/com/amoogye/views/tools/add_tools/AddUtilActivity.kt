@@ -15,6 +15,9 @@ import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.views.tools.MeasureUnit
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_tools_addutil_main.*
+import android.os.Looper.loop
+import com.airbnb.lottie.LottieAnimationView
+
 
 class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
     OnCountEnableListener, AddUtilNameFragment.OnGetNameEditTextListener,
@@ -103,6 +106,10 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
                     1 -> {
                         restPageDefault()
                         onGetNameByUser()
+                        lottieAnimation("addtool02_and.json", R.id.add_util_lottie_volume)
+                        add_util_lottie_name.visibility = View.GONE
+                        add_util_lottie_volume.visibility = View.VISIBLE
+                        add_util_lottie_complete.visibility = View.GONE
                         btn_add_util_next_page.text = "다음"
                         btn_add_util_exit.visibility = View.VISIBLE
                         btn_add_util_next_page.setOnClickListener {
@@ -113,6 +120,10 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
                     2 -> {
                         restPageDefault()
                         onAddUtilResult()
+                        lottieAnimation("addtool03_and.json", R.id.add_util_lottie_complete)
+                        add_util_lottie_name.visibility = View.GONE
+                        add_util_lottie_volume.visibility = View.GONE
+                        add_util_lottie_complete.visibility = View.VISIBLE
                         btn_add_util_next_page.text = "확인"
                         btn_add_util_exit.visibility = View.INVISIBLE
                         btn_add_util_next_page.setOnClickListener {
@@ -146,7 +157,11 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
         btn_add_util_next_page.isEnabled = false
         btn_add_util_back.visibility = View.INVISIBLE
         btn_add_util_next_page.text = "다음"
+        lottieAnimation("addtool01_and.json", R.id.add_util_lottie_name)
         btn_add_util_exit.visibility = View.VISIBLE
+        add_util_lottie_name.visibility = View.VISIBLE
+        add_util_lottie_volume.visibility = View.GONE
+        add_util_lottie_complete.visibility = View.GONE
         btn_add_util_next_page.setOnClickListener {
             btn_add_util_next_page.isEnabled = isNameUnique()
             closeKeyboard()
@@ -240,6 +255,13 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
         val inputMethodManager = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
 
+    }
+
+    private fun lottieAnimation(jsonName: String, id:Int) {
+        val animationView = findViewById<View>(id) as LottieAnimationView
+        animationView.setAnimation(jsonName)
+        animationView.loop(true)
+        animationView.playAnimation()
     }
 
 
