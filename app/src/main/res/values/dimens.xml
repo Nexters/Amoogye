@@ -43,6 +43,7 @@
     <dimen name="setting_sub_item_bottom">17.1dp</dimen>
     <dimen name="setting_switch_top">12dp</dimen>
     <dimen name="setting_switch_bottom">11.1dp</dimen>
+    <dimen name="setting_box_height">52dp</dimen>
 
 
     <!-- tools list text-->
