@@ -54,12 +54,13 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
 
     var itemName = ""
     override fun onGetNameByUser() {
-        itemName = findViewById<EditText>(R.id.edit_txt_name_util).text.toString()
+        itemName = MeasureUnitSaveData.getInstance().unitNameBold
         val comment = findViewById<TextView>(R.id.txt_2_user_name)
         comment.text = itemName
     }
 
     override fun onAddUtilResult() {
+        itemName = MeasureUnitSaveData.getInstance().unitNameBold
         val nameResult = findViewById<TextView>(R.id.txt_3_user_name)
         val nameResultUnit = findViewById<TextView>(R.id.txt_3_user_name_unit)
         val result = MeasureUnitSaveData.getInstance().unitNameSoft
@@ -237,7 +238,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
     private fun closeKeyboard() {
 
         val inputMethodManager = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(currentFocus.windowToken, 0)
+        inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
 
     }
 

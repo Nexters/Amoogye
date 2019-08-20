@@ -3,7 +3,7 @@
     <item>
         <shape android:shape="rectangle">
             <!-- Set the border color of your layout here -->
-            <solid android:color="@color/add_util_volume_box" />
+            <solid android:color="@color/black" />
 
         </shape>
     </item>

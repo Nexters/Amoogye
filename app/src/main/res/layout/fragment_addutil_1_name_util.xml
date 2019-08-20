@@ -29,6 +29,7 @@
                 android:textSize="@dimen/add_util_head_text_size" />
 
             <TextView
+                android:id="@+id/txt_name_comment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txt_title_1_name_util"
@@ -57,7 +58,7 @@
                 android:fontFamily="@font/nanum_square_r"
                 android:hint="@string/add_util_name_hint"
                 android:paddingBottom="@dimen/add_util_alert_top"
-                android:maxLength="@dimen/add_util_name_max_length"
+                android:maxLength="11"
                 android:textColor="@color/add_util_text_color"
                 android:textCursorDrawable="@drawable/add_name_edit_custom" />
 
@@ -93,7 +94,7 @@
                 android:visibility="invisible" />
 
             <ImageButton
-                android:id="@+id/btn_addutil_name_complete"
+                android:id="@+id/btn_add_util_name_complete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"

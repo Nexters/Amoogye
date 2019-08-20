@@ -119,7 +119,6 @@
     <dimen name="add_util_new_badge_bottom">22dp</dimen>
 
     <dimen name="add_util_name_comment_bottom">48dp</dimen>
-    <dimen name="add_util_name_max_length">11</dimen>
     <dimen name="add_util_name_edit_text_below">4dp</dimen>
     <dimen name="add_util_name_edit_line_height">1dp</dimen>
 

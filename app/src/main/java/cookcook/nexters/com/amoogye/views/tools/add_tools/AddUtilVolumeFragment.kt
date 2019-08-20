@@ -1,12 +1,9 @@
 package cookcook.nexters.com.amoogye.views.tools.add_tools
 
-import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import cookcook.nexters.com.amoogye.R
@@ -83,16 +80,16 @@ class AddUtilVolumeFragment : Fragment() {
 
         initializeLists()
 
-        btn_add_util_tool.text = toolList[0]
+        text_add_util_tool.text = toolList[0]
         MeasureUnitSaveData.getInstance().currentTool = toolList[0]
 
-        btn_add_util_integer.text = integerList[0]
+        txt_add_util_integer.text = integerList[0]
         MeasureUnitSaveData.getInstance().currentInteger = integerList[0]
 
-        btn_add_util_decimal_point.text = decimalPointList[0]
+        txt_add_util_decimal_point.text = decimalPointList[0]
         MeasureUnitSaveData.getInstance().currentDecimalPoint = decimalPointList[0]
 
-        btn_add_util_tool.setOnClickListener{
+        text_add_util_tool.setOnClickListener{
             state = ButtonSelectedState.TOOL
             picker = BaseScrollPicker(getView, toolList)
             layout_container_scroll_picker.visibility = View.VISIBLE
@@ -100,7 +97,7 @@ class AddUtilVolumeFragment : Fragment() {
             (activity!!.findViewById<Button>(R.id.btn_add_util_next_page) as View).visibility = View.GONE
         }
 
-        btn_add_util_integer.setOnClickListener {
+        txt_add_util_integer.setOnClickListener {
             state = ButtonSelectedState.INTEGER
             picker = BaseScrollPicker(getView, integerList)
             btn_add_util_confirm.visibility = View.VISIBLE
@@ -108,7 +105,7 @@ class AddUtilVolumeFragment : Fragment() {
             (activity!!.findViewById<Button>(R.id.btn_add_util_next_page) as View).visibility = View.GONE
         }
 
-        btn_add_util_decimal_point.setOnClickListener {
+        txt_add_util_decimal_point.setOnClickListener {
             state = ButtonSelectedState.DECIMALPOINT
             picker = BaseScrollPicker(getView, decimalPointList)
             btn_add_util_confirm.visibility = View.VISIBLE
@@ -123,15 +120,15 @@ class AddUtilVolumeFragment : Fragment() {
 
             when (state) {
                 ButtonSelectedState.TOOL -> {
-                    btn_add_util_tool.text = toolList[picker.getItem()]
+                    text_add_util_tool.text = toolList[picker.getItem()]
                     MeasureUnitSaveData.getInstance().currentTool = toolList[picker.getItem()]
                 }
                 ButtonSelectedState.INTEGER -> {
-                    btn_add_util_integer.text = integerList[picker.getItem()]
+                    txt_add_util_integer.text = integerList[picker.getItem()]
                     MeasureUnitSaveData.getInstance().currentInteger = integerList[picker.getItem()]
                 }
                 ButtonSelectedState.DECIMALPOINT -> {
-                    btn_add_util_decimal_point.text = decimalPointList[picker.getItem()]
+                    txt_add_util_decimal_point.text = decimalPointList[picker.getItem()]
                     MeasureUnitSaveData.getInstance().currentDecimalPoint = decimalPointList[picker.getItem()]
                 }
             }
