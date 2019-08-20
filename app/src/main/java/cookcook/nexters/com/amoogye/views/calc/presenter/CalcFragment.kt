@@ -2,9 +2,7 @@ package cookcook.nexters.com.amoogye.views.calc.presenter
 
 import android.animation.AnimatorSet
 import android.animation.ValueAnimator
-import android.annotation.SuppressLint
 import android.graphics.Color
-import android.os.CountDownTimer
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -12,10 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import com.baoyz.actionsheet.ActionSheet
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.base.BaseFragment
@@ -23,8 +18,12 @@ import cookcook.nexters.com.amoogye.base.BaseNumberButton
 import cookcook.nexters.com.amoogye.base.BaseScrollPicker
 import cookcook.nexters.com.amoogye.databinding.FragmentCalcBinding
 import cookcook.nexters.com.amoogye.views.calc.entity.EditTextType
-import cookcook.nexters.com.amoogye.views.calc.entity.NormalUnitModel
+import cookcook.nexters.com.amoogye.views.calc.entity.UnitModel
 import cookcook.nexters.com.amoogye.views.calc.entity.UnitType
+import cookcook.nexters.com.amoogye.views.tools.MeasureUnit
+import cookcook.nexters.com.amoogye.utils.realmData
+import io.realm.Realm
+import io.realm.RealmResults
 import kotlinx.android.synthetic.main.fragment_calc.*
 import kotlinx.android.synthetic.main.layout_unit_button_wrap.*
 import org.koin.android.ext.android.get
@@ -42,6 +41,8 @@ class CalcFragment : BaseFragment() {
     private val plusSelectStatus = arrayOf(false, false, true)
 
     private var currentContainerCase: Int = 3
+
+    private lateinit var realm: Realm
 
     companion object {
         // 선택 선언 1 (Fragment를 싱글턴으로 사용 시)
@@ -130,7 +131,9 @@ class CalcFragment : BaseFragment() {
 
         itemChange(calculatorViewModel.flag - 1)
         unitRecyclerView = UnitButtonActivity(view)
-        unitRecyclerView.addItems(makeDummyNormalItems())
+
+        /* TODO: 현재는 default로 일반 단위로 초기화되어있음 이후에는 선택 된 것을 기준으로 초기화하자. */
+        unitRecyclerView.addItems(selectUnitItems(UnitType.NORMAL))
 
         txt_ingredient.setOnClickListener {
             changeCalcContainerLayout(1)
@@ -334,16 +337,10 @@ class CalcFragment : BaseFragment() {
                 override fun onOtherButtonClick(actionSheet: ActionSheet?, index: Int) {
                     if (index == 0) {
                         txt_unit_changer.text = "생활단위"
-                        setRecyclerViewUnitLife()
-                        for (item in unitRecyclerView.adapter.getUnitList()) {
-                            Log.d("good", item.abbreviation)
-                        }
+                        setRecyclerViewUnitModel(UnitType.LIFE)
                     } else {
                         txt_unit_changer.text = "일반단위"
-                        setRecyclerViewUnitNormal()
-                        for (item in unitRecyclerView.adapter.getUnitList()) {
-                            Log.d("good", item.abbreviation)
-                        }
+                        setRecyclerViewUnitModel(UnitType.NORMAL)
                     }
                 }
 
@@ -353,42 +350,39 @@ class CalcFragment : BaseFragment() {
             }).show()
     }
 
-    private fun makeDummyNormalItems(): ArrayList<NormalUnitModel> {
-        return arrayListOf(
-            NormalUnitModel("g", "그램", UnitType.NORMAL),
-            NormalUnitModel("kg", "킬로그램", UnitType.NORMAL),
-            NormalUnitModel("oz", "온즈", UnitType.NORMAL),
-            NormalUnitModel("cc", "시시", UnitType.NORMAL),
-            NormalUnitModel("ml", "밀리그램", UnitType.NORMAL),
-            NormalUnitModel("L", "리터", UnitType.NORMAL),
-            NormalUnitModel("Tbsp", "테이블스푼", UnitType.NORMAL),
-            NormalUnitModel("Tsp", "티스푼", UnitType.NORMAL),
-            NormalUnitModel("pt", "파인트", UnitType.NORMAL)
-        )
+    private fun selectUnitItems(type: UnitType): ArrayList<UnitModel> {
+        val list: RealmResults<MeasureUnit> = when (type) {
+            UnitType.LIFE -> realm.where(MeasureUnit::class.java).equalTo("unitType", 0).findAll()
+            UnitType.NORMAL -> realm.where(MeasureUnit::class.java).equalTo("unitType", 1).findAll()
+        }
+
+/*
+        for (a in realmData) {
+            realm.beginTransaction()
+
+            val temp = realm.createObject(MeasureUnit::class.java, newId())
+            temp.unitNameBold = a.unitNameBold
+            temp.unitNameSoft = a.unitNameSoft
+            temp.unitStatus = a.unitStatus
+            temp.unitType = a.unitType
+            temp.unitValue = a.unitValue
+            temp.unit = a.unit
+
+            realm.commitTransaction()
+        }
+*/
+        val result: ArrayList<UnitModel> = arrayListOf()
+
+        for (item in list) {
+            result.add(UnitModel(item.unitNameBold, item.unitNameSoft, type))
+        }
+
+        return result
     }
 
-    private fun makeDummyLifeItems(): ArrayList<NormalUnitModel> {
-        return arrayListOf(
-            NormalUnitModel("밥숟가락", null, UnitType.LIFE),
-            NormalUnitModel("베라스푼", null, UnitType.LIFE),
-            NormalUnitModel("종이컵", null, UnitType.LIFE),
-            NormalUnitModel("병뚜껑", null, UnitType.LIFE),
-            NormalUnitModel("김용기", null, UnitType.LIFE),
-            NormalUnitModel("소주잔", null, UnitType.LIFE),
-            NormalUnitModel("참치캔", null, UnitType.LIFE),
-            NormalUnitModel("햇반그릇", null, UnitType.LIFE),
-            NormalUnitModel("my냄비", null, UnitType.LIFE)
-        )
-    }
-
-    private fun setRecyclerViewUnitNormal() {
+    private fun setRecyclerViewUnitModel(type: UnitType) {
         unitRecyclerView.removeAll()
-        unitRecyclerView.addItems(makeDummyNormalItems())
-    }
-
-    private fun setRecyclerViewUnitLife() {
-        unitRecyclerView.removeAll()
-        unitRecyclerView.addItems(makeDummyLifeItems())
+        unitRecyclerView.addItems(selectUnitItems(type))
     }
 
     override fun subscribeUI() {
@@ -399,6 +393,8 @@ class CalcFragment : BaseFragment() {
         binding.calculatorVM = calculatorViewModel
         calculatorViewModel.context = context!!
         binding.lifecycleOwner = this
+
+        realm = Realm.getDefaultInstance()
 
         return binding.root
     }

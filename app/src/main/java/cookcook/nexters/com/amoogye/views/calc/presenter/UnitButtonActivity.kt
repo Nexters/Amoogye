@@ -5,7 +5,7 @@ import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cookcook.nexters.com.amoogye.R
-import cookcook.nexters.com.amoogye.views.calc.entity.NormalUnitModel
+import cookcook.nexters.com.amoogye.views.calc.entity.UnitModel
 import cookcook.nexters.com.amoogye.views.calc.presenter.adapter.UnitAdapter
 
 const val GRID_COLUMN = 3
@@ -23,13 +23,13 @@ class UnitButtonActivity(view: View) {
         recyclerView.isLayoutFrozen = true
     }
 
-    fun addItems(item: ArrayList<NormalUnitModel>) {
+    fun addItems(item: ArrayList<UnitModel>) {
         recyclerView.isLayoutFrozen = false
         adapter.setAdapterItems(item)
         recyclerView.isLayoutFrozen = true
     }
 
-    fun addItem(item: NormalUnitModel) {
+    fun addItem(item: UnitModel) {
         recyclerView.isLayoutFrozen = false
         adapter.addAdapterItem(item)
         recyclerView.isLayoutFrozen = true
