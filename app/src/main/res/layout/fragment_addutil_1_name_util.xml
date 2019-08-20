@@ -63,8 +63,10 @@
                 android:textCursorDrawable="@drawable/add_name_edit_custom" />
 
             <View
+                android:id="@+id/view_edit__under"
                 android:layout_below="@id/edit_txt_name_util"
                 android:layout_marginTop="@dimen/add_util_name_edit_text_below"
+                android:layout_marginBottom="@dimen/add_util_alert_top"
                 android:layout_width="match_parent"
                 android:background="@color/black"
                 android:layout_height="@dimen/add_util_name_edit_line_height"/>
@@ -73,8 +75,7 @@
                 android:id="@+id/txt_alert_below_ten_letter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/edit_txt_name_util"
-                android:layout_marginTop="@dimen/add_util_alert_top"
+                android:layout_below="@id/view_edit__under"
                 android:fontFamily="@font/nanum_square_r"
                 android:text="@string/add_util_name_alert_ten"
                 android:textColor="@color/add_util_main_color"
@@ -85,8 +86,7 @@
                 android:id="@+id/txt_alert_same_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/edit_txt_name_util"
-                android:layout_marginTop="@dimen/add_util_alert_top"
+                android:layout_below="@id/view_edit__under"
                 android:fontFamily="@font/nanum_square_r"
                 android:text="@string/add_util_name_alert_same"
                 android:textColor="@color/add_util_main_color"
