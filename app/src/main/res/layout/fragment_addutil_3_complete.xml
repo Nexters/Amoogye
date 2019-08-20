@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingTop="5dp"
+    android:paddingTop="@dimen/add_util_fragment_top"
     android:paddingStart="@dimen/add_util_start_end"
     android:paddingEnd="@dimen/add_util_start_end">
 

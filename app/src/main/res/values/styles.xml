@@ -11,7 +11,7 @@
 
         <item name="actionSheetStyle">@style/ActionSheetStyleiOS7</item>
     </style>
-    
+
     <style name="BottomNavigationView" parent="@style/TextAppearance.AppCompat.Caption">
         <item name="android:textSize">@dimen/bottom_navigation_text_size</item>
         <item name="android:fontFamily">@font/nanum_square_r</item>
@@ -22,7 +22,7 @@
         <item name="android:fontFamily">@font/nanum_square_r</item>
     </style>
 
-    
+
     <style name="TabTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/white</item>
         <item name="android:textColorPrimary">@color/tools_list_main_color</item>
