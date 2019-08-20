@@ -130,6 +130,7 @@
     <dimen name="add_util_volume_box_end">6dp</dimen>
     <dimen name="add_util_volume_box_padding">12dp</dimen>
     <dimen name="add_util_volume_text_end">10dp</dimen>
+    <dimen name="add_util_volume_scroll_top">10dp</dimen>
 
 
     <!-- calc -->
