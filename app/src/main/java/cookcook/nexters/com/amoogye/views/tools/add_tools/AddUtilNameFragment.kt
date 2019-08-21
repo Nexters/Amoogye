@@ -99,7 +99,7 @@ class AddUtilNameFragment(
 
             override fun afterTextChanged(p0: Editable?) {
                 txt_alert_same_name.visibility = View.INVISIBLE
-                btn_addutil_name_complete.visibility = View.VISIBLE
+                btn_add_util_name_complete.visibility = View.VISIBLE
                 if (p0!!.length > 10) {
                     txt_alert_below_ten_letter.visibility = View.VISIBLE
                     onCountEnableFalseListener?.onCountTextEnableFalse()
@@ -108,18 +108,19 @@ class AddUtilNameFragment(
                     onCountEnableListener?.onCountTextEnableTrue()
                     if (p0.isEmpty()) {
                         onCountEnableFalseListener?.onCountTextEnableFalse()
-                        btn_addutil_name_complete.visibility = View.INVISIBLE
+                        btn_add_util_name_complete.visibility = View.INVISIBLE
                     }
                 }
             }
 
         })
 
-        btn_addutil_name_complete.setOnClickListener {
+
+        btn_add_util_name_complete.setOnClickListener {
             edit_txt_name_util.text.clear()
         }
 
-
+        MeasureUnitSaveData.getInstance().unitNameBold = edit_txt_name_util.text.toString()
 
     }
 

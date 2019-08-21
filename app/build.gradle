@@ -94,6 +94,9 @@ dependencies {
     // Realm adapter
     implementation 'io.realm:android-adapters:2.1.1'
 
+    // lottie
+    implementation "com.airbnb.android:lottie:3.0.0"
+
     //androidx
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.browser:browser:1.0.0'

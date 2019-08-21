@@ -47,7 +47,5 @@ class AddUtilCompleteFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        val name = MeasureUnitSaveData.getInstance().unitNameSoft
     }
 }
