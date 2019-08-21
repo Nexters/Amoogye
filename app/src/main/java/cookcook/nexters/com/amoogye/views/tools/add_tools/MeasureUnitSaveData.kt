@@ -16,6 +16,8 @@ class MeasureUnitSaveData {
     var currentInteger: String = ""
     var currentDecimalPoint: String = ""
 
+    var newItemId: Long = -1
+
     companion object {
         // 선택 선언 1 (Fragment를 싱글턴으로 사용 시)
         private var INSTANCE: MeasureUnitSaveData? = null

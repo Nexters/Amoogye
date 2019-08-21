@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.views.tools.MeasureUnit
 import cookcook.nexters.com.amoogye.views.tools.NUM_DEFAULT_ITEMS
+import cookcook.nexters.com.amoogye.views.tools.add_tools.MeasureUnitSaveData
 import io.realm.RealmRecyclerViewAdapter
 import io.realm.RealmResults
 
@@ -92,10 +93,12 @@ class ToolsRecyclerAdapterLife(
         }
 
         private fun isItemNew() : Int {
-            val createdTime = data!![adapterPosition].unitId
-            // val createdTime.createTime : Realm에 시간 데이터 넣기
-            // 조건 : 시간데이터를 가져와서 현재시간과 비교해서 3분 정도면 VISIBLE?
-            if (true) return View.VISIBLE
+            val newItemId = MeasureUnitSaveData.getInstance().newItemId
+            val dataId = data!![adapterPosition].unitId
+            if (dataId == newItemId) {
+                MeasureUnitSaveData.getInstance().newItemId = -1
+                return View.VISIBLE
+            }
             return View.GONE
         }
 
