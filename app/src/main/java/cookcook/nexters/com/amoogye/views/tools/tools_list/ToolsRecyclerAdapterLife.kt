@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.ToggleButton
 import androidx.recyclerview.widget.RecyclerView
@@ -27,6 +28,7 @@ class ToolsRecyclerAdapterLife(
         private val unitSoft = itemView.findViewById<TextView>(R.id.txt_measureUnit_soft)
         private val unitCheckBox = itemView.findViewById<CheckBox>(R.id.checkBox_lifeTool_Item)
         private val toggleOnOff = itemView.findViewById<ToggleButton>(R.id.toggle_tools_item_onoff)
+        private val imageNewItem = itemView.findViewById<ImageView>(R.id.img_new_item)
 
         fun bind(unit: MeasureUnit) {
             unitBold?.text = unit.unitNameBold
@@ -35,6 +37,7 @@ class ToolsRecyclerAdapterLife(
             unitCheckBox.isChecked = false
             toggleOnOff.visibility = getToggleVisibility()
             toggleOnOff.isChecked = isToggleOn()
+            imageNewItem.visibility = isItemNew()
         }
 
         private fun getVisibility(): Int {
@@ -86,6 +89,14 @@ class ToolsRecyclerAdapterLife(
                 }
 
             }
+        }
+
+        private fun isItemNew() : Int {
+            val createdTime = data!![adapterPosition].unitId
+            // val createdTime.createTime : Realm에 시간 데이터 넣기
+            // 조건 : 시간데이터를 가져와서 현재시간과 비교해서 3분 정도면 VISIBLE?
+            if (true) return View.VISIBLE
+            return View.GONE
         }
 
     }
