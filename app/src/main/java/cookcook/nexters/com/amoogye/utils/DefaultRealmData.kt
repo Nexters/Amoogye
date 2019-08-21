@@ -14,11 +14,11 @@ val realmData = arrayOf(
     MeasureUnit(9,1,0,"pt", "파인트","",0),
     MeasureUnit(10,0,0,"밥숟가락", "","",0),
     MeasureUnit(11,0,0,"베라스푼", "","",0),
-    MeasureUnit(11,0,0,"종이컵", "","",0),
-    MeasureUnit(11,0,0,"병뚜껑", "","",0),
-    MeasureUnit(11,0,0,"김용기", "","",0),
-    MeasureUnit(11,0,0,"소주잔", "","",0),
-    MeasureUnit(11,0,0,"참치캔", "","",0),
-    MeasureUnit(11,0,0,"햇반그릇", "","",0),
-    MeasureUnit(11,0,0,"내냄비", "","",0)
+    MeasureUnit(12,0,0,"종이컵", "","",0),
+    MeasureUnit(13,0,0,"병뚜껑", "","",0),
+    MeasureUnit(14,0,0,"김용기", "","",0),
+    MeasureUnit(15,0,0,"소주잔", "","",0),
+    MeasureUnit(16,0,0,"참치캔", "","",0),
+    MeasureUnit(17,0,0,"햇반그릇", "","",0),
+    MeasureUnit(18,0,0,"내냄비", "","",0)
 )
