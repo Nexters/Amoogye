@@ -58,7 +58,7 @@ class ToolsFragmentNormal : Fragment() {
 
         realm = Realm.getDefaultInstance()
 
-        unitList = realm.where(MeasureUnit::class.java).equalTo("unitType", TYPE_LIFE).findAll()
+        unitList = realm.where(MeasureUnit::class.java).equalTo("unitType", TYPE_NORMAL).findAll()
             .sort("unitId", Sort.DESCENDING)
 
         // 리사이클러뷰 어댑터
@@ -75,6 +75,7 @@ class ToolsFragmentNormal : Fragment() {
 
         // 리사이클러뷰 사이즈 고정 해제
         layout_normalRecyclerView.setHasFixedSize(false)
+
 
     }
 
