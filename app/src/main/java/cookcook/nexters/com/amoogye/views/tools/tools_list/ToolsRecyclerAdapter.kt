@@ -19,6 +19,7 @@ class ToolsRecyclerAdapter(
     autoUpdate: Boolean
 ) :
     RealmRecyclerViewAdapter<MeasureUnit, ToolsRecyclerAdapter.Holder>(measureUnitList, autoUpdate) {
+
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val unitBold = itemView.findViewById<TextView>(R.id.txt_measureUnit_bold)

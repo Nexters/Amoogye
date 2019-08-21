@@ -19,9 +19,9 @@ import cookcook.nexters.com.amoogye.base.BaseScrollPicker
 import cookcook.nexters.com.amoogye.databinding.FragmentCalcBinding
 import cookcook.nexters.com.amoogye.views.calc.entity.EditTextType
 import cookcook.nexters.com.amoogye.views.calc.entity.UnitModel
-import cookcook.nexters.com.amoogye.views.calc.entity.UnitType
 import cookcook.nexters.com.amoogye.views.tools.MeasureUnit
-import cookcook.nexters.com.amoogye.utils.realmData
+import cookcook.nexters.com.amoogye.views.tools.TYPE_LIFE
+import cookcook.nexters.com.amoogye.views.tools.TYPE_NORMAL
 import io.realm.Realm
 import io.realm.RealmResults
 import kotlinx.android.synthetic.main.fragment_calc.*
@@ -40,7 +40,7 @@ class CalcFragment : BaseFragment() {
     private val portionSelectStatus = arrayOf(false, true, true)
     private val plusSelectStatus = arrayOf(false, false, true)
 
-    private var currentContainerCase: Int = 3
+    private var currentContainerCase: Int = 0
 
     private lateinit var realm: Realm
 
@@ -129,11 +129,8 @@ class CalcFragment : BaseFragment() {
 
         BaseNumberButton(view, onClick)
 
-        itemChange(calculatorViewModel.flag - 1)
-        unitRecyclerView = UnitButtonActivity(view)
 
         /* TODO: 현재는 default로 일반 단위로 초기화되어있음 이후에는 선택 된 것을 기준으로 초기화하자. */
-        unitRecyclerView.addItems(selectUnitItems(UnitType.NORMAL))
 
         txt_ingredient.setOnClickListener {
             changeCalcContainerLayout(1)
@@ -145,6 +142,24 @@ class CalcFragment : BaseFragment() {
 
         btn_unit_changer.setOnClickListener {
             callUnitSelector()
+        }
+
+        btn_unit_changer_previous.setOnClickListener {
+            if (!calculatorViewModel.isClickPrevButton()) {
+                return@setOnClickListener
+            }
+            calculatorViewModel.reduceIndex()
+            unitRecyclerView.addItems(selectUnitItems(calculatorViewModel.currentSelectedType))
+        }
+
+        btn_unit_changer_next.setOnClickListener {
+
+            if (!calculatorViewModel.isClickNextButton()) {
+                return@setOnClickListener
+            }
+
+            calculatorViewModel.increaseIndex()
+            unitRecyclerView.addItems(selectUnitItems(calculatorViewModel.currentSelectedType))
         }
 
         val items: ArrayList<String> = arrayListOf(
@@ -160,10 +175,15 @@ class CalcFragment : BaseFragment() {
             "gtfrdeswasrdf"
         )
         val picker = BaseScrollPicker(view, items)
+
+        itemChange(calculatorViewModel.flag - 1)
+        unitRecyclerView = UnitButtonActivity(view)
+        unitRecyclerView.addItems(selectUnitItems(calculatorViewModel.currentSelectedType))
     }
 
     private fun itemChange(containerCase: Int) {
 
+        Log.d("TAG", "item change case $containerCase")
         if (ingredientSelectStatus[containerCase]) {
             txt_ingredient.setTextColor(Color.parseColor("#131c32"))
         } else {
@@ -204,8 +224,8 @@ class CalcFragment : BaseFragment() {
                         return
                     }
                     2 -> {
-                        humanTopWidth = layout_human_top_standard.measuredWidth
-                        humanBottomWidth = layout_human_bottom_standard.measuredWidth
+                        humanTopWidth = hide_layout_human_top_standard.measuredWidth
+                        humanBottomWidth = hide_layout_human_bottom_standard.measuredWidth
 
                         val animation = ValueAnimator.ofInt(layout_human_top_standard.measuredWidth, 0).setDuration(200)
                         animation.addUpdateListener {
@@ -242,8 +262,8 @@ class CalcFragment : BaseFragment() {
                         // 아무런 변화가 일어나지 않는다.
                     }
                     2 -> {
-                        ingredientTopWidth = layout_ingredient_top_standard.measuredWidth
-                        ingredientBottomWidth = layout_ingredient_bottom_standard.measuredWidth
+                        ingredientTopWidth = hide_layout_ingredient_top_standard.measuredWidth
+                        ingredientBottomWidth = hide_layout_ingredient_bottom_standard.measuredWidth
                         val animation2 =
                             ValueAnimator.ofInt(layout_ingredient_bottom_standard.measuredWidth, 0).setDuration(200)
                         animation2.addUpdateListener {
@@ -337,10 +357,12 @@ class CalcFragment : BaseFragment() {
                 override fun onOtherButtonClick(actionSheet: ActionSheet?, index: Int) {
                     if (index == 0) {
                         txt_unit_changer.text = "생활단위"
-                        setRecyclerViewUnitModel(UnitType.LIFE)
+                        calculatorViewModel.currentSelectedType = 1
+                        setRecyclerViewUnitModel(TYPE_LIFE)
                     } else {
                         txt_unit_changer.text = "일반단위"
-                        setRecyclerViewUnitModel(UnitType.NORMAL)
+                        calculatorViewModel.currentSelectedType = 0
+                        setRecyclerViewUnitModel(TYPE_NORMAL)
                     }
                 }
 
@@ -350,37 +372,52 @@ class CalcFragment : BaseFragment() {
             }).show()
     }
 
-    private fun selectUnitItems(type: UnitType): ArrayList<UnitModel> {
+    private fun selectUnitItems(type: Int): ArrayList<UnitModel> {
         val list: RealmResults<MeasureUnit> = when (type) {
-            UnitType.LIFE -> realm.where(MeasureUnit::class.java).equalTo("unitType", 0).findAll()
-            UnitType.NORMAL -> realm.where(MeasureUnit::class.java).equalTo("unitType", 1).findAll()
+            TYPE_LIFE -> {
+                realm.where(MeasureUnit::class.java).equalTo("unitType", TYPE_LIFE).findAll()
+            }
+            TYPE_NORMAL -> {
+                realm.where(MeasureUnit::class.java).equalTo("unitType", TYPE_NORMAL).findAll()
+            }
+            else -> {
+                Log.e("TAG", "선언되지 않은 타입입니다.")
+                return arrayListOf()
+            }
         }
 
-/*
-        for (a in realmData) {
-            realm.beginTransaction()
-
-            val temp = realm.createObject(MeasureUnit::class.java, newId())
-            temp.unitNameBold = a.unitNameBold
-            temp.unitNameSoft = a.unitNameSoft
-            temp.unitStatus = a.unitStatus
-            temp.unitType = a.unitType
-            temp.unitValue = a.unitValue
-            temp.unit = a.unit
-
-            realm.commitTransaction()
-        }
-*/
         val result: ArrayList<UnitModel> = arrayListOf()
 
-        for (item in list) {
-            result.add(UnitModel(item.unitNameBold, item.unitNameSoft, type))
+        calculatorViewModel.itemSize = list.size
+
+        var index = calculatorViewModel.index
+        var size = 9
+        var max = (list.size / 10) + 1
+
+        if (index > max - 1) {
+            index = max - 1
         }
+
+        var startIndex = index * size
+        var endIndex = index * size + size
+
+        if (endIndex > list.size) {
+            endIndex = list.size
+        }
+
+
+        for (x in startIndex until endIndex) {
+            result.add(UnitModel(list[x].unitNameBold, list[x].unitNameSoft, list[x].unitType))
+        }
+
+//        for (item in list) {
+//            result.add(UnitModel(item.unitNameBold, item.unitNameSoft, type))
+//        }
 
         return result
     }
 
-    private fun setRecyclerViewUnitModel(type: UnitType) {
+    private fun setRecyclerViewUnitModel(type: Int) {
         unitRecyclerView.removeAll()
         unitRecyclerView.addItems(selectUnitItems(type))
     }

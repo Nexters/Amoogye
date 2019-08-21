@@ -34,23 +34,6 @@ class TimerViewModel(private val repo: TimerRepository) : ViewModel() {
         _secondText.value = "0"
     }
 
-    /**
-     * 타이머 텍스트, 버튼 구분용
-     */
-    fun timerState(): TimerStatus {
-        if (isTimerStart && isTimerEnd) {
-            return TimerStatus.STATE_END // 종료
-        }
-        if (isTimerStart) {
-            return TimerStatus.STATE_PROGRESS // 진행 중
-        }
-        if (isTimerEnd) {
-            return TimerStatus.STATE_PAUSE // 일시 정지
-        }
-
-        return TimerStatus.STATE_WAIT // 시작
-    }
-
     fun setSelectedTimerEditText(number: Int) {
         _selectedTimerEditText.value = number
     }

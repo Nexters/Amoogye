@@ -8,8 +8,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.views.calc.entity.UnitModel
-import cookcook.nexters.com.amoogye.views.calc.entity.UnitType
 import cookcook.nexters.com.amoogye.views.calc.presenter.CalcFragment
+import cookcook.nexters.com.amoogye.views.tools.TYPE_LIFE
+import cookcook.nexters.com.amoogye.views.tools.TYPE_NORMAL
 import kotlinx.android.synthetic.main.item_unit_recyclerview.view.*
 
 class UnitAdapter(val context: Context) : RecyclerView.Adapter<UnitAdapter.Holder>() {
@@ -53,10 +54,10 @@ class UnitAdapter(val context: Context) : RecyclerView.Adapter<UnitAdapter.Holde
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind (unitModel: UnitModel, context: Context) {
-            if (unitModel.viewType == UnitType.NORMAL) {
+            if (unitModel.viewType == TYPE_NORMAL) {
                 itemView.txt_unit_abbreviation.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.resources.getDimension(R.dimen.item_normal_abbreviation_size))
                 itemView.txt_unit_korean.visibility = View.VISIBLE
-            } else if (unitModel.viewType == UnitType.LIFE){
+            } else if (unitModel.viewType == TYPE_LIFE){
                 itemView.txt_unit_abbreviation.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.resources.getDimension(R.dimen.item_life_abbreviation_size))
                 itemView.txt_unit_korean.visibility = View.GONE
             }
