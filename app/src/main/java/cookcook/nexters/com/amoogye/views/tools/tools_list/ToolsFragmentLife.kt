@@ -62,7 +62,7 @@ class ToolsFragmentLife : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         realm = Realm.getDefaultInstance()
-        val unitList = realm.where(MeasureUnit::class.java).equalTo("unitType", TYPE_NORMAL).findAll()
+        val unitList = realm.where(MeasureUnit::class.java).equalTo("unitType", TYPE_LIFE).findAll()
             .sort("unitId", Sort.DESCENDING)
 
         val recyclerAdapter =
@@ -124,13 +124,12 @@ class ToolsFragmentLife : Fragment() {
     }
 
     private fun areAllItemsDefault(): Boolean {
-        realm.beginTransaction()
 
-        val maxId = newId()
-        Log.d("maxmax", ""+maxId+" "+ NUM_DEFAULT_ITEMS)
+        val maxId = realm.where(MeasureUnit::class.java).equalTo("unitType", TYPE_LIFE)
+            .max("unitId").toInt()
 
-        realm.commitTransaction()
 
+        //Log.d("maxmax", ""+maxId.unitId+" "+ NUM_DEFAULT_ITEMS)
         if (maxId > NUM_DEFAULT_ITEMS) return false
         return true
     }

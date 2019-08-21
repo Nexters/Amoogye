@@ -13,6 +13,7 @@ import android.widget.TextView
 import androidx.viewpager.widget.ViewPager
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.views.tools.MeasureUnit
+import cookcook.nexters.com.amoogye.views.tools.TYPE_LIFE
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_tools_addutil_main.*
 
@@ -217,7 +218,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
         realm.beginTransaction()
 
         val newItem = realm.createObject(MeasureUnit::class.java, newId())
-        newItem.unitType = 0
+        newItem.unitType = TYPE_LIFE
         newItem.unitNameBold = MeasureUnitSaveData.getInstance().unitNameBold
         newItem.unitNameSoft = MeasureUnitSaveData.getInstance().unitNameSoft
         newItem.unit = MeasureUnitSaveData.getInstance().unit

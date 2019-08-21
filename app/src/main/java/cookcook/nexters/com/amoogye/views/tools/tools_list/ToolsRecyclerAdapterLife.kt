@@ -2,6 +2,7 @@ package cookcook.nexters.com.amoogye.views.tools.tools_list
 
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,7 +40,8 @@ class ToolsRecyclerAdapterLife(
 
         private fun getVisibility(): Int {
             val dataId = data!![adapterPosition].unitId
-            if (flagIsEditMode && (dataId >= NUM_DEFAULT_ITEMS)) {
+            Log.d("maxmax2", ""+dataId+" "+ NUM_DEFAULT_ITEMS+""+flagIsEditMode)
+            if (flagIsEditMode && (dataId > NUM_DEFAULT_ITEMS)) {
                 return View.VISIBLE
             }
             return View.GONE
