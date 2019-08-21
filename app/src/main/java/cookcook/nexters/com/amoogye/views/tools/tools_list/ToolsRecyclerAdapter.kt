@@ -38,6 +38,8 @@ class ToolsRecyclerAdapter(
 
         fun isToggleChecked() {
             toggleOnOff.setOnCheckedChangeListener{ toggleOnOff, _ ->
+                isToggleClicked = true
+
                 val dataId = data!![adapterPosition].unitId
                 if(toggleOnOff.isChecked){
                     toggleChecked.add(dataId)

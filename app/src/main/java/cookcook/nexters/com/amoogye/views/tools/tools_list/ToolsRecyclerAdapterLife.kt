@@ -40,7 +40,7 @@ class ToolsRecyclerAdapterLife(
 
         private fun getVisibility(): Int {
             val dataId = data!![adapterPosition].unitId
-            Log.d("maxmax2", ""+dataId+" "+ NUM_DEFAULT_ITEMS+""+flagIsEditMode)
+
             if (flagIsEditMode && (dataId > NUM_DEFAULT_ITEMS)) {
                 return View.VISIBLE
             }
@@ -73,16 +73,16 @@ class ToolsRecyclerAdapterLife(
 
         fun isToggleChecked() {
             toggleOnOff.setOnCheckedChangeListener{ toggleOnOff, _ ->
-                isToggleClicked = true
+                isToggleClickedLife = true
 
                 val dataId = data!![adapterPosition].unitId
                 if(toggleOnOff.isChecked){
-                    toggleChecked.add(dataId)
+                    toggleCheckedLife.add(dataId)
                 } else {
-                    if (dataId in toggleChecked){
-                        toggleChecked.remove(dataId)
+                    if (dataId in toggleCheckedLife){
+                        toggleCheckedLife.remove(dataId)
                     } else {
-                        toggleNotChecked.add(dataId)
+                        toggleNotCheckedLife.add(dataId)
                     }
 
                 }
