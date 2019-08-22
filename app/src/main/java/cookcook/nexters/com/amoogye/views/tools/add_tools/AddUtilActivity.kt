@@ -232,8 +232,10 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
     private fun saveNewTool() {
 
         realm.beginTransaction()
+        val newItemId = newId()
+        MeasureUnitSaveData.getInstance().newItemId = newItemId
 
-        val newItem = realm.createObject(MeasureUnit::class.java, newId())
+        val newItem = realm.createObject(MeasureUnit::class.java, newItemId)
         newItem.unitType = TYPE_LIFE
         newItem.unitNameBold = MeasureUnitSaveData.getInstance().unitNameBold
         newItem.unitNameSoft = MeasureUnitSaveData.getInstance().unitNameSoft

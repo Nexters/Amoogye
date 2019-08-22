@@ -30,6 +30,16 @@
         android:textColor="@color/tools_list_text_color_soft"
         android:textSize="@dimen/tools_list_item_soft_text_size" />
 
+    <com.rey.material.widget.ImageView
+        android:id="@+id/img_new_item"
+        android:layout_toEndOf="@id/txt_measureUnit_soft"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/add_util_new_item"
+        android:visibility="invisible"/>
+
     <ToggleButton
         android:id="@+id/toggle_tools_item_onoff"
         android:layout_width="@dimen/tools_list_toggle_width"

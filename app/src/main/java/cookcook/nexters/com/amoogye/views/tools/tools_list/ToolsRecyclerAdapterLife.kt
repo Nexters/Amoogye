@@ -7,12 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.ToggleButton
 import androidx.recyclerview.widget.RecyclerView
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.views.tools.MeasureUnit
 import cookcook.nexters.com.amoogye.views.tools.NUM_DEFAULT_ITEMS
+import cookcook.nexters.com.amoogye.views.tools.add_tools.MeasureUnitSaveData
 import io.realm.RealmRecyclerViewAdapter
 import io.realm.RealmResults
 
@@ -28,6 +30,7 @@ class ToolsRecyclerAdapterLife(
         private val unitSoft = itemView.findViewById<TextView>(R.id.txt_measureUnit_soft)
         private val unitCheckBox = itemView.findViewById<CheckBox>(R.id.checkBox_lifeTool_Item)
         private val toggleOnOff = itemView.findViewById<ToggleButton>(R.id.toggle_tools_item_onoff)
+        private val imageNewItem = itemView.findViewById<ImageView>(R.id.img_new_item)
 
         fun bind(unit: MeasureUnit) {
             unitBold?.text = unit.unitNameBold
@@ -36,6 +39,7 @@ class ToolsRecyclerAdapterLife(
             unitCheckBox.isChecked = false
             toggleOnOff.visibility = getToggleVisibility()
             toggleOnOff.isChecked = isToggleOn()
+            imageNewItem.visibility = isItemNew()
         }
 
         private fun getVisibility(): Int {
@@ -88,6 +92,16 @@ class ToolsRecyclerAdapterLife(
                 }
 
             }
+        }
+
+        private fun isItemNew() : Int {
+            val newItemId = MeasureUnitSaveData.getInstance().newItemId
+            val dataId = data!![adapterPosition].unitId
+            if (dataId == newItemId) {
+                MeasureUnitSaveData.getInstance().newItemId = -1
+                return View.VISIBLE
+            }
+            return View.GONE
         }
 
     }
