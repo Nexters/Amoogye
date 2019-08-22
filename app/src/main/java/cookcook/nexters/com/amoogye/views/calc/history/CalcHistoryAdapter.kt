@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import cookcook.nexters.com.amoogye.R
 import io.realm.RealmRecyclerViewAdapter
 import io.realm.RealmResults
+import java.text.SimpleDateFormat
+import java.util.*
 
 class CalcHistoryAdapter(
     private val context: Context,
@@ -23,7 +25,8 @@ class CalcHistoryAdapter(
         private val resultAfter = itemView.findViewById<TextView>(R.id.calc_history_result_after)
 
         fun bind(unit: CalcHistory) {
-            createDate?.text = unit.createDate.toString()
+            val formatter = SimpleDateFormat("yyyy년 M월 d일 E요일", Locale.KOREA)
+            createDate?.text = formatter.format(unit.createDate)
             createDate.visibility = isDateSame()
             resultBefore?.text = unit.calcResultBefore
             resultAfter?.text = unit.calcResultAfter
@@ -34,8 +37,8 @@ class CalcHistoryAdapter(
 
             if (adapterPosition == 0) return View.VISIBLE
 
-            val pastDate = data!![pastDataId].createDate
-            val nowDate = data!![adapterPosition].createDate
+            val pastDate = (data!![pastDataId].createDate / 10000000).toInt()
+            val nowDate = (data!![adapterPosition].createDate / 10000000).toInt()
 
             if (pastDate == nowDate) return View.GONE
 

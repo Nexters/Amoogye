@@ -25,9 +25,17 @@ class CalcHistoryActivity : AppCompatActivity() {
 
         realm = Realm.getDefaultInstance()
 
-        //val historyLastId = realm.where(CalcHistory::class.java).max("historyId").toLong()
-        historyList = realm.where(CalcHistory::class.java).findAll()
+        val historyLastId = realm.where(CalcHistory::class.java).max("historyId").toLong()
+
+        if (historyLastId > 100) {
+            historyList = realm.where(CalcHistory::class.java)
+            .between("historyId", historyLastId-LIMIT, historyLastId).findAll()
+            .sort("historyId", Sort.DESCENDING)
+        }
+        else {
+            historyList = realm.where(CalcHistory::class.java).findAll()
                 .sort("historyId", Sort.DESCENDING)
+        }
 
         val recyclerAdapter = CalcHistoryAdapter(this, historyList, true)
         layout_calc_history_recycler.adapter = recyclerAdapter
@@ -39,8 +47,5 @@ class CalcHistoryActivity : AppCompatActivity() {
         btn_calc_history_back.setOnClickListener {
             finish()
         }
-
-
     }
-
 }
