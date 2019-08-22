@@ -78,6 +78,7 @@
     <dimen name="tools_list_info_top">12dp</dimen>
     <dimen name="tools_list_info_start">170dp</dimen>
     <dimen name="tools_list_tab_height">35dp</dimen>
+    <dimen name="tools_list_toast_top_bottom">12dp</dimen>
 
 
     <!-- add util text -->

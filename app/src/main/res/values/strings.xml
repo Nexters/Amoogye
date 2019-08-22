@@ -39,6 +39,7 @@
     <string name="tools_list_edit">편집</string>
     <string name="tools_list_edit_close">닫기</string>
     <string name="tools_list_edit_delete">삭제</string>
+    <string name="tools_list_toast_alert">삭제할 수 있는 계량도구가 없습니다</string>
 
     <!-- tools add util-->
     <string name="add_util_title">계량도구 추가</string>

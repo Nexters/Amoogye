@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:text="@string/tools_list_toast_alert"
+        android:background="@drawable/tools_list_toast_background"
+        android:textColor="@color/white"
+        android:paddingStart="@dimen/tools_list_start_end"
+        android:paddingEnd="@dimen/tools_list_start_end"
+        android:paddingTop="@dimen/tools_list_toast_top_bottom"
+        android:paddingBottom="@dimen/tools_list_toast_top_bottom"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/nanum_square_r"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>
