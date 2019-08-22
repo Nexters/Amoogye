@@ -37,10 +37,12 @@ class CalcHistoryAdapter(
 
             if (adapterPosition == 0) return View.VISIBLE
 
-            val pastDate = (data!![pastDataId].createDate / 10000000).toInt()
-            val nowDate = (data!![adapterPosition].createDate / 10000000).toInt()
+            val pastDateMonth = (data!![pastDataId].createDate / (60*60*24*1000*7)%12).toInt()
+            val nowDateMonth = (data!![adapterPosition].createDate / (60*60*24*1000*7)%12).toInt()
+            val pastDateDay = (data!![pastDataId].createDate / (60*60*24*1000)%7).toInt()
+            val nowDateDay = (data!![adapterPosition].createDate / (60*60*24*1000)%7).toInt()
 
-            if (pastDate == nowDate) return View.GONE
+            if (pastDateMonth == nowDateMonth && pastDateDay == nowDateDay) return View.GONE
 
             if (adapterPosition == data!!.size - 1) pastDataId = 0
             else pastDataId = adapterPosition
