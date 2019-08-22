@@ -11,7 +11,8 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -307,8 +308,7 @@
                 android:id="@+id/calc_layout_bottom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="1dp">
+                android:layout_alignParentBottom="true">
 
                 <Button
                     android:layout_width="match_parent"
@@ -321,35 +321,45 @@
             </RelativeLayout>
         </RelativeLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:background="@color/main_background_color"/>
 
-        <FrameLayout
-            android:id="@+id/calc_frame_layout"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.47">
+            android:layout_weight="0.47"
+            android:layout_marginTop="4dp"
+            android:orientation="vertical"
+            android:background="@color/white">
 
-            <include layout="@layout/layout_number_button_wrap"
-                android:id="@+id/calc_layout_button"
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="visible"/>
+                android:layout_height="4dp"
+                android:background="@color/main_background_color"/>
 
-            <include layout="@layout/layout_unit_button_wrap"
-                android:id="@+id/calc_layout_unit"
+            <FrameLayout
+                android:id="@+id/calc_frame_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone"/>
+                android:layout_height="match_parent">
 
-            <include layout="@layout/layout_ingredient_scroll_wrap"
-                android:id="@+id/calc_layout_ingredient"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone"/>
+                <include layout="@layout/layout_number_button_wrap"
+                    android:id="@+id/calc_layout_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="visible"/>
 
-        </FrameLayout>
+                <include layout="@layout/layout_unit_button_wrap"
+                    android:id="@+id/calc_layout_unit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone"/>
+
+                <include layout="@layout/layout_ingredient_scroll_wrap"
+                    android:id="@+id/calc_layout_ingredient"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone"/>
+
+            </FrameLayout>
+        </LinearLayout>
+
     </LinearLayout>
 </layout>
