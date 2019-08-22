@@ -1,6 +1,7 @@
 package cookcook.nexters.com.amoogye.views.calc.history
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,36 +11,43 @@ import cookcook.nexters.com.amoogye.R
 import io.realm.RealmRecyclerViewAdapter
 import io.realm.RealmResults
 
-class CalcHistoryAdapter (private val context: Context, calcHistoryList: RealmResults<CalcHistory>, autoUpdate:Boolean) :
+class CalcHistoryAdapter(
+    private val context: Context,
+    calcHistoryList: RealmResults<CalcHistory>,
+    autoUpdate: Boolean
+) :
     RealmRecyclerViewAdapter<CalcHistory, CalcHistoryAdapter.Holder>(calcHistoryList, autoUpdate) {
-    inner class Holder(itemView : View) : RecyclerView.ViewHolder(itemView) {
+    inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val createDate = itemView.findViewById<TextView>(R.id.calc_history_date)
         private val resultBefore = itemView.findViewById<TextView>(R.id.calc_history_result_before)
         private val resultAfter = itemView.findViewById<TextView>(R.id.calc_history_result_after)
 
-        fun bind(unit : CalcHistory) {
+        fun bind(unit: CalcHistory) {
             createDate?.text = unit.createDate.toString()
+            createDate.visibility = isDateSame()
             resultBefore?.text = unit.calcResultBefore
             resultAfter?.text = unit.calcResultAfter
         }
 
-        private fun isDateSame() : Int{
 
-            val nowId = data!![adapterPosition].historyId
+        private fun isDateSame(): Int {
 
-            if (nowId == 0L){
-                return View.VISIBLE
-            } else {
-                val past = data!![adapterPosition-1].historyId
-                if (past == nowId) return View.GONE
-                return View.VISIBLE
-            }
+            if (adapterPosition == 0) return View.VISIBLE
+
+            val pastDate = data!![pastDataId].createDate
+            val nowDate = data!![adapterPosition].createDate
+
+            if (pastDate == nowDate) return View.GONE
+
+            if (adapterPosition == data!!.size - 1) pastDataId = 0
+            else pastDataId = adapterPosition
+
+            return View.VISIBLE
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val view = LayoutInflater.from(context).inflate(R.layout.calc_history_item_layout, parent,false)
+        val view = LayoutInflater.from(context).inflate(R.layout.calc_history_item_layout, parent, false)
         return Holder(view)
     }
 
@@ -48,6 +56,6 @@ class CalcHistoryAdapter (private val context: Context, calcHistoryList: RealmRe
     }
 
     override fun getItemCount(): Int {
-        return if(data == null) 0 else data!!.size
+        return if (data == null) 0 else data!!.size
     }
 }
