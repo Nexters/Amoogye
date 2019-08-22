@@ -72,7 +72,7 @@ class ToolsFragment : Fragment() , ToolsFragmentLife.OnClickEditModeListener {
         }
 
         btn_convert_add_util_activity.setOnClickListener {
-            val intent = Intent(context, CalcHistoryActivity::class.java)
+            val intent = Intent(context, AddUtilActivity::class.java)
             startActivity(intent)
         }
     }

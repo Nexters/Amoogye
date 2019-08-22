@@ -2,6 +2,7 @@ package cookcook.nexters.com.amoogye.views.calc.presenter
 
 import android.animation.AnimatorSet
 import android.animation.ValueAnimator
+import android.content.Intent
 import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
@@ -22,6 +23,7 @@ import cookcook.nexters.com.amoogye.views.calc.entity.UnitModel
 import cookcook.nexters.com.amoogye.views.calc.entity.UnitType
 import cookcook.nexters.com.amoogye.views.tools.MeasureUnit
 import cookcook.nexters.com.amoogye.utils.realmData
+import cookcook.nexters.com.amoogye.views.calc.history.CalcHistoryActivity
 import io.realm.Realm
 import io.realm.RealmResults
 import kotlinx.android.synthetic.main.fragment_calc.*
@@ -109,7 +111,11 @@ class CalcFragment : BaseFragment() {
     }
 
     override fun setupViews(view: View) {
-        btn_history.setOnClickListener { calculatorViewModel.gazuaa("history 구현 예정") }
+        btn_history.setOnClickListener {
+            val intent = Intent(context, CalcHistoryActivity::class.java)
+            startActivity(intent)
+
+        }
         btn_tip.setOnClickListener { calculatorViewModel.gazuaa("tool_tip 구현 예정") }
 
         // edittext setting

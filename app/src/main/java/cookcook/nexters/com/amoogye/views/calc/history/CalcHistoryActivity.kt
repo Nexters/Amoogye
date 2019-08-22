@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import cookcook.nexters.com.amoogye.R
 import io.realm.Realm
-import io.realm.RealmObject
 import io.realm.RealmResults
 import io.realm.Sort
 import kotlinx.android.synthetic.main.activity_calc_history.*
@@ -37,25 +36,11 @@ class CalcHistoryActivity : AppCompatActivity() {
         layout_calc_history_recycler.layoutManager = LinearLayoutManager(this)
         layout_calc_history_recycler.setHasFixedSize(false)
 
-    }
-
-    private fun insertData(date: Long, before: String, after: String) {
-        realm.beginTransaction()
-
-        val newItem = realm.createObject(CalcHistory::class.java, newId())
-        newItem.createDate = date
-        newItem.calcResultBefore = before
-        newItem.calcResultAfter = after
-
-        realm.commitTransaction()
-    }
-
-    private fun newId(): Long {
-        val maxId = realm.where(CalcHistory::class.java).max("historyId")
-        if (maxId != null) {
-            return maxId.toLong() + 1
+        btn_calc_history_back.setOnClickListener {
+            finish()
         }
-        return 0
+
+
     }
 
 }
