@@ -39,6 +39,7 @@
     <string name="tools_list_edit">편집</string>
     <string name="tools_list_edit_close">닫기</string>
     <string name="tools_list_edit_delete">삭제</string>
+    <string name="tools_list_toast_alert">삭제할 수 있는 계량도구가 없습니다</string>
 
     <!-- tools add util-->
     <string name="add_util_title">계량도구 추가</string>
@@ -58,7 +59,7 @@
     <string name="add_util_alert_cancel">계량도구 추가를 모두 취소\n하시겠습니까?</string>
     <string name="add_util_volume_comment_1">주변 물건으로 </string>
     <string name="add_util_volume_comment_2">의 부피를 계산해보세요.</string>
-    <string name="add_util_complete_comment">을 새로운 도구로 추가했습니다.</string>
+    <string name="add_util_complete_comment">를 새로운 도구로 추가했습니다.</string>
 
 
 </resources>

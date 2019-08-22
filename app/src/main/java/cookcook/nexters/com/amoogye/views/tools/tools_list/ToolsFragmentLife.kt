@@ -2,6 +2,7 @@ package cookcook.nexters.com.amoogye.views.tools.tools_list
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -77,7 +78,11 @@ class ToolsFragmentLife : Fragment() {
         btn_edit_toolList.setOnClickListener {
 
             if (areAllItemsDefault()) {
-                Toast.makeText(context!!, "삭제할 수 있는 계량도구가 없습니다", Toast.LENGTH_LONG).show()
+                val toastView = layoutInflater.inflate(R.layout.layout_tool_list_toast,  null)
+                val toast = Toast.makeText(context!!, "삭제할 수 있는 계량도구가 없습니다", Toast.LENGTH_SHORT)
+                toast.setGravity(Gravity.BOTTOM, 0, 270)
+                toast.setView(toastView)
+                toast.show()
             } else {
                 flagIsEditMode = true
                 recyclerAdapter.notifyDataSetChanged()
@@ -88,9 +93,9 @@ class ToolsFragmentLife : Fragment() {
                 callback.onDisableSwipe()
             }
 
-            if (isToggleClicked) {
+            if (isToggleClickedLife) {
                 changeToggleStatus()
-                isToggleClicked = false
+                isToggleClickedLife = false
             }
         }
 
@@ -127,12 +132,9 @@ class ToolsFragmentLife : Fragment() {
     }
 
     private fun areAllItemsDefault(): Boolean {
-        realm.beginTransaction()
 
-        val maxId = newId()
-        Log.d("maxmax", ""+maxId+" "+ NUM_DEFAULT_ITEMS)
-
-        realm.commitTransaction()
+        val maxId = realm.where(MeasureUnit::class.java).equalTo("unitType", TYPE_LIFE)
+            .max("unitId").toInt()
 
         if (maxId > NUM_DEFAULT_ITEMS) return false
         return true
@@ -141,11 +143,11 @@ class ToolsFragmentLife : Fragment() {
     private fun changeToggleStatus() {
         realm.beginTransaction()
 
-        if (toggleNotChecked.size > 0) {
-            toggleUnitStatus(ITEM_STATUS_OFF, toggleNotChecked)
+        if (toggleNotCheckedLife.size > 0) {
+            toggleUnitStatus(ITEM_STATUS_OFF, toggleNotCheckedLife)
         }
-        if (toggleChecked.size > 0) {
-            toggleUnitStatus(ITEM_STATUS_ON, toggleChecked)
+        if (toggleCheckedLife.size > 0) {
+            toggleUnitStatus(ITEM_STATUS_ON, toggleCheckedLife)
         }
 
         realm.commitTransaction()
@@ -186,8 +188,8 @@ class ToolsFragmentLife : Fragment() {
 
         for (itemId in checkedList) {
 
-            if (itemId in toggleChecked) toggleChecked.remove(itemId)
-            if (itemId in toggleNotChecked) toggleNotChecked.remove(itemId)
+            if (itemId in toggleCheckedLife) toggleChecked.remove(itemId)
+            if (itemId in toggleNotCheckedLife) toggleNotChecked.remove(itemId)
             val deleteItem = realm.where(MeasureUnit::class.java).equalTo("unitId", itemId).findFirst()!!
             deleteItem.deleteFromRealm()
 
@@ -203,9 +205,9 @@ class ToolsFragmentLife : Fragment() {
     override fun onResume() {
         super.onResume()
         flagIsEditMode = false
-        if (isToggleClicked) {
+        if (isToggleClickedLife) {
             changeToggleStatus()
-            isToggleClicked = false
+            isToggleClickedLife = false
         }
     }
 

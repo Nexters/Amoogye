@@ -3,12 +3,11 @@
     <item>
         <shape android:shape="rectangle">
             <!-- Set the border color of your layout here -->
-            <solid android:color="@color/add_util_volume_box" />
+            <solid android:color="@color/add_util_line_division_2" />
 
         </shape>
     </item>
     <item
-        android:bottom="1dp"
         android:top="1dp">
         <shape android:shape="rectangle">
             <solid android:color="@color/white" />

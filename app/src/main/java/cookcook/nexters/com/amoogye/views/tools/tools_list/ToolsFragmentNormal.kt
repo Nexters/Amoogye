@@ -80,6 +80,7 @@ class ToolsFragmentNormal : Fragment() {
         // 리사이클러뷰 사이즈 고정 해제
         layout_normalRecyclerView.setHasFixedSize(false)
 
+
     }
 
     private fun changeToggleStatus() {

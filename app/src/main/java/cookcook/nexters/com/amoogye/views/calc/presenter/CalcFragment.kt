@@ -2,7 +2,9 @@ package cookcook.nexters.com.amoogye.views.calc.presenter
 
 import android.animation.AnimatorSet
 import android.animation.ValueAnimator
+import android.content.Intent
 import android.graphics.Color
+import android.graphics.Typeface
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -10,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.EditText
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import com.baoyz.actionsheet.ActionSheet
 import cookcook.nexters.com.amoogye.R
@@ -23,6 +26,8 @@ import cookcook.nexters.com.amoogye.views.tools.MeasureUnit
 import cookcook.nexters.com.amoogye.views.tools.TYPE_FOOD
 import cookcook.nexters.com.amoogye.views.tools.TYPE_LIFE
 import cookcook.nexters.com.amoogye.views.tools.TYPE_NORMAL
+import cookcook.nexters.com.amoogye.utils.realmData
+import cookcook.nexters.com.amoogye.views.calc.history.CalcHistoryActivity
 import io.realm.Realm
 import io.realm.RealmResults
 import kotlinx.android.synthetic.main.fragment_calc.*
@@ -110,7 +115,11 @@ class CalcFragment : BaseFragment() {
     }
 
     override fun setupViews(view: View) {
-        btn_history.setOnClickListener { calculatorViewModel.gazuaa("history 구현 예정") }
+        btn_history.setOnClickListener {
+            val intent = Intent(context, CalcHistoryActivity::class.java)
+            startActivity(intent)
+
+        }
         btn_tip.setOnClickListener { calculatorViewModel.gazuaa("tool_tip 구현 예정") }
 
         // edittext setting
@@ -130,8 +139,11 @@ class CalcFragment : BaseFragment() {
 
         BaseNumberButton(view, onClick)
 
+//        itemChange(calculatorViewModel.flag - 1)
+//        unitRecyclerView = UnitButtonActivity(view)
 
         /* TODO: 현재는 default로 일반 단위로 초기화되어있음 이후에는 선택 된 것을 기준으로 초기화하자. */
+//        unitRecyclerView.addItems(selectUnitItems(UnitType.NORMAL))
 
         txt_ingredient.setOnClickListener {
             changeCalcContainerLayout(1)
@@ -236,20 +248,38 @@ class CalcFragment : BaseFragment() {
         Log.d("TAG", "item change case $containerCase")
         if (ingredientSelectStatus[containerCase]) {
             txt_ingredient.setTextColor(Color.parseColor("#131c32"))
+
+            val face : Typeface = ResourcesCompat.getFont(context!!, R.font.nanum_square_b)!!
+            txt_ingredient.typeface = face
         } else {
             txt_ingredient.setTextColor(Color.parseColor("#33131c32"))
+
+            val face : Typeface = ResourcesCompat.getFont(context!!, R.font.nanum_square_r)!!
+            txt_ingredient.typeface = face
         }
 
         if (portionSelectStatus[containerCase]) {
             txt_human.setTextColor(Color.parseColor("#131c32"))
+
+            val face : Typeface = ResourcesCompat.getFont(context!!, R.font.nanum_square_b)!!
+            txt_human.typeface = face
         } else {
             txt_human.setTextColor(Color.parseColor("#33131c32"))
+
+            val face : Typeface = ResourcesCompat.getFont(context!!, R.font.nanum_square_r)!!
+            txt_human.typeface = face
         }
 
         if (plusSelectStatus[containerCase]) {
             txt_calc_plus.setTextColor(Color.parseColor("#131c32"))
+
+            val face : Typeface = ResourcesCompat.getFont(context!!, R.font.nanum_square_b)!!
+            txt_calc_plus.typeface = face
         } else {
             txt_calc_plus.setTextColor(Color.parseColor("#33131c32"))
+
+            val face : Typeface = ResourcesCompat.getFont(context!!, R.font.nanum_square_r)!!
+            txt_calc_plus.typeface = face
         }
         updateContents(containerCase)
     }

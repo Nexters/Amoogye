@@ -1,7 +1,5 @@
 package cookcook.nexters.com.amoogye.views.tools.add_tools
 
-import cookcook.nexters.com.amoogye.views.calc.presenter.CalcFragment
-
 class MeasureUnitSaveData {
 
     /* 헌진이의 기운이 남아있습니다. */
@@ -15,6 +13,8 @@ class MeasureUnitSaveData {
     var currentTool: String = ""
     var currentInteger: String = ""
     var currentDecimalPoint: String = ""
+
+    var newItemId: Long = -1
 
     companion object {
         // 선택 선언 1 (Fragment를 싱글턴으로 사용 시)
