@@ -1,7 +1,5 @@
 package cookcook.nexters.com.amoogye.views.tools.add_tools
 
-import cookcook.nexters.com.amoogye.views.calc.presenter.CalcFragment
-
 class MeasureUnitSaveData {
 
     /* 헌진이의 기운이 남아있습니다. */

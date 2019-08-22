@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="52dp"
+    android:layout_height="@dimen/tools_list_item_height"
     android:background="@drawable/tools_item_border">
 
     <TextView
@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_marginStart="11dp"
+        android:layout_marginStart="@dimen/tools_list_item_soft_start"
         android:layout_marginTop="@dimen/tools_list_item_soft_top"
         android:layout_toEndOf="@id/txt_measureUnit_bold"
         android:fontFamily="@font/nanum_square_r"
@@ -42,8 +42,8 @@
 
     <ToggleButton
         android:id="@+id/toggle_tools_item_onoff"
-        android:layout_width="48dp"
-        android:layout_height="24dp"
+        android:layout_width="@dimen/tools_list_toggle_width"
+        android:layout_height="@dimen/tools_list_toggle_height"
         android:layout_alignParentEnd="true"
         android:layout_centerInParent="true"
         android:layout_marginTop="@dimen/tools_list_button_top"

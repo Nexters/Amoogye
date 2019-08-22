@@ -62,13 +62,22 @@
     <dimen name="tools_list_item_bold_bottom">16dp</dimen>
     <dimen name="tools_list_item_soft_top">20dp</dimen>
     <dimen name="tools_list_item_soft_bottom">19dp</dimen>
+    <dimen name="tools_list_item_soft_start">11dp</dimen>
+    <dimen name="tools_list_item_height">52dp</dimen>
+    <dimen name="tools_list_toggle_width">48dp</dimen>
+    <dimen name="tools_list_toggle_height">24dp</dimen>
+
     <dimen name="tools_list_line_divide_bold">4dp</dimen>
     <dimen name="tools_list_line_divide_soft">1dp</dimen>
     <dimen name="tools_list_button_top">16dp</dimen>
     <dimen name="tools_list_button_bottom">13dp</dimen>
     <dimen name="tools_list_delete_button">15dp</dimen>
+    <dimen name="tools_list_edit_button_width">26dp</dimen>
+    <dimen name="tools_list_edit_button_bottom">10dp</dimen>
     <dimen name="tools_list_info">4dp</dimen>
     <dimen name="tools_list_info_top">12dp</dimen>
+    <dimen name="tools_list_info_start">170dp</dimen>
+    <dimen name="tools_list_tab_height">35dp</dimen>
 
 
     <!-- add util text -->
@@ -80,6 +89,7 @@
     <dimen name="add_util_box_text_size">18sp</dimen>
     <dimen name="add_util_volume_count_text_size">16sp</dimen>
     <dimen name="add_util_volume_finish_text_size">14sp</dimen>
+    <dimen name="add_util_exit_alert_text_size">16sp</dimen>
 
 
     <!-- add util -->
@@ -87,6 +97,9 @@
     <dimen name="add_util_image_height">200dp</dimen>
     <dimen name="add_util_image_top">15dp</dimen>
     <dimen name="add_util_view_indicator_bottom">20dp</dimen>
+    <dimen name="add_util_fragment_top">5dp</dimen>
+    <dimen name="add_util_exit_alert_start_end">24dp</dimen>
+    <dimen name="add_util_exit_alert_top">25sp</dimen>
 
     <dimen name="add_util_title_height">56dp</dimen>
     <dimen name="add_util_title_top">18dp</dimen>
@@ -95,20 +108,29 @@
 
     <dimen name="add_util_head_top">20dp</dimen>
     <dimen name="add_util_head_comment_top">12dp</dimen>
+    <dimen name="add_util_fragment_container_top">40dp</dimen>
+    <dimen name="add_util_indicator_width">56dp</dimen>
+    <dimen name="add_util_indicator_height">5dp</dimen>
+
     <dimen name="add_util_button_top">23dp</dimen>
     <dimen name="add_util_button_bottom">16dp</dimen>
     <dimen name="add_util_alert_top">8dp</dimen>
     <dimen name="add_util_new_badge_start">12dp</dimen>
     <dimen name="add_util_new_badge_top">24dp</dimen>
     <dimen name="add_util_new_badge_bottom">22dp</dimen>
+
     <dimen name="add_util_name_comment_bottom">48dp</dimen>
+    <dimen name="add_util_name_edit_text_below">4dp</dimen>
+    <dimen name="add_util_name_edit_line_height">1dp</dimen>
 
     <dimen name="add_util_volume_box_1">120dp</dimen>
     <dimen name="add_util_volume_box_2">26dp</dimen>
     <dimen name="add_util_volume_box_height">44dp</dimen>
     <dimen name="add_util_volume_box_top">45dp</dimen>
     <dimen name="add_util_volume_box_end">6dp</dimen>
+    <dimen name="add_util_volume_box_padding">12dp</dimen>
     <dimen name="add_util_volume_text_end">10dp</dimen>
+    <dimen name="add_util_volume_scroll_top">10dp</dimen>
 
 
     <!-- calc -->
