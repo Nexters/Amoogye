@@ -11,7 +11,8 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -37,10 +38,9 @@
                     android:id="@+id/btn_tip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/tool_tip"
+                    android:src="@drawable/tip"
                     android:background="@android:color/transparent"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="16dp"/>
+                    android:layout_alignParentEnd="true"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -78,14 +78,16 @@
                     android:fontFamily="@font/nanum_square_r"
                     android:layout_marginStart="6dp"/>
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/calculator_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/calc_text_container"
                 android:layout_above="@+id/calc_layout_bottom"
-                android:layout_marginTop="32dp"
-                android:layout_marginBottom="24dp">
+                android:layout_below="@+id/calc_text_container"
+                android:layout_marginTop="33dp"
+                android:layout_marginBottom="23dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -105,14 +107,15 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="@dimen/calc_edit_box_size"
                                 android:background="@drawable/number_input_non_focus_wrap_rounded_box"
+                                android:cursorVisible="false"
                                 android:minWidth="@dimen/calc_edit_box_size"
                                 android:paddingStart="@dimen/calc_edit_padding"
                                 android:paddingEnd="@dimen/calc_edit_padding"
-                                android:text="@{calculatorVM.humanOne}"
                                 android:singleLine="true"
+                                android:text="@{calculatorVM.humanOne}"
                                 android:textAlignment="center"
                                 android:textSize="@dimen/calc_edit_text_size"
-                                android:cursorVisible="false"/>
+                                android:fontFamily="@font/nanum_square_r" />
 
                             <TextView
                                 android:id="@+id/txt_twice_human_standard"
@@ -121,9 +124,11 @@
                                 android:layout_centerVertical="true"
                                 android:layout_marginStart="4dp"
                                 android:layout_toEndOf="@+id/edit_twice_human_one"
-                                android:text="명 기준"
                                 android:singleLine="true"
-                                android:textSize="@dimen/calc_text_size" />
+                                android:text="명 기준"
+                                android:textColor="@color/calc_text_color"
+                                android:textSize="@dimen/calc_text_size"
+                                android:fontFamily="@font/nanum_square_r" />
                         </RelativeLayout>
 
                         <RelativeLayout
@@ -143,14 +148,15 @@
                                     android:layout_height="@dimen/calc_edit_box_size"
                                     android:layout_marginStart="8dp"
                                     android:background="@drawable/number_input_non_focus_wrap_rounded_box"
+                                    android:cursorVisible="false"
                                     android:minWidth="@dimen/calc_edit_box_size"
                                     android:paddingStart="@dimen/calc_edit_padding"
                                     android:paddingEnd="@dimen/calc_edit_padding"
-                                    android:text="@{calculatorVM.amount}"
                                     android:singleLine="true"
+                                    android:text="@{calculatorVM.amount}"
                                     android:textAlignment="center"
                                     android:textSize="@dimen/calc_edit_text_size"
-                                    android:cursorVisible="false"/>
+                                    android:fontFamily="@font/nanum_square_r" />
 
                                 <EditText
                                     android:id="@+id/edit_twice_unit"
@@ -163,28 +169,31 @@
                                     android:minWidth="@dimen/calc_edit_box_size"
                                     android:paddingStart="@dimen/calc_edit_padding"
                                     android:paddingEnd="@dimen/calc_edit_padding"
-                                    android:text="@{calculatorVM.unit}"
                                     android:singleLine="true"
+                                    android:text="@{calculatorVM.unit}"
                                     android:textAlignment="center"
-                                    android:textSize="@dimen/calc_edit_text_size" />
+                                    android:textSize="@dimen/calc_edit_text_size"
+                                    android:fontFamily="@font/nanum_square_r" />
 
                                 <TextView
                                     android:id="@+id/txt_twice_dml"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_centerVertical="true"
-                                    android:singleLine="true"
                                     android:layout_marginStart="4dp"
                                     android:layout_toEndOf="@+id/edit_twice_unit"
+                                    android:singleLine="true"
                                     android:text="의"
-                                    android:textSize="@dimen/calc_text_size" />
+                                    android:textSize="@dimen/calc_text_size"
+                                    android:textColor="@color/calc_text_color"
+                                    android:fontFamily="@font/nanum_square_r" />
                             </RelativeLayout>
 
                             <RelativeLayout
                                 android:id="@+id/layout_ingredient_wrap"
-                                android:layout_toEndOf="@id/layout_weight_standard"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:layout_toEndOf="@id/layout_weight_standard">
 
                                 <EditText
                                     android:id="@+id/edit_twice_ingredient"
@@ -196,10 +205,11 @@
                                     android:minWidth="@dimen/calc_edit_box_size"
                                     android:paddingStart="@dimen/calc_edit_padding"
                                     android:paddingEnd="@dimen/calc_edit_padding"
+                                    android:singleLine="true"
                                     android:text="@{calculatorVM.ingredient}"
                                     android:textAlignment="center"
-                                    android:singleLine="true"
-                                    android:textSize="@dimen/calc_edit_text_size" />
+                                    android:textSize="@dimen/calc_edit_text_size"
+                                    android:fontFamily="@font/nanum_square_r" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -207,9 +217,11 @@
                                     android:layout_centerVertical="true"
                                     android:layout_marginStart="4dp"
                                     android:layout_toEndOf="@id/edit_twice_ingredient"
-                                    android:text="를"
                                     android:singleLine="true"
-                                    android:textSize="@dimen/calc_text_size" />
+                                    android:text="를"
+                                    android:textSize="@dimen/calc_text_size"
+                                    android:textColor="@color/calc_text_color"
+                                    android:fontFamily="@font/nanum_square_r" />
                             </RelativeLayout>
                         </RelativeLayout>
                     </RelativeLayout>
@@ -229,14 +241,15 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="@dimen/calc_edit_box_size"
                                 android:background="@drawable/number_input_non_focus_wrap_rounded_box"
+                                android:cursorVisible="false"
                                 android:minWidth="@dimen/calc_edit_box_size"
                                 android:paddingStart="@dimen/calc_edit_padding"
                                 android:paddingEnd="@dimen/calc_edit_padding"
-                                android:text="@{calculatorVM.humanTwo}"
                                 android:singleLine="true"
+                                android:text="@{calculatorVM.humanTwo}"
                                 android:textAlignment="center"
                                 android:textSize="@dimen/calc_edit_text_size"
-                                android:cursorVisible="false"/>
+                                android:fontFamily="@font/nanum_square_r" />
 
                             <TextView
                                 android:id="@+id/txt_twice_human_standard_two"
@@ -245,9 +258,11 @@
                                 android:layout_centerVertical="true"
                                 android:layout_marginStart="4dp"
                                 android:layout_toEndOf="@+id/edit_twice_human_two"
-                                android:text="명 기준"
                                 android:singleLine="true"
-                                android:textSize="@dimen/calc_text_size" />
+                                android:text="명 기준"
+                                android:textSize="@dimen/calc_text_size"
+                                android:textColor="@color/calc_text_color"
+                                android:fontFamily="@font/nanum_square_r" />
                         </RelativeLayout>
 
                         <RelativeLayout
@@ -266,20 +281,24 @@
                                 android:minWidth="@dimen/calc_edit_box_size"
                                 android:paddingStart="@dimen/calc_edit_padding"
                                 android:paddingEnd="@dimen/calc_edit_padding"
+                                android:singleLine="true"
                                 android:text="@{calculatorVM.tool}"
-                                android:singleLine="true"
                                 android:textAlignment="center"
-                                android:textSize="@dimen/calc_edit_text_size" />
+                                android:textSize="@dimen/calc_edit_text_size"
+                                android:fontFamily="@font/nanum_square_r" />
                         </RelativeLayout>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:layout_marginStart="4dp"
-                                android:layout_toEndOf="@+id/layout_ingredient_bottom_standard"
-                                android:text="으로"
-                                android:singleLine="true"
-                                android:textSize="@dimen/calc_text_size" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="4dp"
+                            android:layout_toEndOf="@+id/layout_ingredient_bottom_standard"
+                            android:singleLine="true"
+                            android:text="으로"
+                            android:textSize="@dimen/calc_text_size"
+                            android:textColor="@color/calc_text_color"
+                            android:fontFamily="@font/nanum_square_r" />
                     </RelativeLayout>
                 </LinearLayout>
 
@@ -297,40 +316,50 @@
                     android:text="바꾸면"
                     android:textSize="22sp"
                     android:fontFamily="@font/nanum_square_r"
-                    android:background="#ff4f34"
+                    android:background="@drawable/timer_rounded_theme_button"
                     android:textColor="#ffffff" />
             </RelativeLayout>
         </RelativeLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:background="@color/main_background_color"/>
 
-        <FrameLayout
-            android:id="@+id/calc_frame_layout"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.47">
+            android:layout_weight="0.47"
+            android:layout_marginTop="4dp"
+            android:orientation="vertical"
+            android:background="@color/white">
 
-            <include layout="@layout/layout_number_button_wrap"
-                android:id="@+id/calc_layout_button"
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="visible"/>
+                android:layout_height="4dp"
+                android:background="@color/main_background_color"/>
 
-            <include layout="@layout/layout_unit_button_wrap"
-                android:id="@+id/calc_layout_unit"
+            <FrameLayout
+                android:id="@+id/calc_frame_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone"/>
+                android:layout_height="match_parent">
 
-            <include layout="@layout/layout_ingredient_scroll_wrap"
-                android:id="@+id/calc_layout_ingredient"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone"/>
+                <include layout="@layout/layout_number_button_wrap"
+                    android:id="@+id/calc_layout_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="visible"/>
 
-        </FrameLayout>
+                <include layout="@layout/layout_unit_button_wrap"
+                    android:id="@+id/calc_layout_unit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone"/>
+
+                <include layout="@layout/layout_ingredient_scroll_wrap"
+                    android:id="@+id/calc_layout_ingredient"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone"/>
+
+            </FrameLayout>
+        </LinearLayout>
+
     </LinearLayout>
 </layout>
