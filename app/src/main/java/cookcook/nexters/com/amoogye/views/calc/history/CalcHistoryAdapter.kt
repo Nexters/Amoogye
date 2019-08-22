@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import cookcook.nexters.com.amoogye.R
+import io.realm.RealmRecyclerViewAdapter
+import io.realm.RealmResults
 
-class CalcHistoryAdapter (private val context: Context, private val calcHistoryList:ArrayList<CalcHistory>) :
-    RecyclerView.Adapter<CalcHistoryAdapter.Holder>() {
+class CalcHistoryAdapter (private val context: Context, calcHistoryList: RealmResults<CalcHistory>, autoUpdate:Boolean) :
+    RealmRecyclerViewAdapter<CalcHistory, CalcHistoryAdapter.Holder>(calcHistoryList, autoUpdate) {
     inner class Holder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         private val createDate = itemView.findViewById<TextView>(R.id.calc_history_date)
         private val resultBefore = itemView.findViewById<TextView>(R.id.calc_history_result_before)
@@ -17,14 +19,21 @@ class CalcHistoryAdapter (private val context: Context, private val calcHistoryL
 
         fun bind(unit : CalcHistory) {
             createDate?.text = unit.createDate.toString()
-            createDate.visibility = isDateSame()
             resultBefore?.text = unit.calcResultBefore
             resultAfter?.text = unit.calcResultAfter
         }
 
         private fun isDateSame() : Int{
-            if (historyFlag) return View.VISIBLE
-            return View.GONE
+
+            val nowId = data!![adapterPosition].historyId
+
+            if (nowId == 0L){
+                return View.VISIBLE
+            } else {
+                val past = data!![adapterPosition-1].historyId
+                if (past == nowId) return View.GONE
+                return View.VISIBLE
+            }
         }
 
     }
@@ -35,10 +44,10 @@ class CalcHistoryAdapter (private val context: Context, private val calcHistoryL
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.bind(calcHistoryList[position])
+        holder.bind(data!![position])
     }
 
     override fun getItemCount(): Int {
-        return calcHistoryList.size
+        return if(data == null) 0 else data!!.size
     }
 }
