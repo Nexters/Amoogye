@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import cookcook.nexters.com.amoogye.R
+import cookcook.nexters.com.amoogye.views.calc.history.CalcHistoryActivity
 import cookcook.nexters.com.amoogye.views.tools.add_tools.AddUtilActivity
 import cookcook.nexters.com.amoogye.views.tools.tools_list.ToolsFragmentLife
 import cookcook.nexters.com.amoogye.views.tools.tools_list.ToolsViewPageAdapter
@@ -71,7 +72,7 @@ class ToolsFragment : Fragment() , ToolsFragmentLife.OnClickEditModeListener {
         }
 
         btn_convert_add_util_activity.setOnClickListener {
-            val intent = Intent(context, AddUtilActivity::class.java)
+            val intent = Intent(context, CalcHistoryActivity::class.java)
             startActivity(intent)
         }
     }
