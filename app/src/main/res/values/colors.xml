@@ -14,7 +14,7 @@
 
     <color name="number_input_wrap_color">#FF4F34</color>
     <color name="main_background_color">#EBEDF4</color>
-    <color name="number_button_text_color">#6E7282</color>
+    <color name="number_button_text_color">#131C32</color>
     <color name="number_non_focus_wrap_color">#f1f5f7</color>
 
     <color name="timer_title_color">#131c32</color>
@@ -39,6 +39,7 @@
     <color name="tools_list_background">#f1f5f7</color>
     <color name="tools_list_line_division">#0D131c32</color>
     <color name="tools_list_dim_color">#12000000</color>
+    <color name="tools_list_toast_color">#CC4d566b</color>
 
     <color name="add_util_text_color">#131c32</color>
     <color name="add_util_text_color_soft">#80131c32</color>
@@ -47,5 +48,6 @@
     <color name="add_util_line_division">#1A131c32</color>
     <color name="add_util_line_division_2">#33131c32</color>
     <color name="add_util_volume_box">#dde2e5</color>
+    <color name="calc_text_color">#7F131C32</color>
 </resources>
 

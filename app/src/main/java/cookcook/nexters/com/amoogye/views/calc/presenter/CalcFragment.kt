@@ -4,6 +4,7 @@ import android.animation.AnimatorSet
 import android.animation.ValueAnimator
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Typeface
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -11,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.EditText
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import com.baoyz.actionsheet.ActionSheet
 import cookcook.nexters.com.amoogye.R
@@ -172,20 +174,38 @@ class CalcFragment : BaseFragment() {
 
         if (ingredientSelectStatus[containerCase]) {
             txt_ingredient.setTextColor(Color.parseColor("#131c32"))
+
+            val face : Typeface = ResourcesCompat.getFont(context!!, R.font.nanum_square_b)!!
+            txt_ingredient.typeface = face
         } else {
             txt_ingredient.setTextColor(Color.parseColor("#33131c32"))
+
+            val face : Typeface = ResourcesCompat.getFont(context!!, R.font.nanum_square_r)!!
+            txt_ingredient.typeface = face
         }
 
         if (portionSelectStatus[containerCase]) {
             txt_human.setTextColor(Color.parseColor("#131c32"))
+
+            val face : Typeface = ResourcesCompat.getFont(context!!, R.font.nanum_square_b)!!
+            txt_human.typeface = face
         } else {
             txt_human.setTextColor(Color.parseColor("#33131c32"))
+
+            val face : Typeface = ResourcesCompat.getFont(context!!, R.font.nanum_square_r)!!
+            txt_human.typeface = face
         }
 
         if (plusSelectStatus[containerCase]) {
             txt_calc_plus.setTextColor(Color.parseColor("#131c32"))
+
+            val face : Typeface = ResourcesCompat.getFont(context!!, R.font.nanum_square_b)!!
+            txt_calc_plus.typeface = face
         } else {
             txt_calc_plus.setTextColor(Color.parseColor("#33131c32"))
+
+            val face : Typeface = ResourcesCompat.getFont(context!!, R.font.nanum_square_r)!!
+            txt_calc_plus.typeface = face
         }
         updateContents(containerCase)
     }

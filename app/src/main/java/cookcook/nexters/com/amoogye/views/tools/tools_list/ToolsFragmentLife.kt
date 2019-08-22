@@ -2,6 +2,7 @@ package cookcook.nexters.com.amoogye.views.tools.tools_list
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -78,7 +79,11 @@ class ToolsFragmentLife : Fragment() {
         btn_edit_toolList.setOnClickListener {
 
             if (areAllItemsDefault()) {
-                Toast.makeText(context!!, "삭제할 수 있는 계량도구가 없습니다", Toast.LENGTH_LONG).show()
+                val toastView = layoutInflater.inflate(R.layout.layout_tool_list_toast,  null)
+                val toast = Toast.makeText(context!!, "삭제할 수 있는 계량도구가 없습니다", Toast.LENGTH_SHORT)
+                toast.setGravity(Gravity.BOTTOM, 0, 270)
+                toast.setView(toastView)
+                toast.show()
             } else {
                 flagIsEditMode = true
                 recyclerAdapter.notifyDataSetChanged()
