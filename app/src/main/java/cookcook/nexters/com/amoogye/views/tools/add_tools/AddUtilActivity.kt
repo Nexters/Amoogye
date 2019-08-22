@@ -221,7 +221,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
         newItem.unitNameBold = MeasureUnitSaveData.getInstance().unitNameBold
         newItem.unitNameSoft = MeasureUnitSaveData.getInstance().unitNameSoft
         newItem.unit = MeasureUnitSaveData.getInstance().unit
-        newItem.unitValue = MeasureUnitSaveData.getInstance().unitValue
+        newItem.unitValue = MeasureUnitSaveData.getInstance().unitValue.toDouble()
 
         realm.commitTransaction()
     }

@@ -1,14 +1,17 @@
 package cookcook.nexters.com.amoogye.views.calc.presenter.adapter
 
 import android.content.Context
+import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import cookcook.nexters.com.amoogye.R
+import cookcook.nexters.com.amoogye.views.calc.entity.EditTextType
 import cookcook.nexters.com.amoogye.views.calc.entity.UnitModel
 import cookcook.nexters.com.amoogye.views.calc.presenter.CalcFragment
+import cookcook.nexters.com.amoogye.views.calc.presenter.CalculatorViewModel
 import cookcook.nexters.com.amoogye.views.tools.TYPE_LIFE
 import cookcook.nexters.com.amoogye.views.tools.TYPE_NORMAL
 import kotlinx.android.synthetic.main.item_unit_recyclerview.view.*
@@ -67,7 +70,19 @@ class UnitAdapter(val context: Context) : RecyclerView.Adapter<UnitAdapter.Holde
 
             /* TODO: CalcFragment에 종속적이지 않고 좀 더 안전한 코드를 고민해보자.. */
             itemView.setOnClickListener {
-                CalcFragment.getInstance().binding.calculatorVM!!.onUnitButtonClick(unitModel.abbreviation)
+                Log.d("TAG", "is weight is " + unitModel.isWeight.toString())
+                if(unitModel.isWeight) {
+                    Log.d("TAG", "show")
+                    if (CalcFragment.getInstance().binding.calculatorVM!!.getSelectedEditText() === EditTextType.UNIT) {
+                        CalcFragment.getInstance().showWeight()
+                    }
+                } else {
+                    Log.d("TAG", "hide")
+                    if (CalcFragment.getInstance().binding.calculatorVM!!.getSelectedEditText() === EditTextType.UNIT) {
+                        CalcFragment.getInstance().hideWeight()
+                    }
+                }
+                CalcFragment.getInstance().binding.calculatorVM!!.onUnitButtonClick(unitModel)
             }
         }
     }

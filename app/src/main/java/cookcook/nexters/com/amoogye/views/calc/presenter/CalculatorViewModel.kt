@@ -10,6 +10,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import cookcook.nexters.com.amoogye.views.calc.domain.CalculatorRepository
 import cookcook.nexters.com.amoogye.views.calc.entity.EditTextType
+import cookcook.nexters.com.amoogye.views.calc.entity.UnitModel
+import cookcook.nexters.com.amoogye.views.tools.MeasureUnit
 
 class CalculatorViewModel(private val repo: CalculatorRepository) : ViewModel() {
     lateinit var context: Context
@@ -19,6 +21,8 @@ class CalculatorViewModel(private val repo: CalculatorRepository) : ViewModel() 
     var currentSelectedType: Int = 0
 
     var itemSize: Int = 0
+
+    var isWeight: Boolean = false
 
     // flag
     private var ingredientSelected = true
@@ -38,6 +42,10 @@ class CalculatorViewModel(private val repo: CalculatorRepository) : ViewModel() 
     val ingredient: LiveData<String> get() = _ingredient
     val humanTwo: LiveData<String> get() = _humanTwo
     val tool: LiveData<String> get() = _tool
+
+    var unitObject: UnitModel? = null
+    var toolObject: UnitModel? = null
+    var ingredientObject: MeasureUnit? = null
 
     init {
         _humanOne.value = ""
@@ -139,6 +147,10 @@ class CalculatorViewModel(private val repo: CalculatorRepository) : ViewModel() 
         _selectedEditText.value = value
     }
 
+    fun setIngredient(text: String) {
+        _ingredient.value = text
+    }
+
     fun getSelectedEditText() = _selectedEditText.value
 
     fun onNumberButtonClick(number: String) {
@@ -167,17 +179,23 @@ class CalculatorViewModel(private val repo: CalculatorRepository) : ViewModel() 
         }
     }
 
-    fun onUnitButtonClick(value: String) {
+    fun onUnitButtonClick(model: UnitModel) {
         when (_selectedEditText.value) {
             EditTextType.UNIT -> {
-                _unit.value = value
+                unitObject = model
+                _unit.value = model.abbreviation
             }
             EditTextType.TOOL -> {
-                _tool.value = value
+                toolObject = model
+                _tool.value = model.abbreviation
             }
             else -> {
                 // 아무것도 안한다.
             }
         }
+    }
+
+    fun setUnit(unit: String) {
+        _unit.value = unit
     }
 }

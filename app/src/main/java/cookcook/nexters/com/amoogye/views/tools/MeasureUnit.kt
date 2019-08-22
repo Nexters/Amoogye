@@ -11,7 +11,8 @@ open class MeasureUnit(
     var unitNameBold: String = "",
     var unitNameSoft: String = "",
     var unit: String = "",
-    var unitValue: Int = 0,
-    var recentlyUseData: Long = 0,
-    var createData: Long = 0
+    var unitValue: Double = 0.0,
+    var isWeight: Boolean = false,
+    var recentlyUseDate: Long = 0,
+    var createDate: Long = 0
 ) : RealmObject()

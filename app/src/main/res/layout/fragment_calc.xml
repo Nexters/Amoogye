@@ -93,10 +93,10 @@
 
                 <LinearLayout
                     android:id="@+id/hide_layout"
-                    android:visibility="invisible"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="invisible">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -180,16 +180,7 @@
                                         android:textAlignment="center"
                                         android:textSize="@dimen/calc_edit_text_size" />
 
-                                    <TextView
-                                        android:id="@+id/hide_txt_twice_dml"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_centerVertical="true"
-                                        android:layout_marginStart="4dp"
-                                        android:layout_toEndOf="@id/hide_edit_twice_unit"
-                                        android:singleLine="true"
-                                        android:text="의"
-                                        android:textSize="@dimen/calc_text_size" />
+
                                 </RelativeLayout>
                             </RelativeLayout>
 
@@ -199,11 +190,22 @@
                                 android:layout_height="wrap_content"
                                 android:layout_toEndOf="@id/hide_layout_weight_standard">
 
+                                <TextView
+                                    android:id="@+id/hide_txt_twice_dml"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginStart="4dp"
+                                    android:singleLine="true"
+                                    android:text="의"
+                                    android:textSize="@dimen/calc_text_size" />
+
                                 <EditText
                                     android:id="@+id/hide_edit_twice_ingredient"
                                     android:layout_width="wrap_content"
                                     android:layout_height="@dimen/calc_edit_box_size"
                                     android:layout_marginStart="8dp"
+                                    android:layout_toEndOf="@id/hide_txt_twice_dml"
                                     android:background="@drawable/number_input_non_focus_wrap_rounded_box"
                                     android:cursorVisible="false"
                                     android:minWidth="@dimen/calc_edit_box_size"
@@ -214,16 +216,18 @@
                                     android:textAlignment="center"
                                     android:textSize="@dimen/calc_edit_text_size" />
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginStart="4dp"
-                                    android:layout_toEndOf="@id/hide_edit_twice_ingredient"
-                                    android:singleLine="true"
-                                    android:text="를"
-                                    android:textSize="@dimen/calc_text_size" />
+
                             </RelativeLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="4dp"
+                                android:layout_toEndOf="@id/hide_layout_ingredient_wrap"
+                                android:singleLine="true"
+                                android:text="를"
+                                android:textSize="@dimen/calc_text_size" />
                         </RelativeLayout>
                     </RelativeLayout>
 
@@ -362,7 +366,7 @@
 
                             <RelativeLayout
                                 android:id="@+id/layout_weight_standard"
-                                android:layout_width="0dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_toEndOf="@+id/edit_twice_amount">
 
@@ -385,30 +389,33 @@
                                         android:textAlignment="center"
                                         android:textSize="@dimen/calc_edit_text_size" />
 
-                                    <TextView
-                                        android:id="@+id/txt_twice_dml"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_centerVertical="true"
-                                        android:layout_marginStart="4dp"
-                                        android:layout_toEndOf="@+id/edit_twice_unit"
-                                        android:singleLine="true"
-                                        android:text="의"
-                                        android:textSize="@dimen/calc_text_size" />
+
                                 </RelativeLayout>
+
                             </RelativeLayout>
 
                             <RelativeLayout
                                 android:id="@+id/layout_ingredient_wrap"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_toEndOf="@id/layout_weight_standard">
+
+                                <TextView
+                                    android:id="@+id/txt_twice_dml"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginStart="4dp"
+                                    android:singleLine="true"
+                                    android:text="의"
+                                    android:textSize="@dimen/calc_text_size" />
 
                                 <EditText
                                     android:id="@+id/edit_twice_ingredient"
                                     android:layout_width="wrap_content"
                                     android:layout_height="@dimen/calc_edit_box_size"
                                     android:layout_marginStart="8dp"
+                                    android:layout_toEndOf="@id/txt_twice_dml"
                                     android:background="@drawable/number_input_non_focus_wrap_rounded_box"
                                     android:cursorVisible="false"
                                     android:minWidth="@dimen/calc_edit_box_size"
@@ -419,16 +426,17 @@
                                     android:textAlignment="center"
                                     android:textSize="@dimen/calc_edit_text_size" />
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginStart="4dp"
-                                    android:layout_toEndOf="@id/edit_twice_ingredient"
-                                    android:singleLine="true"
-                                    android:text="를"
-                                    android:textSize="@dimen/calc_text_size" />
                             </RelativeLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="4dp"
+                                android:layout_toEndOf="@id/layout_ingredient_wrap"
+                                android:singleLine="true"
+                                android:text="를"
+                                android:textSize="@dimen/calc_text_size" />
                         </RelativeLayout>
                     </RelativeLayout>
 
@@ -511,6 +519,7 @@
                 android:layout_alignParentBottom="true">
 
                 <Button
+                    android:id="@+id/btn_calc_button"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:background="#ff4f34"
@@ -518,6 +527,36 @@
                     android:text="바꾸면"
                     android:textColor="#ffffff"
                     android:textSize="22sp" />
+
+                <RelativeLayout
+                    android:id="@+id/layout_calc_result"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@drawable/number_input_wrap_rounded_box"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/txt_calc_result"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:textColor="@color/timer_theme_color" />
+
+                    <RelativeLayout
+                        android:id="@+id/layout_calc_delete_wrap"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp">
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/keyboard_icon_search_delete" />
+                    </RelativeLayout>
+                </RelativeLayout>
+
             </RelativeLayout>
         </RelativeLayout>
 

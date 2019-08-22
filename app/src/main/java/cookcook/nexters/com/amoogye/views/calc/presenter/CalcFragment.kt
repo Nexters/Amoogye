@@ -20,6 +20,7 @@ import cookcook.nexters.com.amoogye.databinding.FragmentCalcBinding
 import cookcook.nexters.com.amoogye.views.calc.entity.EditTextType
 import cookcook.nexters.com.amoogye.views.calc.entity.UnitModel
 import cookcook.nexters.com.amoogye.views.tools.MeasureUnit
+import cookcook.nexters.com.amoogye.views.tools.TYPE_FOOD
 import cookcook.nexters.com.amoogye.views.tools.TYPE_LIFE
 import cookcook.nexters.com.amoogye.views.tools.TYPE_NORMAL
 import io.realm.Realm
@@ -162,23 +163,72 @@ class CalcFragment : BaseFragment() {
             unitRecyclerView.addItems(selectUnitItems(calculatorViewModel.currentSelectedType))
         }
 
-        val items: ArrayList<String> = arrayListOf(
-            "jjjjjjjjj",
-            "mmmmmmm",
-            "kkkkkkkk",
-            "kjkjkjkjkjk",
-            "kkkkkkkkkk",
-            "jijijijiji",
-            "mkmkmkmkmk",
-            "inknknknk",
-            "rdrdftft",
-            "gtfrdeswasrdf"
-        )
+        val data = realm.where(MeasureUnit::class.java).equalTo("unitType", TYPE_FOOD).findAll()
+
+
+        val items: ArrayList<String> = arrayListOf()
+
+        data.map {items.add(it.unitNameBold)}
+
         val picker = BaseScrollPicker(view, items)
+
+        picker.wheelView.setLoopListener {
+            calculatorViewModel.setIngredient(items.get(it))
+            calculatorViewModel.ingredientObject = data.find { j -> j.unitNameBold == items[it]}
+        }
 
         itemChange(calculatorViewModel.flag - 1)
         unitRecyclerView = UnitButtonActivity(view)
         unitRecyclerView.addItems(selectUnitItems(calculatorViewModel.currentSelectedType))
+
+        val initData = realm.where(MeasureUnit::class.java).equalTo("unitId", 5).findFirst()
+        calculatorViewModel.unitObject = UnitModel(initData.unitNameBold, initData.unitNameSoft, initData.unitType, initData.isWeight, initData.unitValue)
+        calculatorViewModel.setUnit(initData.unitNameBold)
+
+        btn_calc_button.setOnClickListener {
+            var humanOne = calculatorViewModel.humanOne.value
+            var humanOneValue = 1
+            if (!humanOne!!.isEmpty()) {
+                humanOneValue = humanOne.toInt()
+            }
+
+            var humanTwo = calculatorViewModel.humanTwo.value
+            var humanTwoValue = 1
+            if (!humanOne.isEmpty()) {
+                humanTwoValue = humanTwo!!.toInt()
+            }
+
+            var amount = calculatorViewModel.amount.value
+            var amoutValue = 1
+            if (!amount!!.isEmpty()) {
+                amoutValue = amount.toInt()
+            }
+
+            var unit = calculatorViewModel.unitObject
+            var tool = calculatorViewModel.toolObject
+            var ingredient = calculatorViewModel.ingredientObject
+
+
+            var beforeValue = unit!!.oneMLValue * amoutValue // 10(amount) L (unit)를
+            var changeValue = tool!!.oneMLValue // ml로 바꾸면
+
+            var result = beforeValue / changeValue
+
+            Log.d("TAG", "human: ${humanOneValue} human2 ${humanTwoValue} unit ${unit.oneMLValue} tool: ${tool.oneMLValue}")
+
+            Log.d("TAG", result.toString())
+            txt_calc_result.text = "$result ${tool.abbreviation}이다."
+
+            btn_calc_button.visibility = View.GONE
+            layout_calc_result.visibility = View.VISIBLE
+            calc_frame_layout.visibility = View.INVISIBLE
+        }
+
+        layout_calc_delete_wrap.setOnClickListener {
+            btn_calc_button.visibility = View.VISIBLE
+            layout_calc_result.visibility = View.GONE
+            calc_frame_layout.visibility = View.VISIBLE
+        }
     }
 
     private fun itemChange(containerCase: Int) {
@@ -244,7 +294,7 @@ class CalcFragment : BaseFragment() {
 
                         val set = AnimatorSet()
                         set.playSequentially(listOf(animation, animation2))
-                        set.setInterpolator(AccelerateDecelerateInterpolator())
+                        set.interpolator = AccelerateDecelerateInterpolator()
                         set.start()
                     }
 
@@ -275,7 +325,7 @@ class CalcFragment : BaseFragment() {
                         val set = AnimatorSet()
 //                        set.playSequentially(listOf(animation, animation2))
                         set.play(animation2)
-                        set.setInterpolator(AccelerateDecelerateInterpolator())
+                        set.interpolator = AccelerateDecelerateInterpolator()
                         set.start()
                     }
                 }
@@ -304,7 +354,7 @@ class CalcFragment : BaseFragment() {
 
                         val set = AnimatorSet()
                         set.playSequentially(listOf(animation, animation2))
-                        set.setInterpolator(AccelerateDecelerateInterpolator())
+                        set.interpolator = AccelerateDecelerateInterpolator()
                         set.start()
                     }
 
@@ -319,7 +369,7 @@ class CalcFragment : BaseFragment() {
 
                         val set = AnimatorSet()
                         set.play(animation2)
-                        set.setInterpolator(AccelerateDecelerateInterpolator())
+                        set.interpolator = AccelerateDecelerateInterpolator()
                         set.start()
                     }
 
@@ -328,16 +378,48 @@ class CalcFragment : BaseFragment() {
                     }
                 }
             }
-            3 -> {
-                // 질량
-                layout_weight_standard.visibility = View.VISIBLE
-            }
             else -> {
 
             }
         }
 
         this.currentContainerCase = number
+    }
+
+    fun showWeight() {
+
+        val weightWidth = hide_layout_ingredient_wrap.layoutParams.width
+
+        val animation =
+            ValueAnimator.ofInt(0, weightWidth).setDuration(200)
+        animation.addUpdateListener {
+            val value = it.animatedValue as Int
+            layout_ingredient_wrap.layoutParams.width = value
+            layout_ingredient_wrap.requestLayout()
+        }
+
+        val set = AnimatorSet()
+        set.play(animation)
+        set.interpolator = AccelerateDecelerateInterpolator()
+        set.start()
+    }
+
+    fun hideWeight() {
+
+        val weightWidth = hide_layout_ingredient_wrap.layoutParams.width
+
+        val animation =
+            ValueAnimator.ofInt(weightWidth, 0).setDuration(200)
+        animation.addUpdateListener {
+            val value = it.animatedValue as Int
+            layout_ingredient_wrap.layoutParams.width = value
+            layout_ingredient_wrap.requestLayout()
+        }
+
+        val set = AnimatorSet()
+        set.play(animation)
+        set.interpolator = AccelerateDecelerateInterpolator()
+        set.start()
     }
 
     private fun changeCalcContainerLayout(number: Int) {
@@ -407,7 +489,8 @@ class CalcFragment : BaseFragment() {
 
 
         for (x in startIndex until endIndex) {
-            result.add(UnitModel(list[x].unitNameBold, list[x].unitNameSoft, list[x].unitType))
+            Log.d("TAG", list[x].unitNameSoft + " : " + list[x].isWeight)
+            result.add(UnitModel(list[x].unitNameBold, list[x].unitNameSoft, list[x].unitType, list[x].isWeight, list[x].unitValue))
         }
 
 //        for (item in list) {

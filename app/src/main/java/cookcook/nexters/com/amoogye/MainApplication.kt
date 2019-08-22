@@ -20,6 +20,10 @@ class MainApplication : Application() {
                     item.unitType = it.unitType
                     item.unitNameBold = it.unitNameBold
                     item.unitNameSoft = it.unitNameSoft
+                    item.isWeight = it.isWeight
+                    item.createDate = it.createDate
+                    item.recentlyUseDate = it.recentlyUseDate
+                    item.unitValue = it.unitValue
                 }
             }
         }.build()
