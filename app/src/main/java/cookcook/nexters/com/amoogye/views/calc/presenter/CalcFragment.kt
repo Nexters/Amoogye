@@ -22,13 +22,10 @@ import cookcook.nexters.com.amoogye.base.BaseScrollPicker
 import cookcook.nexters.com.amoogye.databinding.FragmentCalcBinding
 import cookcook.nexters.com.amoogye.views.calc.entity.EditTextType
 import cookcook.nexters.com.amoogye.views.calc.entity.UnitModel
-import cookcook.nexters.com.amoogye.views.tools.MeasureUnit
-import cookcook.nexters.com.amoogye.views.tools.TYPE_FOOD
-import cookcook.nexters.com.amoogye.views.tools.TYPE_LIFE
-import cookcook.nexters.com.amoogye.views.tools.TYPE_NORMAL
 import cookcook.nexters.com.amoogye.utils.realmData
 import cookcook.nexters.com.amoogye.views.calc.history.CalcHistory
 import cookcook.nexters.com.amoogye.views.calc.history.CalcHistoryActivity
+import cookcook.nexters.com.amoogye.views.tools.*
 import cookcook.nexters.com.amoogye.views.tools.add_tools.MeasureUnitSaveData
 import io.realm.Realm
 import io.realm.RealmResults
@@ -177,13 +174,13 @@ class CalcFragment : BaseFragment() {
 
         val items: ArrayList<String> = arrayListOf()
 
-        data.map {items.add(it.unitNameBold)}
+        data.map { items.add(it.unitNameBold) }
 
         val picker = BaseScrollPicker(view, items)
 
         picker.wheelView.setLoopListener {
             calculatorViewModel.setIngredient(items.get(it))
-            calculatorViewModel.ingredientObject = data.find { j -> j.unitNameBold == items[it]}
+            calculatorViewModel.ingredientObject = data.find { j -> j.unitNameBold == items[it] }
         }
 
         itemChange(calculatorViewModel.flag - 1)
@@ -191,7 +188,13 @@ class CalcFragment : BaseFragment() {
         unitRecyclerView.addItems(selectUnitItems(calculatorViewModel.currentSelectedType))
 
         val initData = realm.where(MeasureUnit::class.java).equalTo("unitId", 5).findFirst()
-        calculatorViewModel.unitObject = UnitModel(initData.unitNameBold, initData.unitNameSoft, initData.unitType, initData.isWeight, initData.unitValue)
+        calculatorViewModel.unitObject = UnitModel(
+            initData.unitNameBold,
+            initData.unitNameSoft,
+            initData.unitType,
+            initData.isWeight,
+            initData.unitValue
+        )
         calculatorViewModel.setUnit(initData.unitNameBold)
 
         btn_calc_button.setOnClickListener {
@@ -229,20 +232,23 @@ class CalcFragment : BaseFragment() {
                 beforeValue = beforeValue * weight
             }
 
-            var result = beforeValue / changeValue
+            var result: Double = beforeValue / changeValue
 
             if (humanOneValue > 1 || humanTwoValue > 1) {
                 result /= humanOneValue
                 result *= humanTwoValue
 
             }
-            var text = "$result ${tool.abbreviation}이다."
-            txt_calc_result.text = text
+
+            result = Math.round(result*100) / 100.0
+
+            var text = "$result ${tool.abbreviation}"
+            txt_calc_result.text = "$text 이다"
 
             realm.beginTransaction()
             val newItemId = newId()
             val newItem = realm.createObject(CalcHistory::class.java, newItemId)
-            newItem.calcResultBefore = "${unit.abbreviation} ${amoutValue}는"
+            newItem.calcResultBefore = "$amoutValue${unit.abbreviation}"
             newItem.calcResultAfter = text
             newItem.createDate = Date().time
             realm.commitTransaction()
@@ -273,36 +279,36 @@ class CalcFragment : BaseFragment() {
         if (ingredientSelectStatus[containerCase]) {
             txt_ingredient.setTextColor(Color.parseColor("#131c32"))
 
-            val face : Typeface = ResourcesCompat.getFont(context!!, R.font.nanum_square_b)!!
+            val face: Typeface = ResourcesCompat.getFont(context!!, R.font.nanum_square_b)!!
             txt_ingredient.typeface = face
         } else {
             txt_ingredient.setTextColor(Color.parseColor("#33131c32"))
 
-            val face : Typeface = ResourcesCompat.getFont(context!!, R.font.nanum_square_r)!!
+            val face: Typeface = ResourcesCompat.getFont(context!!, R.font.nanum_square_r)!!
             txt_ingredient.typeface = face
         }
 
         if (portionSelectStatus[containerCase]) {
             txt_human.setTextColor(Color.parseColor("#131c32"))
 
-            val face : Typeface = ResourcesCompat.getFont(context!!, R.font.nanum_square_b)!!
+            val face: Typeface = ResourcesCompat.getFont(context!!, R.font.nanum_square_b)!!
             txt_human.typeface = face
         } else {
             txt_human.setTextColor(Color.parseColor("#33131c32"))
 
-            val face : Typeface = ResourcesCompat.getFont(context!!, R.font.nanum_square_r)!!
+            val face: Typeface = ResourcesCompat.getFont(context!!, R.font.nanum_square_r)!!
             txt_human.typeface = face
         }
 
         if (plusSelectStatus[containerCase]) {
             txt_calc_plus.setTextColor(Color.parseColor("#131c32"))
 
-            val face : Typeface = ResourcesCompat.getFont(context!!, R.font.nanum_square_b)!!
+            val face: Typeface = ResourcesCompat.getFont(context!!, R.font.nanum_square_b)!!
             txt_calc_plus.typeface = face
         } else {
             txt_calc_plus.setTextColor(Color.parseColor("#33131c32"))
 
-            val face : Typeface = ResourcesCompat.getFont(context!!, R.font.nanum_square_r)!!
+            val face: Typeface = ResourcesCompat.getFont(context!!, R.font.nanum_square_r)!!
             txt_calc_plus.typeface = face
         }
         updateContents(containerCase)
@@ -543,7 +549,15 @@ class CalcFragment : BaseFragment() {
 
 
         for (x in startIndex until endIndex) {
-            result.add(UnitModel(list[x].unitNameBold, list[x].unitNameSoft, list[x].unitType, list[x].isWeight, list[x].unitValue))
+            result.add(
+                UnitModel(
+                    list[x].unitNameBold,
+                    list[x].unitNameSoft,
+                    list[x].unitType,
+                    list[x].isWeight,
+                    list[x].unitValue
+                )
+            )
         }
 
         return result

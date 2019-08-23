@@ -58,16 +58,16 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
 
     var itemName = ""
     override fun onGetNameByUser() {
-        itemName = MeasureUnitSaveData.getInstance().unitNameBold
+        itemName = findViewById<EditText>(R.id.edit_txt_name_util).text.toString()
         val comment = findViewById<TextView>(R.id.txt_2_user_name)
         comment.text = itemName
     }
 
     override fun onAddUtilResult() {
-        itemName = MeasureUnitSaveData.getInstance().unitNameBold
         val nameResult = findViewById<TextView>(R.id.txt_3_user_name)
         val nameResultUnit = findViewById<TextView>(R.id.txt_3_user_name_unit)
         val result = MeasureUnitSaveData.getInstance().unitNameSoft
+        MeasureUnitSaveData.getInstance().unitNameBold = itemName
         nameResult.text = itemName
         nameResultUnit.text = "($result)"
     }
@@ -207,10 +207,9 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
 
     private fun getStandardDataList() {
 
-        val standardToolData = realm.where(MeasureUnit::class.java).equalTo("unitNameBold", "종이컵").findFirst()!!
-
-        val standardToolValue = standardToolData.unitValue
-        val standardToolUnit = standardToolData.unit
+        val standardTool = MeasureUnitSaveData.getInstance().currentTool
+        val standardToolData = realm.where(MeasureUnit::class.java).equalTo("unitNameBold", standardTool).findFirst()!!
+        val standardToolValue = standardToolData.unitValue.toInt()
 
         val calcInteger = MeasureUnitSaveData.getInstance().currentInteger.toInt()
         val decimalPoint = MeasureUnitSaveData.getInstance().currentDecimalPoint.toInt()
@@ -218,10 +217,9 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
 
         val calcResult = standardToolValue * (calcInteger + calcDecimalPoint)
         val calcResultInt = calcResult.toInt()
-        val calcResultString = calcResultInt.toString() + standardToolUnit
+        val calcResultString = calcResultInt.toString() + "ml"
 
         MeasureUnitSaveData.getInstance().unitNameSoft = calcResultString
-        MeasureUnitSaveData.getInstance().unit = standardToolUnit
         MeasureUnitSaveData.getInstance().unitValue = calcResultInt
 
     }
@@ -236,7 +234,6 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
         newItem.unitType = TYPE_LIFE
         newItem.unitNameBold = MeasureUnitSaveData.getInstance().unitNameBold
         newItem.unitNameSoft = MeasureUnitSaveData.getInstance().unitNameSoft
-        newItem.unit = MeasureUnitSaveData.getInstance().unit
         newItem.unitValue = MeasureUnitSaveData.getInstance().unitValue.toDouble()
 
         realm.commitTransaction()
