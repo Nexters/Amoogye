@@ -207,9 +207,6 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
 
     private fun getStandardDataList() {
 
-        val standardTool = MeasureUnitSaveData.getInstance().currentTool
-        //val standardToolData = realm.where(MeasureUnit::class.java).equalTo("unitNameBold", standardTool).findFirst()!!
-        //테스트용
         val standardToolData = realm.where(MeasureUnit::class.java).equalTo("unitNameBold", "종이컵").findFirst()!!
 
         val standardToolValue = standardToolData.unitValue
@@ -240,7 +237,7 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
         newItem.unitNameBold = MeasureUnitSaveData.getInstance().unitNameBold
         newItem.unitNameSoft = MeasureUnitSaveData.getInstance().unitNameSoft
         newItem.unit = MeasureUnitSaveData.getInstance().unit
-        newItem.unitValue = MeasureUnitSaveData.getInstance().unitValue
+        newItem.unitValue = MeasureUnitSaveData.getInstance().unitValue.toDouble()
 
         realm.commitTransaction()
     }

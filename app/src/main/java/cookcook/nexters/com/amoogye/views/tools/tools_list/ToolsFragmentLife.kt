@@ -57,14 +57,13 @@ class ToolsFragmentLife : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
         realm = Realm.getDefaultInstance()
         val unitList = realm.where(MeasureUnit::class.java).equalTo("unitType", TYPE_LIFE).findAll()
             .sort("unitId", Sort.DESCENDING)
+
+        for(x in unitList) {
+            Log.d("TAG","LIFE" + x.unitNameSoft)
+        }
 
         val recyclerAdapter =
             ToolsRecyclerAdapterLife(context!!, unitList, true)
@@ -116,6 +115,10 @@ class ToolsFragmentLife : Fragment() {
             insertData("Leah", "메롱")
         }
 
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
     }
 
@@ -166,7 +169,7 @@ class ToolsFragmentLife : Fragment() {
         val newItem = realm.createObject(MeasureUnit::class.java, newId())
         newItem.unitNameBold = nameBold
         newItem.unitNameSoft = nameSoft
-        newItem.unitType = 0
+        newItem.unitType = TYPE_NORMAL
 
         realm.commitTransaction()
     }

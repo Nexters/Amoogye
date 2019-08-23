@@ -22,15 +22,21 @@ import cookcook.nexters.com.amoogye.base.BaseScrollPicker
 import cookcook.nexters.com.amoogye.databinding.FragmentCalcBinding
 import cookcook.nexters.com.amoogye.views.calc.entity.EditTextType
 import cookcook.nexters.com.amoogye.views.calc.entity.UnitModel
-import cookcook.nexters.com.amoogye.views.calc.entity.UnitType
 import cookcook.nexters.com.amoogye.views.tools.MeasureUnit
+import cookcook.nexters.com.amoogye.views.tools.TYPE_FOOD
+import cookcook.nexters.com.amoogye.views.tools.TYPE_LIFE
+import cookcook.nexters.com.amoogye.views.tools.TYPE_NORMAL
 import cookcook.nexters.com.amoogye.utils.realmData
+import cookcook.nexters.com.amoogye.views.calc.history.CalcHistory
 import cookcook.nexters.com.amoogye.views.calc.history.CalcHistoryActivity
+import cookcook.nexters.com.amoogye.views.tools.add_tools.MeasureUnitSaveData
 import io.realm.Realm
 import io.realm.RealmResults
 import kotlinx.android.synthetic.main.fragment_calc.*
 import kotlinx.android.synthetic.main.layout_unit_button_wrap.*
 import org.koin.android.ext.android.get
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class CalcFragment : BaseFragment() {
@@ -44,7 +50,7 @@ class CalcFragment : BaseFragment() {
     private val portionSelectStatus = arrayOf(false, true, true)
     private val plusSelectStatus = arrayOf(false, false, true)
 
-    private var currentContainerCase: Int = 3
+    private var currentContainerCase: Int = 0
 
     private lateinit var realm: Realm
 
@@ -121,7 +127,6 @@ class CalcFragment : BaseFragment() {
         btn_tip.setOnClickListener { calculatorViewModel.gazuaa("tool_tip 구현 예정") }
 
         // edittext setting
-        /* TODO: 묶어서 초기화하자 */
         calculatorViewModel.calculatorEditTextSetting(edit_twice_human_one)
         editTextClickEvent(edit_twice_human_one, EditTextType.HUMAN_ONE)
         calculatorViewModel.calculatorEditTextSetting(edit_twice_amount)
@@ -137,12 +142,6 @@ class CalcFragment : BaseFragment() {
 
         BaseNumberButton(view, onClick)
 
-        itemChange(calculatorViewModel.flag - 1)
-        unitRecyclerView = UnitButtonActivity(view)
-
-        /* TODO: 현재는 default로 일반 단위로 초기화되어있음 이후에는 선택 된 것을 기준으로 초기화하자. */
-        unitRecyclerView.addItems(selectUnitItems(UnitType.NORMAL))
-
         txt_ingredient.setOnClickListener {
             changeCalcContainerLayout(1)
         }
@@ -155,23 +154,123 @@ class CalcFragment : BaseFragment() {
             callUnitSelector()
         }
 
-        val items: ArrayList<String> = arrayListOf(
-            "jjjjjjjjj",
-            "mmmmmmm",
-            "kkkkkkkk",
-            "kjkjkjkjkjk",
-            "kkkkkkkkkk",
-            "jijijijiji",
-            "mkmkmkmkmk",
-            "inknknknk",
-            "rdrdftft",
-            "gtfrdeswasrdf"
-        )
+        btn_unit_changer_previous.setOnClickListener {
+            if (!calculatorViewModel.isClickPrevButton()) {
+                return@setOnClickListener
+            }
+            calculatorViewModel.reduceIndex()
+            unitRecyclerView.addItems(selectUnitItems(calculatorViewModel.currentSelectedType))
+        }
+
+        btn_unit_changer_next.setOnClickListener {
+
+            if (!calculatorViewModel.isClickNextButton()) {
+                return@setOnClickListener
+            }
+
+            calculatorViewModel.increaseIndex()
+            unitRecyclerView.addItems(selectUnitItems(calculatorViewModel.currentSelectedType))
+        }
+
+        val data = realm.where(MeasureUnit::class.java).equalTo("unitType", TYPE_FOOD).findAll()
+
+
+        val items: ArrayList<String> = arrayListOf()
+
+        data.map {items.add(it.unitNameBold)}
+
         val picker = BaseScrollPicker(view, items)
+
+        picker.wheelView.setLoopListener {
+            calculatorViewModel.setIngredient(items.get(it))
+            calculatorViewModel.ingredientObject = data.find { j -> j.unitNameBold == items[it]}
+        }
+
+        itemChange(calculatorViewModel.flag - 1)
+        unitRecyclerView = UnitButtonActivity(view)
+        unitRecyclerView.addItems(selectUnitItems(calculatorViewModel.currentSelectedType))
+
+        val initData = realm.where(MeasureUnit::class.java).equalTo("unitId", 5).findFirst()
+        calculatorViewModel.unitObject = UnitModel(initData.unitNameBold, initData.unitNameSoft, initData.unitType, initData.isWeight, initData.unitValue)
+        calculatorViewModel.setUnit(initData.unitNameBold)
+
+        btn_calc_button.setOnClickListener {
+            var humanOne = calculatorViewModel.humanOne.value
+            var humanOneValue = 1
+            if (!humanOne!!.isEmpty()) {
+                humanOneValue = humanOne.toInt()
+            }
+
+            var humanTwo = calculatorViewModel.humanTwo.value
+            var humanTwoValue = 1
+            if (!humanOne.isEmpty()) {
+                humanTwoValue = humanTwo!!.toInt()
+            }
+
+            var amount = calculatorViewModel.amount.value
+            var amoutValue = 1
+            if (!amount!!.isEmpty()) {
+                amoutValue = amount.toInt()
+            }
+
+            var unit = calculatorViewModel.unitObject
+            var tool = calculatorViewModel.toolObject
+            var ingredient = calculatorViewModel.ingredientObject
+
+            if (unit!!.abbreviation.isEmpty() || tool!!.abbreviation.isEmpty()) {
+                return@setOnClickListener
+            }
+
+            var beforeValue = unit.oneMLValue * amoutValue // 10(amount) L (unit)를
+            var changeValue = tool.oneMLValue // ml로 바꾸면
+
+            var weight = ingredient!!.unitValue
+
+            if (!ingredient.unitNameBold.isEmpty()) {
+                beforeValue = beforeValue * weight
+            }
+
+            var result = beforeValue / changeValue
+
+            if (humanOneValue > 1 || humanTwoValue > 1) {
+                result /= humanOneValue
+                result *= humanTwoValue
+
+            }
+            var text = "$result ${tool.abbreviation}이다."
+            txt_calc_result.text = text
+
+            realm.beginTransaction()
+            val newItemId = newId()
+            val newItem = realm.createObject(CalcHistory::class.java, newItemId)
+            newItem.calcResultBefore = "${unit.abbreviation} ${amoutValue}는"
+            newItem.calcResultAfter = text
+            newItem.createDate = Date().time
+            realm.commitTransaction()
+
+            btn_calc_button.visibility = View.GONE
+            layout_calc_result.visibility = View.VISIBLE
+            calc_frame_layout.visibility = View.INVISIBLE
+        }
+
+        layout_calc_delete_wrap.setOnClickListener {
+            btn_calc_button.visibility = View.VISIBLE
+            layout_calc_result.visibility = View.GONE
+            calc_frame_layout.visibility = View.VISIBLE
+        }
+    }
+
+    private fun newId(): Long {
+        val maxId = realm.where(CalcHistory::class.java).max("historyId")
+        if (maxId != null) {
+            return maxId.toLong() + 1
+        }
+        return 0
     }
 
     private fun itemChange(containerCase: Int) {
 
+        Log.d("TAG", "item change case $containerCase")
         if (ingredientSelectStatus[containerCase]) {
             txt_ingredient.setTextColor(Color.parseColor("#131c32"))
 
@@ -230,8 +329,8 @@ class CalcFragment : BaseFragment() {
                         return
                     }
                     2 -> {
-                        humanTopWidth = layout_human_top_standard.measuredWidth
-                        humanBottomWidth = layout_human_bottom_standard.measuredWidth
+                        humanTopWidth = hide_layout_human_top_standard.measuredWidth
+                        humanBottomWidth = hide_layout_human_bottom_standard.measuredWidth
 
                         val animation = ValueAnimator.ofInt(layout_human_top_standard.measuredWidth, 0).setDuration(200)
                         animation.addUpdateListener {
@@ -250,7 +349,7 @@ class CalcFragment : BaseFragment() {
 
                         val set = AnimatorSet()
                         set.playSequentially(listOf(animation, animation2))
-                        set.setInterpolator(AccelerateDecelerateInterpolator())
+                        set.interpolator = AccelerateDecelerateInterpolator()
                         set.start()
                     }
 
@@ -268,8 +367,8 @@ class CalcFragment : BaseFragment() {
                         // 아무런 변화가 일어나지 않는다.
                     }
                     2 -> {
-                        ingredientTopWidth = layout_ingredient_top_standard.measuredWidth
-                        ingredientBottomWidth = layout_ingredient_bottom_standard.measuredWidth
+                        ingredientTopWidth = hide_layout_ingredient_top_standard.measuredWidth
+                        ingredientBottomWidth = hide_layout_ingredient_bottom_standard.measuredWidth
                         val animation2 =
                             ValueAnimator.ofInt(layout_ingredient_bottom_standard.measuredWidth, 0).setDuration(200)
                         animation2.addUpdateListener {
@@ -281,7 +380,7 @@ class CalcFragment : BaseFragment() {
                         val set = AnimatorSet()
 //                        set.playSequentially(listOf(animation, animation2))
                         set.play(animation2)
-                        set.setInterpolator(AccelerateDecelerateInterpolator())
+                        set.interpolator = AccelerateDecelerateInterpolator()
                         set.start()
                     }
                 }
@@ -310,7 +409,7 @@ class CalcFragment : BaseFragment() {
 
                         val set = AnimatorSet()
                         set.playSequentially(listOf(animation, animation2))
-                        set.setInterpolator(AccelerateDecelerateInterpolator())
+                        set.interpolator = AccelerateDecelerateInterpolator()
                         set.start()
                     }
 
@@ -325,7 +424,7 @@ class CalcFragment : BaseFragment() {
 
                         val set = AnimatorSet()
                         set.play(animation2)
-                        set.setInterpolator(AccelerateDecelerateInterpolator())
+                        set.interpolator = AccelerateDecelerateInterpolator()
                         set.start()
                     }
 
@@ -334,16 +433,48 @@ class CalcFragment : BaseFragment() {
                     }
                 }
             }
-            3 -> {
-                // 질량
-                layout_weight_standard.visibility = View.VISIBLE
-            }
             else -> {
 
             }
         }
 
         this.currentContainerCase = number
+    }
+
+    fun showWeight() {
+
+        val weightWidth = hide_layout_ingredient_wrap.layoutParams.width
+
+        val animation =
+            ValueAnimator.ofInt(0, weightWidth).setDuration(200)
+        animation.addUpdateListener {
+            val value = it.animatedValue as Int
+            layout_ingredient_wrap.layoutParams.width = value
+            layout_ingredient_wrap.requestLayout()
+        }
+
+        val set = AnimatorSet()
+        set.play(animation)
+        set.interpolator = AccelerateDecelerateInterpolator()
+        set.start()
+    }
+
+    fun hideWeight() {
+
+        val weightWidth = hide_layout_ingredient_wrap.layoutParams.width
+
+        val animation =
+            ValueAnimator.ofInt(weightWidth, 0).setDuration(200)
+        animation.addUpdateListener {
+            val value = it.animatedValue as Int
+            layout_ingredient_wrap.layoutParams.width = value
+            layout_ingredient_wrap.requestLayout()
+        }
+
+        val set = AnimatorSet()
+        set.play(animation)
+        set.interpolator = AccelerateDecelerateInterpolator()
+        set.start()
     }
 
     private fun changeCalcContainerLayout(number: Int) {
@@ -363,10 +494,12 @@ class CalcFragment : BaseFragment() {
                 override fun onOtherButtonClick(actionSheet: ActionSheet?, index: Int) {
                     if (index == 0) {
                         txt_unit_changer.text = "생활단위"
-                        setRecyclerViewUnitModel(UnitType.LIFE)
+                        calculatorViewModel.currentSelectedType = 1
+                        setRecyclerViewUnitModel(TYPE_LIFE)
                     } else {
                         txt_unit_changer.text = "일반단위"
-                        setRecyclerViewUnitModel(UnitType.NORMAL)
+                        calculatorViewModel.currentSelectedType = 0
+                        setRecyclerViewUnitModel(TYPE_NORMAL)
                     }
                 }
 
@@ -376,37 +509,48 @@ class CalcFragment : BaseFragment() {
             }).show()
     }
 
-    private fun selectUnitItems(type: UnitType): ArrayList<UnitModel> {
+    private fun selectUnitItems(type: Int): ArrayList<UnitModel> {
         val list: RealmResults<MeasureUnit> = when (type) {
-            UnitType.LIFE -> realm.where(MeasureUnit::class.java).equalTo("unitType", 0).findAll()
-            UnitType.NORMAL -> realm.where(MeasureUnit::class.java).equalTo("unitType", 1).findAll()
+            TYPE_LIFE -> {
+                realm.where(MeasureUnit::class.java).equalTo("unitType", TYPE_LIFE).findAll()
+            }
+            TYPE_NORMAL -> {
+                realm.where(MeasureUnit::class.java).equalTo("unitType", TYPE_NORMAL).findAll()
+            }
+            else -> {
+                Log.e("TAG", "선언되지 않은 타입입니다.")
+                return arrayListOf()
+            }
         }
 
-/*
-        for (a in realmData) {
-            realm.beginTransaction()
-
-            val temp = realm.createObject(MeasureUnit::class.java, newId())
-            temp.unitNameBold = a.unitNameBold
-            temp.unitNameSoft = a.unitNameSoft
-            temp.unitStatus = a.unitStatus
-            temp.unitType = a.unitType
-            temp.unitValue = a.unitValue
-            temp.unit = a.unit
-
-            realm.commitTransaction()
-        }
-*/
         val result: ArrayList<UnitModel> = arrayListOf()
 
-        for (item in list) {
-            result.add(UnitModel(item.unitNameBold, item.unitNameSoft, type))
+        calculatorViewModel.itemSize = list.size
+
+        var index = calculatorViewModel.index
+        var size = 9
+        var max = (list.size / 10) + 1
+
+        if (index > max - 1) {
+            index = max - 1
+        }
+
+        var startIndex = index * size
+        var endIndex = index * size + size
+
+        if (endIndex > list.size) {
+            endIndex = list.size
+        }
+
+
+        for (x in startIndex until endIndex) {
+            result.add(UnitModel(list[x].unitNameBold, list[x].unitNameSoft, list[x].unitType, list[x].isWeight, list[x].unitValue))
         }
 
         return result
     }
 
-    private fun setRecyclerViewUnitModel(type: UnitType) {
+    private fun setRecyclerViewUnitModel(type: Int) {
         unitRecyclerView.removeAll()
         unitRecyclerView.addItems(selectUnitItems(type))
     }

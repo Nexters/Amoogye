@@ -3,20 +3,30 @@ package cookcook.nexters.com.amoogye.views.calc.presenter
 import android.content.Context
 import android.os.Build
 import android.text.InputType
+import android.util.Log
 import android.widget.EditText
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import cookcook.nexters.com.amoogye.views.calc.domain.CalculatorRepository
 import cookcook.nexters.com.amoogye.views.calc.entity.EditTextType
+import cookcook.nexters.com.amoogye.views.calc.entity.UnitModel
+import cookcook.nexters.com.amoogye.views.tools.MeasureUnit
 
 class CalculatorViewModel(private val repo: CalculatorRepository) : ViewModel() {
     lateinit var context: Context
-    var flag: Int = 3
+    var flag: Int = 1
+
+    var index: Int = 0
+    var currentSelectedType: Int = 0
+
+    var itemSize: Int = 0
+
+    var isWeight: Boolean = false
 
     // flag
     private var ingredientSelected = true
-    private var portionSelected = true
+    private var portionSelected = false
 
     private val _selectedEditText = MutableLiveData<EditTextType>()
     private val _humanOne = MutableLiveData<String>()
@@ -33,21 +43,52 @@ class CalculatorViewModel(private val repo: CalculatorRepository) : ViewModel() 
     val humanTwo: LiveData<String> get() = _humanTwo
     val tool: LiveData<String> get() = _tool
 
+    var unitObject: UnitModel? = null
+    var toolObject: UnitModel? = null
+    var ingredientObject: MeasureUnit? = null
+
     init {
-        _humanOne.value = "0"
-        _amount.value = "0"
-        _humanTwo.value = "0"
+        _humanOne.value = ""
+        _amount.value = ""
+        _humanTwo.value = ""
     }
 
     fun init() {
         ingredientSelected = true
-        portionSelected = true
-        flag = 3
+        portionSelected = false
+        flag = 1
+        _humanOne.value = ""
+        _amount.value = ""
+        _humanTwo.value = ""
+    }
+
+    fun reduceIndex() {
+        this.index--
+    }
+
+    fun increaseIndex() {
+        this.index++
+    }
+
+    // 이거 사용해서 버튼 disable 구분
+    fun isClickNextButton(): Boolean {
+        if (itemSize / 10 == index) {
+            return false
+        }
+        return true
+    }
+
+    fun isClickPrevButton(): Boolean {
+        if (index == 0) {
+            return false
+        }
+        return true
     }
 
     fun gazuaa(text: String) = repo.showToast(context, text)
 
     fun convertFragment(buttonId: Int): Int {
+        Log.d("TAG", "minus $buttonId")
         when (buttonId) {
             1 -> {
                 ingredientSelected = !ingredientSelected
@@ -70,6 +111,7 @@ class CalculatorViewModel(private val repo: CalculatorRepository) : ViewModel() 
             2 -> {
                 portionSelected = !portionSelected
                 if (portionSelected) {
+                    Log.d("TAG","Portion selected is $portionSelected")
                     val dump = this.flag + buttonId
                     if (dump != 2) {
                         this.flag = dump
@@ -77,6 +119,7 @@ class CalculatorViewModel(private val repo: CalculatorRepository) : ViewModel() 
                         portionSelected = !portionSelected
                     }
                 } else {
+                    Log.d("TAG", "Portion selected is $portionSelected")
                     val dump = this.flag - buttonId
                     if (dump != 0) {
                         this.flag = dump
@@ -86,6 +129,8 @@ class CalculatorViewModel(private val repo: CalculatorRepository) : ViewModel() 
                 }
             }
         }
+
+        Log.d("TAG", "convert is $flag")
 
         return this.flag - 1
     }
@@ -102,12 +147,16 @@ class CalculatorViewModel(private val repo: CalculatorRepository) : ViewModel() 
         _selectedEditText.value = value
     }
 
+    fun setIngredient(text: String) {
+        _ingredient.value = text
+    }
+
     fun getSelectedEditText() = _selectedEditText.value
 
     fun onNumberButtonClick(number: String) {
         when (_selectedEditText.value) {
             EditTextType.HUMAN_ONE -> {
-                _humanOne.value = _humanOne.value?.let { it->
+                _humanOne.value = _humanOne.value?.let { it ->
                     repo.changeNumberText(number, it)
                 } ?: repo.changeNumberText(number, "0")
             }
@@ -130,17 +179,23 @@ class CalculatorViewModel(private val repo: CalculatorRepository) : ViewModel() 
         }
     }
 
-    fun onUnitButtonClick(value: String) {
+    fun onUnitButtonClick(model: UnitModel) {
         when (_selectedEditText.value) {
             EditTextType.UNIT -> {
-                _unit.value = value
+                unitObject = model
+                _unit.value = model.abbreviation
             }
             EditTextType.TOOL -> {
-                _tool.value = value
+                toolObject = model
+                _tool.value = model.abbreviation
             }
             else -> {
                 // 아무것도 안한다.
             }
         }
+    }
+
+    fun setUnit(unit: String) {
+        _unit.value = unit
     }
 }

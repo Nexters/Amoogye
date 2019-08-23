@@ -1,10 +1,11 @@
 package cookcook.nexters.com.amoogye.base
 
+import android.util.Log
 import android.view.View
 import cookcook.nexters.com.amoogye.R
 import io.blackbox_vision.wheelview.view.WheelView
 
-class BaseScrollPicker {
+open class BaseScrollPicker {
 
     private var items: ArrayList<String> = ArrayList()
 
@@ -16,10 +17,11 @@ class BaseScrollPicker {
         wheelView.setItems(items)
         wheelView.setInitPosition(2)
         wheelView.setCanLoop(false)
-
+        onClick()
     }
 
-
+    fun onClick() {
+    }
 
     fun getItem(): Int {
         return wheelView.selectedItem

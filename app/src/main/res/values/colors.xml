@@ -49,5 +49,11 @@
     <color name="add_util_line_division_2">#33131c32</color>
     <color name="add_util_volume_box">#dde2e5</color>
     <color name="calc_text_color">#7F131C32</color>
+
+    <color name="onboarding_1">#f1f6ff</color>
+    <color name="onboarding_2">#eefdfa</color>
+    <color name="onboarding_3">#e7eef2</color>
+    <color name="onboarding_4">#e7eef2</color>
+    <color name="onboarding_5">#effbff</color>
 </resources>
 

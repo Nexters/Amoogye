@@ -9,7 +9,7 @@ import android.view.Window
 import cookcook.nexters.com.amoogye.R
 import kotlinx.android.synthetic.main.base_dialog.*
 
-class DefaultDialog(context: Context, private val ok : () -> Unit, private val  cancel : () -> Unit) : Dialog(context) {
+open class DefaultDialog(context: Context, private val ok : () -> Unit, private val  cancel : () -> Unit) : Dialog(context) {
     fun callFunction() {
         this.setCancelable(false)   // 배경 클릭해도 다이얼로그가 꺼지지 않음
         show()                      // 커스텀 다이얼로그를 노출한다.

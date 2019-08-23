@@ -102,7 +102,6 @@ class TimerFragment : TimerBaseFragment() {
             }
 
             TimerStatus.STATE_PROGRESS -> {
-                val time = this.getTimerService()!!.getRemindTimes()
                 visibleFlag(txt_timer_time, true)
                 visibleFlag(btn_timer_cancel, true)
                 visibleFlag(btn_timer_pause_resume_flag, true)
@@ -172,7 +171,7 @@ class TimerFragment : TimerBaseFragment() {
     }
 
     private fun editTextClickEvent(editText: EditText, number: Int) {
-        editText.setOnTouchListener { v, event ->
+        editText.setOnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
                 timerViewModel.setSelectedTimerEditText(number)
                 editTextWrapChange(timerViewModel.getSelectedTimerEditText()!!)

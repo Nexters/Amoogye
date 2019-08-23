@@ -25,8 +25,13 @@ class MainApplication : Application() {
             realmData.map {
                 realm?.apply {
                     val item = this.createObject(MeasureUnit::class.java, it.unitId)
+                    item.unitType = it.unitType
                     item.unitNameBold = it.unitNameBold
                     item.unitNameSoft = it.unitNameSoft
+                    item.isWeight = it.isWeight
+                    item.createDate = it.createDate
+                    item.recentlyUseDate = it.recentlyUseDate
+                    item.unitValue = it.unitValue
                 }
             }
 

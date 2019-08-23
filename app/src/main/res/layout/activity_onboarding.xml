@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.onboarding.OnboardingActivity">
+
+    <RelativeLayout
+        android:id="@+id/layout_onboarding"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:id="@+id/layout_center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/txt_onboarding_title"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="18dp"
+                android:src="@drawable/amoogye_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <androidx.viewpager.widget.ViewPager
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/txt_onboarding_title"
+                android:id="@+id/view_pager_onboarding"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            
+            <Button
+                android:id="@+id/btn_onboarding_ok"
+                android:text="시작하기"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/nanum_square_r"
+                android:background="@drawable/timer_rounded_theme_button"
+                android:layout_width="match_parent"
+                android:layout_margin="16dp"
+                android:visibility="gone"
+                android:layout_height="60dp" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/onboarding_tab_layout"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="@dimen/tools_list_line_divide_bold"
+                android:theme="@style/TabTheme"
+                app:tabIndicator="@drawable/ic_tab_indicator_24dp"
+                app:tabRippleColor="@color/transparent"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/tools_list_tab_height" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/tools_list_line_divide_bold"
+                android:layout_below="@id/onboarding_tab_layout"
+                android:background="@color/tools_list_background" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

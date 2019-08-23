@@ -61,6 +61,10 @@ class ToolsFragmentNormal : Fragment() {
         unitList = realm.where(MeasureUnit::class.java).equalTo("unitType", TYPE_NORMAL).findAll()
             .sort("unitId", Sort.DESCENDING)
 
+        for(x in unitList) {
+            Log.d("TAG", "NORMAL" + x.unitNameSoft)
+        }
+
         // 리사이클러뷰 어댑터
         val recyclerAdapter =
             ToolsRecyclerAdapter(context!!, unitList, true)

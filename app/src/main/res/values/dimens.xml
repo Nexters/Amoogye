@@ -23,7 +23,7 @@
     <dimen name="timer_text_size">20sp</dimen>
     <dimen name="timer_text_margin">10dp</dimen>
     <dimen name="timer_text_wrap_size">24dp</dimen>
-    <dimen name="timer_small_button_size">124dp</dimen>
+    <dimen name="timer_small_button_size">160dp</dimen>
     <dimen name="timer_button_height">60dp</dimen>
     <dimen name="timer_button_margin_top">29dp</dimen>
 
