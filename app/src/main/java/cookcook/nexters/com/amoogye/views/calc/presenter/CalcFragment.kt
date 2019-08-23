@@ -245,13 +245,13 @@ class CalcFragment : BaseFragment() {
 
             result = Math.round(result*100) / 100.0
 
-            var text = "$result ${tool.abbreviation}이다."
-            txt_calc_result.text = text
+            var text = "$result ${tool.abbreviation}"
+            txt_calc_result.text = "$text 이다"
 
             realm.beginTransaction()
             val newItemId = newId()
             val newItem = realm.createObject(CalcHistory::class.java, newItemId)
-            newItem.calcResultBefore = "${unit.abbreviation} ${amoutValue}는"
+            newItem.calcResultBefore = "$amoutValue${unit.abbreviation}"
             newItem.calcResultAfter = text
             newItem.createDate = Date().time
             realm.commitTransaction()
