@@ -22,13 +22,10 @@ import cookcook.nexters.com.amoogye.base.BaseScrollPicker
 import cookcook.nexters.com.amoogye.databinding.FragmentCalcBinding
 import cookcook.nexters.com.amoogye.views.calc.entity.EditTextType
 import cookcook.nexters.com.amoogye.views.calc.entity.UnitModel
-import cookcook.nexters.com.amoogye.views.tools.MeasureUnit
-import cookcook.nexters.com.amoogye.views.tools.TYPE_FOOD
-import cookcook.nexters.com.amoogye.views.tools.TYPE_LIFE
-import cookcook.nexters.com.amoogye.views.tools.TYPE_NORMAL
 import cookcook.nexters.com.amoogye.utils.realmData
 import cookcook.nexters.com.amoogye.views.calc.history.CalcHistory
 import cookcook.nexters.com.amoogye.views.calc.history.CalcHistoryActivity
+import cookcook.nexters.com.amoogye.views.tools.*
 import cookcook.nexters.com.amoogye.views.tools.add_tools.MeasureUnitSaveData
 import io.realm.Realm
 import io.realm.RealmResults
