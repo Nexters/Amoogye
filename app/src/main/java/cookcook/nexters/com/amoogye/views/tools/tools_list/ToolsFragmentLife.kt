@@ -111,6 +111,7 @@ class ToolsFragmentLife : Fragment() {
             }
         }
 
+        test_btn_insert_data.visibility = View.GONE
         test_btn_insert_data.setOnClickListener {
             insertData("Leah", "메롱")
         }
