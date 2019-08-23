@@ -222,6 +222,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/txt_setting_license"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nanum_square_r"
+                android:paddingStart="@dimen/setting_item_start_end"
+                android:paddingTop="@dimen/setting_sub_item_top"
+                android:paddingEnd="@dimen/setting_item_start_end"
+                android:paddingBottom="@dimen/setting_sub_item_bottom"
+                android:text="라이센스"
+                android:textColor="@color/setting_text_color_soft"
+                android:textSize="@dimen/setting_sub_item_text_size" />
 
             <TextView
                 android:id="@+id/setting_text_contact_email"
@@ -232,7 +244,7 @@
                 android:paddingTop="@dimen/setting_sub_item_top"
                 android:paddingEnd="@dimen/setting_item_start_end"
                 android:paddingBottom="@dimen/setting_sub_item_bottom"
-                android:text="@string/setting_contact_email"
+                android:text="ysg01129@gmail.com"
                 android:textColor="@color/setting_text_color_soft"
                 android:textSize="@dimen/setting_sub_item_text_size" />
 

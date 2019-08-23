@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.utils.SharedPreferences
+import de.psdev.licensesdialog.LicensesDialogFragment
 import kotlinx.android.synthetic.main.fragment_setting.*
 
 
@@ -36,6 +37,14 @@ class SettingFragment: Fragment() {
             val onboarding = SharedPreferences(view.context)
             onboarding.onboarding = true
             Toast.makeText(view.context, "앱을 다시 시작하면 온보딩을 확인할 수 있어요!",Toast.LENGTH_SHORT).show()
+        }
+
+        txt_setting_license.setOnClickListener {
+            val fragment = LicensesDialogFragment.Builder(view.context)
+                .setNotices(R.raw.notices)
+                .build()
+
+            fragment.show(childFragmentManager, null)
         }
     }
 }

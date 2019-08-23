@@ -1,0 +1,26 @@
+<notices>
+    <notice>
+        <name>material design components</name>
+        <url>https://github.com/rey5137/material</url>
+        <copyright>Copyright 2015 Rey Pham.</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>material-wheel-view</name>
+        <url>https://github.com/BlackBoxVision/material-wheel-view</url>
+        <copyright>Black Box Vision</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>license dialog</name>
+        <url>https://github.com/PSDev/LicensesDialog</url>
+        <copyright>Copyright 2013 Philip Schiffer</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>lottie</name>
+        <url>https://github.com/airbnb/lottie-android</url>
+        <copyright>Air BnB</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+</notices>

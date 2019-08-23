@@ -59,13 +59,6 @@ dependencies {
     // material design components
     implementation 'com.github.rey5137:material:1.2.5'
 
-    implementation 'com.google.code.gson:gson:2.8.5'
-
-    //retrofit2
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
-    implementation 'com.squareup.retrofit2:converter-scalars:2.4.0'
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
 
     //rxjava
     implementation 'io.reactivex.rxjava2:rxjava:2.2.5'
@@ -96,6 +89,9 @@ dependencies {
 
     // lottie
     implementation "com.airbnb.android:lottie:3.0.0"
+
+    // license dialog
+    implementation 'de.psdev.licensesdialog:licensesdialog:2.1.0'
 
     //androidx
     implementation 'androidx.appcompat:appcompat:1.0.2'
