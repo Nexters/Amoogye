@@ -224,9 +224,8 @@ class CalcFragment : BaseFragment() {
             var beforeValue = unit.oneMLValue * amoutValue // 10(amount) L (unit)를
             var changeValue = tool.oneMLValue // ml로 바꾸면
 
-            var weight = ingredient!!.unitValue
-
-            if (!ingredient.unitNameBold.isEmpty()) {
+            if (ingredient != null) {
+                var weight = ingredient.unitValue
                 beforeValue = beforeValue * weight
             }
 
