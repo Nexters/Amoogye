@@ -207,10 +207,9 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
 
     private fun getStandardDataList() {
 
-        val standardToolData = realm.where(MeasureUnit::class.java).equalTo("unitNameBold", "종이컵").findFirst()!!
-
+        val standardTool = MeasureUnitSaveData.getInstance().currentTool
+        val standardToolData = realm.where(MeasureUnit::class.java).equalTo("unitNameBold", standardTool).findFirst()!!
         val standardToolValue = standardToolData.unitValue.toInt()
-        val standardToolUnit = standardToolData.unit
 
         val calcInteger = MeasureUnitSaveData.getInstance().currentInteger.toInt()
         val decimalPoint = MeasureUnitSaveData.getInstance().currentDecimalPoint.toInt()

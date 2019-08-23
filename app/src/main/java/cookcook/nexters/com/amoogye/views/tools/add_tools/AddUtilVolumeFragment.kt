@@ -8,6 +8,9 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.base.BaseScrollPicker
+import cookcook.nexters.com.amoogye.views.tools.MeasureUnit
+import cookcook.nexters.com.amoogye.views.tools.TYPE_LIFE
+import io.realm.Realm
 import kotlinx.android.synthetic.main.fragment_addutil_2_volume.*
 
 enum class ButtonSelectedState {
@@ -18,6 +21,8 @@ enum class ButtonSelectedState {
 
 
 class AddUtilVolumeFragment : Fragment() {
+
+    lateinit var realm: Realm
 
     lateinit var state: ButtonSelectedState
     lateinit var picker: BaseScrollPicker
@@ -54,14 +59,13 @@ class AddUtilVolumeFragment : Fragment() {
     }
 
     private fun initializeLists() {
-        /* TODO: toolList의 값을 디비에서 가져와서 갱신하자. */
-        toolList.add("종이컵")
-        toolList.add("소주컵")
-        toolList.add("맥주컵")
-        toolList.add("머그컵")
-        toolList.add("양치컵")
 
-        for (i in 1..50) {
+        val realmData = realm.where(MeasureUnit::class.java).equalTo("unitType", TYPE_LIFE).findAll()!!
+        for (item in realmData){
+            toolList.add(item.unitNameBold)
+        }
+
+        for (i in 0..50) {
             integerList.add(i.toString())
         }
 
@@ -73,6 +77,8 @@ class AddUtilVolumeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getView = view
+
+        realm = Realm.getDefaultInstance()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -83,8 +89,8 @@ class AddUtilVolumeFragment : Fragment() {
         text_add_util_tool.text = toolList[0]
         MeasureUnitSaveData.getInstance().currentTool = toolList[0]
 
-        txt_add_util_integer.text = integerList[0]
-        MeasureUnitSaveData.getInstance().currentInteger = integerList[0]
+        txt_add_util_integer.text = integerList[1]
+        MeasureUnitSaveData.getInstance().currentInteger = integerList[1]
 
         txt_add_util_decimal_point.text = decimalPointList[0]
         MeasureUnitSaveData.getInstance().currentDecimalPoint = decimalPointList[0]

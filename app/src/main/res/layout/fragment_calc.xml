@@ -227,7 +227,7 @@
                                 android:layout_marginStart="4dp"
                                 android:layout_toEndOf="@id/hide_layout_ingredient_wrap"
                                 android:singleLine="true"
-                                android:text="를"
+                                android:text="는"
                                 android:textSize="@dimen/calc_text_size"
                                 android:textColor="@color/calc_text_color"
                                 android:fontFamily="@font/nanum_square_r" />
@@ -446,7 +446,7 @@
                                 android:layout_marginStart="4dp"
                                 android:layout_toEndOf="@id/layout_ingredient_wrap"
                                 android:singleLine="true"
-                                android:text="를"
+                                android:text="는"
                                 android:textSize="@dimen/calc_text_size"
                                 android:textColor="@color/calc_text_color"
                                 android:fontFamily="@font/nanum_square_r" />
