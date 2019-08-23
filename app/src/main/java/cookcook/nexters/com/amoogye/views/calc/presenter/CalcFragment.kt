@@ -27,12 +27,16 @@ import cookcook.nexters.com.amoogye.views.tools.TYPE_FOOD
 import cookcook.nexters.com.amoogye.views.tools.TYPE_LIFE
 import cookcook.nexters.com.amoogye.views.tools.TYPE_NORMAL
 import cookcook.nexters.com.amoogye.utils.realmData
+import cookcook.nexters.com.amoogye.views.calc.history.CalcHistory
 import cookcook.nexters.com.amoogye.views.calc.history.CalcHistoryActivity
+import cookcook.nexters.com.amoogye.views.tools.add_tools.MeasureUnitSaveData
 import io.realm.Realm
 import io.realm.RealmResults
 import kotlinx.android.synthetic.main.fragment_calc.*
 import kotlinx.android.synthetic.main.layout_unit_button_wrap.*
 import org.koin.android.ext.android.get
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class CalcFragment : BaseFragment() {
@@ -123,7 +127,6 @@ class CalcFragment : BaseFragment() {
         btn_tip.setOnClickListener { calculatorViewModel.gazuaa("tool_tip 구현 예정") }
 
         // edittext setting
-        /* TODO: 묶어서 초기화하자 */
         calculatorViewModel.calculatorEditTextSetting(edit_twice_human_one)
         editTextClickEvent(edit_twice_human_one, EditTextType.HUMAN_ONE)
         calculatorViewModel.calculatorEditTextSetting(edit_twice_amount)
@@ -138,12 +141,6 @@ class CalcFragment : BaseFragment() {
         editTextClickEvent(edit_twice_tool, EditTextType.TOOL)
 
         BaseNumberButton(view, onClick)
-
-//        itemChange(calculatorViewModel.flag - 1)
-//        unitRecyclerView = UnitButtonActivity(view)
-
-        /* TODO: 현재는 default로 일반 단위로 초기화되어있음 이후에는 선택 된 것을 기준으로 초기화하자. */
-//        unitRecyclerView.addItems(selectUnitItems(UnitType.NORMAL))
 
         txt_ingredient.setOnClickListener {
             changeCalcContainerLayout(1)
@@ -220,16 +217,36 @@ class CalcFragment : BaseFragment() {
             var tool = calculatorViewModel.toolObject
             var ingredient = calculatorViewModel.ingredientObject
 
+            if (unit!!.abbreviation.isEmpty() || tool!!.abbreviation.isEmpty()) {
+                return@setOnClickListener
+            }
 
-            var beforeValue = unit!!.oneMLValue * amoutValue // 10(amount) L (unit)를
-            var changeValue = tool!!.oneMLValue // ml로 바꾸면
+            var beforeValue = unit.oneMLValue * amoutValue // 10(amount) L (unit)를
+            var changeValue = tool.oneMLValue // ml로 바꾸면
+
+            var weight = ingredient!!.unitValue
+
+            if (!ingredient.unitNameBold.isEmpty()) {
+                beforeValue = beforeValue * weight
+            }
 
             var result = beforeValue / changeValue
 
-            Log.d("TAG", "human: ${humanOneValue} human2 ${humanTwoValue} unit ${unit.oneMLValue} tool: ${tool.oneMLValue}")
+            if (humanOneValue > 1 || humanTwoValue > 1) {
+                result /= humanOneValue
+                result *= humanTwoValue
 
-            Log.d("TAG", result.toString())
-            txt_calc_result.text = "$result ${tool.abbreviation}이다."
+            }
+            var text = "$result ${tool.abbreviation}이다."
+            txt_calc_result.text = text
+
+            realm.beginTransaction()
+            val newItemId = newId()
+            val newItem = realm.createObject(CalcHistory::class.java, newItemId)
+            newItem.calcResultBefore = "${unit.abbreviation} ${amoutValue}는"
+            newItem.calcResultAfter = text
+            newItem.createDate = Date().time
+            realm.commitTransaction()
 
             btn_calc_button.visibility = View.GONE
             layout_calc_result.visibility = View.VISIBLE
@@ -241,6 +258,14 @@ class CalcFragment : BaseFragment() {
             layout_calc_result.visibility = View.GONE
             calc_frame_layout.visibility = View.VISIBLE
         }
+    }
+
+    private fun newId(): Long {
+        val maxId = realm.where(CalcHistory::class.java).max("historyId")
+        if (maxId != null) {
+            return maxId.toLong() + 1
+        }
+        return 0
     }
 
     private fun itemChange(containerCase: Int) {
@@ -519,13 +544,8 @@ class CalcFragment : BaseFragment() {
 
 
         for (x in startIndex until endIndex) {
-            Log.d("TAG", list[x].unitNameSoft + " : " + list[x].isWeight)
             result.add(UnitModel(list[x].unitNameBold, list[x].unitNameSoft, list[x].unitType, list[x].isWeight, list[x].unitValue))
         }
-
-//        for (item in list) {
-//            result.add(UnitModel(item.unitNameBold, item.unitNameSoft, type))
-//        }
 
         return result
     }

@@ -1,18 +1,11 @@
 package cookcook.nexters.com.amoogye.views.tools.add_tools
 
-import android.icu.util.Measure
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import cookcook.nexters.com.amoogye.R
-import cookcook.nexters.com.amoogye.views.tools.MeasureUnit
-import cookcook.nexters.com.amoogye.views.tools.ToolsFragment
-import io.realm.Realm
-import kotlinx.android.synthetic.main.fragment_addutil_3_complete.*
-import kotlin.text.Typography.times
 
 
 class AddUtilCompleteFragment : Fragment() {

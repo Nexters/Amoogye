@@ -60,6 +60,17 @@
     <string name="add_util_volume_comment_1">주변 물건으로 </string>
     <string name="add_util_volume_comment_2">의 부피를 계산해보세요.</string>
     <string name="add_util_complete_comment">를 새로운 도구로 추가했습니다.</string>
+    <string name="onboarding_1_title">소금 20g, 눈대중으로 넣으세요?</string>
+    <string name="onboarding_1_contents">계량컵과 계량스푼 없이 식재료 양을\n측정하는 것은 어려운 일이죠.</string>
+    <string name="onboarding_2_title">이제 쉽게 계량할 수 있습니다.</string>
+    <string name="onboarding_2_contents">아무계를 이용하면 종이컵, 밥숟가락 등\n우리 주변의 도구로 계량할 수 있으니까요.</string>
+    <string name="onboarding_3_title">어떻게 하냐구요?</string>
+    <string name="onboarding_3_contents">위 영상처럼 하시면 됩니다. 간단하죠?</string>
+    <string name="onboarding_4_title">레시피가 만약 3인분 기준이었다면</string>
+    <string name="onboarding_4_contents">위 영상처럼 하시면 됩니다. 간단하죠?</string>
+    <string name="onboarding_5_title">아무계와 함께 쉽게 요리해요</string>
+    <string name="onboarding_5_contents">지금부터 주변의 아무거나로\n계량을 시작해보세요!</string>
+    <string name="onboarding_init">온보딩 다시 보기</string>
 
 
 </resources>
