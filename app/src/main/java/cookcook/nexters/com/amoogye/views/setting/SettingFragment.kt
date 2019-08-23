@@ -34,7 +34,7 @@ class SettingFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setting_text_onboarding_init.setOnClickListener {
             val onboarding = SharedPreferences(view.context)
-            onboarding.onboarding = false
+            onboarding.onboarding = true
             Toast.makeText(view.context, "앱을 다시 시작하면 온보딩을 확인할 수 있어요!",Toast.LENGTH_SHORT).show()
         }
     }
