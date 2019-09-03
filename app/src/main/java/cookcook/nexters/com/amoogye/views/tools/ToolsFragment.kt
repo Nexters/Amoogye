@@ -1,13 +1,13 @@
 package cookcook.nexters.com.amoogye.views.tools
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import cookcook.nexters.com.amoogye.R
-import cookcook.nexters.com.amoogye.views.calc.history.CalcHistoryActivity
 import cookcook.nexters.com.amoogye.views.tools.add_tools.AddUtilActivity
 import cookcook.nexters.com.amoogye.views.tools.tools_list.ToolsFragmentLife
 import cookcook.nexters.com.amoogye.views.tools.tools_list.ToolsViewPageAdapter
@@ -59,6 +59,18 @@ class ToolsFragment : Fragment() , ToolsFragmentLife.OnClickEditModeListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        val tools_dim = context!!.getSharedPreferences("com.cookcook.prefs", 0)
+
+        if(!tools_dim.getBoolean("TOOLSDIM", false)) {
+            val editor:SharedPreferences.Editor = tools_dim.edit()
+            editor.putBoolean("TOOLSDIM", true)
+            editor.apply()
+        } else {
+            layout_tools_dimScreen.visibility = View.GONE
+        }
+
+
         val toolsFragmentAdapter =
             ToolsViewPageAdapter(childFragmentManager)
         layout_Tools_viewPager.adapter = toolsFragmentAdapter
