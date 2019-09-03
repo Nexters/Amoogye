@@ -1,9 +1,9 @@
 package cookcook.nexters.com.amoogye.views.tools
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
+import cookcook.nexters.com.amoogye.utils.SharedPreferences
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -60,13 +60,8 @@ class ToolsFragment : Fragment() , ToolsFragmentLife.OnClickEditModeListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val tools_dim = context!!.getSharedPreferences("com.cookcook.prefs", 0)
-
-        if(!tools_dim.getBoolean("TOOLSDIM", false)) {
-            val editor:SharedPreferences.Editor = tools_dim.edit()
-            editor.putBoolean("TOOLSDIM", true)
-            editor.apply()
-        } else {
+        val toolsDim = SharedPreferences(context!!)
+        if(!toolsDim.tools_dim) {
             layout_tools_dimScreen.visibility = View.GONE
         }
 
@@ -81,6 +76,7 @@ class ToolsFragment : Fragment() , ToolsFragmentLife.OnClickEditModeListener {
         layout_tools_dimScreen.setOnClickListener {
             layout_tools_dimScreen.visibility = View.GONE
             img_popup_message.visibility = View.GONE
+            toolsDim.tools_dim = false
         }
 
         btn_convert_add_util_activity.setOnClickListener {
