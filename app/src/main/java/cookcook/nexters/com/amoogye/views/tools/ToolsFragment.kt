@@ -3,11 +3,11 @@ package cookcook.nexters.com.amoogye.views.tools
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import cookcook.nexters.com.amoogye.utils.SharedPreferences
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import cookcook.nexters.com.amoogye.R
-import cookcook.nexters.com.amoogye.views.calc.history.CalcHistoryActivity
 import cookcook.nexters.com.amoogye.views.tools.add_tools.AddUtilActivity
 import cookcook.nexters.com.amoogye.views.tools.tools_list.ToolsFragmentLife
 import cookcook.nexters.com.amoogye.views.tools.tools_list.ToolsViewPageAdapter
@@ -61,6 +61,13 @@ class ToolsFragment : Fragment() , ToolsFragmentLife.OnClickEditModeListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        val toolsDim = SharedPreferences(context!!)
+        if(toolsDim.tools_dim) {
+            layout_tools_dimScreen.visibility = View.VISIBLE
+        }
+
+
         val toolsFragmentAdapter =
             ToolsViewPageAdapter(childFragmentManager)
         layout_Tools_viewPager.adapter = toolsFragmentAdapter
@@ -71,6 +78,7 @@ class ToolsFragment : Fragment() , ToolsFragmentLife.OnClickEditModeListener {
         layout_tools_dimScreen.setOnClickListener {
             layout_tools_dimScreen.visibility = View.GONE
             img_popup_message.visibility = View.GONE
+            toolsDim.tools_dim = false
         }
 
         btn_convert_add_util_activity.setOnClickListener {
