@@ -63,8 +63,8 @@ class ToolsFragment : Fragment() , ToolsFragmentLife.OnClickEditModeListener {
         super.onActivityCreated(savedInstanceState)
 
         val toolsDim = SharedPreferences(context!!)
-        if(!toolsDim.tools_dim) {
-            layout_tools_dimScreen.visibility = View.GONE
+        if(toolsDim.tools_dim) {
+            layout_tools_dimScreen.visibility = View.VISIBLE
         }
 
 

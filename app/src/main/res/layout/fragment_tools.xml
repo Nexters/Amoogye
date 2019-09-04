@@ -87,7 +87,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/tools_list_dim_color"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/img_popup_message"
