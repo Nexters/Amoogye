@@ -65,11 +65,10 @@ class AddUtilActivity : AppCompatActivity(), OnEditTextClickListener,
 
     override fun onAddUtilResult() {
         val nameResult = findViewById<TextView>(R.id.txt_3_user_name)
-        val nameResultUnit = findViewById<TextView>(R.id.txt_3_user_name_unit)
         val result = MeasureUnitSaveData.getInstance().unitNameSoft
+
         MeasureUnitSaveData.getInstance().unitNameBold = itemName
-        nameResult.text = itemName
-        nameResultUnit.text = "($result)"
+        nameResult.text = "$itemName ($result)"
     }
 
 

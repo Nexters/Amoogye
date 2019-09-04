@@ -38,10 +38,12 @@ class ToolsFragment : Fragment() , ToolsFragmentLife.OnClickEditModeListener {
 
     override fun onInvisibleTabLayout() {
         layout_tools_tab_layout.visibility = View.INVISIBLE
+        btn_convert_add_util_activity.visibility = View.INVISIBLE
     }
 
     override fun onVisibleTabLayout() {
         layout_tools_tab_layout.visibility = View.VISIBLE
+        btn_convert_add_util_activity.visibility = View.VISIBLE
     }
 
     override fun onDisableSwipe() {
