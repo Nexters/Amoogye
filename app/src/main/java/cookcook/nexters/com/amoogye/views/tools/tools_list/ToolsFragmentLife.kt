@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.tabs.TabLayout
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.views.tools.*
 import io.realm.Realm
@@ -105,7 +104,7 @@ class ToolsFragmentLife : Fragment() {
         }
 
         btn_edit_delete.setOnClickListener {
-            if (checkedList.isNotEmpty()){
+            if (deleteCheckedList.isNotEmpty()){
                 deleteData()
                 recyclerAdapter.notifyDataSetChanged()
             }
@@ -187,16 +186,16 @@ class ToolsFragmentLife : Fragment() {
     private fun deleteData() {
         realm.beginTransaction()
 
-        for (itemId in checkedList) {
+        for (itemId in deleteCheckedList) {
 
-            if (itemId in toggleCheckedLife) toggleChecked.remove(itemId)
-            if (itemId in toggleNotCheckedLife) toggleNotChecked.remove(itemId)
+            if (itemId in toggleCheckedLife) toggleCheckedLife.remove(itemId)
+            if (itemId in toggleNotCheckedLife) toggleNotCheckedLife.remove(itemId)
             val deleteItem = realm.where(MeasureUnit::class.java).equalTo("unitId", itemId).findFirst()!!
             deleteItem.deleteFromRealm()
 
         }
 
-        checkedList.clear()
+        deleteCheckedList.clear()
 
         realm.commitTransaction()
 
