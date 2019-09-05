@@ -63,7 +63,7 @@ class ToolsFragment : Fragment() , ToolsFragmentLife.OnClickEditModeListener {
         super.onActivityCreated(savedInstanceState)
 
         val toolsDim = SharedPreferences(context!!)
-        if(toolsDim.tools_dim) {
+        if(toolsDim.toolsDim) {
             layout_tools_dimScreen.visibility = View.VISIBLE
         }
 
@@ -78,7 +78,7 @@ class ToolsFragment : Fragment() , ToolsFragmentLife.OnClickEditModeListener {
         layout_tools_dimScreen.setOnClickListener {
             layout_tools_dimScreen.visibility = View.GONE
             img_popup_message.visibility = View.GONE
-            toolsDim.tools_dim = false
+            toolsDim.toolsDim = false
         }
 
         btn_convert_add_util_activity.setOnClickListener {
