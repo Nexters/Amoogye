@@ -13,7 +13,7 @@ class SharedPreferences(context: Context) {
         get() = prefs.getBoolean(ONBOARDING, true)
         set(value) = prefs.edit().putBoolean(ONBOARDING, value).apply()
 
-    var tools_dim: Boolean
+    var toolsDim: Boolean
         get() = prefs.getBoolean(TOOLSDIM, true)
         set(value) = prefs.edit().putBoolean(TOOLSDIM, value).apply()
 }

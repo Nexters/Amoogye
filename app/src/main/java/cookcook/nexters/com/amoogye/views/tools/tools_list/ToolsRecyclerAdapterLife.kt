@@ -2,7 +2,6 @@ package cookcook.nexters.com.amoogye.views.tools.tools_list
 
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -60,10 +59,10 @@ class ToolsRecyclerAdapterLife(
             unitCheckBox.setOnCheckedChangeListener{ unitCheckBox, _ ->
                 val dataId = data!![adapterPosition].unitId
                 if(unitCheckBox.isChecked){
-                    checkedList.add(dataId)
+                    deleteCheckedList.add(dataId)
                 } else {
-                    if (dataId in checkedList){
-                        checkedList.remove(dataId)
+                    if (dataId in deleteCheckedList){
+                        deleteCheckedList.remove(dataId)
                     }
                 }
 
