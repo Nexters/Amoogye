@@ -12,3 +12,8 @@ enum class CalcTypeState {
     PERSONNEL, // 인원 (ex, 1명 기준 10ml를 2명 기준으로 바꾸면)
     MATERIAL_PERSONNEL // 재료 + 인원 (ex, 1명 기준 10ml를 2명 기준 아빠숟가락으로 바꾸면)
 }
+
+enum class CalcUnitType {
+    LIFE, // 생활 (숟가락, 컵 등)
+    NORMAL // 일반 (Ml, kg 등)
+}

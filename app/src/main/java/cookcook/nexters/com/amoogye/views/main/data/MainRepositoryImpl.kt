@@ -4,9 +4,9 @@ import android.content.Context
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import cookcook.nexters.com.amoogye.R
-import cookcook.nexters.com.amoogye.views.main.domain.MainRepository
 import cookcook.nexters.com.amoogye.utils.addFragmentToActivity
-import cookcook.nexters.com.amoogye.views.calc.presenter.CalcFragment
+import cookcook.nexters.com.amoogye.views.calc.presenter.CalcFragment2
+import cookcook.nexters.com.amoogye.views.main.domain.MainRepository
 import cookcook.nexters.com.amoogye.views.setting.SettingFragment
 import cookcook.nexters.com.amoogye.views.timer.presenter.TimerFragment
 import cookcook.nexters.com.amoogye.views.tools.ToolsFragment
@@ -25,7 +25,7 @@ class MainRepositoryImpl : MainRepository {
         val container: Int = R.id.layout_container
         when (id) {
             R.id.navigation_main_calc -> {
-                addFragmentToActivity(fragmentManager, CalcFragment.getInstance(), container)
+                addFragmentToActivity(fragmentManager, CalcFragment2.getInstance(), container)
                 return true
             }
             R.id.navigation_main_timer -> {

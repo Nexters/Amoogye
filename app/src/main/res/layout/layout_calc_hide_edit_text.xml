@@ -35,7 +35,7 @@
                     android:paddingStart="@dimen/calc_edit_padding"
                     android:paddingEnd="@dimen/calc_edit_padding"
                     android:singleLine="true"
-                    android:text="@{calculatorVM.humanOne}"
+                    android:text="@{vm.humanOne}"
                     android:textAlignment="center"
                     android:textSize="@dimen/calc_edit_text_size" />
 
@@ -45,6 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
                     android:layout_toEndOf="@id/hide_edit_twice_human_one"
                     android:fontFamily="@font/nanum_square_r"
                     android:singleLine="true"
@@ -71,7 +72,7 @@
                     android:paddingStart="@dimen/calc_edit_padding"
                     android:paddingEnd="@dimen/calc_edit_padding"
                     android:singleLine="true"
-                    android:text="@{calculatorVM.amount}"
+                    android:text="@{vm.amount}"
                     android:textAlignment="center"
                     android:textSize="@dimen/calc_edit_text_size" />
 
@@ -94,7 +95,7 @@
                         android:paddingStart="@dimen/calc_edit_padding"
                         android:paddingEnd="@dimen/calc_edit_padding"
                         android:singleLine="true"
-                        android:text="@{calculatorVM.unit}"
+                        android:text="@{vm.unit}"
                         android:textAlignment="center"
                         android:textSize="@dimen/calc_edit_text_size" />
 
@@ -132,7 +133,7 @@
                         android:paddingStart="@dimen/calc_edit_padding"
                         android:paddingEnd="@dimen/calc_edit_padding"
                         android:singleLine="true"
-                        android:text="@{calculatorVM.ingredient}"
+                        android:text="@{vm.ingredient}"
                         android:textAlignment="center"
                         android:textSize="@dimen/calc_edit_text_size" />
 
@@ -173,7 +174,7 @@
                     android:paddingStart="@dimen/calc_edit_padding"
                     android:paddingEnd="@dimen/calc_edit_padding"
                     android:singleLine="true"
-                    android:text="@{calculatorVM.humanTwo}"
+                    android:text="@{vm.humanTwo}"
                     android:textAlignment="center"
                     android:textSize="@dimen/calc_edit_text_size" />
 
@@ -209,7 +210,7 @@
                     android:paddingStart="@dimen/calc_edit_padding"
                     android:paddingEnd="@dimen/calc_edit_padding"
                     android:singleLine="true"
-                    android:text="@{calculatorVM.tool}"
+                    android:text="@{vm.tool}"
                     android:textAlignment="center"
                     android:textSize="@dimen/calc_edit_text_size" />
             </RelativeLayout>

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="cookcook.nexters.com.amoogye.views.calc.entity.CalcTypeState" />
 
         <variable
-            name="calculatorVM"
+            name="vm"
             type="cookcook.nexters.com.amoogye.views.calc.presenter.CalculatorViewModel2" />
     </data>
 
@@ -18,8 +20,9 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.53"
-            android:padding="16dp"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:padding="16dp">
+
             <RelativeLayout
                 android:id="@+id/calc_layout_top"
                 android:layout_width="match_parent"
@@ -30,57 +33,71 @@
                     android:id="@+id/btn_history"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/history"
-                    android:background="@android:color/transparent"
+                    android:layout_marginEnd="24dp"
                     android:layout_toStartOf="@+id/btn_tip"
-                    android:layout_marginEnd="24dp"/>
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/history" />
 
                 <ImageButton
                     android:id="@+id/btn_tip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/tip"
+                    android:layout_alignParentEnd="true"
                     android:background="@android:color/transparent"
-                    android:layout_alignParentEnd="true"/>
+                    android:src="@drawable/tip" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/calc_text_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:layout_below="@+id/calc_layout_top">
+                android:layout_below="@+id/calc_layout_top"
+                android:layout_marginTop="1dp">
+
                 <TextView
                     android:id="@+id/txt_ingredient"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="재료"
-                    android:textSize="22sp"
                     android:fontFamily="@font/nanum_square_r"
-                    android:textColor="#131c32"/>
+                    android:text="재료"
+                    android:onClick="@{() -> vm.onChangeCalcState(CalcTypeState.MATERIAL)}"
+                    android:textColor="#131c32"
+                    android:textSize="22sp" />
 
                 <TextView
                     android:id="@+id/txt_calc_plus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="+"
-                    android:textSize="22sp"
+                    android:layout_marginStart="6dp"
                     android:layout_toEndOf="@+id/txt_ingredient"
                     android:fontFamily="@font/nanum_square_r"
-                    android:layout_marginStart="6dp"/>
+                    android:text="+"
+                    android:textSize="22sp" />
 
                 <TextView
                     android:id="@+id/txt_human"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="인원"
-                    android:textSize="22sp"
+                    android:layout_marginStart="6dp"
                     android:layout_toEndOf="@+id/txt_calc_plus"
                     android:fontFamily="@font/nanum_square_r"
-                    android:layout_marginStart="6dp"/>
+                    android:onClick="@{() -> vm.onChangeCalcState(CalcTypeState.PERSONNEL)}"
+                    android:text="인원"
+                    android:textSize="22sp" />
             </RelativeLayout>
 
-            <RelativeLayout
+            <TextView
+                android:text="@{vm.alertText}"
+                android:fontFamily="@font/nanum_square_r"
+                android:textSize="12sp"
+                android:textColor="@color/timer_theme_color"
+                android:layout_below="@id/calc_text_container"
+                android:layout_marginTop="12dp"
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content" />
+
+           <RelativeLayout
                 android:id="@+id/calculator_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -89,7 +106,20 @@
                 android:layout_marginTop="33dp"
                 android:layout_marginBottom="23dp">
 
+                <include
+                    android:id="@+id/layout_invisible_container"
+                    layout="@layout/layout_calc_hide_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    bind:vm="@{vm}"
+                    android:visibility="invisible" />
 
+                <include
+                    android:id="@+id/layout_visible_container"
+                    layout="@layout/layout_calc_visible_edit_text"
+                    bind:vm="@{vm}"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
             </RelativeLayout>
 
@@ -103,11 +133,11 @@
                     android:id="@+id/btn_calc_button"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:text="바꾸면"
-                    android:textSize="22sp"
-                    android:fontFamily="@font/nanum_square_r"
                     android:background="@drawable/timer_rounded_theme_button"
-                    android:textColor="#ffffff" />
+                    android:fontFamily="@font/nanum_square_r"
+                    android:text="바꾸면"
+                    android:textColor="#ffffff"
+                    android:textSize="22sp" />
 
                 <RelativeLayout
                     android:id="@+id/layout_calc_result"
@@ -125,10 +155,10 @@
 
                     <RelativeLayout
                         android:id="@+id/layout_calc_delete_wrap"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
                         android:layout_width="40dp"
-                        android:layout_height="40dp">
+                        android:layout_height="40dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true">
 
                         <ImageView
                             android:layout_width="16dp"
@@ -144,38 +174,41 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.47"
             android:layout_marginTop="4dp"
-            android:orientation="vertical"
-            android:background="@color/white">
+            android:layout_weight="0.47"
+            android:background="@color/white"
+            android:orientation="vertical">
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="4dp"
-                android:background="@color/main_background_color"/>
+                android:background="@color/main_background_color" />
 
             <FrameLayout
                 android:id="@+id/calc_frame_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <include layout="@layout/layout_number_button_wrap"
+                <include
                     android:id="@+id/calc_layout_button"
+                    layout="@layout/layout_number_button_wrap"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="visible"/>
+                    android:visibility="visible" />
 
-                <include layout="@layout/layout_unit_button_wrap"
+                <include
                     android:id="@+id/calc_layout_unit"
+                    layout="@layout/layout_unit_button_wrap"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
 
-                <include layout="@layout/layout_ingredient_scroll_wrap"
+                <include
                     android:id="@+id/calc_layout_ingredient"
+                    layout="@layout/layout_ingredient_scroll_wrap"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
 
             </FrameLayout>
         </LinearLayout>

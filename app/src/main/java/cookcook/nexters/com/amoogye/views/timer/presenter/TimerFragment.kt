@@ -71,7 +71,7 @@ class TimerFragment : TimerBaseFragment() {
         layoutParam.width = 0
         layout_timer_background.layoutParams = layoutParam
 
-        BaseNumberButton(view, onClick)
+        BaseNumberButton(view, onClick, false)
     }
 
     override fun subscribeUI() {

@@ -6,17 +6,18 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.views.calc.entity.UnitModel
+import cookcook.nexters.com.amoogye.views.calc.presenter.adapter.AdapterListener
 import cookcook.nexters.com.amoogye.views.calc.presenter.adapter.UnitAdapter
 
 const val GRID_COLUMN = 3
 
-class UnitButtonActivity(view: View) {
+class UnitButtonActivity(view: View, adapterListener: AdapterListener) {
     var adapter: UnitAdapter
     var context: Context = view.context
     val recyclerView: RecyclerView = view.findViewById(R.id.recyclerview_unit)
 
     init {
-        adapter = UnitAdapter(context)
+        adapter = UnitAdapter(context, adapterListener)
         recyclerView.layoutManager = GridLayoutManager(context, GRID_COLUMN)
         recyclerView.adapter = adapter
         recyclerView.setHasFixedSize(true)

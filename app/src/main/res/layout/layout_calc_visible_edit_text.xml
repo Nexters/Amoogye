@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout>
+
     <data>
 
         <import type="cookcook.nexters.com.amoogye.views.calc.entity.EditTextType" />
@@ -27,7 +28,7 @@
 
                 <RelativeLayout
                     android:id="@+id/layout_human_top_standard"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
                     <EditText
@@ -41,7 +42,6 @@
                         android:paddingStart="@dimen/calc_edit_padding"
                         android:paddingEnd="@dimen/calc_edit_padding"
                         android:singleLine="true"
-                        android:onClick="@{() -> vm.onSelectedEditBox(EditTextType.HUMAN_ONE)}"
                         android:text="@{vm.humanOne}"
                         android:textAlignment="center"
                         android:textSize="@dimen/calc_edit_text_size" />
@@ -52,6 +52,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="4dp"
+                        android:layout_marginEnd="8dp"
                         android:layout_toEndOf="@+id/edit_twice_human_one"
                         android:fontFamily="@font/nanum_square_r"
                         android:singleLine="true"
@@ -70,16 +71,15 @@
                         android:id="@+id/edit_twice_amount"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/calc_edit_box_size"
-                        android:layout_marginStart="8dp"
                         android:background="@drawable/number_input_non_focus_wrap_rounded_box"
                         android:cursorVisible="false"
                         android:fontFamily="@font/nanum_square_r"
                         android:minWidth="@dimen/calc_edit_box_size"
                         android:paddingStart="@dimen/calc_edit_padding"
                         android:paddingEnd="@dimen/calc_edit_padding"
+                        android:layout_marginEnd="4dp"
                         android:singleLine="true"
                         android:text="@{vm.amount}"
-                        android:onClick="@{() -> vm.onSelectedEditBox(EditTextType.AMOUNT)}"
                         android:textAlignment="center"
                         android:textSize="@dimen/calc_edit_text_size" />
 
@@ -94,7 +94,8 @@
                             android:id="@+id/edit_twice_unit"
                             android:layout_width="wrap_content"
                             android:layout_height="@dimen/calc_edit_box_size"
-                            android:layout_marginStart="4dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginStart="0dp"
                             android:background="@drawable/number_input_non_focus_wrap_rounded_box"
                             android:cursorVisible="false"
                             android:fontFamily="@font/nanum_square_r"
@@ -103,7 +104,6 @@
                             android:paddingEnd="@dimen/calc_edit_padding"
                             android:singleLine="true"
                             android:text="@{vm.unit}"
-                            android:onClick="@{() -> vm.onSelectedEditBox(EditTextType.UNIT)}"
                             android:textAlignment="center"
                             android:textSize="@dimen/calc_edit_text_size" />
 
@@ -112,7 +112,7 @@
 
                     <RelativeLayout
                         android:id="@+id/layout_ingredient_wrap"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toEndOf="@id/layout_weight_standard">
 
@@ -142,7 +142,6 @@
                             android:paddingEnd="@dimen/calc_edit_padding"
                             android:singleLine="true"
                             android:text="@{vm.ingredient}"
-                            android:onClick="@{() -> vm.onSelectedEditBox(EditTextType.INGREDIENT)}"
                             android:textAlignment="center"
                             android:textSize="@dimen/calc_edit_text_size" />
 
@@ -169,7 +168,7 @@
 
                 <RelativeLayout
                     android:id="@+id/layout_human_bottom_standard"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
                     <EditText
@@ -184,7 +183,6 @@
                         android:paddingEnd="@dimen/calc_edit_padding"
                         android:singleLine="true"
                         android:text="@{vm.humanTwo}"
-                        android:onClick="@{() -> vm.onSelectedEditBox(EditTextType.HUMAN_TWO)}"
                         android:textAlignment="center"
                         android:textSize="@dimen/calc_edit_text_size" />
 
@@ -198,6 +196,7 @@
                         android:fontFamily="@font/nanum_square_r"
                         android:singleLine="true"
                         android:text="명 기준"
+                        android:layout_marginEnd="8dp"
                         android:textColor="@color/calc_text_color"
                         android:textSize="@dimen/calc_text_size" />
                 </RelativeLayout>
@@ -212,7 +211,6 @@
                         android:id="@+id/edit_twice_tool"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/calc_edit_box_size"
-                        android:layout_marginStart="8dp"
                         android:background="@drawable/number_input_non_focus_wrap_rounded_box"
                         android:cursorVisible="false"
                         android:fontFamily="@font/nanum_square_r"
@@ -221,7 +219,6 @@
                         android:paddingEnd="@dimen/calc_edit_padding"
                         android:singleLine="true"
                         android:text="@{vm.tool}"
-                        android:onClick="@{() -> vm.onSelectedEditBox(EditTextType.TOOL)}"
                         android:textAlignment="center"
                         android:textSize="@dimen/calc_edit_text_size" />
                 </RelativeLayout>

@@ -16,8 +16,10 @@ import cookcook.nexters.com.amoogye.views.tools.TYPE_LIFE
 import cookcook.nexters.com.amoogye.views.tools.TYPE_NORMAL
 import kotlinx.android.synthetic.main.item_unit_recyclerview.view.*
 
-class UnitAdapter(val context: Context) : RecyclerView.Adapter<UnitAdapter.Holder>() {
+class UnitAdapter(val context: Context, onClick: AdapterListener) : RecyclerView.Adapter<UnitAdapter.Holder>() {
     private var unitList: ArrayList<UnitModel> = arrayListOf()
+
+    private var itemClickEvent: AdapterListener = onClick
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_unit_recyclerview, parent, false)
@@ -68,21 +70,8 @@ class UnitAdapter(val context: Context) : RecyclerView.Adapter<UnitAdapter.Holde
             itemView.txt_unit_abbreviation.text = unitModel.abbreviation
             itemView.txt_unit_korean.text = unitModel.korean
 
-            /* TODO: CalcFragment에 종속적이지 않고 좀 더 안전한 코드를 고민해보자.. */
             itemView.setOnClickListener {
-                Log.d("TAG", "is weight is " + unitModel.isWeight.toString())
-                if(unitModel.isWeight) {
-                    Log.d("TAG", "show")
-                    if (CalcFragment.getInstance().binding.calculatorVM!!.getSelectedEditText() === EditTextType.UNIT) {
-                        CalcFragment.getInstance().showWeight()
-                    }
-                } else {
-                    Log.d("TAG", "hide")
-                    if (CalcFragment.getInstance().binding.calculatorVM!!.getSelectedEditText() === EditTextType.UNIT) {
-                        CalcFragment.getInstance().hideWeight()
-                    }
-                }
-                CalcFragment.getInstance().binding.calculatorVM!!.onUnitButtonClick(unitModel)
+                itemClickEvent.click(unitModel)
             }
         }
     }
