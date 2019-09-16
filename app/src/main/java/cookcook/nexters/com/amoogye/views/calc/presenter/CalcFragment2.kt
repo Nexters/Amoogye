@@ -171,6 +171,7 @@ class CalcFragment2 : BaseFragment() {
         calculatorViewModel.useIngredient.observe(this, visibleWeightEditText)
         calculatorViewModel.selectedEditBox.observe(this, changeSelectedEditText)
         calculatorViewModel.calcKeyboardType.observe(this, changeKeyboard)
+
         BaseNumberButton(view, onClick)
 
         editTextSetting(edit_twice_amount, EditTextType.AMOUNT)
@@ -238,7 +239,6 @@ class CalcFragment2 : BaseFragment() {
     private fun callUnitSelector() {
         context!!.setTheme(R.style.ActionSheetStyleiOS7)
 
-        /* TODO: 생활단위, 일반단위를 고정값이 아니게 바꾸자 */
         ActionSheet.createBuilder(context, fragmentManager)
             .setCancelButtonTitle("취소")
             .setOtherButtonTitles("생활단위", "일반단위")
