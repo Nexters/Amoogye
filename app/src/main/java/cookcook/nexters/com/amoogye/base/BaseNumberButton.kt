@@ -35,11 +35,26 @@ class BaseNumberButton() {
         "delete"
     )
 
-    constructor(view: View, onClick:(number: String) -> Unit): this() {
+    constructor(view: View, onClick:(number: String) -> Unit, useDot: Boolean = true): this() {
+        val emptyLayout = view.findViewById<RelativeLayout>(R.id.layout_non_dot)
+        if (useDot) {
+            emptyLayout.visibility = View.GONE
+        } else {
+            emptyLayout.visibility = View.VISIBLE
+
+        }
+
         for (x in 0 until numberButtonList.size) {
             var layout = view.findViewById<RelativeLayout>(numberButtonList[x])
             layout.setOnClickListener {
                 onClick(numberButtonTextList[x])
+            }
+            if (x == 10) {
+                if (useDot) {
+                    layout.visibility = View.VISIBLE
+                } else {
+                    layout.visibility = View.GONE
+                }
             }
         }
     }

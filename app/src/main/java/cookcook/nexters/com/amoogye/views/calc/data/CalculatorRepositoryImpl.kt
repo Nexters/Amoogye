@@ -17,8 +17,23 @@ class CalculatorRepositoryImpl : CalculatorRepository {
         } else {
             if (number != "delete") {
                 if (afterText == "0") {
-                    afterText = number
+                    afterText = if (number == ".") {
+                        "0."
+                    } else {
+                        number
+                    }
                 } else {
+                    if (number == ".") {
+                        if (afterText.any { it == '.' }) {
+                            return afterText
+                        }
+                    }
+                    if (afterText.any{it == '.'}) {
+                        val dump = afterText.split('.')
+                        if (dump[1].isNotEmpty()) {
+                            return afterText
+                        }
+                    }
                     afterText += number
                 }
             }
@@ -26,6 +41,10 @@ class CalculatorRepositoryImpl : CalculatorRepository {
 
         if (afterText.isEmpty()) {
             return "0"
+        }
+
+        if ((afterText.toCharArray()[afterText.lastIndex] != '.') && afterText.toDouble() > 9999) {
+            afterText = "9999"
         }
 
         return afterText

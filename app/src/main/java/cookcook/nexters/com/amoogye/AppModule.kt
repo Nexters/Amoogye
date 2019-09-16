@@ -2,7 +2,7 @@ package cookcook.nexters.com.amoogye
 
 import cookcook.nexters.com.amoogye.views.calc.data.CalculatorRepositoryImpl
 import cookcook.nexters.com.amoogye.views.calc.domain.CalculatorRepository
-import cookcook.nexters.com.amoogye.views.calc.presenter.CalculatorViewModel
+import cookcook.nexters.com.amoogye.views.calc.presenter.CalculatorViewModel2
 import cookcook.nexters.com.amoogye.views.main.presenter.MainViewModel
 import cookcook.nexters.com.amoogye.views.main.domain.MainRepository
 import cookcook.nexters.com.amoogye.views.main.data.MainRepositoryImpl
@@ -13,9 +13,13 @@ import org.koin.android.viewmodel.dsl.viewModel
 
 import org.koin.dsl.module
 
-val calcModule = module {
-    single<CalculatorRepository> { CalculatorRepositoryImpl() }
-    viewModel { CalculatorViewModel(get()) }
+//val calcModule = module {
+//    single<CalculatorRepository> { CalculatorRepositoryImpl() }
+//    viewModel { CalculatorViewModel(get()) }
+//}
+
+val calcModule2 = module {
+    viewModel { CalculatorViewModel2() }
 }
 
 val timerModule = module {
@@ -28,4 +32,4 @@ val mainModule = module {
     viewModel { MainViewModel(get()) }
 }
 
-val appModule = listOf(mainModule, calcModule, timerModule)
+val appModule = listOf(mainModule, calcModule2, timerModule)

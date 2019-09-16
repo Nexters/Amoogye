@@ -30,6 +30,8 @@ import cookcook.nexters.com.amoogye.views.tools.add_tools.MeasureUnitSaveData
 import io.realm.Realm
 import io.realm.RealmResults
 import kotlinx.android.synthetic.main.fragment_calc.*
+import kotlinx.android.synthetic.main.layout_calc_hide_edit_text.*
+import kotlinx.android.synthetic.main.layout_calc_visible_edit_text.*
 import kotlinx.android.synthetic.main.layout_unit_button_wrap.*
 import org.koin.android.ext.android.get
 import java.util.*
@@ -184,7 +186,7 @@ class CalcFragment : BaseFragment() {
         }
 
         itemChange(calculatorViewModel.flag - 1)
-        unitRecyclerView = UnitButtonActivity(view)
+//        unitRecyclerView = UnitButtonActivity(view)
         unitRecyclerView.addItems(selectUnitItems(calculatorViewModel.currentSelectedType))
 
         val initData = realm.where(MeasureUnit::class.java).equalTo("unitId", 5).findFirst()
@@ -573,7 +575,7 @@ class CalcFragment : BaseFragment() {
 
     override fun onDataBinding(inflater: LayoutInflater, container: ViewGroup?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_calc, container, false)
-        binding.calculatorVM = calculatorViewModel
+//        binding.calculatorVM = calculatorViewModel
         calculatorViewModel.context = context!!
         binding.lifecycleOwner = this
 

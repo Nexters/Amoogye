@@ -31,20 +31,14 @@
             android:fontFamily="@font/nanum_square_r"
             android:layout_toEndOf="@+id/txt_unit_normal_sequence"/>
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/btn_unit_changer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:orientation="horizontal"
             android:layout_marginEnd="20dp">
 
-            <ImageView
-                android:id="@+id/image_unit_changer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/keyboard_icon_choose"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"/>
 
             <TextView
                 android:id="@+id/txt_unit_changer"
@@ -54,10 +48,16 @@
                 android:textSize="12sp"
                 android:textColor="#131c32"
                 android:fontFamily="@font/nanum_square_r"
-                android:layout_toStartOf="@id/image_unit_changer"
                 android:layout_marginEnd="6dp"/>
 
-        </RelativeLayout>
+            <ImageView
+                android:id="@+id/image_unit_changer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/keyboard_icon_choose"/>
+
+        </LinearLayout>
     </RelativeLayout>
 
     <RelativeLayout

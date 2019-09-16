@@ -33,7 +33,7 @@ val realmData = arrayOf(
     MeasureUnit(22, TYPE_FOOD,0,"백설탕","","",1.17645,false,Date().time, Date().time),
     MeasureUnit(23, TYPE_FOOD,0,"물","","",1.0,false,Date().time, Date().time),
     MeasureUnit(24, TYPE_FOOD,0,"밀가루","","",2.38095,false,Date().time, Date().time),
-    MeasureUnit(25, TYPE_FOOD,0,"강려분","","",1.49255,false,Date().time, Date().time),
+    MeasureUnit(25, TYPE_FOOD,0,"강력분","","",1.49255,false,Date().time, Date().time),
     MeasureUnit(26, TYPE_FOOD,0,"중력분","","",1.8182, false,Date().time, Date().time),
     MeasureUnit(27, TYPE_FOOD,0,"박력분","","",2.0,false,Date().time, Date().time),
     MeasureUnit(28, TYPE_FOOD,0,"이스트","","",1.56475,false,Date().time, Date().time),
