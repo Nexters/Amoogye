@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Amoogye</string>
+    <string name="app_name">아무계</string>
 
     <string name="navigation_main_calc">계산기</string>
     <string name="navigation_main_tools">계량도구</string>

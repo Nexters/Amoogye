@@ -34,7 +34,7 @@ class SettingFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val setting = SharedPreferences(this)
+        val setting = SharedPreferences(activity!!.applicationContext)
 
         setting_text_onboarding_init.setOnClickListener {
             val onboarding = SharedPreferences(view.context)
@@ -50,7 +50,8 @@ class SettingFragment: Fragment() {
             fragment.show(childFragmentManager, null)
         }
 
-        // TODO sound, vibration 초기 값 가져와 세팅
+        setting_switch_sound.isChecked = setting.sound
+        setting_switch_vibration.isChecked = setting.vibration
 
         setting_switch_sound.setOnCheckedChangeListener { _, isChecked ->
             setting.sound = isChecked
