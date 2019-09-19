@@ -23,6 +23,8 @@ class CalculatorViewModel2 : ViewModel() {
 
     lateinit var context: Context
 
+    val TAG: String = CalculatorViewModel2::class.java.simpleName!!
+
     // 에딧 텍스트
     var humanOne: MutableLiveData<String> = MutableLiveData() // 1명 기준
     var humanTwo: MutableLiveData<String> = MutableLiveData() // 2명 으로
@@ -98,7 +100,7 @@ class CalculatorViewModel2 : ViewModel() {
                 this.tool.value = unitModel.abbreviation
             }
             else -> {
-                Log.e("TAG", "잘못된 타입입니다.")
+                Log.e(TAG, "잘못된 타입입니다.")
             }
         }
     }
@@ -252,7 +254,7 @@ class CalculatorViewModel2 : ViewModel() {
                 }
             }
             else -> {
-                Log.e("TAG", "잘못된 타입입니다.")
+                Log.e(TAG, "잘못된 계산 타입입니다.")
             }
         }
     }
@@ -343,7 +345,7 @@ class CalculatorViewModel2 : ViewModel() {
                 text = "$result ${this.tool.value}이다."
             }
             else -> {
-                Log.e("TAG", "잘못된 상태입니다.")
+                Log.e(TAG, "잘못된 상태입니다.")
                 text = ""
             }
         }

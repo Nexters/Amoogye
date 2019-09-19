@@ -11,21 +11,12 @@ import cookcook.nexters.com.amoogye.utils.SharedPreferences
 import cookcook.nexters.com.amoogye.views.main.presenter.MainActivity
 import kotlinx.android.synthetic.main.activity_onboarding.*
 
+
 class OnboardingActivity : AppCompatActivity() {
 
     lateinit var onboardingViewPagerAdapter: OnboardingViewPagerAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        val onboarding = SharedPreferences(this)
-        if(!onboarding.onboarding) {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        }
-
-        setContentView(R.layout.activity_onboarding)
-
+    fun init() {
         onboardingViewPagerAdapter = OnboardingViewPagerAdapter(supportFragmentManager)
 
         view_pager_onboarding.adapter = onboardingViewPagerAdapter
@@ -83,6 +74,20 @@ class OnboardingActivity : AppCompatActivity() {
             onboarding.onboarding = false
             startActivity(Intent(this, MainActivity::class.java))
             finish()
+        }
+    }
+
+    lateinit var onboarding: SharedPreferences
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        this.onboarding = SharedPreferences(this)
+        if(!onboarding.onboarding) {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        } else {
+            setContentView(R.layout.activity_onboarding)
+            init()
         }
     }
 
