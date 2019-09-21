@@ -313,7 +313,7 @@ class CalculatorViewModel2 : ViewModel() {
         } else {
             1.0
         }
-        val ingredientName = selectedIngredientObject!!.unitNameBold
+        val ingredientName: String
         val text: String
         val textBefore: String
         val textAfter: String
@@ -326,8 +326,8 @@ class CalculatorViewModel2 : ViewModel() {
                         BigDecimal((amount * unit * ingredient) / tool)
                             .setScale(1, RoundingMode.HALF_UP)
                         )
-                text = "$result ${this.tool.value}"
-                textBefore = "$amount ${selectedUnitObject!!.abbreviation}"
+                text = "$result${this.tool.value}"
+                textBefore = "$amount${selectedUnitObject!!.abbreviation}"
                 textAfter = text
             }
             CalcTypeState.PERSONNEL -> {
@@ -337,8 +337,8 @@ class CalculatorViewModel2 : ViewModel() {
                         BigDecimal(((amount * unit * ingredient) / humanOne) * humanTwo)
                             .setScale(1, RoundingMode.HALF_UP)
                         )
-                text = "$result ${this.unit.value}"
-                textBefore = "${humanOne.toInt()}명 기준 $amount ${selectedUnitObject!!.abbreviation}"
+                text = "$result${this.unit.value}"
+                textBefore = "${humanOne.toInt()}명 기준 $amount${selectedUnitObject!!.abbreviation}"
                 textAfter = "${humanTwo.toInt()}명 기준 $text"
 
             }
@@ -350,7 +350,8 @@ class CalculatorViewModel2 : ViewModel() {
                         BigDecimal((((amount * unit * ingredient) / humanOne) * humanTwo) / tool)
                             .setScale(1, RoundingMode.HALF_UP)
                         )
-                text = "$result ${this.tool.value}"
+                text = "$result${this.tool.value}"
+                ingredientName = selectedIngredientObject!!.unitNameBold
                 textBefore = "${humanOne.toInt()}명 기준 $ingredientName $amount${selectedUnitObject!!.abbreviation}"
                 textAfter = "${humanTwo.toInt()}명 기준 $text"
             }
