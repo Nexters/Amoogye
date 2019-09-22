@@ -72,19 +72,28 @@ class CalculatorViewModel2 : ViewModel() {
         unitNormalList = realm.where(MeasureUnit::class.java).equalTo("unitType", TYPE_NORMAL).findAll()
         foodList = realm.where(MeasureUnit::class.java).equalTo("unitType", TYPE_FOOD).findAll()
 
-        val initData = unitNormalList.find { it.unitId == 15L }!!
-
+        val initUnitData = unitNormalList.find { it.unitId == 15L }!!
         val unitModel = UnitModel(
-            initData.unitNameBold,
-            initData.unitNameSoft,
-            initData.unitType,
-            initData.isWeight,
-            initData.unitValue
+            initUnitData.unitNameBold,
+            initUnitData.unitNameSoft,
+            initUnitData.unitType,
+            initUnitData.isWeight,
+            initUnitData.unitValue
         )
-
         this.selectedUnitObject = unitModel
         this.unit.value = unitModel.abbreviation
         this.useIngredient.value = unitModel.isWeight
+
+        val initToolData = unitLifeList.find { it.unitId == 1L }!!
+        val toolModel = UnitModel(
+            initToolData.unitNameBold,
+            initToolData.unitNameSoft,
+            initToolData.unitType,
+            initToolData.isWeight,
+            initToolData.unitValue
+        )
+        this.selectedToolObject = toolModel
+        this.tool.value = toolModel.abbreviation
     }
 
     fun onSelectUnit(unitModel: UnitModel) {
