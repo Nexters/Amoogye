@@ -41,7 +41,7 @@ class CalculatorViewModel2 : ViewModel() {
     var alertText: MutableLiveData<String> = MutableLiveData()
 
     var beforeCalcState: MutableLiveData<CalcTypeState> = MutableLiveData() // TODO 인터렉션
-    var selectedUnitType: CalcUnitType
+    var selectedUnitType: MutableLiveData<CalcUnitType> = MutableLiveData()
 
     private var selectedUnitObject: UnitModel? = null
     private var selectedToolObject: UnitModel? = null
@@ -62,7 +62,7 @@ class CalculatorViewModel2 : ViewModel() {
         this.currentCalcState.value = CalcTypeState.MATERIAL
         this.calcKeyboardType.value = CalcLayoutState.NUMBER
         this.useIngredient.value = false
-        this.selectedUnitType = CalcUnitType.NORMAL
+        this.selectedUnitType.value = CalcUnitType.NORMAL
         this.amount.value = "0"
 
         this.index = 0
@@ -105,7 +105,7 @@ class CalculatorViewModel2 : ViewModel() {
     }
 
     private fun unitItemList(): RealmResults<MeasureUnit> {
-        return if (this.selectedUnitType == CalcUnitType.NORMAL) {
+        return if (this.selectedUnitType.value == CalcUnitType.NORMAL) {
             unitNormalList
         } else {
             unitLifeList

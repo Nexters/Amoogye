@@ -85,6 +85,7 @@ class CalcFragment2 : BaseFragment() {
             EditTextType.UNIT -> {
                 edit_twice_unit.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
                 calculatorViewModel.calcKeyboardType.value = CalcLayoutState.UNIT
+                calculatorViewModel.selectedUnitType.value = CalcUnitType.NORMAL
             }
             EditTextType.INGREDIENT -> {
                 edit_twice_ingredient.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
@@ -97,6 +98,7 @@ class CalcFragment2 : BaseFragment() {
             EditTextType.TOOL -> {
                 edit_twice_tool.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
                 calculatorViewModel.calcKeyboardType.value = CalcLayoutState.TOOL
+                calculatorViewModel.selectedUnitType.value = CalcUnitType.LIFE
             }
             EditTextType.NONE -> {
                 calculatorViewModel.calcKeyboardType.value = CalcLayoutState.NONE
@@ -135,18 +137,21 @@ class CalcFragment2 : BaseFragment() {
                 txt_human.setTextColor(Color.parseColor("#33131c32"))
                 txt_calc_plus.setTextColor(Color.parseColor("#33131c32"))
                 hideOrVisibleLayout(isVisibleHuman = false, isVisibleMaterial = true)
+                calculatorViewModel.selectedEditBox.value = EditTextType.AMOUNT
             }
             CalcTypeState.PERSONNEL -> {
                 txt_human.setTextColor(Color.parseColor("#131c32"))
                 txt_ingredient.setTextColor(Color.parseColor("#33131c32"))
                 txt_calc_plus.setTextColor(Color.parseColor("#33131c32"))
                 hideOrVisibleLayout(isVisibleHuman = true, isVisibleMaterial = false)
+                calculatorViewModel.selectedEditBox.value = EditTextType.HUMAN_ONE
             }
             CalcTypeState.MATERIAL_PERSONNEL -> {
                 txt_ingredient.setTextColor(Color.parseColor("#131c32"))
                 txt_human.setTextColor(Color.parseColor("#131c32"))
                 txt_calc_plus.setTextColor(Color.parseColor("#131c32"))
                 hideOrVisibleLayout(isVisibleHuman = true, isVisibleMaterial = true)
+                calculatorViewModel.selectedEditBox.value = EditTextType.HUMAN_ONE
             }
         }
     }
@@ -180,6 +185,8 @@ class CalcFragment2 : BaseFragment() {
         calculatorViewModel.useIngredient.observe(this, visibleWeightEditText)
         calculatorViewModel.selectedEditBox.observe(this, changeSelectedEditText)
         calculatorViewModel.calcKeyboardType.observe(this, changeKeyboard)
+
+        calculatorViewModel.selectedUnitType.observe(this, changeItemList)
 
         BaseNumberButton(view, onClick)
 
@@ -233,6 +240,11 @@ class CalcFragment2 : BaseFragment() {
             btn_calc_button.visibility = View.VISIBLE
             layout_calc_result.visibility = View.GONE
             calc_frame_layout.visibility = View.VISIBLE
+            if (calculatorViewModel.currentCalcState.value == CalcTypeState.MATERIAL) {
+                calculatorViewModel.selectedEditBox.value = EditTextType.AMOUNT
+            } else {
+                calculatorViewModel.selectedEditBox.value = EditTextType.HUMAN_ONE
+            }
         }
 
         val items: ArrayList<String> = arrayListOf()
@@ -242,6 +254,21 @@ class CalcFragment2 : BaseFragment() {
 
         picker.wheelView.setLoopListener {
             calculatorViewModel.onSelectIngredient(items[it])
+        }
+    }
+
+    private val changeItemList = Observer<CalcUnitType> {
+        unitRecyclerView.addItems(calculatorViewModel.convertUnitItemList())
+        when(calculatorViewModel.selectedUnitType.value) {
+            CalcUnitType.LIFE -> {
+                txt_unit_changer.text = "생활단위"
+            }
+            CalcUnitType.NORMAL -> {
+                txt_unit_changer.text = "일반단위"
+            }
+            else -> {
+                Log.e("CalcFragment", "잘못된 타입입니다.")
+            }
         }
     }
 
@@ -255,13 +282,10 @@ class CalcFragment2 : BaseFragment() {
             .setListener(object : ActionSheet.ActionSheetListener {
                 override fun onOtherButtonClick(actionSheet: ActionSheet?, index: Int) {
                     if (index == 0) {
-                        txt_unit_changer.text = "생활단위"
-                        calculatorViewModel.selectedUnitType = CalcUnitType.LIFE
+                        calculatorViewModel.selectedUnitType.value = CalcUnitType.LIFE
                     } else {
-                        txt_unit_changer.text = "일반단위"
-                        calculatorViewModel.selectedUnitType = CalcUnitType.NORMAL
+                        calculatorViewModel.selectedUnitType.value = CalcUnitType.NORMAL
                     }
-                    unitRecyclerView.addItems(calculatorViewModel.convertUnitItemList())
                 }
 
                 override fun onDismiss(actionSheet: ActionSheet?, isCancel: Boolean) {
