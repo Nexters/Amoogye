@@ -200,6 +200,14 @@ class CalcFragment2 : BaseFragment() {
         unitRecyclerView = UnitButtonActivity(view, adapterListener)
         unitRecyclerView.addItems(calculatorViewModel.convertUnitItemList())
 
+        txt_unit_normal_sequence.setOnClickListener {
+            Toast.makeText(this.context, "구현 예정", Toast.LENGTH_SHORT).show()
+        }
+
+        txt_unit_recent_sequence.setOnClickListener {
+            Toast.makeText(this.context, "구현 예정", Toast.LENGTH_SHORT).show()
+        }
+
         btn_history.setOnClickListener {
             val intent = Intent(context, CalcHistoryActivity::class.java)
             startActivity(intent)
