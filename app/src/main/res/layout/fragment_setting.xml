@@ -72,6 +72,7 @@
                 android:fontFamily="@font/nanum_square_r"
                 android:paddingStart="@dimen/setting_item_start_end"
                 android:paddingEnd="@dimen/setting_item_start_end"
+                android:background="@null"
                 android:thumb="@drawable/setting_on_off_thumb"
                 android:track="@drawable/setting_on_off_selector"  />
 
@@ -155,6 +156,7 @@
                     android:fontFamily="@font/nanum_square_r"
                     android:paddingStart="@dimen/setting_item_start_end"
                     android:paddingEnd="@dimen/setting_item_start_end"
+                    android:background="@null"
                     android:thumb="@drawable/setting_on_off_thumb"
                     android:track="@drawable/setting_on_off_selector"  />
             </RelativeLayout>
@@ -185,6 +187,7 @@
                     android:fontFamily="@font/nanum_square_r"
                     android:paddingStart="@dimen/setting_item_start_end"
                     android:paddingEnd="@dimen/setting_item_start_end"
+                    android:background="@null"
                     android:thumb="@drawable/setting_on_off_thumb"
                     android:track="@drawable/setting_on_off_selector"/>
             </RelativeLayout>
