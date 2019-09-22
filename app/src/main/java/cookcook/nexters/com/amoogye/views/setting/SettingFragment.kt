@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import cn.pedant.SweetAlert.SweetAlertDialog
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.utils.SharedPreferences
 import de.psdev.licensesdialog.LicensesDialogFragment
 import kotlinx.android.synthetic.main.fragment_setting.*
+import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder
 
 
 class SettingFragment: Fragment() {
@@ -52,9 +52,17 @@ class SettingFragment: Fragment() {
         }
 
         setting_text_contact_email.setOnClickListener {
-            SweetAlertDialog(view.context, SweetAlertDialog.SUCCESS_TYPE)
-                .setTitleText("쿸쿸 팀")
-                .setContentText("")
+
+            val dialogBuilder = NiftyDialogBuilder.getInstance(view.context)
+
+            dialogBuilder
+                .withTitle("만든 사람들")
+                .withTitleColor("#000000")
+                .withDialogColor("#ffffff")
+                .withDividerColor("#000000")
+                .withMessageColor("#000000")
+                .withMessage(R.string.makers)
+                .show()
         }
 
         setting_switch_sound.isChecked = setting.sound
