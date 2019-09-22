@@ -21,7 +21,11 @@ class MainApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         Realm.init(this)
-        val realmConfiguration = RealmConfiguration.Builder().initialData { realm ->
+        val realmConfiguration = RealmConfiguration
+            .Builder()
+            .schemaVersion(1)
+            .deleteRealmIfMigrationNeeded()
+            .initialData { realm ->
             realmData.map {
                 realm?.apply {
                     val item = this.createObject(MeasureUnit::class.java, it.unitId)

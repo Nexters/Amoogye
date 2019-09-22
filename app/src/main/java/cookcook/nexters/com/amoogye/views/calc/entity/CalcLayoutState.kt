@@ -4,7 +4,8 @@ enum class CalcLayoutState {
     NUMBER, // 숫자 입력
     TOOL,  // 도구 입력
     UNIT,  // 단위 입력
-    INGREDIENT // 무게 단위 항목 입력
+    INGREDIENT, // 무게 단위 항목 입력
+    NONE // 아무것도 선택하지 않
 }
 
 enum class CalcTypeState {
