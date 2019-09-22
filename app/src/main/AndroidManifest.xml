@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="cookcook.nexters.com.amoogye">
 
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
     <application
+        tools:node="replace"
         android:name=".MainApplication"
         android:allowBackup="true"
         android:icon="@drawable/amoogye_logo"
@@ -29,8 +31,7 @@
         <activity
             android:name=".views.tools.add_tools.AddUtilActivity"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity android:name=".views.main.presenter.MainActivity">
-        </activity>
+        <activity android:name=".views.main.presenter.MainActivity"/>
     </application>
 
 </manifest>

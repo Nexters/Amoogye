@@ -244,7 +244,7 @@
                 android:paddingTop="@dimen/setting_sub_item_top"
                 android:paddingEnd="@dimen/setting_item_start_end"
                 android:paddingBottom="@dimen/setting_sub_item_bottom"
-                android:text="ysg01129@gmail.com"
+                android:text="만든 사람들"
                 android:textColor="@color/setting_text_color_soft"
                 android:textSize="@dimen/setting_sub_item_text_size" />
 

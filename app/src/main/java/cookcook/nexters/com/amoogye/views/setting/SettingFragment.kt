@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import cn.pedant.SweetAlert.SweetAlertDialog
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.utils.SharedPreferences
 import de.psdev.licensesdialog.LicensesDialogFragment
@@ -45,6 +46,12 @@ class SettingFragment: Fragment() {
                 .build()
 
             fragment.show(childFragmentManager, null)
+        }
+
+        setting_text_contact_email.setOnClickListener {
+            SweetAlertDialog(view.context, SweetAlertDialog.SUCCESS_TYPE)
+                .setTitleText("쿸쿸 팀")
+                .setContentText("")
         }
     }
 }
