@@ -31,7 +31,7 @@ class CalculatorViewModel2 : ViewModel() {
     var unit: MutableLiveData<String> = MutableLiveData() // ml
     var amount: MutableLiveData<String> = MutableLiveData() // 10
     var ingredient: MutableLiveData<String> = MutableLiveData() // 굴소스
-    var tool: MutableLiveData<String> = MutableLiveData() // 아빠숟가락
+    var tool: MutableLiveData<String> = MutableLiveData() // 밥숟가락
 
     var selectedEditBox: MutableLiveData<EditTextType> = MutableLiveData()
     var calcKeyboardType: MutableLiveData<CalcLayoutState> = MutableLiveData() // 키보드 타입
@@ -313,7 +313,10 @@ class CalculatorViewModel2 : ViewModel() {
         } else {
             1.0
         }
+        val ingredientName: String
         val text: String
+        val textBefore: String
+        val textAfter: String
         when (currentCalcState.value) {
             CalcTypeState.MATERIAL -> {
 
@@ -323,7 +326,9 @@ class CalculatorViewModel2 : ViewModel() {
                         BigDecimal((amount * unit * ingredient) / tool)
                             .setScale(1, RoundingMode.HALF_UP)
                         )
-                text = "$result ${this.tool.value}이다."
+                text = "$result${this.tool.value}"
+                textBefore = "$amount${selectedUnitObject!!.abbreviation}"
+                textAfter = text
             }
             CalcTypeState.PERSONNEL -> {
                 val humanOne = removeDecimalPoint(humanOne.value!!).toDouble()
@@ -332,7 +337,10 @@ class CalculatorViewModel2 : ViewModel() {
                         BigDecimal(((amount * unit * ingredient) / humanOne) * humanTwo)
                             .setScale(1, RoundingMode.HALF_UP)
                         )
-                text = "$result ${this.unit.value}이다."
+                text = "$result${this.unit.value}"
+                textBefore = "${humanOne.toInt()}명 기준 $amount${selectedUnitObject!!.abbreviation}"
+                textAfter = "${humanTwo.toInt()}명 기준 $text"
+
             }
             CalcTypeState.MATERIAL_PERSONNEL -> {
                 val humanOne = removeDecimalPoint(humanOne.value!!).toDouble()
@@ -342,10 +350,15 @@ class CalculatorViewModel2 : ViewModel() {
                         BigDecimal((((amount * unit * ingredient) / humanOne) * humanTwo) / tool)
                             .setScale(1, RoundingMode.HALF_UP)
                         )
-                text = "$result ${this.tool.value}이다."
+                text = "$result${this.tool.value}"
+                ingredientName = selectedIngredientObject!!.unitNameBold
+                textBefore = "${humanOne.toInt()}명 기준 $ingredientName $amount${selectedUnitObject!!.abbreviation}"
+                textAfter = "${humanTwo.toInt()}명 기준 $text"
             }
             else -> {
                 Log.e(TAG, "잘못된 상태입니다.")
+                textBefore = ""
+                textAfter = ""
                 text = ""
             }
         }
@@ -353,11 +366,11 @@ class CalculatorViewModel2 : ViewModel() {
         realm.beginTransaction()
         val newItemId = newId()
         val newItem = realm.createObject(CalcHistory::class.java, newItemId)
-        newItem.calcResultBefore = "$amount${selectedUnitObject!!.abbreviation}"
-        newItem.calcResultAfter = text
+        newItem.calcResultBefore = textBefore
+        newItem.calcResultAfter = textAfter
         newItem.createDate = Date().time
         realm.commitTransaction()
-        return text
+        return text+"이다."
     }
 
     private fun newId(): Long {
