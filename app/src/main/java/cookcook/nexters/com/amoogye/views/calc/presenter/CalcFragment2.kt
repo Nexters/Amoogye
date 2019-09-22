@@ -70,7 +70,9 @@ class CalcFragment2 : BaseFragment() {
         edit_twice_ingredient.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
         edit_twice_human_two.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
         edit_twice_tool.setBackgroundResource(R.drawable.number_input_non_focus_wrap_rounded_box)
-
+        btn_calc_button.visibility = View.VISIBLE
+        layout_calc_result.visibility = View.GONE
+        calc_frame_layout.visibility = View.VISIBLE
         when (type!!) {
             EditTextType.HUMAN_ONE -> {
                 edit_twice_human_one.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
@@ -96,6 +98,9 @@ class CalcFragment2 : BaseFragment() {
                 edit_twice_tool.setBackgroundResource(R.drawable.number_input_wrap_rounded_box)
                 calculatorViewModel.calcKeyboardType.value = CalcLayoutState.TOOL
             }
+            EditTextType.NONE -> {
+                calculatorViewModel.calcKeyboardType.value = CalcLayoutState.NONE
+            }
         }
     }
 
@@ -114,6 +119,11 @@ class CalcFragment2 : BaseFragment() {
             CalcLayoutState.TOOL,
             CalcLayoutState.UNIT -> {
                 calc_layout_unit.visibility = View.VISIBLE
+            }
+            CalcLayoutState.NONE -> {
+                btn_calc_button.visibility = View.GONE
+                layout_calc_result.visibility = View.VISIBLE
+                calc_frame_layout.visibility = View.INVISIBLE
             }
         }
     }
@@ -142,7 +152,6 @@ class CalcFragment2 : BaseFragment() {
     }
 
     private val visibleWeightEditText = Observer<Boolean> { isVisible ->
-        //        layout_weight_standard.visibility = convertBooleanToVisibleType(isVisible)
         layout_ingredient_wrap.visibility = convertBooleanToVisibleType(isVisible)
     }
 
@@ -263,10 +272,8 @@ class CalcFragment2 : BaseFragment() {
 
     private fun calculation() {
 
+        calculatorViewModel.selectedEditBox.value = EditTextType.NONE
         txt_calc_result.text = calculatorViewModel.calculation()
-        btn_calc_button.visibility = View.GONE
-        layout_calc_result.visibility = View.VISIBLE
-        calc_frame_layout.visibility = View.INVISIBLE
     }
 
     private val adapterListener = object : AdapterListener {
