@@ -10,6 +10,7 @@ import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.utils.SharedPreferences
 import de.psdev.licensesdialog.LicensesDialogFragment
 import kotlinx.android.synthetic.main.fragment_setting.*
+import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder
 
 
 class SettingFragment: Fragment() {
@@ -48,6 +49,20 @@ class SettingFragment: Fragment() {
                 .build()
 
             fragment.show(childFragmentManager, null)
+        }
+
+        setting_text_contact_email.setOnClickListener {
+
+            val dialogBuilder = NiftyDialogBuilder.getInstance(view.context)
+
+            dialogBuilder
+                .withTitle("만든 사람들")
+                .withTitleColor("#000000")
+                .withDialogColor("#ffffff")
+                .withDividerColor("#000000")
+                .withMessageColor("#000000")
+                .withMessage(R.string.makers)
+                .show()
         }
 
         setting_switch_sound.isChecked = setting.sound
