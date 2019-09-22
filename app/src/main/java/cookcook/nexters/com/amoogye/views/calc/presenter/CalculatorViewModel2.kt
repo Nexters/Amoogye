@@ -312,7 +312,11 @@ class CalculatorViewModel2 : ViewModel() {
         } else {
             1.0
         }
-        val ingredientName: String
+        val ingredientName = if(useIngredient.value!!) {
+            selectedIngredientObject!!.unitNameBold
+        } else {
+            ""
+        }
         val text: String
         val textBefore: String
         val textAfter: String
@@ -325,8 +329,8 @@ class CalculatorViewModel2 : ViewModel() {
                         BigDecimal((amount * unit * ingredient) / tool)
                             .setScale(1, RoundingMode.HALF_UP)
                         )
-                text = "$result${this.tool.value}"
-                textBefore = "$amount${selectedUnitObject!!.abbreviation}"
+                text = "${removePointerZero(result.toDouble())}${this.tool.value}"
+                textBefore = "$ingredientName ${removePointerZero(amount)}${selectedUnitObject!!.abbreviation}"
                 textAfter = text
             }
             CalcTypeState.PERSONNEL -> {
@@ -336,9 +340,9 @@ class CalculatorViewModel2 : ViewModel() {
                         BigDecimal(((amount * unit * ingredient) / humanOne) * humanTwo)
                             .setScale(1, RoundingMode.HALF_UP)
                         )
-                text = "$result${this.unit.value}"
-                textBefore = "${humanOne.toInt()}명 기준 $amount${selectedUnitObject!!.abbreviation}"
-                textAfter = "${humanTwo.toInt()}명 기준 $text"
+                text = "${removePointerZero(result.toDouble())}${this.unit.value}"
+                textBefore = "${removePointerZero(humanOne)}명 기준 $ingredientName ${removePointerZero(amount)}${selectedUnitObject!!.abbreviation}"
+                textAfter = "${removePointerZero(humanTwo)}명 기준 $text"
 
             }
             CalcTypeState.MATERIAL_PERSONNEL -> {
@@ -349,10 +353,9 @@ class CalculatorViewModel2 : ViewModel() {
                         BigDecimal((((amount * unit * ingredient) / humanOne) * humanTwo) / tool)
                             .setScale(1, RoundingMode.HALF_UP)
                         )
-                text = "$result${this.tool.value}"
-                ingredientName = selectedIngredientObject!!.unitNameBold
-                textBefore = "${humanOne.toInt()}명 기준 $ingredientName $amount${selectedUnitObject!!.abbreviation}"
-                textAfter = "${humanTwo.toInt()}명 기준 $text"
+                text = "${removePointerZero(result.toDouble())}${this.tool.value}"
+                textBefore = "${removePointerZero(humanOne)}명 기준 $ingredientName ${removePointerZero(amount)}${selectedUnitObject!!.abbreviation}"
+                textAfter = "${removePointerZero(humanTwo)}명 기준 $text"
             }
             else -> {
                 Log.e(TAG, "잘못된 상태입니다.")
@@ -370,6 +373,14 @@ class CalculatorViewModel2 : ViewModel() {
         newItem.createDate = Date().time
         realm.commitTransaction()
         return text+"이다."
+    }
+
+    private fun removePointerZero(value: Double): String {
+        if ((value * 10) % 10 > 0) {
+            return value.toString()
+        } else {
+            return value.toInt().toString()
+        }
     }
 
     private fun newId(): Long {
