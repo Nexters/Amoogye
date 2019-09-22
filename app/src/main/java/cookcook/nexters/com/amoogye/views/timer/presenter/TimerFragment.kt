@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.base.BaseNumberButton
 import cookcook.nexters.com.amoogye.databinding.FragmentTimerBinding
+import cookcook.nexters.com.amoogye.utils.SharedPreferences
 import cookcook.nexters.com.amoogye.utils.TimerStatus
 import kotlinx.android.synthetic.main.fragment_timer.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -171,6 +172,9 @@ class TimerFragment : TimerBaseFragment() {
     }
 
     private fun editTextClickEvent(editText: EditText, number: Int) {
+
+        val settings = SharedPreferences(getActivity()!!.applicationContext)
+
         editText.setOnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
                 timerViewModel.setSelectedTimerEditText(number)
@@ -185,6 +189,8 @@ class TimerFragment : TimerBaseFragment() {
                 timerViewModel.onTimerStartButtonClick()
                 getTimerService()!!.setInitialTimes(timerViewModel.time.value!! + 100L)
                 getTimerService()!!.onStartCountdown()
+                getTimerService()!!.setSound(settings.sound)
+                getTimerService()!!.setVibration(settings.vibration)
                 visibleTimerStart()
             } else if (getTimerService()!!.getState() == TimerStatus.STATE_END) {
                 getTimerService()!!.timerStatus = TimerStatus.STATE_WAIT

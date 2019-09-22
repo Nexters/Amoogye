@@ -34,6 +34,9 @@ class SettingFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val setting = SharedPreferences(activity!!.applicationContext)
+
         setting_text_onboarding_init.setOnClickListener {
             val onboarding = SharedPreferences(view.context)
             onboarding.onboarding = true
@@ -52,6 +55,17 @@ class SettingFragment: Fragment() {
             SweetAlertDialog(view.context, SweetAlertDialog.SUCCESS_TYPE)
                 .setTitleText("쿸쿸 팀")
                 .setContentText("")
+        }
+
+        setting_switch_sound.isChecked = setting.sound
+        setting_switch_vibration.isChecked = setting.vibration
+
+        setting_switch_sound.setOnCheckedChangeListener { _, isChecked ->
+            setting.sound = isChecked
+        }
+
+        setting_switch_vibration.setOnCheckedChangeListener { _, isChecked ->
+            setting.vibration = isChecked
         }
     }
 }

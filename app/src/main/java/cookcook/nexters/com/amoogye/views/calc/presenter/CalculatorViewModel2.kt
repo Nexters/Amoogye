@@ -23,13 +23,15 @@ class CalculatorViewModel2 : ViewModel() {
 
     lateinit var context: Context
 
+    val TAG: String = CalculatorViewModel2::class.java.simpleName!!
+
     // 에딧 텍스트
     var humanOne: MutableLiveData<String> = MutableLiveData() // 1명 기준
     var humanTwo: MutableLiveData<String> = MutableLiveData() // 2명 으로
     var unit: MutableLiveData<String> = MutableLiveData() // ml
     var amount: MutableLiveData<String> = MutableLiveData() // 10
     var ingredient: MutableLiveData<String> = MutableLiveData() // 굴소스
-    var tool: MutableLiveData<String> = MutableLiveData() // 아빠숟가락
+    var tool: MutableLiveData<String> = MutableLiveData() // 밥숟가락
 
     var selectedEditBox: MutableLiveData<EditTextType> = MutableLiveData()
     var calcKeyboardType: MutableLiveData<CalcLayoutState> = MutableLiveData() // 키보드 타입
@@ -39,7 +41,7 @@ class CalculatorViewModel2 : ViewModel() {
     var alertText: MutableLiveData<String> = MutableLiveData()
 
     var beforeCalcState: MutableLiveData<CalcTypeState> = MutableLiveData() // TODO 인터렉션
-    var selectedUnitType: CalcUnitType
+    var selectedUnitType: MutableLiveData<CalcUnitType> = MutableLiveData()
 
     private var selectedUnitObject: UnitModel? = null
     private var selectedToolObject: UnitModel? = null
@@ -60,30 +62,38 @@ class CalculatorViewModel2 : ViewModel() {
         this.currentCalcState.value = CalcTypeState.MATERIAL
         this.calcKeyboardType.value = CalcLayoutState.NUMBER
         this.useIngredient.value = false
-        this.selectedUnitType = CalcUnitType.NORMAL
+        this.selectedUnitType.value = CalcUnitType.NORMAL
         this.amount.value = "0"
 
         this.index = 0
         this.itemSize = 0
 
-        val initData = realm
-            .where(MeasureUnit::class.java)
-            .equalTo("unitId", 5)
-            .findFirst() // ml
-
-        onSelectUnit(
-            UnitModel(
-                initData.unitNameBold,
-                initData.unitNameSoft,
-                initData.unitType,
-                initData.isWeight,
-                initData.unitValue
-            )
-        )
-
         unitLifeList = realm.where(MeasureUnit::class.java).equalTo("unitType", TYPE_LIFE).findAll()
         unitNormalList = realm.where(MeasureUnit::class.java).equalTo("unitType", TYPE_NORMAL).findAll()
         foodList = realm.where(MeasureUnit::class.java).equalTo("unitType", TYPE_FOOD).findAll()
+
+        val initUnitData = unitNormalList.find { it.unitId == 15L }!!
+        val unitModel = UnitModel(
+            initUnitData.unitNameBold,
+            initUnitData.unitNameSoft,
+            initUnitData.unitType,
+            initUnitData.isWeight,
+            initUnitData.unitValue
+        )
+        this.selectedUnitObject = unitModel
+        this.unit.value = unitModel.abbreviation
+        this.useIngredient.value = unitModel.isWeight
+
+        val initToolData = unitLifeList.find { it.unitId == 1L }!!
+        val toolModel = UnitModel(
+            initToolData.unitNameBold,
+            initToolData.unitNameSoft,
+            initToolData.unitType,
+            initToolData.isWeight,
+            initToolData.unitValue
+        )
+        this.selectedToolObject = toolModel
+        this.tool.value = toolModel.abbreviation
     }
 
     fun onSelectUnit(unitModel: UnitModel) {
@@ -98,13 +108,13 @@ class CalculatorViewModel2 : ViewModel() {
                 this.tool.value = unitModel.abbreviation
             }
             else -> {
-                Log.e("TAG", "잘못된 타입입니다.")
+                Log.e(TAG, "잘못된 타입입니다.")
             }
         }
     }
 
     private fun unitItemList(): RealmResults<MeasureUnit> {
-        return if (this.selectedUnitType == CalcUnitType.NORMAL) {
+        return if (this.selectedUnitType.value == CalcUnitType.NORMAL) {
             unitNormalList
         } else {
             unitLifeList
@@ -252,7 +262,7 @@ class CalculatorViewModel2 : ViewModel() {
                 }
             }
             else -> {
-                Log.e("TAG", "잘못된 타입입니다.")
+                Log.e(TAG, "잘못된 계산 타입입니다.")
             }
         }
     }
@@ -311,7 +321,14 @@ class CalculatorViewModel2 : ViewModel() {
         } else {
             1.0
         }
+        val ingredientName = if(useIngredient.value!!) {
+            selectedIngredientObject!!.unitNameBold
+        } else {
+            ""
+        }
         val text: String
+        val textBefore: String
+        val textAfter: String
         when (currentCalcState.value) {
             CalcTypeState.MATERIAL -> {
 
@@ -321,7 +338,9 @@ class CalculatorViewModel2 : ViewModel() {
                         BigDecimal((amount * unit * ingredient) / tool)
                             .setScale(1, RoundingMode.HALF_UP)
                         )
-                text = "$result ${this.tool.value}이다."
+                text = "${removePointerZero(result.toDouble())}${this.tool.value}"
+                textBefore = "$ingredientName ${removePointerZero(amount)}${selectedUnitObject!!.abbreviation}"
+                textAfter = text
             }
             CalcTypeState.PERSONNEL -> {
                 val humanOne = removeDecimalPoint(humanOne.value!!).toDouble()
@@ -330,7 +349,10 @@ class CalculatorViewModel2 : ViewModel() {
                         BigDecimal(((amount * unit * ingredient) / humanOne) * humanTwo)
                             .setScale(1, RoundingMode.HALF_UP)
                         )
-                text = "$result ${this.unit.value}이다."
+                text = "${removePointerZero(result.toDouble())}${this.unit.value}"
+                textBefore = "${removePointerZero(humanOne)}명 기준 $ingredientName ${removePointerZero(amount)}${selectedUnitObject!!.abbreviation}"
+                textAfter = "${removePointerZero(humanTwo)}명 기준 $text"
+
             }
             CalcTypeState.MATERIAL_PERSONNEL -> {
                 val humanOne = removeDecimalPoint(humanOne.value!!).toDouble()
@@ -340,10 +362,14 @@ class CalculatorViewModel2 : ViewModel() {
                         BigDecimal((((amount * unit * ingredient) / humanOne) * humanTwo) / tool)
                             .setScale(1, RoundingMode.HALF_UP)
                         )
-                text = "$result ${this.tool.value}이다."
+                text = "${removePointerZero(result.toDouble())}${this.tool.value}"
+                textBefore = "${removePointerZero(humanOne)}명 기준 $ingredientName ${removePointerZero(amount)}${selectedUnitObject!!.abbreviation}"
+                textAfter = "${removePointerZero(humanTwo)}명 기준 $text"
             }
             else -> {
-                Log.e("TAG", "잘못된 상태입니다.")
+                Log.e(TAG, "잘못된 상태입니다.")
+                textBefore = ""
+                textAfter = ""
                 text = ""
             }
         }
@@ -351,11 +377,19 @@ class CalculatorViewModel2 : ViewModel() {
         realm.beginTransaction()
         val newItemId = newId()
         val newItem = realm.createObject(CalcHistory::class.java, newItemId)
-        newItem.calcResultBefore = "$amount${selectedUnitObject!!.abbreviation}"
-        newItem.calcResultAfter = text
+        newItem.calcResultBefore = textBefore
+        newItem.calcResultAfter = textAfter
         newItem.createDate = Date().time
         realm.commitTransaction()
-        return text
+        return text+"이다."
+    }
+
+    private fun removePointerZero(value: Double): String {
+        if ((value * 10) % 10 > 0) {
+            return value.toString()
+        } else {
+            return value.toInt().toString()
+        }
     }
 
     private fun newId(): Long {

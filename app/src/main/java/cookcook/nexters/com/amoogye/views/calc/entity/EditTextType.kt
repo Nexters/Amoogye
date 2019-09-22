@@ -8,4 +8,5 @@ enum class EditTextType {
     INGREDIENT, // P (ex, 굴소스)
     HUMAN_TWO, // T (2명)
     TOOL, // A 아빠숟가락
+    NONE // 아무것도 선택하지 않음
 }
