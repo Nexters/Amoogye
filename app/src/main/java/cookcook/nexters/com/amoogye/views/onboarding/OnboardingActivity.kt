@@ -2,6 +2,7 @@ package cookcook.nexters.com.amoogye.views.onboarding
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
@@ -27,16 +28,23 @@ class OnboardingActivity : AppCompatActivity() {
         onboarding_tab_layout.tabSelectedIndicator
 
         view_pager_onboarding.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            var isFirst: Boolean = true
+
             override fun onPageScrollStateChanged(state: Int) {
 
             }
 
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                if (isFirst && positionOffset == 0f && positionOffsetPixels == 0) {
+                    onPageSelected(0)
+                    isFirst = false
+                }
             }
 
             override fun onPageSelected(position: Int) {
                 when (position) {
                     0 -> {
+                        Log.d("TAG", "Nexters")
                         btn_onboarding_ok.visibility = View.GONE
                         onboarding_tab_layout.visibility = View.VISIBLE
                         layout_onboarding.setBackgroundColor(resources.getColor(R.color.onboarding_1))
@@ -75,6 +83,8 @@ class OnboardingActivity : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
+
+
     }
 
     lateinit var onboarding: SharedPreferences
@@ -96,5 +106,9 @@ class OnboardingActivity : AppCompatActivity() {
         animationView.setAnimation(jsonName)
         animationView.loop(true)
         animationView.playAnimation()
+    }
+
+    override fun onStart() {
+        super.onStart()
     }
 }
