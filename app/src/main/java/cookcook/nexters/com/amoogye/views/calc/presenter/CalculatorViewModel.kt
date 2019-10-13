@@ -1,65 +1,403 @@
 package cookcook.nexters.com.amoogye.views.calc.presenter
 
 import android.content.Context
-import android.os.Build
-import android.text.InputType
 import android.util.Log
-import android.widget.EditText
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import cookcook.nexters.com.amoogye.views.calc.domain.CalculatorRepository
-import cookcook.nexters.com.amoogye.views.calc.entity.EditTextType
-import cookcook.nexters.com.amoogye.views.calc.entity.UnitModel
+import cookcook.nexters.com.amoogye.views.calc.entity.*
+import cookcook.nexters.com.amoogye.views.calc.history.CalcHistory
 import cookcook.nexters.com.amoogye.views.tools.MeasureUnit
+import cookcook.nexters.com.amoogye.views.tools.TYPE_FOOD
+import cookcook.nexters.com.amoogye.views.tools.TYPE_LIFE
+import cookcook.nexters.com.amoogye.views.tools.TYPE_NORMAL
+import io.realm.Realm
+import io.realm.RealmResults
+import java.math.BigDecimal
+import java.math.RoundingMode
+import java.util.*
+import kotlin.collections.ArrayList
 
-class CalculatorViewModel(private val repo: CalculatorRepository) : ViewModel() {
+const val MAX_ITEM_VIEWING_SIZE = 9
+
+class CalculatorViewModel2 : ViewModel() {
+
     lateinit var context: Context
-    var flag: Int = 1
 
-    var index: Int = 0
-    var currentSelectedType: Int = 0
+    val TAG: String = CalculatorViewModel2::class.java.simpleName!!
 
-    var itemSize: Int = 0
+    // 에딧 텍스트
+    var humanOne: MutableLiveData<String> = MutableLiveData() // 1명 기준
+    var humanTwo: MutableLiveData<String> = MutableLiveData() // 2명 으로
+    var unit: MutableLiveData<String> = MutableLiveData() // ml
+    var amount: MutableLiveData<String> = MutableLiveData() // 10
+    var ingredient: MutableLiveData<String> = MutableLiveData() // 굴소스
+    var tool: MutableLiveData<String> = MutableLiveData() // 밥숟가락
 
-    var isWeight: Boolean = false
+    var selectedEditBox: MutableLiveData<EditTextType> = MutableLiveData()
+    var calcKeyboardType: MutableLiveData<CalcLayoutState> = MutableLiveData() // 키보드 타입
+    var currentCalcState: MutableLiveData<CalcTypeState> = MutableLiveData() // 계산 상태 (인원, 재료, 인원 + 재료)
+    var useIngredient: MutableLiveData<Boolean> = MutableLiveData() // 무게 단위 사용 여부
 
-    // flag
-    private var ingredientSelected = true
-    private var portionSelected = false
+    var alertText: MutableLiveData<String> = MutableLiveData()
 
-    private val _selectedEditText = MutableLiveData<EditTextType>()
-    private val _humanOne = MutableLiveData<String>()
-    private val _amount = MutableLiveData<String>()
-    private val _unit = MutableLiveData<String>()
-    private val _ingredient = MutableLiveData<String>()
-    private val _humanTwo = MutableLiveData<String>()
-    private val _tool = MutableLiveData<String>()
+    var beforeCalcState: MutableLiveData<CalcTypeState> = MutableLiveData() // TODO 인터렉션
+    var selectedUnitType: MutableLiveData<CalcUnitType> = MutableLiveData()
 
-    val humanOne: LiveData<String> get() = _humanOne
-    val amount: LiveData<String> get() = _amount
-    val unit: LiveData<String> get() = _unit
-    val ingredient: LiveData<String> get() = _ingredient
-    val humanTwo: LiveData<String> get() = _humanTwo
-    val tool: LiveData<String> get() = _tool
+    private var selectedUnitObject: UnitModel? = null
+    private var selectedToolObject: UnitModel? = null
+    private var selectedIngredientObject: MeasureUnit? = null
 
-    var unitObject: UnitModel? = null
-    var toolObject: UnitModel? = null
-    var ingredientObject: MeasureUnit? = null
+    private var index: Int
+    private var itemSize: Int
+
+    var realm: Realm = Realm.getDefaultInstance()
+
+    private var unitLifeList: RealmResults<MeasureUnit>
+    private var unitNormalList: RealmResults<MeasureUnit>
+    var foodList: RealmResults<MeasureUnit>
 
     init {
-        _humanOne.value = ""
-        _amount.value = ""
-        _humanTwo.value = ""
+
+        this.selectedEditBox.value = EditTextType.AMOUNT
+        this.currentCalcState.value = CalcTypeState.MATERIAL
+        this.calcKeyboardType.value = CalcLayoutState.NUMBER
+        this.useIngredient.value = false
+        this.selectedUnitType.value = CalcUnitType.NORMAL
+        this.amount.value = "0"
+
+        this.index = 0
+        this.itemSize = 0
+
+        unitLifeList = realm.where(MeasureUnit::class.java).equalTo("unitType", TYPE_LIFE).findAll()
+        unitNormalList = realm.where(MeasureUnit::class.java).equalTo("unitType", TYPE_NORMAL).findAll()
+        foodList = realm.where(MeasureUnit::class.java).equalTo("unitType", TYPE_FOOD).findAll()
+
+        val initUnitData = unitNormalList.find { it.unitId == 15L }!!
+        val unitModel = UnitModel(
+            initUnitData.unitNameBold,
+            initUnitData.unitNameSoft,
+            initUnitData.unitType,
+            initUnitData.isWeight,
+            initUnitData.unitValue
+        )
+        this.selectedUnitObject = unitModel
+        this.unit.value = unitModel.abbreviation
+        this.useIngredient.value = unitModel.isWeight
+
+        val initToolData = unitLifeList.find { it.unitId == 1L }!!
+        val toolModel = UnitModel(
+            initToolData.unitNameBold,
+            initToolData.unitNameSoft,
+            initToolData.unitType,
+            initToolData.isWeight,
+            initToolData.unitValue
+        )
+        this.selectedToolObject = toolModel
+        this.tool.value = toolModel.abbreviation
     }
 
-    fun init() {
-        ingredientSelected = true
-        portionSelected = false
-        flag = 1
-        _humanOne.value = ""
-        _amount.value = ""
-        _humanTwo.value = ""
+    fun onSelectUnit(unitModel: UnitModel) {
+        when {
+            selectedEditBox.value == EditTextType.UNIT -> {
+                this.selectedUnitObject = unitModel
+                this.unit.value = unitModel.abbreviation
+                this.useIngredient.value = unitModel.isWeight
+            }
+            selectedEditBox.value === EditTextType.TOOL -> {
+                this.selectedToolObject = unitModel
+                this.tool.value = unitModel.abbreviation
+            }
+            else -> {
+                Log.e(TAG, "잘못된 타입입니다.")
+            }
+        }
+    }
+
+    private fun unitItemList(): RealmResults<MeasureUnit> {
+        return if (this.selectedUnitType.value == CalcUnitType.NORMAL) {
+            unitNormalList
+        } else {
+            unitLifeList
+        }
+    }
+
+    fun convertUnitItemList(): ArrayList<UnitModel> {
+        val result: ArrayList<UnitModel> = arrayListOf()
+
+        val list = unitItemList()
+        itemSize = list.size
+
+        val max = (itemSize / 10) + 1
+
+        if (index > max - 1) {
+            index = max - 1
+        }
+
+        val startIndex = index * MAX_ITEM_VIEWING_SIZE
+        var endIndex = index * MAX_ITEM_VIEWING_SIZE + MAX_ITEM_VIEWING_SIZE
+
+        if (endIndex > itemSize) {
+            endIndex = itemSize
+        }
+
+
+        for (x in startIndex until endIndex) {
+            result.add(
+                UnitModel(
+                    list[x].unitNameBold,
+                    list[x].unitNameSoft,
+                    list[x].unitType,
+                    list[x].isWeight,
+                    list[x].unitValue
+                )
+            )
+        }
+        return result
+    }
+
+    fun onSelectedEditBox(type: EditTextType) {
+        this.selectedEditBox.value = type
+    }
+
+    fun onSelectIngredient(ingredient: String) {
+        val ingredientObject = foodList.find { it.unitNameBold == ingredient }
+        this.selectedIngredientObject = ingredientObject
+        this.ingredient.value = ingredient
+    }
+
+    fun onNumberButtonClick(number: String) {
+        when (selectedEditBox.value) {
+            EditTextType.HUMAN_ONE -> {
+                humanOne.value = humanOne.value?.let { it ->
+                    changeNumberText(number, it)
+                } ?: changeNumberText(number, "0")
+            }
+            EditTextType.HUMAN_TWO -> {
+                humanTwo.value = humanTwo.value?.let { it ->
+                    changeNumberText(number, it)
+                } ?: changeNumberText(number, "0")
+            }
+            EditTextType.AMOUNT -> {
+                amount.value = amount.value?.let { it ->
+                    changeNumberText(number, it)
+                } ?: changeNumberText(number, "0")
+            }
+            else ->
+                Log.e("Error", "Number Button Click Error : Invalid Type")
+        }
+    }
+
+    private fun changeNumberText(number: String, text: String): String {
+        var afterText: String = text
+
+        if (number == "delete" && text.isNotEmpty()) {
+            afterText = text.substring(0, text.length - 1)
+        } else {
+            if (number != "delete") {
+                if (afterText == "0") {
+                    afterText = if (number == ".") {
+                        "0."
+                    } else {
+                        number
+                    }
+                } else {
+                    if (number == ".") {
+                        if (afterText.any { it == '.' }) {
+                            return afterText
+                        }
+                    }
+                    if (afterText.any { it == '.' }) {
+                        val dump = afterText.split('.')
+                        if (dump[1].isNotEmpty()) {
+                            alertText.value = "숫자는 소수점 첫째자리까지 입력할 수 있습니다."
+                            return afterText
+                        }
+                    }
+                    afterText += number
+                }
+            }
+        }
+
+        if (afterText.isEmpty()) {
+            return "0"
+        }
+
+        if ((afterText.toCharArray()[afterText.lastIndex] != '.') && afterText.toDouble() > 9999) {
+            alertText.value = "숫자는 9,999까지 입력할 수 있습니다."
+            afterText = "9999"
+        }
+
+        return afterText
+    }
+
+    // 선택한 계산 상태
+    fun onChangeCalcState(type: CalcTypeState) {
+        beforeCalcState.value = type
+        when (type) {
+            // 재료를 클릭 했다면
+            CalcTypeState.MATERIAL -> {
+                when (currentCalcState.value) {
+                    CalcTypeState.MATERIAL -> {
+                        currentCalcState.value = CalcTypeState.PERSONNEL
+                    }
+                    CalcTypeState.PERSONNEL -> {
+                        currentCalcState.value = CalcTypeState.MATERIAL_PERSONNEL
+                    }
+                    CalcTypeState.MATERIAL_PERSONNEL -> {
+                        currentCalcState.value = CalcTypeState.PERSONNEL
+                    }
+                }
+            }
+            CalcTypeState.PERSONNEL -> {
+                when (currentCalcState.value) {
+                    CalcTypeState.MATERIAL -> {
+                        currentCalcState.value = CalcTypeState.MATERIAL_PERSONNEL
+                    }
+                    CalcTypeState.PERSONNEL -> {
+                        currentCalcState.value = CalcTypeState.MATERIAL
+                    }
+                    CalcTypeState.MATERIAL_PERSONNEL -> {
+                        currentCalcState.value = CalcTypeState.MATERIAL
+                    }
+                }
+            }
+            else -> {
+                Log.e(TAG, "잘못된 계산 타입입니다.")
+            }
+        }
+    }
+
+    fun checkCalculable(): Boolean {
+
+        if (amount.value.isNullOrEmpty() || unit.value.isNullOrEmpty()) {
+            return false
+        }
+        if (useIngredient.value!!) {
+            if (ingredient.value.isNullOrEmpty()) {
+                return false
+            }
+        }
+
+        when (currentCalcState.value) {
+            CalcTypeState.MATERIAL -> {
+                if (tool.value.isNullOrEmpty()) {
+                    return false
+                }
+            }
+            CalcTypeState.PERSONNEL -> {
+                if (humanOne.value.isNullOrEmpty() || humanTwo.value.isNullOrEmpty()) {
+                    return false
+                }
+            }
+            CalcTypeState.MATERIAL_PERSONNEL -> {
+                if (tool.value.isNullOrEmpty()) {
+                    return false
+                }
+                if (humanOne.value.isNullOrEmpty() || humanTwo.value.isNullOrEmpty()) {
+                    return false
+                }
+            }
+            else -> {
+                return false
+            }
+        }
+        return true
+    }
+
+    private fun removeDecimalPoint(text: String): String {
+        return if (text.toCharArray()[text.lastIndex] == '.') {
+            text.substring(0, text.lastIndex)
+        } else {
+            text
+        }
+    }
+
+    fun calculation(): String {
+
+        val amount = removeDecimalPoint(amount.value!!).toDouble()
+        val unit = selectedUnitObject!!.oneMLValue
+        val ingredient = if (useIngredient.value!!) {
+            selectedIngredientObject!!.unitValue
+        } else {
+            1.0
+        }
+        val ingredientName = if(useIngredient.value!!) {
+            selectedIngredientObject!!.unitNameBold
+        } else {
+            ""
+        }
+        val text: String
+        val textBefore: String
+        val textAfter: String
+        when (currentCalcState.value) {
+            CalcTypeState.MATERIAL -> {
+
+                val tool = selectedToolObject!!.oneMLValue
+
+                val result: BigDecimal = (
+                        BigDecimal((amount * unit * ingredient) / tool)
+                            .setScale(1, RoundingMode.HALF_UP)
+                        )
+                text = "${removePointerZero(result.toDouble())}${this.tool.value}"
+                textBefore = "$ingredientName ${removePointerZero(amount)}${selectedUnitObject!!.abbreviation}"
+                textAfter = text
+            }
+            CalcTypeState.PERSONNEL -> {
+                val humanOne = removeDecimalPoint(humanOne.value!!).toDouble()
+                val humanTwo = removeDecimalPoint(humanTwo.value!!).toDouble()
+                val result: BigDecimal = (
+                        BigDecimal(((amount * unit * ingredient) / humanOne) * humanTwo)
+                            .setScale(1, RoundingMode.HALF_UP)
+                        )
+                text = "${removePointerZero(result.toDouble())}${this.unit.value}"
+                textBefore = "${removePointerZero(humanOne)}명 기준 $ingredientName ${removePointerZero(amount)}${selectedUnitObject!!.abbreviation}"
+                textAfter = "${removePointerZero(humanTwo)}명 기준 $text"
+
+            }
+            CalcTypeState.MATERIAL_PERSONNEL -> {
+                val humanOne = removeDecimalPoint(humanOne.value!!).toDouble()
+                val humanTwo = removeDecimalPoint(humanTwo.value!!).toDouble()
+                val tool = selectedToolObject!!.oneMLValue
+                val result: BigDecimal = (
+                        BigDecimal((((amount * unit * ingredient) / humanOne) * humanTwo) / tool)
+                            .setScale(1, RoundingMode.HALF_UP)
+                        )
+                text = "${removePointerZero(result.toDouble())}${this.tool.value}"
+                textBefore = "${removePointerZero(humanOne)}명 기준 $ingredientName ${removePointerZero(amount)}${selectedUnitObject!!.abbreviation}"
+                textAfter = "${removePointerZero(humanTwo)}명 기준 $text"
+            }
+            else -> {
+                Log.e(TAG, "잘못된 상태입니다.")
+                textBefore = ""
+                textAfter = ""
+                text = ""
+            }
+        }
+
+        realm.beginTransaction()
+        val newItemId = newId()
+        val newItem = realm.createObject(CalcHistory::class.java, newItemId)
+        newItem.calcResultBefore = textBefore
+        newItem.calcResultAfter = textAfter
+        newItem.createDate = Date().time
+        realm.commitTransaction()
+        return text+"이다."
+    }
+
+    private fun removePointerZero(value: Double): String {
+        if ((value * 10) % 10 > 0) {
+            return value.toString()
+        } else {
+            return value.toInt().toString()
+        }
+    }
+
+    private fun newId(): Long {
+        val maxId = realm.where(CalcHistory::class.java).max("historyId")
+        if (maxId != null) {
+            return maxId.toLong() + 1
+        }
+        return 0
     }
 
     fun reduceIndex() {
@@ -83,119 +421,5 @@ class CalculatorViewModel(private val repo: CalculatorRepository) : ViewModel() 
             return false
         }
         return true
-    }
-
-    fun gazuaa(text: String) = repo.showToast(context, text)
-
-    fun convertFragment(buttonId: Int): Int {
-        Log.d("TAG", "minus $buttonId")
-        when (buttonId) {
-            1 -> {
-                ingredientSelected = !ingredientSelected
-                if (ingredientSelected) {
-                    val dump = this.flag + buttonId
-                    if (dump != 1) {
-                        this.flag = dump
-                    } else {
-                        ingredientSelected = !ingredientSelected
-                    }
-                } else {
-                    val dump = this.flag - buttonId
-                    if (dump != 0) {
-                        this.flag = dump
-                    } else {
-                        ingredientSelected = !ingredientSelected
-                    }
-                }
-            }
-            2 -> {
-                portionSelected = !portionSelected
-                if (portionSelected) {
-                    Log.d("TAG","Portion selected is $portionSelected")
-                    val dump = this.flag + buttonId
-                    if (dump != 2) {
-                        this.flag = dump
-                    } else {
-                        portionSelected = !portionSelected
-                    }
-                } else {
-                    Log.d("TAG", "Portion selected is $portionSelected")
-                    val dump = this.flag - buttonId
-                    if (dump != 0) {
-                        this.flag = dump
-                    } else {
-                        portionSelected = !portionSelected
-                    }
-                }
-            }
-        }
-
-        Log.d("TAG", "convert is $flag")
-
-        return this.flag - 1
-    }
-
-    fun calculatorEditTextSetting(editText: EditText) {
-        editText.inputType = InputType.TYPE_NULL
-        editText.setRawInputType(InputType.TYPE_CLASS_TEXT)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            editText.showSoftInputOnFocus = false
-        }
-    }
-
-    fun setSelectedEditText(value: EditTextType) {
-        _selectedEditText.value = value
-    }
-
-    fun setIngredient(text: String) {
-        _ingredient.value = text
-    }
-
-    fun getSelectedEditText() = _selectedEditText.value
-
-    fun onNumberButtonClick(number: String) {
-        when (_selectedEditText.value) {
-            EditTextType.HUMAN_ONE -> {
-                _humanOne.value = _humanOne.value?.let { it ->
-                    repo.changeNumberText(number, it)
-                } ?: repo.changeNumberText(number, "0")
-            }
-            EditTextType.AMOUNT -> {
-                _amount.value = _amount.value?.let { it ->
-                    repo.changeNumberText(number, it)
-                } ?: repo.changeNumberText(number, "0")
-            }
-            EditTextType.INGREDIENT -> {
-
-            }
-            EditTextType.HUMAN_TWO -> {
-                _humanTwo.value = _humanTwo.value?.let { it ->
-                    repo.changeNumberText(number, it)
-                } ?: repo.changeNumberText(number, "0")
-            }
-            else -> {
-                // 아무것도 안한다.
-            }
-        }
-    }
-
-    fun onUnitButtonClick(model: UnitModel) {
-        when (_selectedEditText.value) {
-            EditTextType.UNIT -> {
-                unitObject = model
-                _unit.value = model.abbreviation
-            }
-            EditTextType.TOOL -> {
-                toolObject = model
-                _tool.value = model.abbreviation
-            }
-            else -> {
-                // 아무것도 안한다.
-            }
-        }
-    }
-
-    fun setUnit(unit: String) {
-        _unit.value = unit
     }
 }

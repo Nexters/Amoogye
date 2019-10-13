@@ -1,17 +1,13 @@
 package cookcook.nexters.com.amoogye.views.calc.presenter.adapter
 
 import android.content.Context
-import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import cookcook.nexters.com.amoogye.R
-import cookcook.nexters.com.amoogye.views.calc.entity.EditTextType
 import cookcook.nexters.com.amoogye.views.calc.entity.UnitModel
-import cookcook.nexters.com.amoogye.views.calc.presenter.CalcFragment
-import cookcook.nexters.com.amoogye.views.calc.presenter.CalculatorViewModel
 import cookcook.nexters.com.amoogye.views.tools.TYPE_LIFE
 import cookcook.nexters.com.amoogye.views.tools.TYPE_NORMAL
 import kotlinx.android.synthetic.main.item_unit_recyclerview.view.*

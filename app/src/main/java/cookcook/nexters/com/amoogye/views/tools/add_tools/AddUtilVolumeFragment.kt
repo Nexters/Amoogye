@@ -8,6 +8,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.base.BaseScrollPicker
+import cookcook.nexters.com.amoogye.base.wheel_picker.BaseWheelPicker
 import cookcook.nexters.com.amoogye.views.tools.MeasureUnit
 import cookcook.nexters.com.amoogye.views.tools.TYPE_LIFE
 import io.realm.Realm
@@ -25,7 +26,7 @@ class AddUtilVolumeFragment : Fragment() {
     lateinit var realm: Realm
 
     lateinit var state: ButtonSelectedState
-    lateinit var picker: BaseScrollPicker
+    lateinit var picker: BaseWheelPicker
     lateinit var getView:View
 
     private val toolList: ArrayList<String> = arrayListOf()
@@ -81,6 +82,20 @@ class AddUtilVolumeFragment : Fragment() {
         realm = Realm.getDefaultInstance()
     }
 
+    private val pickerChange: (value: String) -> Unit = {
+        when(state) {
+            ButtonSelectedState.TOOL -> {
+                text_add_util_tool.text = it
+            }
+            ButtonSelectedState.INTEGER -> {
+                txt_add_util_integer.text = it
+            }
+            ButtonSelectedState.DECIMALPOINT -> {
+                txt_add_util_decimal_point.text = it
+            }
+        }
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -95,9 +110,11 @@ class AddUtilVolumeFragment : Fragment() {
         txt_add_util_decimal_point.text = decimalPointList[0]
         MeasureUnitSaveData.getInstance().currentDecimalPoint = decimalPointList[0]
 
+        picker = BaseWheelPicker(getView, toolList, pickerChange)
+
         text_add_util_tool.setOnClickListener{
             state = ButtonSelectedState.TOOL
-            picker = BaseScrollPicker(getView, toolList)
+            picker.wheelPickerDataChange(toolList)
             layout_container_scroll_picker.visibility = View.VISIBLE
             btn_add_util_confirm.visibility = View.VISIBLE
             (activity!!.findViewById<Button>(R.id.btn_add_util_next_page) as View).visibility = View.GONE
@@ -105,7 +122,7 @@ class AddUtilVolumeFragment : Fragment() {
 
         txt_add_util_integer.setOnClickListener {
             state = ButtonSelectedState.INTEGER
-            picker = BaseScrollPicker(getView, integerList)
+            picker.wheelPickerDataChange(integerList)
             btn_add_util_confirm.visibility = View.VISIBLE
             layout_container_scroll_picker.visibility = View.VISIBLE
             (activity!!.findViewById<Button>(R.id.btn_add_util_next_page) as View).visibility = View.GONE
@@ -113,7 +130,7 @@ class AddUtilVolumeFragment : Fragment() {
 
         txt_add_util_decimal_point.setOnClickListener {
             state = ButtonSelectedState.DECIMALPOINT
-            picker = BaseScrollPicker(getView, decimalPointList)
+            picker.wheelPickerDataChange(decimalPointList)
             btn_add_util_confirm.visibility = View.VISIBLE
             layout_container_scroll_picker.visibility = View.VISIBLE
             (activity!!.findViewById<Button>(R.id.btn_add_util_next_page) as View).visibility = View.GONE
@@ -123,21 +140,6 @@ class AddUtilVolumeFragment : Fragment() {
             layout_container_scroll_picker.visibility = View.GONE
             btn_add_util_confirm.visibility = View.INVISIBLE
             (activity!!.findViewById<Button>(R.id.btn_add_util_next_page) as View).visibility = View.VISIBLE
-
-            when (state) {
-                ButtonSelectedState.TOOL -> {
-                    text_add_util_tool.text = toolList[picker.getItem()]
-                    MeasureUnitSaveData.getInstance().currentTool = toolList[picker.getItem()]
-                }
-                ButtonSelectedState.INTEGER -> {
-                    txt_add_util_integer.text = integerList[picker.getItem()]
-                    MeasureUnitSaveData.getInstance().currentInteger = integerList[picker.getItem()]
-                }
-                ButtonSelectedState.DECIMALPOINT -> {
-                    txt_add_util_decimal_point.text = decimalPointList[picker.getItem()]
-                    MeasureUnitSaveData.getInstance().currentDecimalPoint = decimalPointList[picker.getItem()]
-                }
-            }
         }
     }
 }
