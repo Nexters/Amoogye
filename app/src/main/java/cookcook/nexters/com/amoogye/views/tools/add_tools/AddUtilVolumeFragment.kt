@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import cookcook.nexters.com.amoogye.R
-import cookcook.nexters.com.amoogye.base.BaseScrollPicker
 import cookcook.nexters.com.amoogye.base.wheel_picker.BaseWheelPicker
 import cookcook.nexters.com.amoogye.views.tools.MeasureUnit
 import cookcook.nexters.com.amoogye.views.tools.TYPE_LIFE
