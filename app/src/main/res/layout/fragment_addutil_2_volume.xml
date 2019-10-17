@@ -36,10 +36,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
             android:fontFamily="@font/nanum_square_r"
             android:text="@string/add_util_volume_comment_1"
             android:textColor="@color/add_util_text_color_soft"
-            android:layout_marginEnd="5dp"
             android:textSize="@dimen/add_util_head_comment_text_size" />
 
         <TextView
@@ -146,10 +146,10 @@
         android:layout_below="@id/layout_outer_mid"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="@dimen/add_util_volume_scroll_top"
-        android:text="@string/add_util_volume_complete"
         android:background="@drawable/add_util_scroll_border_complete"
         android:paddingStart="@dimen/add_util_start_end"
         android:paddingEnd="@dimen/add_util_start_end"
+        android:text="@string/add_util_volume_complete"
         android:textAlignment="viewEnd"
         android:visibility="invisible" />
 
@@ -160,9 +160,14 @@
         android:layout_below="@id/btn_add_util_confirm"
         android:visibility="invisible">
 
+        <!--<include-->
+        <!--android:id="@+id/scroll_picker"-->
+        <!--layout="@layout/layout_ingredient_scroll_wrap"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent" />-->
         <include
             android:id="@+id/scroll_picker"
-            layout="@layout/layout_ingredient_scroll_wrap"
+            layout="@layout/layout_wheel_picker"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </RelativeLayout>

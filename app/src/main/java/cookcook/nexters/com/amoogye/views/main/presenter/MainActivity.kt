@@ -4,7 +4,6 @@ import androidx.databinding.DataBindingUtil
 import cookcook.nexters.com.amoogye.R
 import cookcook.nexters.com.amoogye.base.BaseActivity
 import cookcook.nexters.com.amoogye.databinding.ActivityMainBinding
-import cookcook.nexters.com.amoogye.views.calc.presenter.CalculatorViewModel
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
