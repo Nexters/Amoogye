@@ -51,11 +51,6 @@ class WheelPickerAdapter(val fontSize: Int, val context: Context) : RecyclerView
 
     override fun onBindViewHolder(holder: WheelPickerViewHolder, position: Int) {
         holder.bind(data[position])
-        if (currentPosition == position) {
-            holder.txtItemName.setTextColor(context.resources.getColor(R.color.timer_theme_color))
-        } else {
-            holder.txtItemName.setTextColor(context.resources.getColor(R.color.timer_title_color))
-        }
     }
 
 

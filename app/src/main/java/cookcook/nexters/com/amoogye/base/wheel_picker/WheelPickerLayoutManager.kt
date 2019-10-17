@@ -1,6 +1,9 @@
 package cookcook.nexters.com.amoogye.base.wheel_picker
 
 import android.content.Context
+import android.graphics.Color
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -50,6 +53,11 @@ class WheelPickerLayoutManager(context: Context?) : LinearLayoutManager(context)
             child.scaleX = scale
             child.scaleY = scale
             child.alpha = scale
+            if (scale == 1.0f) {
+                ((child as LinearLayout).getChildAt(0) as TextView).setTextColor(Color.parseColor("#FF0000"))
+            } else {
+                ((child as LinearLayout).getChildAt(0) as TextView).setTextColor(Color.parseColor("#000000"))
+            }
         }
     }
 

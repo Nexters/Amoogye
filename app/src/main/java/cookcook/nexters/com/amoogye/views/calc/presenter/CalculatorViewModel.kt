@@ -47,17 +47,16 @@ class CalculatorViewModel2 : ViewModel() {
     private var selectedToolObject: UnitModel? = null
     private var selectedIngredientObject: MeasureUnit? = null
 
-    private var index: Int
-    private var itemSize: Int
+    private var index: Int = 0
+    private var itemSize: Int = 0
 
     var realm: Realm = Realm.getDefaultInstance()
 
-    private var unitLifeList: RealmResults<MeasureUnit>
-    private var unitNormalList: RealmResults<MeasureUnit>
-    var foodList: RealmResults<MeasureUnit>
+    private lateinit var unitLifeList: RealmResults<MeasureUnit>
+    private lateinit var unitNormalList: RealmResults<MeasureUnit>
+    lateinit var foodList: RealmResults<MeasureUnit>
 
-    init {
-
+    fun init() {
         this.selectedEditBox.value = EditTextType.AMOUNT
         this.currentCalcState.value = CalcTypeState.MATERIAL
         this.calcKeyboardType.value = CalcLayoutState.NUMBER
@@ -94,6 +93,10 @@ class CalculatorViewModel2 : ViewModel() {
         )
         this.selectedToolObject = toolModel
         this.tool.value = toolModel.abbreviation
+    }
+
+    init {
+        init()
     }
 
     fun onSelectUnit(unitModel: UnitModel) {
